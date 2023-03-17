@@ -221,8 +221,9 @@
                         <th scope="col">No.</th>
                         <th scope="col">Name</th>
                         <th scope="col" style="width: 200px;">Check-in Date</th>
-                        <th scope="col">Maximum Check-out Date</th>
+                        <th scope="col">Check-out Date</th>
                         <th scope="col">Payment Method</th>
+                        <th scope="col">Booking Type</th>
                         <th scope="col">Action</th>
                         
                     </tr>   

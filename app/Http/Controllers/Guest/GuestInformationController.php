@@ -104,7 +104,7 @@ class GuestInformationController extends Controller
             $guestInformation = new GuestInformation();
             $guestInformation->guest_id = $guest_id;
             $guestInformation->reservation_id = $reservation_id;
-            $reservation->booking_types = 'Online';
+            $guestInformation->booking_types = 'Online'; 
             $guestInformation->salutation = $salutation;
             $guestInformation->first_name = $first_name;
             $guestInformation->last_name = $last_name;  
@@ -131,9 +131,7 @@ class GuestInformationController extends Controller
                     $guestInformation->department = $department_id;
                 }
             }
-
             $guestInformation->save();
-
             }
     // Redirect to a success page
         return redirect()->route('view.invoice');   

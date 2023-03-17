@@ -211,16 +211,25 @@
           <table class="table table-condensed table-sm table-bordered">
             <thead class="bg-[#51bdb8] text-white">
               <tr style="text-align:center">
-                <th scope="col">No.</th>
-                <th scope="col" style="width: 200px;">Name</th>
-                <th scope="col">Payment Method</th>
-                <th Booking scope="col">Booking Status</th>
-                <th scope="col">Check-in / Check-out Date</th>  
-                <th scope="col">Action</th>
+                <td scope="col">No.</td>
+                <td scope="col" style="width: 200px;">td</th>
+                <td scope="col">Payment Method</td>
+                <td Booking scope="col">Booking Status</td>
+                <td scope="col">Check-in / Check-out Date</td>  
+                <td scope="col">Action  <button type="button"  class="btn btn-primary btn-sm" data-toggle="modal" data-target="#" ><i class="fa-solid fa-eye"></i></button></td>
+
+                 <!--View Button-->	
+              
+                   
               </tr>
             </thead>
+     
             <tbody>
-              @foreach ($reservationData as $index => $data)
+
+        
+                      
+                    
+                       @foreach ($reservationData as $index => $data)
                   <tr style="text-align:center" >
                     <td  scope="col">{{ $index + 1 }}</td>
                       <td scope="col">{{ $data->first_name }} &nbsp; {{ $data->last_name }}</td>

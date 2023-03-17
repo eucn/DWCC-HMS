@@ -104,11 +104,10 @@ Route::prefix('frontdesk')->group(function (){
 
     Route::get('/register', [FrontdeskController::class, 'FrontdeskRegister'])->name('frontdesk.register');
     Route::post('/register/create',[FrontdeskController::class, 'FrontdeskRegisterCreate'])->name('frontdesk.register.create');
-    Route::get('/reservation', [FrontdeskReservationController::class, 'FrontdeskReservation'])->name('frontdesk.reservation');
-    Route::post('/reservation/create', [FrontdeskReservationController::class, 'getRoomId'])->name('frontdesk.reservation.create');
-    Route::post('/reservation/create', [FrontdeskReservationController::class, 'FrontdeskReservationSave'])->name('frontdesk.reservation.save');
+    Route::get('/reservation', [FrontdeskController::class, 'FrontdeskReservation'])->name('frontdesk.reservation');
+    Route::post('/reservation/create/roomid', [FrontdeskController::class, 'GetRoomID'])->name('frontdesk.reservation.create');
+    Route::post('/reservation/create', [FrontdeskController::class, 'FrontdeskReservationSave'])->name('frontdesk.reservation.save');
     Route::get('/bookingdetails', [FrontdeskController::class, 'FrontdeskBookingDetails'])->name('frontdesk.bookingdetails');
-      
     Route::get('/reports', [FrontdeskController::class, 'FrontdeskReports'])->name('frontdesk.reports');
     Route::get('/payment', [FrontdeskController::class, 'FrontdeskPayment'])->name('frontdesk.payment');
 

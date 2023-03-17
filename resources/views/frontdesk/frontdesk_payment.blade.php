@@ -225,17 +225,25 @@
                         <th scope="col">Payment Method</th>
                         <th scope="col">Booking Type</th>
                         <th scope="col">Action</th>
-                        
                     </tr>   
                 </thead>   
-                </tbody>   
+                </tbody> 
+                @foreach ($reservationData as $index => $data)
+                <tr style="text-align:center" >
+                  <td  scope="col">{{ $index + 1 }}</td>
+                    <td scope="col">{{ $data->first_name }} &nbsp; {{ $data->last_name }}</td>
+                    <td scope="col"> {{ \Carbon\Carbon::parse($data->checkin_date)->format('F j, Y') }}</td> 
+                    <td> {{ \Carbon\Carbon::parse($data->checkout_date)->format('F j, Y') }}</td>
+                    <td scope="col">{{ $data->payment_method }}</td>
+                    <td scope="col">{{ $data->booking_status }}</td>
+                
+                    <td scope="col"></td>
+                </tr>
+            @endforeach  
             </table>
 </div>
    
     </section>
-    
-    <hr style="border-top: 1px solid #3C4048; width: 1150px; position:relative; top: -90px;">
-
   </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->

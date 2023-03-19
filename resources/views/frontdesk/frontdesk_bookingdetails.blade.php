@@ -28,7 +28,8 @@
   <link href="{{ asset('template/assets/vendor/quill/quill.bubble.css') }}" rel="stylesheet">
   <link href="{{ asset('template/assets/vendor/remixicon/remixicon.css') }}" rel="stylesheet">
   <link href="{{ asset('template/assets/vendor/simple-datatables/style.css') }}" rel="stylesheet">
-  
+
+  <!-- Modal -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -224,12 +225,12 @@
                 <td scope="col">Payment Method</td>
                 <td Booking scope="col">Booking Status</td>
                 <td scope="col">Check-in / Check-out Date</td>  
-                <td scope="col"  style="width: 200px; text-align:center;">&nbsp &nbsp &nbsp &nbsp Action <button type="button"  class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal" style="position: relative; top: 36px; left: -55px;" ><i class="fa-solid fa-eye"></i></button><button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#" style="position: relative; top: 36px; left: -50px; width: 30px;" ><i class="fa-solid fa-xmark"></i></button></td>
+                <td scope="col"  style="width: 200px; text-align:center;">&nbsp &nbsp &nbsp &nbsp Action <button type="button"  class="btn btn-primary btn-sm" data-toggle="modal" data-target="#view_modal" style="position: relative; top: 36px; left: -55px;" ><i class="fa-solid fa-eye"></i></button><button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#delete_modal"  style="position: relative; top: 36px; left: -50px; width: 30px;" ><i class="fa-solid fa-trash"></i></button></td>
    
               <div class="container">
 
-  <!-- Modal -->
-  <div class="modal fade" id="myModal" role="dialog">
+  <!-- View Modal -->
+  <div class="modal fade" id="view_modal" role="dialog">
     <div class="modal-dialog">
     
       <!-- Modal content-->
@@ -249,7 +250,25 @@
           <button type="button" class="btn btn-default" data-dismiss="modal" style="background-color: #19A7CE; color:#ffffff;">Close</button>
         </div>
       </div>
-                   
+
+       <!-- Delete Modal -->
+       <div class="modal fade" id="delete_modal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header>
+          <button type="button"  style="position:relative; left: 350px; color: red;" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title" style="position:relative; left: -230px; color:#51bdb8;">Cancel Booking Details</h4>
+        </div>
+        <div class="modal-body">
+          <h4 style="font-weight: bold; color:#434242;">Are you sure you want to cancel this booking? </h4>
+         
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal" style="background-color: #19A7CE; color:#ffffff;">Close</button>
+        </div>
+      </div>
               </tr>
             </thead>
      

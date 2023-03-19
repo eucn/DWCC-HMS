@@ -127,12 +127,12 @@
                         <div class="pl-10">{{ $rooms->room_type }}</div>
                       </div>
                       <div class="flex justify-between">
-                        <label class="font-bold" for="guests">Number of guests: </label>
+                        <label class="font-bold" for="guests">Total No. of Guests: </label>
                         <div class="pl-10">{{ $reservation->guests_num }}</div>
                       </div>
                       <div class="flex justify-between">
-                        <label class="font-bold" for="additional-guests">Additional Bed: </label>
-                        <div class="pl-10">{{ $reservation->extra_bed }}</div>
+                        <label class="font-bold" for="guests">Additional Guests: </label>
+                        <div class="pl-10">{{ $reservation->additional_guests }}</div>
                       </div>
                     </div>
 
@@ -171,7 +171,7 @@
                     </div>
                     <div class="w-full md:w-1/2 py-2 px-5">
                       <div class="justify-left">
-                        <label class="font-bold" for="additional-person">Additional Person: </label>
+                        <label class="font-bold" for="additional-person">Additional Fee Per-Guests: </label>
                       </div>
                     </div>
                     <div class="w-full md:w-1/2 py-2 px-5">
@@ -271,7 +271,6 @@
                               <div class="flex-shrink-0 text-left">
                                 <p>{{ $guestRegistration->first_name }} {{ $guestRegistration->last_name }}</p>
                               </div>
-                              
                               </div>
                             
                             <div class="flex justify-between items-center mb-4">
@@ -292,10 +291,7 @@
                               <p>Number of Guests:</p>
                               <p>{{$reservation->guests_num}}</p>
                             </div>
-                            <div class="flex justify-between mb-4">
-                              <p>Additional Bed:</p>
-                              <p>{{$reservation->extra_bed}}</p>
-                            </div>
+    
                             <div class="flex justify-between mb-4">
                               <p>Number of Nights:</p>
                               <p>{{$reservation->nights}}</p>
@@ -344,7 +340,6 @@
                       </div>
                     </div>
                   </div>
-
                   <script type="text/javascript">
                     function toggleModal(modalID) {
                       document.getElementById(modalID).classList.toggle("hidden");
@@ -357,45 +352,6 @@
                   <h1>No records</h1>
                   @endif
                 </div>
-
-    </section>
-    <footer class="bg-[#a2eeea] mt-[150px]">
-      <div class="max-w-[1240px] mx-auto py-16 px-4 grid lg:grid-cols-4 gap-8">
-        <!-- Logo -->
-        <div class="flex flex-col items-center justify-between space-y-12
-                            md:flex-col md:space-y-0 md:items-start">
-          <!-- Logo -->
-          <div>
-            <img src="{{ asset('./images/logom2.png')}}" class="h-[100px]" alt="">
-          </div>
-        </div>
-
-        <div class="">
-          <h1 class="font-bold text-lg w-full">MICROHOTEL</h1>
-          <p class="text-sm text-gray-900">The DWCC Microhotel is a school-run hotel
-            located inside the Divine Word College of Calapan.</p>
-        </div>
-
-        <div class="">
-          <h1 class="font-bold text-lg">Contact Us</h1>
-          <p class="text-sm text-gray-900">Gov Infantado St, Calapan City, Oriental Mindoro</p>
-          <p class="text-sm text-gray-900">microhotel@dwcc.edu.ph</p>
-          <p class="text-sm text-gray-900">09123456789</p>
-        </div>
-
-        <div class="flex flex-col items-center justify-between space-y-12
-                        md:flex-col md:space-y-0 md:items-start">
-          <!-- Logo -->
-          <div>
-            <img src="{{ asset('./images/DWCCLOGO.png')}}" class="h-[100px]" alt="">
-          </div>
-        </div>
-      </div>
-
-      <div class="bg-[#55AFAB] flex justify-center">
-        <p class="text-sm">Copyright &copy; 2023 DWCC MicroHotel</p>
-      </div>
-    </footer>
   </x-app-layout>
 </body>
 <script src="{{url('js/progressbar.js')}}"></script>

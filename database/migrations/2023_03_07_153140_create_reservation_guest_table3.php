@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('online_reservations', function (Blueprint $table) {
+        Schema::create('reservations', function (Blueprint $table) {
             $table ->bigIncrements('id');
             $table ->unsignedBigInteger('guest_id');
             $table ->unsignedBigInteger('room_id');

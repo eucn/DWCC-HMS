@@ -28,6 +28,10 @@
   <link href="{{ asset('template/assets/vendor/quill/quill.bubble.css') }}" rel="stylesheet">
   <link href="{{ asset('template/assets/vendor/remixicon/remixicon.css') }}" rel="stylesheet">
   <link href="{{ asset('template/assets/vendor/simple-datatables/style.css') }}" rel="stylesheet">
+  
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
   <!-- Template Main CSS File -->
   <link href="{{ asset('template/assets/css/style.css') }}" rel="stylesheet">
@@ -37,6 +41,7 @@
   <script defer src="https://use.fontawesome.com/releases/v6.1.1/js/all.js"
     integrity="sha384-xBXmu0dk1bEoiwd71wOonQLyH+VpgR1XcDH3rtxrLww5ajNTuMvBdL5SOiFZnNdp" crossorigin="anonymous">
   </script>
+
 
   <!-- =======================================================
   * Template Name: NiceAdmin - v2.4.0
@@ -165,6 +170,7 @@
 
     <div class="pagetitle">
       <h1>Booking Details</h1>
+      <br>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
@@ -196,8 +202,9 @@
                     <option value="100">50</option>
                     <option value="100">100</option> --}}
                   </select>
+                
                   <b>
-                    <p style="position: relative; top: 8px; left: 1px;color:#434242;">entries</p>
+                    <p style="position: relative; top: 7px; left: 1px;color:#434242;">entries</p>
                   </b>
                 </div>
                 <div class="">
@@ -206,31 +213,54 @@
             </div>
           </div><!-- End Left side columns -->
         </div>
+        <hr style="border-top: 2px solid #3C4048;position: relative; left: 8px;">
         <div>
           <br>
           <table class="table table-condensed table-sm table-bordered">
             <thead class="bg-[#51bdb8] text-white">
               <tr style="text-align:center">
                 <td scope="col">No.</td>
-                <td scope="col" style="width: 200px;">td</th>
+                <td scope="col" style="width: 200px;">Name</th>
                 <td scope="col">Payment Method</td>
                 <td Booking scope="col">Booking Status</td>
                 <td scope="col">Check-in / Check-out Date</td>  
-                <td scope="col">Action  <button type="button"  class="btn btn-primary btn-sm" data-toggle="modal" data-target="#" ><i class="fa-solid fa-eye"></i></button></td>
+                <td scope="col"  style="width: 200px; text-align:center;">&nbsp &nbsp &nbsp &nbsp Action <button type="button"  class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal" style="position: relative; top: 36px; left: -55px;" ><i class="fa-solid fa-eye"></i></button><button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#" style="position: relative; top: 36px; left: -50px; width: 30px;" ><i class="fa-solid fa-xmark"></i></button></td>
+   
+              <div class="container">
 
-                 <!--View Button-->	
-              
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button"  style="position:relative; left: 350px; color: red;" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title" style="position:relative; left: -230px; color:#51bdb8;">Booking Details</h4>
+        </div>
+        <div class="modal-body">
+          <p style="font-weight: bold; color:#434242;">Name: </p>
+          <p style="font-weight: bold; color:#434242;">Payment Method: </p>
+          <p style="font-weight: bold; color:#434242;">Booking Status: </p>
+          <p style="font-weight: bold; color:#434242;">Check-in / Check-out Date: </p>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal" style="background-color: #19A7CE; color:#ffffff;">Close</button>
+        </div>
+      </div>
                    
               </tr>
             </thead>
      
             <tbody>
 
+            
         
                       
                     
                        @foreach ($reservationData as $index => $data)
-                  <tr style="text-align:center" >
+                  <tr style="text-align:center" style="height: 250px;">
                     <td  scope="col">{{ $index + 1 }}</td>
                       <td scope="col">{{ $data->first_name }} &nbsp; {{ $data->last_name }}</td>
                       <td scope="col">{{ $data->payment_method }}</td>

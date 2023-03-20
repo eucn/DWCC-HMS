@@ -262,7 +262,7 @@
           <h4 class="modal-title" style="position:relative; left: -230px; color:#51bdb8;">Cancel Booking Details</h4>
         </div>
         <div class="modal-body">
-          <h4 style="font-weight: bold; color:#434242;">Are you sure you want to cancel this booking? </h4>
+          <h4 style="font-weight: bold; color:#434242;">  Are you sure you want to cancel this booking? </h4>
          
         </div>
         <div class="modal-footer">

@@ -243,16 +243,29 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button"  style="position:relative; left: 350px; color: red;" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title" style="position:relative; left: -200px; color:#51bdb8;">Payment Information</h4>
+        <h4 class="modal-title" style="position:relative; left: -200px; color:#595959;">Payment Information</h4>
       </div>
       <div class="modal-body">
-        <p style="font-weight: bold; color:#434242;">Name: </p>
-        <p style="font-weight: bold; color:#434242;">Receipt No.: </p>
-       
-
+        <div class="flex justify-center items-center h-full">
+          <div class="w-full max-w-xl">
+            <div class="my-4">
+              <p class="font-bold text-gray-700" for="name">Name:</p> 
+              <input class="w-full h-14 rounded-md py-4" type="text" name="name" id="">
+            </div>
+           <div class="my-4">
+            <p class="font-bold text-gray-700" for="receipt_no">Receipt No. : </p>
+            <input class="w-full h-14 rounded-md py-4" type="text" name="receipt_no" id="receipt_no">
+           </div>
+          </div>
+        </div>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal" style="background-color: #19A7CE; color:#ffffff;">Close</button>
+      
+      <div class="modal-footer text-center">
+        <div class="">
+          <button type="button" class="btn btn-default" data-dismiss="modal"
+          style="background-color: #F59E0B; color: #FFFFFF; font-weight: regular;font-size: 15px; padding: 0.75rem 1.5rem; border-radius: 0.375rem; box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05), 0 1px 3px 1px rgba(0, 0, 0, 0.1); transition: all 0.15s ease; outline: none; margin-right: 0.25rem; margin-bottom: 0.25rem;">
+           Confirm</button>
+        </div>
       </div>
     </div>
                       
@@ -262,13 +275,15 @@
                 </tbody> 
                 @foreach ($reservationData as $index => $data)
                 <tr style="text-align:center" >
-                  <td  scope="col">{{ $index + 1 }}</td>
+                  <td  scope="col">
+                  {{-- {{ $index + 1 }}  --}}
+                    <p class="">{{ $data->reservation_id }}
+                    </p></td>
                     <td scope="col">{{ $data->first_name }} &nbsp; {{ $data->last_name }}</td>
                     <td scope="col"> {{ \Carbon\Carbon::parse($data->checkin_date)->format('F j, Y') }}</td> 
                     <td> {{ \Carbon\Carbon::parse($data->checkout_date)->format('F j, Y') }}</td>
                     <td scope="col">{{ $data->payment_method }}</td>
                     <td scope="col">{{ $data->booking_types }}</td>
-                
                     <td scope="col" style="position:relative; left: 50px; top: -35px;"> <button type="button"  class="btn btn-primary btn-sm" data-toggle="modal" data-target="#view_modal" style="position: relative; top: 36px; left: -55px;" >Confirm Payment</button></td>
                 </tr>
             @endforeach  

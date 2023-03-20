@@ -172,7 +172,7 @@
   </aside><!-- End Sidebar-->
 
   <main id="main" class="main">
-
+      
     <div class="pagetitle">
       <h1>Payment</h1>
       <nav>
@@ -218,7 +218,11 @@
         
 
       </div>
-
+      @if (Session::has('success'))
+      <div class="alert alert-success">
+          {{ Session::get('success') }}
+          </div>
+      @endif
       <div>
             <br>
       <table class="table table-condensed table-sm table-bordered">   
@@ -233,43 +237,7 @@
                         <th scope="col" style="width: 200px; text-align:center;"> &nbsp &nbsp  Action</th>
 
 
-                        <div class="container">
-
-<!-- View Modal -->
-<div class="modal fade" id="view_modal" role="dialog">
-  <div class="modal-dialog">
-  
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button"  style="position:relative; left: 350px; color: red;" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title" style="position:relative; left: -200px; color:#595959;">Payment Information</h4>
-      </div>
-      <div class="modal-body">
-        <div class="flex justify-center items-center h-full">
-          <div class="w-full max-w-xl">
-            <div class="my-4">
-              <p class="font-bold text-gray-700" for="name">Name:</p> 
-              <input class="w-full h-14 rounded-md py-4" type="text" name="name" id="">
-            </div>
-           <div class="my-4">
-            <p class="font-bold text-gray-700" for="receipt_no">Receipt No. : </p>
-            <input class="w-full h-14 rounded-md py-4" type="text" name="receipt_no" id="receipt_no">
-           </div>
-          </div>
-        </div>
-      </div>
-      
-      <div class="modal-footer text-center">
-        <div class="">
-          <button type="button" class="btn btn-default" data-dismiss="modal"
-          style="background-color: #F59E0B; color: #FFFFFF; font-weight: regular;font-size: 15px; padding: 0.75rem 1.5rem; border-radius: 0.375rem; box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05), 0 1px 3px 1px rgba(0, 0, 0, 0.1); transition: all 0.15s ease; outline: none; margin-right: 0.25rem; margin-bottom: 0.25rem;">
-           Confirm</button>
-        </div>
-      </div>
-    </div>
-                      
-                      
+                        <div class="container">       
                     </tr>   
                 </thead>   
                 </tbody> 
@@ -284,11 +252,55 @@
                     <td> {{ \Carbon\Carbon::parse($data->checkout_date)->format('F j, Y') }}</td>
                     <td scope="col">{{ $data->payment_method }}</td>
                     <td scope="col">{{ $data->booking_types }}</td>
-                    <td scope="col" style="position:relative; left: 50px; top: -35px;"> <button type="button"  class="btn btn-primary btn-sm" data-toggle="modal" data-target="#view_modal" style="position: relative; top: 36px; left: -55px;" >Confirm Payment</button></td>
+                    <td scope="col" style="position:relative; left: 50px; top: -35px;"> <button type="button" 
+                    class="btn btn-primary btn-sm" data-toggle="modal" data-target="#view_modal{{  $data->reservation_id }}" id="editModal"
+                    style="position: relative; top: 36px; left: -55px;" >Confirm Payment</button></td>
                 </tr>
-            @endforeach  
-            </table>
-</div>
+                <!-- View Modal -->
+              <div class="modal fade" id="view_modal{{  $data->reservation_id }}" role="dialog">
+                <div class="modal-dialog">
+                  <form action="{{ route('frontdesk.bookingstatus', ['reservation_Id' => $data->reservation_id]) }}" method="POST">
+                    @csrf
+                    <input type="hidden" name="reservation_id" value="{{ $data->reservation_id }}">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" style="position:relative; left: 350px; color: red;" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title" style="position:relative; left: -200px; color:#595959;">Payment Information</h4>
+                      </div>
+                      <div class="modal-body">
+                        <div class="row justify-content-center">
+                          <div class="col-10">
+                            <div class="form-group">
+                              <label for="first_name" class="font-weight-bold text-gray-700">First Name:</label>
+                              <input class="form-control" type="text" name="first_name" id="first_name" value="{{ $data->first_name }}">
+                            </div>
+                            <div class="form-group">
+                              <label for="last_name" class="font-weight-bold text-gray-700">Last Name:</label>
+                              <input class="form-control" type="text" name="last_name" id="last_name" value="{{ $data->last_name }}">
+                            </div>
+                            <div class="form-group">
+                              <label for="receipt_no" class="font-weight-bold text-gray-700">Receipt No.:</label>
+                              <input class="form-control" type="text" name="receipt_no" id="receipt_no" value="">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <div class="modal-footer text-center">
+                        <div class="">
+                          <button type="submit" class="btn btn-default"
+                            style="background-color: #F59E0B; color: #FFFFFF; font-weight: regular;font-size: 15px; padding: 0.75rem 1.5rem; border-radius: 0.375rem; box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05), 0 1px 3px 1px rgba(0, 0, 0, 0.1); transition: all 0.15s ease; outline: none; margin-right: 0.25rem; margin-bottom: 0.25rem;">
+                            Confirm</button>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+                @endforeach  
+              </table>
+            </div>
    
     </section>
   </main><!-- End #main -->

@@ -281,4 +281,18 @@ class FrontdeskController extends Controller
             'reservationData' => $reservations,
         ]);
     }
+    public function updateBookingStatus(Request $request)
+    {
+        $reservation_id = $request->input('reservation_id');
+        $reservations = Reservations::find($reservation_id);
+
+        if ($reservations) {
+        $reservations->booking_status = 'paid';
+        $reservations->save();
+        return redirect()->back()->with('success', 'Booking status updated successfully.');
+        } else {
+            return redirect()->back()->with('error', 'Invalid guest information.');
+        }
+    }
+
 }

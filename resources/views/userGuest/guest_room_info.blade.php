@@ -169,23 +169,13 @@
                                         <div class="flex items-center justify-center">
                                             <a class="bg-gray-100 hover:bg-gray-400 text-gray-700 px-2 py-2 rounded-l shadow-md transition duration-300 ease-in-out cursor-pointer"
                                                 onclick="subtract('guest_num')">-</a>
-                                            <input readonly type="number" id="guest_num" name="guest_num" value="1"
-                                                min="1" class="w-[200px] text-center text-gray-700 bg-white py-2">
+                                            <input readonly type="number" id="guest_num" name="guest_num" value="{{ $rooms->max_capacity }}"
+                                                min="{{ $rooms->max_capacity }}" class="w-[200px] text-center text-gray-700 bg-white py-2">
                                             <a class="bg-gray-100 hover:bg-gray-400 text-gray-700 px-2 py-2 rounded-r shadow-md transition duration-300 ease-in-out cursor-pointer"
                                                 onclick="add('guest_num')">+</a>
                                         </div>
                                     </div>
-                                    <div class="py-2">
-                                        <p class="text-medium font-semibold">Extra Bed</p>
-                                        <div class="flex items-center justify-center mt-2">
-                                            <a class="bg-gray-100 hover:bg-gray-400 text-gray-700 px-2 py-2 rounded-l shadow-md transition duration-300 ease-in-out cursor-pointer"
-                                                onclick="subtract('extra_bed')">-</a>
-                                            <input readonly type="number" id="extra_bed" name="extra_bed" value="1"
-                                                min="1" class="w-[200px] text-center text-gray-700 bg-white py-2">
-                                            <a class="bg-gray-100 hover:bg-gray-400 text-gray-700 px-2 py-2 rounded-r shadow-md transition duration-300 ease-in-out cursor-pointer"
-                                                onclick="add('extra_bed')">+</a>
-                                        </div>
-                                    </div>
+                               
                                     <div class="py-6 text-center">
                                         <button type="submit"
                                             class="bg-yellow-500 hover:bg-yellow-600  text-white active:bg-yellow-800 font-bold uppercase text-sm px-[80px] py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
@@ -219,43 +209,6 @@
                     inputElement.value = currentValue + 1;
                 }
             </script>
-
-            <footer class="bg-[#a2eeea] mt-[150px]">
-                <div class="max-w-[1240px] mx-auto py-16 px-4 grid lg:grid-cols-4 gap-8">
-                    <!-- Logo -->
-                    <div class="flex flex-col items-center justify-between space-y-12
-            md:flex-col md:space-y-0 md:items-start">
-                        <!-- Logo -->
-                        <div>
-                            <img src="{{ asset('./images/logom2.png') }}" class="h-[100px]" alt=""></div>
-                    </div>
-
-                    <div class="">
-                        <h1 class="font-bold text-lg w-full">MICROHOTEL</h1>
-                        <p class="text-sm text-gray-900">The DWCC Microhotel is a school-run hotel
-                            located inside the Divine Word College of Calapan.</p>
-                    </div>
-
-                    <div class="">
-                        <h1 class="font-bold text-lg">Contact Us</h1>
-                        <p class="text-sm text-gray-900">Gov Infantado St, Calapan City, Oriental Mindoro</p>
-                        <p class="text-sm text-gray-900">microhotel@dwcc.edu.ph</p>
-                        <p class="text-sm text-gray-900">09123456789</p>
-                    </div>
-
-                    <div class="flex flex-col items-center justify-between space-y-12
-                        md:flex-col md:space-y-0 md:items-start">
-                        <!-- Logo -->
-                        <div>
-                            <img src="{{ asset('./images/DWCCLOGO.png')}}" class="h-[100px]" alt=""></div>
-                    </div>
-                </div>
-
-                <div class="bg-[#55AFAB] flex justify-center">
-                    <p class="text-sm">Copyright &copy; 2023 DWCC MicroHotel</p>
-                </div>
-            </footer>
-
     </x-app-layout>
 </body>
 <script src="{{url('js/progressbar.js')}}"></script>

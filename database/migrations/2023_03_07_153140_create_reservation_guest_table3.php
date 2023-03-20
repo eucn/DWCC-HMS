@@ -11,9 +11,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('walkin_reservations', function (Blueprint $table) {
+        Schema::create('reservations', function (Blueprint $table) {
             $table ->id();
-            $table ->unsignedBigInteger('frontdesk_id');
+            $table ->unsignedBigInteger('guest_id')->nullable();
+            $table ->unsignedBigInteger('frontdesk_id')->nullable();
             $table ->unsignedBigInteger('room_id');
             $table ->string('booking_status');
             $table ->integer('nights');
@@ -22,15 +23,18 @@ return new class extends Migration
             $table ->decimal('base_price',8,3);
             $table ->decimal('total_price',8,3);
             $table ->integer('guests_num');
+            $table ->integer('additional_guests');
             $table ->decimal('guestsFee',8,3);
-            $table ->integer('extra_bed');
             $table->timestamps();
-            //  $table->foreign('room_id')
-            //       ->references('id')->on('manage_room')
-            //       ->onDelete('cascade');
-            // $table->foreign('frontdesk_id')
-            //       ->references('id')->on('frontdesk')
-            //       ->onDelete('cascade');
+            $table->foreign('guest_id')
+            ->references('id')->on('users')
+            ->onDelete('cascade');
+             $table->foreign('frontdesk_id')
+            ->references('id')->on('frontdesks')
+            ->onDelete('cascade');
+            $table->foreign('room_id')
+            ->references('id')->on('manage_room')
+            ->onDelete('cascade');
         });
     }
 
@@ -41,6 +45,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('walkin_reservations');
+        Schema::dropIfExists('reservations');
     }
 };

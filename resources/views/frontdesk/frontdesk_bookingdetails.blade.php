@@ -225,7 +225,7 @@
                 <td scope="col">Payment Method</td>
                 <td Booking scope="col">Booking Status</td>
                 <td scope="col">Check-in / Check-out Date</td>  
-                <td scope="col"  style="width: 200px; text-align:center;">&nbsp &nbsp &nbsp &nbsp Action <button type="button"  class="btn btn-primary btn-sm" data-toggle="modal" data-target="#view_modal" style="position: relative; top: 36px; left: -55px;" ><i class="fa-solid fa-eye"></i></button><button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#delete_modal"  style="position: relative; top: 36px; left: -50px; width: 30px;" ><i class="fa-solid fa-trash"></i></button></td>
+                <td scope="col"  style="width: 200px; text-align:center;">&nbsp &nbsp &nbsp Action</td>
    
               <div class="container">
 
@@ -287,7 +287,7 @@
                       <td scope="col"> {{ \Carbon\Carbon::parse($data->checkin_date)->format('F j, Y') }} &nbsp; - &nbsp;
                         {{ \Carbon\Carbon::parse($data->checkout_date)->format('F j, Y') }}
                       </td> 
-                      <td scope="col"></td>
+                      <td scope="col" style="position:relative; left: 50px; top: -35px;"> <button type="button"  class="btn btn-primary btn-sm" data-toggle="modal" data-target="#view_modal" style="position: relative; top: 36px; left: -55px;" ><i class="fa-solid fa-eye"></i></button><button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#delete_modal"  style="position: relative; top: 36px; left: -50px; width: 30px;" ><i class="fa-solid fa-trash"></i></button></td>
                   </tr>
               @endforeach
             </tbody>

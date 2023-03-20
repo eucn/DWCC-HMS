@@ -235,7 +235,7 @@
                     <td scope="col"> {{ \Carbon\Carbon::parse($data->checkin_date)->format('F j, Y') }}</td> 
                     <td> {{ \Carbon\Carbon::parse($data->checkout_date)->format('F j, Y') }}</td>
                     <td scope="col">{{ $data->payment_method }}</td>
-                    <td scope="col">{{ $data->booking_status }}</td>
+                    <td scope="col">{{ $data->booking_types }}</td>
                 
                     <td scope="col"></td>
                 </tr>

@@ -227,7 +227,7 @@
                   <div class="space-y-4 font-regular text-base sm:text-lg pb-10 ">
                     <div class="flex flex-col lg:flex-row justify-center">
                       <div class="mx-4 md:mx-4 py-3" style="position:relative; left: 250px; top: -145px; ">
-                        <label class="" for="room_no">Room No:</label><br>
+                        <label class="" for="room_no" >Room No:</label><br>
                         <input class="first-letter:w-full md:w-[475px] py-1.5 border-2 text-center " style="border: 1px solid gray;" name="room_no" id="room_no" value="{{ old('room_no') }}" readonly>
                       </div>
                     </div>

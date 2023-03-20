@@ -252,9 +252,9 @@
                     <td> {{ \Carbon\Carbon::parse($data->checkout_date)->format('F j, Y') }}</td>
                     <td scope="col">{{ $data->payment_method }}</td>
                     <td scope="col">{{ $data->booking_types }}</td>
-                    <td scope="col" style="position:relative; left: 50px; top: -35px;"> <button type="button" 
+                    <td scope="col"> <button type="button" 
                     class="btn btn-primary btn-sm" data-toggle="modal" data-target="#view_modal{{  $data->reservation_id }}" id="editModal"
-                    style="position: relative; top: 36px; left: -55px;" >Confirm Payment</button></td>
+                    >Confirm Payment</button></td>
                 </tr>
                 <!-- View Modal -->
               <div class="modal fade" id="view_modal{{  $data->reservation_id }}" role="dialog">

@@ -245,9 +245,12 @@
                       <td scope="col"> {{ \Carbon\Carbon::parse($data->checkin_date)->format('F j, Y') }} &nbsp; - &nbsp;
                         {{ \Carbon\Carbon::parse($data->checkout_date)->format('F j, Y') }}
                       </td> 
-                      <td scope="col" style="position:relative; left: 50px; top: -35px;"> 
-                        <button type="button"  class="btn btn-primary btn-sm" data-toggle="modal" data-target="#view_modal{{ $data->reservation_id }}" style="position: relative; top: 36px; left: -55px;" value="{{ $data->reservation_id }}"><i class="fa-solid fa-eye"></i></button>
-                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#delete_modal"  style="position: relative; top: 36px; left: -50px; width: 30px;" ><i class="fa-solid fa-trash"></i></button></td>
+                      <td scope="col"> 
+                        <button type="button"  class="btn btn-primary btn-sm" data-toggle="modal" data-target="#view_modal{{ $data->reservation_id }}">
+                          <i class="fa-solid fa-eye"></i></button>
+                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#delete_modal">
+                          <i class="fa-solid fa-trash"></i></button>
+                        </td>
                   </tr>
                   <div class="modal fade" id="view_modal{{ $data->reservation_id }}" role="dialog">
                     <div class="modal-dialog">

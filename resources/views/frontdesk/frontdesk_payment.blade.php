@@ -30,6 +30,12 @@
   <link href="{{ asset('template/assets/vendor/remixicon/remixicon.css') }}" rel="stylesheet">
   <link href="{{ asset('template/assets/vendor/simple-datatables/style.css') }}" rel="stylesheet">
 
+    <!-- Modal -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+
   <!-- Template Main CSS File -->
   <link href="{{ asset('template/assets/css/style.css') }}" rel="stylesheet">
 
@@ -195,7 +201,7 @@
                 <option value="{{ url()->current() }}?records_per_page=50"  'selected' : '' }}>50</option>
                 <option value="{{ url()->current() }}?records_per_page=100"  'selected' : '' }}>100</option>
             </select>
-            <b><p style="position: relative; top: 8px; left: 1px;color:#434242;">entries</p></b>
+            <b><p style="position: relative; top: 6px; left: 1px;color:#434242;">entries</p></b>
 
     
         </div>
@@ -224,7 +230,33 @@
                         <th scope="col">Check-out Date</th>
                         <th scope="col">Payment Method</th>
                         <th scope="col">Booking Type</th>
-                        <th scope="col">Action</th>
+                        <th scope="col" style="width: 200px; text-align:center;"> &nbsp &nbsp  Action</th>
+
+
+                        <div class="container">
+
+<!-- View Modal -->
+<div class="modal fade" id="view_modal" role="dialog">
+  <div class="modal-dialog">
+  
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button"  style="position:relative; left: 350px; color: red;" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title" style="position:relative; left: -200px; color:#51bdb8;">Payment Information</h4>
+      </div>
+      <div class="modal-body">
+        <p style="font-weight: bold; color:#434242;">Name: </p>
+        <p style="font-weight: bold; color:#434242;">Receipt No.: </p>
+       
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" style="background-color: #19A7CE; color:#ffffff;">Close</button>
+      </div>
+    </div>
+                      
+                      
                     </tr>   
                 </thead>   
                 </tbody> 
@@ -237,7 +269,7 @@
                     <td scope="col">{{ $data->payment_method }}</td>
                     <td scope="col">{{ $data->booking_types }}</td>
                 
-                    <td scope="col"></td>
+                    <td scope="col" style="position:relative; left: 50px; top: -35px;"> <button type="button"  class="btn btn-primary btn-sm" data-toggle="modal" data-target="#view_modal" style="position: relative; top: 36px; left: -55px;" >Confirm Payment</button></td>
                 </tr>
             @endforeach  
             </table>

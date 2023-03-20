@@ -308,21 +308,7 @@
                     onclick="subtract('guest_num')">-</a>
                 </div>
               </div>
-              <div class="py-2">
-                <p style="position: relative; top: -150px; left: 400px; top: -385px;" class="text-medium font-semibold">
-                  Extra Bed</p>
-                <div class="flex items-center justify-center mt-2">
-                  <a style="position: relative; top: -150px; left: 695px; top: -385px;"
-                    class="bg-gray-100 hover:bg-gray-400 text-gray-700 px-2 py-2 rounded-r shadow-md transition duration-300 ease-in-out cursor-pointer"
-                    onclick="add('extra_bed')">+</a>
-                  <input style="position: relative; top: -150px; left: 260px; top: -386px; width: 410px;" readonly
-                    type="number" id="extra_bed" name="extra_bed" value="1" min="1"
-                    class="w-[200px] text-center text-gray-700 bg-white py-2">
-                  <a style="position: relative; top: -150px; left: -180px; top: -385px;"
-                    class="bg-gray-100 hover:bg-gray-400 text-gray-700 px-2 py-2 rounded-l shadow-md transition duration-300 ease-in-out cursor-pointer"
-                    onclick="subtract('extra_bed')">-</a>
-                </div>
-              </div>
+           
 
              <!-- Guest Info -->
             <div class="bg-white rounded-lg border-2 shadow-md w-full pb-4"
@@ -427,10 +413,10 @@
             Save
           </button>
             <!-- <button  class="bg-yellow-500 text-white active:bg-yellow-800 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">Continue</button> -->
-            <button type="submit" class="btn btn-primary" style="background-color: #E0C822 " data-bs-toggle="modal"
-              data-bs-target="#modalDialogScrollable">
-              continue
-            </button>
+            <!-- <button type="submit" class="btn btn-primary" style="background-color: #E0C822 " data-bs-toggle="modal" -->
+              <!-- data-bs-target="#modalDialogScrollable"> -->
+              <!-- continue -->
+      <!-- /    </button> -->
           </form>
             {{-- <!-- Modal -->
             <div class="modal fade" id="modalDialogScrollable" tabindex="-1">

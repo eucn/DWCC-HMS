@@ -231,7 +231,7 @@ class FrontdeskController extends Controller
             $guestInformation->save();
             
         }
-        Session::flash('success', 'Reservation was successful.');
+        Session::flash('success', 'Your reservation was successful.');
         return redirect()->route('frontdesk.reservation');
 
     }

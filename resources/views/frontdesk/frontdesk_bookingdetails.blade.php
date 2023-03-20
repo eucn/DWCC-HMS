@@ -227,53 +227,13 @@
                 <td scope="col">Check-in / Check-out Date</td>  
                 <td scope="col"  style="width: 200px; text-align:center;">&nbsp &nbsp &nbsp Action</td>
    
-              <div class="container">
-
+<div class="container">
   <!-- View Modal -->
-  <div class="modal fade" id="view_modal" role="dialog">
-    <div class="modal-dialog">
-    
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button"  style="position:relative; left: 350px; color: red;" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title" style="position:relative; left: -230px; color:#51bdb8;">Booking Details</h4>
-        </div>
-        <div class="modal-body">
-          <p style="font-weight: bold; color:#434242;">Name: </p>
-          <p style="font-weight: bold; color:#434242;">Payment Method: </p>
-          <p style="font-weight: bold; color:#434242;">Booking Status: </p>
-          <p style="font-weight: bold; color:#434242;">Check-in / Check-out Date: </p>
-
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal" style="background-color: #19A7CE; color:#ffffff;">Close</button>
-        </div>
-      </div>
-
-       <!-- Delete Modal -->
-       <div class="modal fade" id="delete_modal" role="dialog">
-    <div class="modal-dialog">
-    
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button"  style="position:relative; left: 350px; color: red;" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title" style="position:relative; left: -230px; color:#51bdb8;">Cancel Booking Details</h4>
-        </div>
-        <div class="modal-body">
-          <h4 style="font-weight: bold; color:#434242;"> Are you sure you want to cancel this booking? </h4>
-         
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal" style="background-color: #19A7CE; color:#ffffff;">Close</button>
-        </div>
-      </div>
               </tr>
             </thead>
      
             <tbody>
-                       @foreach ($reservationData as $index => $data)
+              @foreach ($reservationData as $index => $data)     
                   <tr style="text-align:center" style="height: 250px;">
                     <td  scope="col">
                       {{-- {{ $index + 1 }} --}}
@@ -286,9 +246,53 @@
                         {{ \Carbon\Carbon::parse($data->checkout_date)->format('F j, Y') }}
                       </td> 
                       <td scope="col" style="position:relative; left: 50px; top: -35px;"> 
-                        <button type="button"  class="btn btn-primary btn-sm" data-toggle="modal" data-target="#view_modal" style="position: relative; top: 36px; left: -55px;" value="{{ $data->reservation_id }}" ><i class="fa-solid fa-eye"></i></button>
+                        <button type="button"  class="btn btn-primary btn-sm" data-toggle="modal" data-target="#view_modal{{ $data->reservation_id }}" style="position: relative; top: 36px; left: -55px;" value="{{ $data->reservation_id }}"><i class="fa-solid fa-eye"></i></button>
                         <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#delete_modal"  style="position: relative; top: 36px; left: -50px; width: 30px;" ><i class="fa-solid fa-trash"></i></button></td>
                   </tr>
+                  <div class="modal fade" id="view_modal{{ $data->reservation_id }}" role="dialog">
+                    <div class="modal-dialog">
+                    
+                      <!-- Modal content-->
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button"  style="position:relative; left: 350px; color: red;" class="close" data-dismiss="modal">&times;</button>
+                          <h4 class="modal-title" style="position:relative; left: -230px; color:#51bdb8;">Booking Details</h4>
+                        </div>
+                        <div class="modal-body">
+                          <p style="font-weight: bold; color:#434242;">Name: <span>{{ $data->first_name }}&nbsp;{{ $data->last_name }}</span></p>
+                          <p style="font-weight: bold; color:#434242;">Payment Method: <span>{{ $data->payment_method }}</span></p>
+                          <p style="font-weight: bold; color:#434242;">Booking Status: <span>{{$data->booking_status}}</span></p>
+                          <p style="font-weight: bold; color:#434242;">Check-in / Check-out Date: <span>
+                            {{ \Carbon\Carbon::parse($data->checkin_date)->format('F j, Y') }} &nbsp; - &nbsp;
+                            {{ \Carbon\Carbon::parse($data->checkout_date)->format('F j, Y') }}</span>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-default" data-dismiss="modal" style="background-color: #19A7CE; color:#ffffff;">Close</button>
+                        </div>
+                      </div>
+                
+                       <!-- Delete Modal -->
+                       <div class="modal fade" id="delete_modal" role="dialog">
+                    <div class="modal-dialog">
+                    
+                      <!-- Modal content-->
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button"  style="position:relative; left: 350px; color: red;" class="close" data-dismiss="modal">&times;</button>
+                          <h4 class="modal-title" style="position:relative; left: -230px; color:#51bdb8;">Cancel Booking Details</h4>
+                        </div>
+                        <div class="modal-body">
+                          <h4 style="font-weight: bold; color:#434242;"> Are you sure you want to cancel this booking? </h4>
+                         
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-default" data-dismiss="modal" style="background-color: #19A7CE; color:#ffffff;">Close</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                </div>
               @endforeach
             </tbody>
           </table>

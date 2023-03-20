@@ -210,10 +210,14 @@
             <div class="flex justify-end mt-20 mr-10">
                 {{-- <button id="continue-button" class="text-white bg-[#E0C822] hover:bg-yellow-600 px-4 py-2 rounded-sm"
                        >Continue</button> --}}
-                <button class="bg-yellow-500 text-white active:bg-yellow-800 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button"
+                {{-- <button class="bg-yellow-500 text-white active:bg-yellow-800 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button"
                   onclick="toggleModal('modal-id')">
                   Continue
-                </button>
+                </button> --}}
+                <a href="{{ route('guest.view.invoice') }}" target="_blank" class="bg-yellow-500 text-white active:bg-yellow-800 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">View</a>
+
+                <a href="{{ route('generate.invoice')}}" 
+                 class="bg-yellow-500 text-white active:bg-yellow-800 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">Download</a>
             </form>
 
                 <div

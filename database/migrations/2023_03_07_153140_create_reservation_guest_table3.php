@@ -12,26 +12,29 @@ return new class extends Migration
     public function up()
     {
         Schema::create('reservations', function (Blueprint $table) {
-            $table ->bigIncrements('id');
-            $table ->unsignedBigInteger('guest_id');
+            $table ->id();
+            $table ->unsignedBigInteger('guest_id')->nullable();
+            $table ->unsignedBigInteger('frontdesk_id')->nullable();
             $table ->unsignedBigInteger('room_id');
             $table ->string('booking_status');
-            $table ->string('booking_types');
             $table ->integer('nights');
             $table ->date('checkin_date');
             $table ->date('checkout_date');
             $table ->decimal('base_price',8,3);
             $table ->decimal('total_price',8,3);
             $table ->integer('guests_num');
+            $table ->integer('additional_guests');
             $table ->decimal('guestsFee',8,3);
-            $table ->integer('extra_bed');
             $table->timestamps();
-            //  $table->foreign('room_id')
-            //       ->references('id')->on('manage_room')
-            //       ->onDelete('cascade');
-            // $table->foreign('guest_id')
-            //       ->references('id')->on('users')
-            //       ->onDelete('cascade');
+            $table->foreign('guest_id')
+            ->references('id')->on('users')
+            ->onDelete('cascade');
+             $table->foreign('frontdesk_id')
+            ->references('id')->on('frontdesks')
+            ->onDelete('cascade');
+            $table->foreign('room_id')
+            ->references('id')->on('manage_room')
+            ->onDelete('cascade');
         });
     }
 

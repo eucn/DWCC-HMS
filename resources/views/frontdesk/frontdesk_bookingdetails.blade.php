@@ -257,7 +257,7 @@
     
       <!-- Modal content-->
       <div class="modal-content">
-        <div class="modal-header>
+        <div class="modal-header">
           <button type="button"  style="position:relative; left: 350px; color: red;" class="close" data-dismiss="modal">&times;</button>
           <h4 class="modal-title" style="position:relative; left: -230px; color:#51bdb8;">Cancel Booking Details</h4>
         </div>
@@ -273,21 +273,21 @@
             </thead>
      
             <tbody>
-
-            
-        
-                      
-                    
                        @foreach ($reservationData as $index => $data)
                   <tr style="text-align:center" style="height: 250px;">
-                    <td  scope="col">{{ $index + 1 }}</td>
+                    <td  scope="col">
+                      {{-- {{ $index + 1 }} --}}
+                      <p class="">{{ $data->reservation_id }}
+                    </td>
                       <td scope="col">{{ $data->first_name }} &nbsp; {{ $data->last_name }}</td>
                       <td scope="col">{{ $data->payment_method }}</td>
                       <td scope="col">{{ $data->booking_status }}</td>
                       <td scope="col"> {{ \Carbon\Carbon::parse($data->checkin_date)->format('F j, Y') }} &nbsp; - &nbsp;
                         {{ \Carbon\Carbon::parse($data->checkout_date)->format('F j, Y') }}
                       </td> 
-                      <td scope="col" style="position:relative; left: 50px; top: -35px;"> <button type="button"  class="btn btn-primary btn-sm" data-toggle="modal" data-target="#view_modal" style="position: relative; top: 36px; left: -55px;" ><i class="fa-solid fa-eye"></i></button><button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#delete_modal"  style="position: relative; top: 36px; left: -50px; width: 30px;" ><i class="fa-solid fa-trash"></i></button></td>
+                      <td scope="col" style="position:relative; left: 50px; top: -35px;"> 
+                        <button type="button"  class="btn btn-primary btn-sm" data-toggle="modal" data-target="#view_modal" style="position: relative; top: 36px; left: -55px;" value="{{ $data->reservation_id }}" ><i class="fa-solid fa-eye"></i></button>
+                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#delete_modal"  style="position: relative; top: 36px; left: -50px; width: 30px;" ><i class="fa-solid fa-trash"></i></button></td>
                   </tr>
               @endforeach
             </tbody>

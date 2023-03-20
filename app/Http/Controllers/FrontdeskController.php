@@ -164,11 +164,11 @@ class FrontdeskController extends Controller
             $reservation->checkout_date = $checkoutdateSave;
             $reservation->nights = $numNights;
             $reservation->booking_status = 'Pending';
-            $reservation->booking_types = 'Walk-in'; 
+            $reservation->booking_types = 'Walk-in';    
             $reservation->base_price = $roomPrice;
             $reservation->total_price = $totalPrice;
             $reservation->guests_num = $numGuests;
-            $reservation->additional_guests = $additionalFeePerGuest;
+            $reservation->additional_guests = $numAdditionalGuests;
             $reservation->guests_Fee = $total_numGuestFee;
             $reservation->save();
 
@@ -244,21 +244,38 @@ class FrontdeskController extends Controller
     }
   
     public function FrontdeskBookingDetails(){
+
         $reservations = GuestInformation::join('reservations', 'guest_information.reservation_id', '=', 'reservations.id')
         ->join('manage_rooms', 'reservations.room_id', '=', 'manage_rooms.id')
-        ->select('guest_information.first_name','guest_information.last_name', 'guest_information.payment_method','reservations.booking_status', 'reservations.checkin_date','reservations.total_price', 'reservations.checkout_date',)
+        ->select('guest_information.reservation_id','guest_information.first_name','guest_information.last_name', 'guest_information.payment_method','reservations.booking_status', 'reservations.checkin_date','reservations.total_price', 'reservations.checkout_date',)
         ->get();
+
+        // $bookingdetails = GuestInformation::join('reservations', 'guest_information.reservation_id', '=', 'reservations.id')
+        // ->join('manage_rooms', 'reservations.room_id', '=', 'manage_rooms.id')
+        // ->select('guest_information.first_name','guest_information.last_name','guest_information.address', 'guest_information.payment_method','reservations.booking_status', 'reservations.checkin_date','reservations.total_price', 'reservations.checkout_date',)
+        // ->get();
+
+
         return view('frontdesk.frontdesk_bookingdetails', [
             'reservationData' => $reservations,
+            // 'bookingdetails' => $bookingdetails,
         ]);
     }
+    public function destroy($id)
+    {
+        $item = Reservations::findOrFail($id);
+        $item->delete();
+
+        return redirect()->route('items.index')->with('success', 'Item deleted successfully');
+    }
+
     public function FrontdeskReports(){
         return view('frontdesk.frontdesk_reports');
     }
     public function FrontdeskPayment(){
         $reservations = GuestInformation::join('reservations', 'guest_information.reservation_id', '=', 'reservations.id')
         ->join('manage_rooms', 'reservations.room_id', '=', 'manage_rooms.id')
-        ->select('guest_information.first_name','guest_information.last_name', 'guest_information.payment_method','reservations.booking_types', 'reservations.checkin_date','reservations.total_price', 'reservations.checkout_date',)
+        ->select('guest_information.reservation_id','guest_information.first_name','guest_information.last_name', 'guest_information.payment_method','reservations.booking_types', 'reservations.checkin_date','reservations.total_price', 'reservations.checkout_date',)
         ->get();
         return view('frontdesk.frontdesk_payment', [
             'reservationData' => $reservations,

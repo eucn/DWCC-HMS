@@ -164,6 +164,7 @@ class FrontdeskController extends Controller
             $reservation->checkout_date = $checkoutdateSave;
             $reservation->nights = $numNights;
             $reservation->booking_status = 'Pending';
+            $reservation->booking_types = 'Walk-in'; 
             $reservation->base_price = $roomPrice;
             $reservation->total_price = $totalPrice;
             $reservation->guests_num = $numGuests;
@@ -201,7 +202,6 @@ class FrontdeskController extends Controller
             $guestInformation = new GuestInformation();
             $guestInformation->frontdesk_id = $frontdesk_id;
             $guestInformation->reservation_id = $reservation_id;
-            $guestInformation->booking_types = 'Online'; 
             $guestInformation->salutation = $salutation;
             $guestInformation->first_name = $first_name;
             $guestInformation->last_name = $last_name;  

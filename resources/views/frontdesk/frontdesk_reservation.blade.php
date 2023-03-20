@@ -185,17 +185,19 @@
                 <strong>{{ session('error') }}</strong>
             </div>
             @endif
-            @if(session()->has('success'))
-              <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative text-center" role="alert">
-                  <strong>{{ session('success') }}</strong>
-              </div>
-          @endif
+            @if (Session::has('success'))
+            <div class="alert alert-success">
+                {{ Session::get('success') }}
+            </div>
+        @endif
+        
       {{-- </div>  --}}
       <div class="container  px-4 sm:px-6 lg:px-8">
           <!-- Flex container -->
           <div class="justify-between mx-[50px]">
             <!-- Room Info -->
             <form method="POST" action="{{ route('frontdesk.reservation.save') }}" >
+              @csrf
               <div class="mx-auto mt-8" style="width:1000px;  position: relative; left: -110px;">
                 <div class="bg-white rounded-lg shadow-md border-2 w-full " style="height: 500px;">
                   <div class="border-b-2 border-gray-300 px-4 py-3">

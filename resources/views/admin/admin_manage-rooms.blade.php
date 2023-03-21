@@ -180,11 +180,11 @@
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Manage Rooms</h1>
+      <h1>Manage Rooms</h1><br>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
-          <li class="breadcrumb-item active">Manage Rooms</li>
+          <li class="breadcrumb-item active">Manage Rooms</li><br>
         </ol>
       </nav>
     </div><!-- End Page Title -->
@@ -208,14 +208,14 @@
             </div>
           </div>
 
-          <hr>
+          <hr style="border-top: 2px solid #3C4048;position: relative; left: 8px;">
 
           <!-- Modal -->
           <div class="modal fade" id="exampleModal">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Add New Room</h4>
+                <h4 class="modal-title" style="color: #51bdb8;">Add New Room</h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
@@ -282,21 +282,36 @@
             </div>
           @endif
 
-          <div class="d-flex justify-content-between mb-3">
-            <div class="row mt-3">
-        <div class="d-flex align-items-center">
-            <label for="records_per_page" class="col-auto mr-2">Records per page:</label>
-            <select name="records_per_page" id="records_per_page" class="form-control mr-2" onchange="window.location.href = this.value;">
-                <option value="{{ url()->current() }}?records_per_page=10"  'selected' : '' }}>10</option>
-                <option value="{{ url()->current() }}?records_per_page=25"  'selected' : '' }}>25</option>
-                <option value="{{ url()->current() }}?records_per_page=50"  'selected' : '' }}>50</option>
-                <option value="{{ url()->current() }}?records_per_page=100"  'selected' : '' }}>100</option>
-            </select>
-        </div>
-        <div class="">
-         
-        </div>
-        </div>
+            <!-- Left side columns -->
+        <div class="col-lg-12">
+          <div class="row">
+
+            <div class="d-flex justify-content-between mb-3">
+              <div class="row mt-3">
+                <div class="d-flex align-items-center">
+                  <b><label for="records_per_page" class="col-auto mr-2"
+                      style="position: relative; top: 2px; right: -3px;color:#434242;">Show</label></b>
+                  <select name="records_per_page" id="records_per_page" class="form-control mr-2" style="position: relative; left:-15px;"
+                    onchange="window.location.href = this.value;">
+                    <option value="{{ url()->current() }}?records_per_page=10" 'selected' : '' }}>10</option>
+                    <option value="{{ url()->current() }}?records_per_page=25" 'selected' : '' }}>25</option>
+                    <option value="{{ url()->current() }}?records_per_page=50" 'selected' : '' }}>50</option>
+                    <option value="{{ url()->current() }}?records_per_page=100" 'selected' : '' }}>100</option>
+                    {{-- <option value="100">10</option>
+                    <option value="100">25</option>
+                    <option value="100">50</option>
+                    <option value="100">100</option> --}}
+                  </select>
+                
+                  <b>
+                    <p style="position: relative; top: 7px; left: -20px;color:#434242;">entries</p>
+                  </b>
+                </div>
+                <div class="">
+                </div>
+              </div>
+            </div>
+          </div><!-- End Left side columns -->
             <!-- <div class="ml-auto">
                 <form action="{{ route('admin.room.create') }}" method="POST">
                     @csrf
@@ -307,7 +322,7 @@
           </div>
 
             <table class="table table-condensed table-sm table-bordered">   
-                <thead class="bg-[#36ae7c] text-white">   
+                <thead class="bg-[#51bdb8] text-white">   
                     <tr style="text-align:center">   
                         <th scope="col">Room No.</th>
                         <th scope="col">Room Type</th>
@@ -317,7 +332,7 @@
                         <th scope="col">Status</th>
                         <th scope="col">Rate</th>
                         <th scope="col">Photos</th>
-                        <th scope="col">Action</th>
+                        <th scope="col" >Action</th>
                     </tr>   
                 </thead>   
                 <tbody>   
@@ -333,11 +348,11 @@
                         <td>
                           <img src="{{ asset($roomData->photos) }}" alt="Room" width="70px" height="70px">                 
                         </td>
-                        <td>
+                        <td style="width: 150px;" >
                           <form action="{{ route('admin.room.create') }}" method="POST">
                           
-                          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal{{ $roomData->id }}">
-    Edit Record
+                          <button type="button" class="btn btn-primary" style="position:relative;left: -25px; top: 20px;" data-bs-toggle="modal" data-bs-target="#editModal{{ $roomData->id }}">
+                          <i class="fa-regular fa-pen-to-square"></i>
 </button>
 
 <!-- Edit Modal -->
@@ -348,37 +363,37 @@
                 @csrf
                 @method('PUT')
                 <div class="modal-header">
-                    <h5 class="modal-title" id="editModal{{ $roomData->room_number }}Label">Edit Room</h5>
+                    <h5 class="modal-title" style="color: #51bdb8;" id="editModal{{ $roomData->room_number }}Label">Edit Room</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
           
                      <div class="form-group">
-                        <label for="name">Room Number</label>
-                        <input type="text" name="name" id="name" value="{{ $roomData->room_number }}">
+                        <label for="name" style="position: relative; left: -175px;">Room Number</label><br>
+                        <input type="text"  style="position: relative; left: -5px; width: 450px;" name="name" id="name" value="{{ $roomData->room_number }}">
                     </div>
                     <div class="form-group">
-                        <label for="room_description">Description</label>
-                        <textarea name="description" class="form-control">{{ $roomData->room_description }}</textarea>
+                        <label for="room_description" style="position: relative; left: -188px; ">Description</label>
+                        <textarea name="description"  class="form-control">{{ $roomData->room_description }}</textarea>
                     </div>
                     <div class="form-group">
-                        <label for="room_type">Room Type</label>
+                        <label for="room_type"  style="position: relative; left: -188px; ">Room Type</label>
                         <input type="text" name="room_type" class="form-control" value="{{ $roomData->room_type }}">
                     </div>
                     <div class="form-group">
-                        <label for="max_capacity">Maximum Capacity</label>
+                        <label for="max_capacity"  style="position: relative; left: -165px; ">Maximum Capacity</label>
                         <input type="text" name="max_capacity" class="form-control" value="{{ $roomData->max_capacity }}">
                     </div>
                     <div class="form-group">
-                        <label for="amenities">Amenities</label>
+                        <label for="amenities"  style="position: relative; left: -190px; ">Amenities</label>
                         <input type="text" name="amenities" class="form-control" value="{{ $roomData->amenities }}">
                     </div>
                     <div class="form-group">
-                        <label for="status">Status</label>
+                        <label for="status"  style="position: relative; left: -210px; ">Status</label>
                         <input type="text" name="status" class="form-control" value="{{ $roomData->status }}">
                     </div>
                     <div class="form-group">
-                        <label for="rate">Rate</label>
+                        <label for="rate"  style="position: relative; left: -210px; ">Rate</label>
                         <input type="text" name="rate" class="form-control" value="{{ $roomData->rate }}">
                     </div>
                   
@@ -398,7 +413,7 @@
                               <form action="{{ route('admin.room.destroy', $roomData->id) }}" method="POST">
     @csrf
     @method('DELETE')
-    <button type="submit" class="btn btn-danger">Delete Room</button>
+    <button type="submit" style="position:relative;left: 28px; top: -20px;" class="btn btn-danger"><i class="fa-solid fa-trash"></i></button></button>
 </form>
                           
                         </td>

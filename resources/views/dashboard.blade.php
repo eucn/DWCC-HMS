@@ -97,81 +97,53 @@ button[disabled]:hover {
     </section>
     <section class="container w-[85%] mx-auto mt-10">
       <h2 class="text-2xl font-bold mb-5">Available Rooms</h2>
-      <div class="w-full flex flex-col bg-gray-200 rounded-2xl p-5">
-        <div class="flex item-center">
-          {{-- <input type="text" name="check_in_date"value="{{ date('F j Y', strtotime(session('check_in_date'))) }}" class="w-[130px] text-center bg-transparent pointer-events-none border-none"/>
-          <input type="text" name="check_out_date" value="{{ date('F j Y', strtotime(session('check_out_date'))) }}" class="w-[130px] text-center bg-transparent pointer-events-none border-none"/>
-          <input type="hidden" name="number_of_nights" value="{{ session('number_of_nights') }}"/> --}}
-        </div>
-        <div class="bg-gray-200 rounded-2xl mx-auto flex justify-between">
-          <div class="">
-            <form method="POST" action="{{ route('view.room1', ['room_id' => 1]) }}" >
-                @csrf
-                  <input type="hidden" name="check_in_date" value="{{ session('check_in_date') }}" 
-                  class="w-[113px] text-center"/>
-                  <input type="hidden" name="check_out_date" value="{{ session('check_out_date') }}" 
-                  class="w-[113px] text-center"/>
-                  <input type="hidden" name="number_of_nights" value="{{ session('number_of_nights') }}" />
-             <div class="flex justify-around items-center mx-30 m-10">
-                <div class="flex justify-center items-center">
-                <div class="relative">
-                  <img src="{{ asset('./images/room1.jpg') }}" class="h-[350px] w-144 shadow-2xl" alt="">
-                  <div class="absolute bg-white h-[200px] w-80 top-60 left-[75px] border-2 border-yellow-500 rounded-md shadow-xl p-3 flex flex-col justify-between">
-                    <h1 class="text-black font-extrabold text-3xl">Room 
-                      {{$room1->id}}
-                    </h1> 
-                    <p class="text-gray-600 text-sm">
-                      {{ $room1->room_type }}
-                    </p>
-                    <h2 class="text-yellow-500 font-bold text-lg">
-                      {{$room1->rate}}
-                      / Night</h2>
-                    <p class="text-sm pb-2">This Queen Bed size room provides comfort for all guests of DWCC MicroHotel</p>
-                    <div class="flex justify-end">
-                      <button type="submit" name="room1" value="1" {{ $isRoom1Reserved ? 'disabled' : '' }} class="inline-flex items-center bg-yellow-500 hover:bg-yellow-600 text-black active:bg-yellow-800 {{ $isRoom1Reserved ? 'bg-gray-400 cursor-not-allowed ' : '' }} font-semibold text-sm px-3 w-21 py-[10px] rounded shadow hover:shadow-lg outline-none focus:outline-none  ease-linear transition-all duration-150">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                          <path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" />
-                        </svg>&nbsp; Details
-                      </button>
-                    </div>
-                  </div>
+      @foreach ($rooms as $room)
+       <form method="POST" action="{{ route('view.room', ['room_id' => $room->id]) }}" >
+          @csrf
+          <input type="hidden" name="check_in_date" value="{{ session('check_in_date') }}" 
+          class="w-[113px] text-center"/>
+          <input type="hidden" name="check_out_date" value="{{ session('check_out_date') }}" 
+          class="w-[113px] text-center"/>
+          <input type="hidden" name="number_of_nights" value="{{ session('number_of_nights') }}" />
+        @endforeach
+        <div class="flex flex-wrap justify-center rounded-lg bg-gray-200">
+          @foreach ($rooms as $room)
+            <div class="max-w-sm rounded overflow-hidden shadow-lg m-10 bg-white">
+              <img class="w-full" src="{{ asset('./images/room1.jpg') }}" alt="Room Image">
+            <div class="">
+              <div class="px-6 py-4">
+                <div>
+                  <div class="text-black font-extrabold text-lg">Room {{$room->id}}</div>
+                  <p class="text-gray-700 text-base">
+                    {{$room->room_type}}
+                  </p>
+                  <p class="text-gray-700 text-base">
+                    {{$room->rate}} / Night
+                  </p>
+                  <p class="text-gray-700 text-base">
+                    This Queen Bed size room provides comfort for all guests of DWCC MicroHotel
+                  </p>
                 </div>
-              </form>
-          </div>
-          <div class="bg-gray-200 pl-6">
-            <form method="POST" action="{{ route('view.room2', ['room_id' => 2]) }}" >
-                @csrf
-                  <input type="hidden" name="check_in_date" value="{{ session('check_in_date') }}" 
-                  class="w-[113px] text-center"/>
-                  <input type="hidden" name="check_out_date" value="{{ session('check_out_date') }}" 
-                  class="w-[113px] text-center"/>
-                  <input type="hidden" name="number_of_nights" value="{{ session('number_of_nights') }}" />
-                <div class="relative">
-                  <img src="{{ asset('./images/room2.jpg') }}" class="h-[350px] w-144 shadow-xl" alt="">
-                  <div class="absolute bg-white h-[200px] w-80 top-60 left-[75px] border-2 border-yellow-500 rounded-md shadow-xl p-3 flex flex-col justify-between">
-                    <h1 class="text-black font-extrabold text-3xl">Room 
-                      {{$room2->id}}
-                    </h1>
-                    <p class="text-gray-600 text-sm">
-                      {{$room2->room_type}}
-                    </p>
-                    <h2 class="text-yellow-500 font-bold text-lg">
-                      {{ $room2->rate }}
-                      / Night</h2>
-                    <p class="text-sm pb-2">This room can easily accommodate 1-3 people in comfort</p>
-                    <div class="flex justify-end">
-                      <button type="submit" name="room2" value="2" {{ $isRoom2Reserved ? 'disabled' : '' }} class="inline-flex items-center bg-yellow-500 hover:bg-yellow-600 text-black active:bg-yellow-800 {{ $isRoom2Reserved ? 'bg-gray-400 cursor-not-allowed' : '' }} font-semibold text-sm px-3 w-21 py-[10px] rounded shadow hover:shadow-lg outline-none focus:outline-none  ease-linear transition-all duration-150">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                          <path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" />
-                        </svg>&nbsp; Details
-                      </button>                      
-                   </div>
-                  </div>
-                </div>
-              </form>
+              </div>
+              </div>  
+              <div class="px-6 py-2">
+                <div class="flex justify-end">
+                  <button type="submit" name="room2" value="{{ $room->id }}" 
+                  {{-- {{ $isRoom2Reserved ? 'disabled' : '' }}    --}}
+                  class="inline-flex items-center bg-yellow-500 hover:bg-yellow-600 text-black active:bg-yellow-800 
+                  {{-- {{ $isRoom2Reserved ? 'bg-gray-400 cursor-not-allowed' : '' }}  --}}
+                  font-semibold text-sm px-3 w-21 py-[10px] rounded shadow hover:shadow-lg outline-none focus:outline-none  ease-linear transition-all duration-150">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" />
+                    </svg>&nbsp; Details
+                  </button>                      
+              </div>
+              </div>
             </div>
-          </div>
-    </section>
+          @endforeach
+      </div>
+    </form>
+    </section>  
     <script>
       const check_in_date = document.getElementById('check_in_date');
       const check_out_date = document.getElementById('check_out_date');

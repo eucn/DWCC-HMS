@@ -51,12 +51,10 @@ class GuestInformationController extends Controller
             $max_capacity = Manage_Room::where('id', $room_id)->value('max_capacity');
             $numAdditionalGuests = $numGuests - $max_capacity;
             if ($numAdditionalGuests > 0 ) {
-                $numGuestFee = $numAdditionalGuests  *  $additionalFeePerGuest;
+                $total_numGuestFee = $numAdditionalGuests  *  $additionalFeePerGuest;
             } else{
-                $numGuestFee  = 0;
+                $total_numGuestFee  = 0;
             }
-            $total_numGuestFee =  $numGuestFee ;
-
             $totalPrice = $total_roomPrice +  $total_numGuestFee;
 
             $reservation = new Reservations;

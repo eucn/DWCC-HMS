@@ -173,7 +173,7 @@
       <h1>Booking Details</h1>
       <br>
       <nav>
-        <ol class="breadcrumb">
+        <ol class="breadcrumb" style="background-color:">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
           <li class="breadcrumb-item active">Booking Details</li>
         </ol>
@@ -191,8 +191,8 @@
               <div class="row mt-3">
                 <div class="d-flex align-items-center">
                   <b><label for="records_per_page" class="col-auto mr-2"
-                      style="position: relative; top: 2px; right: -3px;color:#434242;">Show</label></b>
-                  <select name="records_per_page" id="records_per_page" class="form-control mr-2"
+                      style="position: relative; top: 2px; left: 22px;color:#434242;">Show</label></b>
+                  <select name="records_per_page" id="records_per_page" class="form-control mr-2" style="position: relative; left: 22px;"
                     onchange="window.location.href = this.value;">
                     <option value="{{ url()->current() }}?records_per_page=10" 'selected' : '' }}>10</option>
                     <option value="{{ url()->current() }}?records_per_page=25" 'selected' : '' }}>25</option>
@@ -205,7 +205,7 @@
                   </select>
                 
                   <b>
-                    <p style="position: relative; top: 7px; left: 1px;color:#434242;">entries</p>
+                    <p style="position: relative; top: 7px; left: 22px;color:#434242;">entries</p>
                   </b>
                 </div>
                 <div class="">
@@ -252,6 +252,7 @@
                           <i class="fa-solid fa-trash"></i></button>
                         </td>
                   </tr>
+                    <!-- View Modal -->
                   <div class="modal fade" id="view_modal{{ $data->reservation_id }}" role="dialog">
                     <div class="modal-dialog">
                     
@@ -262,10 +263,10 @@
                           <h4 class="modal-title" style="position:relative; left: -230px; color:#51bdb8;">Booking Details</h4>
                         </div>
                         <div class="modal-body">
-                          <p style="font-weight: bold; color:#434242;">Name: <span>{{ $data->first_name }}&nbsp;{{ $data->last_name }}</span></p>
-                          <p style="font-weight: bold; color:#434242;">Payment Method: <span>{{ $data->payment_method }}</span></p>
-                          <p style="font-weight: bold; color:#434242;">Booking Status: <span>{{$data->booking_status}}</span></p>
-                          <p style="font-weight: bold; color:#434242;">Check-in / Check-out Date: <span>
+                          <strong><p style="color:#434242;">Name: </strong><span>{{ $data->first_name }}&nbsp;{{ $data->last_name }}</span></p>
+                          <strong><p style="color:#434242;">Payment Method: </strong> <span>{{ $data->payment_method }}</span></p>
+                          <strong><p style="color:#434242;">Booking Status:  </strong><span>{{$data->booking_status}}</span></p>
+                          <strong> <p style="color:#434242;">Check-in / Check-out Date:   </strong> <span>
                             {{ \Carbon\Carbon::parse($data->checkin_date)->format('F j, Y') }} &nbsp; - &nbsp;
                             {{ \Carbon\Carbon::parse($data->checkout_date)->format('F j, Y') }}</span>
                         </div>
@@ -274,30 +275,43 @@
                         </div>
                       </div>
                 
-                       <!-- Delete Modal -->
-                       <div class="modal fade" id="delete_modal" role="dialog">
-                    <div class="modal-dialog">
-                    
-                      <!-- Modal content-->
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <button type="button"  style="position:relative; left: 350px; color: red;" class="close" data-dismiss="modal">&times;</button>
-                          <h4 class="modal-title" style="position:relative; left: -230px; color:#51bdb8;">Cancel Booking Details</h4>
-                        </div>
-                        <div class="modal-body">
-                          <h4 style="font-weight: bold; color:#434242;"> Are you sure you want to cancel this booking? </h4>
-                         
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-default" data-dismiss="modal" style="background-color: #19A7CE; color:#ffffff;">Close</button>
-                        </div>
-                      </div>
                     </div>
                   </div>
                 </div>
                 </div>
               @endforeach
             </tbody>
+   <!-- Delete Modal -->
+   <div class="modal fade" id="delete_modal" role="dialog">
+                    <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content" style="height: 230px;">
+                        <div class="modal-header">
+                          <button type="button"  style="position:relative; left: 350px; color: red;" class="close" data-dismiss="modal">&times;</button>
+                          <h4 class="modal-title" style="position:relative; left: -190px; color:#51bdb8;">Cancel Booking Details</h4>
+                    </div>
+                          <form action="{{ route('frontdesk.bookdetails.destroy1', $index->reservation_id) }}" method="post">
+                          
+                @csrf
+                @method('DELETE')
+                <div class="modal-body">
+                <input id="id" name="id">
+               <strong> <h4 class="text-center">Are you sure you want to cancel this reservation?</strong></h4>
+                <input id="firstName" name="firstName"><input id="lastName" name="lastName">
+
+                <button type="button" style="position: relative; top: 50px; left: -65px;"class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="submit" style="position: relative; top: 16px; left: 350px;"  class="btn btn-primary">Yes, Continue  </button>
+              </div>
+          
+                    </div>
+                    
+           
+            </form>
+            
+                        </div>
+                        <div class="modal-footer" style="position: relative; top: -85px; left: 435px; width: 497px;"></div>
+                
+            
           </table>
         </div>
     </section>

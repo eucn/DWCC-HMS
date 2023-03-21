@@ -174,7 +174,7 @@
   <main id="main" class="main">
       
     <div class="pagetitle">
-      <h1>Payment</h1>
+      <h1>Payment</h1><br>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
@@ -266,22 +266,22 @@
                     <div class="modal-content">
                       <div class="modal-header">
                         <button type="button" style="position:relative; left: 350px; color: red;" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title" style="position:relative; left: -200px; color:#595959;">Payment Information</h4>
+                        <h4 class="modal-title" style="position:relative; left: -200px; color:#51bdb8;">Payment Information</h4>
                       </div>
                       <div class="modal-body">
                         <div class="row justify-content-center">
                           <div class="col-10">
                             <div class="form-group">
-                              <label for="first_name" class="font-weight-bold text-gray-700">First Name:</label>
-                              <input class="form-control" type="text" name="first_name" id="first_name" value="{{ $data->first_name }}">
+                              <label for="first_name" class="font-weight-bold text-gray-700" style="position:relative; left: -20px;">First Name:</label>
+                              <input class="form-control" style="position:relative; left: -20px; width: 450px;" type="text" name="first_name" id="first_name" value="{{ $data->first_name }}">
                             </div>
                             <div class="form-group">
-                              <label for="last_name" class="font-weight-bold text-gray-700">Last Name:</label>
-                              <input class="form-control" type="text" name="last_name" id="last_name" value="{{ $data->last_name }}">
+                              <label for="last_name" class="font-weight-bold text-gray-700" style="position:relative; left: -20px;">Last Name:</label>
+                              <input class="form-control" style="position:relative; left: -20px; width: 450px;" type="text" name="last_name" id="last_name" value="{{ $data->last_name }}">
                             </div>
                             <div class="form-group">
-                              <label for="receipt_no" class="font-weight-bold text-gray-700">Receipt No.:</label>
-                              <input class="form-control" type="text" name="receipt_no" id="receipt_no" value="">
+                              <label for="receipt_no" style="position:relative; left: -20px;" class="font-weight-bold text-gray-700">Receipt No.:</label>
+                              <input class="form-control" style="position:relative; left: -20px; width: 450px;" type="text" name="receipt_no" id="receipt_no" value="">
                             </div>
                           </div>
                         </div>

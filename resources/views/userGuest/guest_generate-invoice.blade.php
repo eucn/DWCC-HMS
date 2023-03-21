@@ -109,8 +109,12 @@
                 <td>{{$reservation->nights}}</td>
             </tr>
 			<tr>
-                <td><b>Additional Beds:</b></td>
-                <td>{{$reservation->extra_bed}}</td>
+                <td><b>Total No. of Guest:</b> </td>
+                <td>{{$reservation->guests_num}}</td>
+            </tr>
+            <tr>
+                <td><b>Additional Guests:</b></td>
+                <td>{{$reservation->additional_guests}}</td>
             </tr>
 			<tr>
                 <td><b>Date Checked-in:</b></td>
@@ -185,7 +189,7 @@
             </tr>
             
 			<tr>
-				<td colspan="3" class="text-end"><b>Number of Guests: {{$reservation->guests_num}}</b></td>
+				<td colspan="3" class="text-end"><b>Additional Fee Per-Guests:</b></td>
                 <td colspan="1">PHP {{number_format($reservation->guests_Fee,0)}}</td>
 			</tr>
             <tr>

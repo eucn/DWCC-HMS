@@ -123,6 +123,9 @@ Route::post('/userGuest/guest_information', [GuestInformationController::class, 
 Route::post('/userGuest/invoice', [GuestInformationController::class, 'GuestInfo'])->name('save.invoice');
 Route::get('/guest_users/invoice', [GuestInvoiceController::class, 'view_invoice'])->name('view.invoice');
 
+Route::get('/view-invoice', [GuestInvoiceController::class, 'ViewInvoice'])->name('guest.view.invoice');
+Route::get('/generate-invoice', [GuestInvoiceController::class, 'GenerateInvoice'])->name('generate.invoice');
+
 //-------------- End Guest Routes --------------//
 
 Route::get('/', function () {

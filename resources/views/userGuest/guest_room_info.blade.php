@@ -143,7 +143,7 @@
                     {{-- right --}}
                     <div class=" bg-gray-300 w-[300px] h-[450px] rounded-md">
                         <div class="">
-                            <input type="hidden" name="number_of_nights" value="{{ $number_of_nights }}" id="number_of_nights" />
+                           
                                 {{-- <input type="hidden" name="room_id" value="{{ $id }}" id="number_of_nights" /> --}}
                                 <div class="mx-[25px] mt-2">
                                     <div class="py-2  ">
@@ -173,10 +173,18 @@
                                                 min="{{ $rooms->max_capacity }}" class="w-[200px] text-center text-gray-700 bg-white py-2">
                                             <a class="bg-gray-100 hover:bg-gray-400 text-gray-700 px-2 py-2 rounded-r shadow-md transition duration-300 ease-in-out cursor-pointer"
                                                 onclick="add('guest_num')">+</a>
+                                    </div>
+
+                                 
+                                    <div class="py-4 flex items-center">
+                                        <div>
+                                            <p class="text-medium font-semibold">Number of Nights</p>
+                                        </div>
+                                        <div>
+                                            <input class="py-2 w-[40px] bg-transparent border-none cursor-not-allowed" type="text" name="number_of_nights" value="{{ $number_of_nights }}" id="number_of_nights" readonly/>
                                         </div>
                                     </div>
-                               
-                                    <div class="py-6 text-center">
+                                    <div class="pt-[70px] text-center">
                                         <button type="submit"
                                             class="bg-yellow-500 hover:bg-yellow-600  text-white active:bg-yellow-800 font-bold uppercase text-sm px-[80px] py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                                             id="next">Book Now</button>

@@ -114,9 +114,8 @@ button[disabled]:hover {
               @if(!$checkin_date || !$checkout_date || $isRoomReserved[$room->id]) 
                 <div class="relative">
                   {{-- <img class="w-full" src="{{ asset('image/' . $room->photos) }}" alt="Room Image"> --}}
-                  <img class="w-full" src="{{ asset('images/' . str_replace(' ', '_', $room->photos)) }}" alt="Room Image">
-
-                  {{-- <img class="w-full opacity-50" src="{{ asset('./images/room1.jpg') }}" alt="Room Image"> --}}
+                  {{-- <img class="w-full" src="{{ asset('images/' . str_replace(' ', '_', $room->photos)) }}" alt="Room Image"> --}}
+                  <img class="w-full opacity-50" src="{{ asset('./images/room1.jpg') }}" alt="Room Image">
                   <div class="absolute top-0 left-0 right-0 bottom-0 flex justify-center items-center">
                     <h1 class="text-[30px] font-bold text-gray-00"> Not Available</h1>
                   </div>

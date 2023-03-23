@@ -228,29 +228,29 @@
       <table class="table table-condensed table-sm table-bordered">   
                 <thead class="bg-[#51bdb8] text-white">   
                     <tr style="text-align:center">   
-                        <th scope="col">No.</th>
-                        <th scope="col">Name</th>
-                        <th scope="col" style="width: 200px;">Check-in Date</th>
-                        <th scope="col">Check-out Date</th>
-                        <th scope="col">Payment Method</th>
-                        <th scope="col">Booking Type</th>
-                        <th scope="col" style="width: 200px; text-align:center;"> &nbsp &nbsp  Action</th>
-
-
+                        <th No. scope="col" class="text-center px-4">No.</th>
+                        <th scope="col" class="text-center">Name</th>
+                        <th scope="col" class="w-[150px;] text-center">Check-in Date</th>
+                        <th scope="col" class="text-center">Check-out Date</th>
+                        <th scope="col" class="text-center">Payment Method</th>
+                        <th scope="col" class="text-center">Payment Status</th>
+                        <th scope="col" class="text-center">Booking Type</th>
+                        <th scope="col" style="width: 150px; text-align:center;"> &nbsp &nbsp  Action</th>
                         <div class="container">       
                     </tr>   
                 </thead>   
                 </tbody> 
                 @foreach ($reservationData as $index => $data)
-                <tr style="text-align:center" >
+                <tr class=" text-center pt-2" >
                   <td  scope="col">
-                  {{-- {{ $index + 1 }}  --}}
-                    <p class="">{{ $data->reservation_id }}
+                  {{ $index + 1 }} 
+                    {{-- <p class="text-[0px]">{{ $data->reservation_id }} --}}
                     </p></td>
                     <td scope="col">{{ $data->first_name }} &nbsp; {{ $data->last_name }}</td>
                     <td scope="col"> {{ \Carbon\Carbon::parse($data->checkin_date)->format('F j, Y') }}</td> 
                     <td> {{ \Carbon\Carbon::parse($data->checkout_date)->format('F j, Y') }}</td>
                     <td scope="col">{{ $data->payment_method }}</td>
+                    <td scope="col">{{ $data->payment_status }}</td>
                     <td scope="col">{{ $data->booking_types }}</td>
                     <td scope="col"> <button type="button" 
                     class="btn btn-primary btn-sm" data-toggle="modal" data-target="#view_modal{{  $data->reservation_id }}" id="editModal"

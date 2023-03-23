@@ -204,6 +204,7 @@ class FrontdeskController extends Controller
             $guestInformation->company_name = $company_name;
             $guestInformation->address = $address;
             $guestInformation->phone_number = $phone_number;
+            $guestInformation->payment_status = 'Unpaid';
 
             if($payment_method == "Cash"){
                 $guestInformation->payment_method = $payment_method;
@@ -244,6 +245,7 @@ class FrontdeskController extends Controller
         $reservations = GuestInformation::join('reservations', 'guest_information.reservation_id', '=', 'reservations.id')
         ->join('manage_rooms', 'reservations.room_id', '=', 'manage_rooms.id')
         ->select('guest_information.reservation_id','guest_information.first_name','guest_information.last_name', 'guest_information.payment_method','reservations.booking_status', 'reservations.checkin_date','reservations.total_price', 'reservations.checkout_date',)
+        ->orderBy('guest_information.first_name', 'asc')
         ->get();
 
         return view('frontdesk.frontdesk_bookingdetails', [
@@ -258,15 +260,15 @@ class FrontdeskController extends Controller
         $reservations = GuestInformation::join('reservations', 'guest_information.reservation_id', '=', 'reservations.id')
         ->join('manage_rooms', 'reservations.room_id', '=', 'manage_rooms.id')
         ->select('guest_information.id', 'reservations.id as reservation_id', 'guest_information.first_name', 'guest_information.last_name', 'guest_information.payment_method',
-            'reservations.booking_status', 'reservations.checkin_date', 'reservations.total_price', 'reservations.checkout_date',)
+        'guest_information.payment_status','reservations.booking_status', 'reservations.checkin_date', 'reservations.total_price', 'reservations.checkout_date',)
         ->where('guest_information.reservation_id', '=', $reservation_id)
+        
         ->get();
         
         if ($reservations->count() > 0) {
             foreach ($reservations as $reservation) {
                 $reservation->delete(); // Soft delete the record
             }
-    
             return redirect()->back()->with('success', 'Item soft deleted successfully');
         } else {
             return redirect()->back()->with('error', 'Reservation not found');
@@ -286,7 +288,8 @@ class FrontdeskController extends Controller
     public function FrontdeskPayment(){
         $reservations = GuestInformation::join('reservations', 'guest_information.reservation_id', '=', 'reservations.id')
         ->join('manage_rooms', 'reservations.room_id', '=', 'manage_rooms.id')
-        ->select('guest_information.reservation_id','guest_information.first_name','guest_information.last_name', 'guest_information.payment_method','reservations.booking_types', 'reservations.checkin_date','reservations.total_price', 'reservations.checkout_date',)
+        ->select('guest_information.reservation_id','guest_information.first_name','guest_information.last_name', 'guest_information.payment_method','guest_information.payment_status','reservations.booking_types', 'reservations.checkin_date','reservations.total_price', 'reservations.checkout_date',)
+        ->orderBy('guest_information.first_name', 'asc')
         ->get();
         return view('frontdesk.frontdesk_payment', [
             'reservationData' => $reservations,
@@ -294,16 +297,23 @@ class FrontdeskController extends Controller
     }
     public function updateBookingStatus(Request $request)
     {
-        $reservation_id = $request->input('reservation_id');
-        $reservations = Reservations::find($reservation_id);
+        $invoice_no = $request->input('reservation_id');
 
-        if ($reservations) {
-        $reservations->booking_status = 'paid';
-        $reservations->save();
-        return redirect()->back()->with('success', 'Booking status updated successfully.');
+        $guestInformation = GuestInformation::where('reservation_id', $invoice_no)->first();
+        
+        if ($guestInformation) {
+            $guestInformation->payment_status = 'Paid';
+            $guestInformation->save();
+        
+            $reservation = $guestInformation->reservation;
+            $reservation->booking_status = 'Confirmed';
+            $reservation->save();
+        
+            return redirect()->back()->with('success', 'Booking status updated successfully.');
         } else {
-            return redirect()->back()->with('error', 'Invalid guest information.');
+            return redirect()->back()->with('error', 'The input invoice number is incorrect');
         }
+        
     }
 
 }

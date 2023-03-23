@@ -179,19 +179,6 @@
 
     <hr style="border-top: 2px solid #3C4048;position: relative; left: 8px;">
     <section class="col-md-11 mx-auto">
-      {{-- <div class="justify-between mx-[50px]">   --}}
-              @if(session()->has('error'))
-              <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative text-center" role="alert">
-                <strong>{{ session('error') }}</strong>
-            </div>
-            @endif
-            @if (Session::has('success'))
-            <div class="alert alert-success">
-                {{ Session::get('success') }}
-            </div>
-        @endif
-        
-      {{-- </div>  --}}
       <div class="container  px-4 sm:px-6 lg:px-8">
           <!-- Flex container -->
           <div class="justify-between mx-[50px]">
@@ -421,6 +408,7 @@
               <!-- data-bs-target="#modalDialogScrollable"> -->
               <!-- continue -->
       <!-- /    </button> -->
+          </div>
           </form>
             {{-- <!-- Modal -->
             <div class="modal fade" id="modalDialogScrollable" tabindex="-1">

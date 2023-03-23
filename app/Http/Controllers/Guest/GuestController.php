@@ -14,14 +14,16 @@ class GuestController extends Controller
     public function GuestReservation(Request $request)
     {
         $request->validate([
-            'check_in_date' => 'required|date',
+            'check_in_date' => 'required|date|after_or_equal:today',
             'check_out_date' => 'required|date|after:check_in_date',
         ], [
             'check_in_date.required' => 'The check-in date is required.',
+            'check_in_date.after_or_equal' => 'The check-in date must be today or later.',
             'check_out_date.required' => 'The check-out date is required.',
             'check_out_date.after' => 'The check-out date must be after the check-in date.',
         ]);
-    // $roomIds = Manage_Room::pluck('id
+        
+ 
         $checkInDate = $request->input('check_in_date');
         $checkOutDate = $request->input('check_out_date');    
         $numberOfNights = $request->input('number_of_nights');
@@ -45,16 +47,34 @@ class GuestController extends Controller
     public function ViewDashboard( ){
         $rooms = Manage_Room::all();
           // Format the session date using the date() function
-        // $isRoom1Reserved = $this->isRoomReserved($room1->id, $checkin_date, $checkout_date);
-        // $isRoom2Reserved = $this->isRoomReserved($room2->id, $checkin_date, $checkout_date);
+          
+        $checkin_date = session('check_in_date');
+        $checkout_date = session('check_out_date');
+    
+        $isRoomReserved = [];
+    
+        if ($checkin_date && $checkout_date) {
+            foreach ($rooms as $room) {
+                $isRoomReserved[$room->id] = $this->isRoomReserved($room->id, $checkin_date, $checkout_date);
+            }
+        } else {
+            foreach ($rooms as $room) {
+                $isRoomReserved[$room->id] = true;
+            }
+        }
         return view('dashboard',[
             'rooms'=>$rooms, 
-            // 'isRoom1Reserved'=>$isRoom1Reserved,
-            // 'isRoom2Reserved'=>$isRoom2Reserved,
+            'isRoomReserved'=>$isRoomReserved,
+            'checkin_date' => $checkin_date,
+            'checkout_date' => $checkout_date,
         ]);
     }
     public function isRoomReserved($roomTypeId, $checkin_date, $checkout_date)
     {
+        if (!$checkin_date || !$checkout_date) {
+            // If check-in or check-out dates are not set, return true to disable the button
+            return true;
+        }
         $checkInDateObj = new \DateTime($checkin_date);
         $checkOutDateObj = new \DateTime($checkout_date);
     

@@ -101,11 +101,8 @@ class FrontdeskController extends Controller
     
      public function FrontdeskReservationSave(Request $request)
     {
-        // $frontdesk_id = auth()->user()->id;
-        // $frontdesk_id =  Auth::id();
         if (Auth::guard('frontdesk')->check()) {
             $frontdesk_id = Auth::guard('frontdesk')->id();
-            // do something with $user_id
         } else {
             return abort(401, 'Unauthorized');
         }
@@ -230,8 +227,8 @@ class FrontdeskController extends Controller
             $guestInformation->save();
             
         }
-        Session::flash('success', 'Your reservation was successful.');
-        return redirect()->route('frontdesk.reservation');
+        // Session::flash('success', 'Your reservation was successful.');
+        return redirect()->route('frontdesk.invoice.view');
 
     }
     
@@ -249,24 +246,39 @@ class FrontdeskController extends Controller
         ->select('guest_information.reservation_id','guest_information.first_name','guest_information.last_name', 'guest_information.payment_method','reservations.booking_status', 'reservations.checkin_date','reservations.total_price', 'reservations.checkout_date',)
         ->get();
 
-        // $bookingdetails = GuestInformation::join('reservations', 'guest_information.reservation_id', '=', 'reservations.id')
-        // ->join('manage_rooms', 'reservations.room_id', '=', 'manage_rooms.id')
-        // ->select('guest_information.first_name','guest_information.last_name','guest_information.address', 'guest_information.payment_method','reservations.booking_status', 'reservations.checkin_date','reservations.total_price', 'reservations.checkout_date',)
-        // ->get();
-
-
         return view('frontdesk.frontdesk_bookingdetails', [
             'reservationData' => $reservations,
-            // 'bookingdetails' => $bookingdetails,
+
         ]);
     }
-    public function destroy($id)
+    // SOFT DELETE
+    public function softDeletesReservation($reservation_id)
     {
-        $item = Reservations::findOrFail($id);
-        $item->delete();
-
-        return redirect()->route('items.index')->with('success', 'Item deleted successfully');
+        // $reservations = Reservations::findorFail($reservation_id);
+        $reservations = GuestInformation::join('reservations', 'guest_information.reservation_id', '=', 'reservations.id')
+        ->join('manage_rooms', 'reservations.room_id', '=', 'manage_rooms.id')
+        ->select('guest_information.id', 'reservations.id as reservation_id', 'guest_information.first_name', 'guest_information.last_name', 'guest_information.payment_method',
+            'reservations.booking_status', 'reservations.checkin_date', 'reservations.total_price', 'reservations.checkout_date',)
+        ->where('guest_information.reservation_id', '=', $reservation_id)
+        ->get();
+        
+        if ($reservations->count() > 0) {
+            foreach ($reservations as $reservation) {
+                $reservation->delete(); // Soft delete the record
+            }
+    
+            return redirect()->back()->with('success', 'Item soft deleted successfully');
+        } else {
+            return redirect()->back()->with('error', 'Reservation not found');
+        }
     }
+   // RESTORE SOFT DELETE ITEMS
+    public function viewDeletedGuestInformation()
+    {
+        $deletedGuestInformation = GuestInformation::withTrashed()->onlyTrashed()->get();
+        return view('deleted-guest-information', ['guestInformation' => $deletedGuestInformation]);
+    }
+
 
     public function FrontdeskReports(){
         return view('frontdesk.frontdesk_reports');

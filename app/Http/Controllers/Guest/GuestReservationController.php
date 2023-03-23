@@ -26,6 +26,7 @@ class GuestReservationController extends Controller
           'number_of_nights' => $number_of_nights,
           'rooms'=>$rooms,
         ]);
+        
     }
     
     public function GuestSaveReserve(Request $request){
@@ -38,12 +39,13 @@ class GuestReservationController extends Controller
         $checkIn = $request->input('check_in_date');
         $checkOut = $request->input('check_out_date');
             
-            Session::put('number_of_nights',$numNights);
-            Session::put('room_id', $room_id);
-            Session::put('guest_num',$numGuests);
-            Session::put('extra_bed',$extraBed);
-            Session::put('check_in_date', $checkIn);
-            Session::put('check_out_date', $checkOut);
+        Session::put('number_of_nights', $request->input('number_of_nights'));
+        Session::put('room_id', $request->input('room_id'));
+        Session::put('guest_num', $request->input('guest_num'));
+        Session::put('extra_bed', $request->input('extra_bed'));
+        Session::put('check_in_date', $request->input('check_in_date'));
+        Session::put('check_out_date', $request->input('check_out_date'));
+        
             
         return redirect()->route('registration.form');
     }

@@ -130,12 +130,11 @@ class GuestInformationController extends Controller
                 }
             }
             $guestInformation->save();
-            // Session::forget('room_id');
-            // Session::forget('check_in_date');
-            // Session::forget('check_out_date');
-            // Session::forget('guest_num');
-            // Session::forget('number_of_nights');
-            // Session::flush();
+            Session::forget('room_id');
+            Session::forget('check_in_date');
+            Session::forget('check_out_date');
+            Session::forget('guest_num');
+            Session::forget('number_of_nights');
             }
     // Redirect to a success page
         return redirect()->route('view.invoice');   

@@ -4,9 +4,6 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {{-- <script src="https://kit.fontawesome.com/d0fec6f98b.js" crossorigin="anonymous"></script> --}}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-KlE5+5KpSJ5eI9XDDoHkw/KRjK8Z2QgZnC7V2fz51vhP7VvUz0Bd6pCZX6bPIW8Fv+6K0/SPfgiQc6/8V7jzGg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
     @vite('resources/css/app.css')
 
     <title>Reserve Dates</title>
@@ -64,21 +61,23 @@ button[disabled]:hover {
               <div class="py-2">
                 <label class="block text-gray-900 font-medium mb-2" for="check-in-date">Check-in date:</label>
                 <input class="w-full border-gray-900 rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-blue-500"
-                  id="check_in_date" name="check_in_date" type="date" value="{{ session('check_in_date') }}" required>
-
+                  id="check_in_date" name="check_in_date" type="date" value="{{ session('check_in_date') }}" required>          
                 </div>
               <div class="py-2">
                 <label class="block text-gray-900 font-medium mb-2" for="check-out-date">Check-out date:</label>
                 <input class="w-full border-gray-400 rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-blue-500"
                   id="check_out_date" name="check_out_date" type="date" value="{{ session('check_out_date') }}" required>
-                
                 </div>
+                @error('check_out_date')
+                <div class="text-red-500">{{ $message }}</div>
+                @enderror
               <div class="py-2 flex items-center">
                 <label class="block text-gray-900 font-bold mr-4" for="number-of-nights">Number of Nights:</label>
                 <input type="" id="number_of_nights" name="number_of_nights" value="{{ session('number_of_nights') }}"
                   class="bg-transparent pointer-events-none rounded py-2 px-3 text-gray-900 leading-tight focus:outline-none focus:border-blue-500"
                   readonly>
-              </div >
+              </div>
+         
               <div class="mx-auto">
                 @if ($errors->has('message'))
                 <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
@@ -100,20 +99,42 @@ button[disabled]:hover {
     </section>
     <section class="container w-[85%] mx-auto mt-10">
       <h2 class="text-2xl font-bold mb-5">Available Rooms</h2>
+      <div class="flex flex-wrap justify-center rounded-lg bg-gray-200">
       @foreach ($rooms as $room)
+<<<<<<< HEAD
       <hr style="border: 1px solid #E6AF2E; width: 188px;  position: relative; left: -2px; top: -20px; ">
        <form method="POST" action="{{ route('view.room', ['room_id' => $room->id]) }}" >
+=======
+       <form method="POST" action="{{ route('view.room', ['room_id' => $room->id]) }}"
+         {{-- class=" {{ (!$checkin_date || !$checkout_date || $isRoomReserved[$room->id])  ? 'bg-gray-400 cursor-not-allowed' : ''}} opacity-2" --}}
+         >
+>>>>>>> ac6003d06f488d9ea1b3842bc20ebb3af350afa2
           @csrf
+          <div class="opacity-2">
           <input type="hidden" name="check_in_date" value="{{ session('check_in_date') }}" 
           class="w-[113px] text-center"/>
           <input type="hidden" name="check_out_date" value="{{ session('check_out_date') }}" 
           class="w-[113px] text-center"/>
           <input type="hidden" name="number_of_nights" value="{{ session('number_of_nights') }}" />
-        @endforeach
         <div class="flex flex-wrap justify-center rounded-lg bg-gray-200">
-          @foreach ($rooms as $room)
+          {{-- @foreach ($rooms as $room) --}}
             <div class="max-w-sm rounded overflow-hidden shadow-lg m-10 bg-white">
-              <img class="w-full" src="{{ asset('./images/room1.jpg') }}" alt="Room Image">
+              @if(!$checkin_date || !$checkout_date || $isRoomReserved[$room->id]) 
+                <div class="relative">
+                  {{-- <img class="w-full" src="{{ asset('image/' . $room->photos) }}" alt="Room Image"> --}}
+                  {{-- <img class="w-full" src="{{ asset('images/' . str_replace(' ', '_', $room->photos)) }}" alt="Room Image"> --}}
+                  <img class="w-full opacity-50" src="{{ asset('./images/room1.jpg') }}" alt="Room Image">
+                  <div class="absolute top-0 left-0 right-0 bottom-0 flex justify-center items-center">
+                    <h1 class="text-[30px] font-bold text-gray-00"> Not Available</h1>
+                  </div>
+                </div>
+                @else
+                {{-- <img class="w-full" src="{{ asset('image/' . $room->photos) }}" alt="Room Image"> --}}
+                {{-- <img class="w-full" src="{{ asset('images/' . str_replace(' ', '_', $room->photos)) }}" alt="Room Image"> --}}
+
+                <img class="w-full " src="{{ asset('./images/room1.jpg') }}" alt="Room Image">
+              @endif
+
             <div class="">
               <div class="px-6 py-4">
                 <div>
@@ -132,11 +153,21 @@ button[disabled]:hover {
               </div>  
               <div class="px-6 py-2">
                 <div class="flex justify-end">
+<<<<<<< HEAD
                   <button type="submit" name="room2" value="{{ $room->id }}" 
                   {{-- {{ $isRoom2Reserved ? 'disabled' : '' }}    --}}
                   class="inline-flex items-center  hover:bg-yellow-600 text-black active:bg-yellow-800 
                   {{-- {{ $isRoom2Reserved ? 'bg-gray-400 cursor-not-allowed' : '' }}  --}}
                   font-semibold text-sm px-3 w-21 py-[10px] rounded shadow hover:shadow-lg outline-none focus:outline-none  ease-linear transition-all duration-150" style="background-color: #E6AF2E; color: #ffffff;">
+=======
+                  <button type="submit" name="room_id_{{ $room->id }}" 
+                   value="{{ $room->id }}" 
+                  {{ ( $isRoomReserved[$room->id]) ? 'disabled' : '' }}   
+                  class="inline-flex items-center bg-yellow-500 hover:bg-yellow-600 text-black active:bg-yellow-800 
+                  {{ ( $isRoomReserved[$room->id])
+                   ? 'bg-gray-400 cursor-not-allowed' : '' }} 
+                  font-semibold text-sm px-3 w-21 py-[10px] rounded shadow hover:shadow-lg outline-none focus:outline-none  ease-linear transition-all duration-150">
+>>>>>>> ac6003d06f488d9ea1b3842bc20ebb3af350afa2
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" />
                     </svg>&nbsp; DETAILS
@@ -144,10 +175,13 @@ button[disabled]:hover {
               </div>
               </div>
             </div>
-          @endforeach
       </div>
+    </div>
     </form>
+    @endforeach
+      </div>
     </section>  
+
     <script>
       const check_in_date = document.getElementById('check_in_date');
       const check_out_date = document.getElementById('check_out_date');

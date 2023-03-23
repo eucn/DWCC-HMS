@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\FrontdeskController;
+use App\Http\Controllers\FrontdeskInvoiceController;
 use App\Http\Controllers\Admin\MRoomController;
 use App\Http\Controllers\Guest\GuestController;
 use App\Http\Controllers\Admin\ManageRoomController;
@@ -106,10 +107,14 @@ Route::prefix('frontdesk')->group(function(){
     Route::get('/reservation/view', [FrontdeskController::class, 'FrontdeskReservation'])->name('frontdesk.reservation');
     Route::post('/reservation/create/roomid', [FrontdeskController::class, 'GetRoomID'])->name('frontdesk.reservation.create');
     Route::post('/reservation', [FrontdeskController::class, 'FrontdeskReservationSave'])->name('frontdesk.reservation.save');
+    Route::get('/reservation/guest_invoice', [FrontdeskInvoiceController::class, 'FrontdeskViewInvoice'])->name('frontdesk.invoice.view');
+    Route::get('/reservation/guest_invoice/view', [FrontdeskInvoiceController::class, 'ViewInvoice'])->name('frontdesk.invoice.view.pdf');
     Route::get('/bookingdetails', [FrontdeskController::class, 'FrontdeskBookingDetails'])->name('frontdesk.bookingdetails');
-    Route::post('/update-booking-status/{reservation_Id}',  [FrontdeskController::class, 'updateBookingStatus'])->name('frontdesk.bookingstatus');
+    Route::delete('/bookingdetails/{reservation_id}',  [FrontdeskController::class, 'softDeletesReservation'])->name('frontdesk.bookingdetails.softdelete');
+    Route::get('/bookingdetails/deleted-guest-information',  [FrontdeskController::class, 'ViewDeletesReservation'])->name('frontdesk.bookingdetails.softdelete.view');
     Route::get('/reports', [FrontdeskController::class, 'FrontdeskReports'])->name('frontdesk.reports');
     Route::get('/payment', [FrontdeskController::class, 'FrontdeskPayment'])->name('frontdesk.payment');
+    Route::post('/update-booking-status/{reservation_Id}',  [FrontdeskController::class, 'updateBookingStatus'])->name('frontdesk.bookingstatus');
 });
 //-------------- End Frontdesk Routes --------------//
 

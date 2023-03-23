@@ -28,7 +28,7 @@
         
     </head>
 
-    <body>
+    <body style="background-color: white;">
         {{-- App.blade.php --}}
         <x-app-layout>
             <div class="flex items-center justify-center my-10 mx-10 pb-3 bg-gray-100">
@@ -113,7 +113,7 @@
         
                     <div class=" flex justify-end m-auto">
                         <button type="submit" 
-                        class="bg-[#E0C822] hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded mt-3 ">
+                        class="bg-[#F3C623] hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded mt-3 ">
                             Continue
                         </button>
                     </div>

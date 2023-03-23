@@ -9,7 +9,10 @@
   <title>Admin Dashboard</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
-
+   
+      <!-- Logo -->
+      <link rel="icon" type="image/png" sizes="16x16" href="../images/sitelogo.png"> 
+      
   <!-- Favicons -->
   <link href="{{ asset('template/assets/img/favicon.png') }}" rel="icon">
   <link href="{{ asset('template/assets/img/apple-touch-icon.png') }}" rel="apple-touch-icon">

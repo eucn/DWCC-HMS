@@ -78,7 +78,7 @@
                         </h2>
                     </div>
                 
-                    <div class="bg-black mx-auto w-[96%] h-[6px]"></div>
+                   <hr style="color: #444444; border: solid 2px; width: 1085px; position: relative; left: 30px;">
                 </div>
 
                 <div class="flex  justify-center space-x-3 h-auto">
@@ -87,7 +87,7 @@
                         <div class="image mx-4 my-4">
                             <img class="h-[305px] " src="{{ asset('./images/room1.jpg') }}" alt="">
                             <div class="flex space-x-5">
-                                <div class="bg-white border-2 border-yellow-400 h-[90px] w-[190px] my-3 rounded-md">
+                                <div class="bg-white border-2  h-[90px] w-[190px] my-3 rounded-md" style="border-color: #F3C623;">
                                     <h1 class=" items-center font-bold mt-2 ml-1 pl-3">Capacity</h1>
                                     <div class="bg-black w-auto mx-1 h-[1px]">
                                         <p class="p-3 inline-flex items-center">
@@ -99,7 +99,7 @@
                                             {{ $rooms->max_capacity }} Person</p>
                                     </div>
                                 </div>
-                                <div class="bg-white border-2 border-yellow-400 h-[90px] w-[190px] my-3  rounded-md">
+                                <div class="bg-white border-2  h-[90px] w-[190px] my-3  rounded-md" style="border-color: #F3C623;">
                                     <h1 class="font-bold mt-2 ml-1 pl-3 ">Beds</h1>
                                     <div class="bg-black w-auto mx-1 h-[1px]">
                                         <p class="pl-2 pt-3 inline-flex items-center text-sm ">
@@ -122,7 +122,7 @@
                             </p>
                             <div class="items-center">
                                 <div
-                                    class="bg-white border-2 mx-auto border-yellow-400 h-[90px] w-[300px] my-2 rounded-md">
+                                    class="bg-white border-2 mx-auto  h-[90px] w-[300px] my-2 rounded-md" style="border-color: #E6AF2E;">
                                     <h1 class="font-bold mt-2  ml-1 pl-3">Amenities</h1>
                                     <div class="bg-black w-auto h-[1px] "></div>
                                     <p class="p-3 inline-flex items-center ">
@@ -134,7 +134,7 @@
                                         </svg> {{ $rooms->amenities }}</p>
                                 </div>
                             </div>
-                            <div class="text-right pt-[60px]">
+                            <div class="text-right pt-[60px]" style="position: relative; left: -75px;">
                                 <div class="text-[25px] font-bold">PHP<span class="font-regular">
                                         {{ $rooms->rate }}/nights</span></div>
                             </div>
@@ -178,7 +178,7 @@
                                
                                     <div class="py-6 text-center">
                                         <button type="submit"
-                                            class="bg-yellow-500 hover:bg-yellow-600  text-white active:bg-yellow-800 font-bold uppercase text-sm px-[80px] py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                                        style="background-color: #E6AF2E;" class=" hover:bg-yellow-600  text-white active:bg-yellow-800 font-bold uppercase text-sm px-[80px] py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                                             id="next">Book Now</button>
                                     </div>
                                     <div>
@@ -188,9 +188,12 @@
                                     </div>
                                 </div>
                             </form>
+                            
                         </div>
                     </div>
                 </div>
+                
+                <button style="background-color: #7c7c7c; position: relative; top: 50px; left: 1050px;" onclick="goBack()"   class=" hover:bg-gray-600 text-white active:bg-yellow-800 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">Back</button>
             </section>
 
             {{-- script for add and subtract btn --}}
@@ -213,5 +216,11 @@
 </body>
 <script src="{{url('js/progressbar.js')}}"></script>
 <script src="{{url('js/pm1.js')}}"></script>
+
+<script>
+function goBack() {
+  window.history.back();
+}
+</script>
 
 </html>

@@ -225,7 +225,7 @@
                 <td scope="col">Payment Method</td>
                 <td Booking scope="col">Booking Status</td>
                 <td scope="col">Check-in / Check-out Date</td>  
-                <td scope="col"  style="width: 200px; text-align:center;">&nbsp &nbsp &nbsp Action</td>
+                <td scope="col"  style="width: 140px; text-align:center;"> &nbsp &nbsp Action</td>
    
 <div class="container">
   <!-- View Modal -->
@@ -290,7 +290,7 @@
                           <button type="button"  style="position:relative; left: 350px; color: red;" class="close" data-dismiss="modal">&times;</button>
                           <h4 class="modal-title" style="position:relative; left: -190px; color:#51bdb8;">Cancel Booking Details</h4>
                     </div>
-                          <form action="{{ route('frontdesk.bookdetails.destroy1', $index->reservation_id) }}" method="post">
+                          <form action="#" method="post">
                           
                 @csrf
                 @method('DELETE')

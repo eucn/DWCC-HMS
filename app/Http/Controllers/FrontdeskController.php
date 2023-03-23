@@ -175,7 +175,7 @@ class FrontdeskController extends Controller
                 'phone_number' => 'required|regex:/^09[0-9]{9}$/',
             ], [
                 'phone_number.required' => 'The phone number field is required.',
-                'phone_number.regex' => 'The phone number contain 11 digit.'
+                'phone_number.regex' => 'The phone number must contain 11 digit.'
             ]);
             $reservation_id = Reservations::select('id')->latest('id')->value('id');
             // Validate the request data

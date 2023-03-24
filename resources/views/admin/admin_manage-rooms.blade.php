@@ -142,7 +142,7 @@
       </li><!-- End Manage Rooms Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="{{ route('admin.bookingHistory') }}">
+        <a class="nav-link collapsed" href="index.html">
           <i class="fa-regular fa-file icon-nav"></i>
           <span>Booking History</span>
         </a>
@@ -203,7 +203,8 @@
             <!-- Button trigger modal -->
             <div class="ml-auto">
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                <i class="fa-solid fa-plus"></i>&nbsp Add New</button>
+                  Add New
+                </button>
             </div>
           </div>
 
@@ -260,14 +261,13 @@
                         <input class="form-control" type="number" name="rate">
                         <x-input-error :messages="$errors->get('rate')"/>
                     </div>
-                    <div class="form-group">
-														<label for="image" class="col-form-label" style=" font-weight: 500;">Image:</label>
-														<input type="file" name="photos" class="form-control" id="photos">
-												
+                    <div class="form-group mb-2">
+                        <label>Photos</label>
+                        <input type="file" name="photos" id="photos">
                         <x-input-error :messages="$errors->get('photos')"/>
                     </div>
-                    <button type="submit" style="position: relative; left: 400px;" class="btn btn-primary">Save</button>
-                    <button type="reset" style="position: relative; left: 250px; background-color: #7c7c7c; border: none;" class="btn btn-primary">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                    <button type="reset" class="btn btn-primary">Reset</button>
                 </form>
             </div>
     </div>
@@ -364,7 +364,7 @@
                 @method('PUT')
                 <div class="modal-header">
                     <h5 class="modal-title" style="color: #51bdb8;" id="editModal{{ $roomData->room_number }}Label">Edit Room</h5>
-                    <button type="button" class="btn-close" style="color:red;" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
           

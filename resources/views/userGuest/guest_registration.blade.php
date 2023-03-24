@@ -204,8 +204,7 @@
                             </script>
                             </div>
                             <div class="flex justify-end mt-20">
-                            <button  style="background-color: #7c7c7c;" onclick="goBack()" class=" hover:bg-gray-600 text-white active:bg-yellow-800 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">Back</button>
-                                <button  style="background-color: #E6AF2E;" class=" hover:bg-yellow-600 text-white active:bg-yellow-800 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">Continue</button>
+                                <button  class="bg-yellow-500 hover:bg-yellow-600 text-white active:bg-yellow-800 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">Continue</button>
                               </div> 
                             </div>
                         </div>  
@@ -217,10 +216,4 @@
     </body>
     <script src="{{url('js/progressbar.js')}}"></script>
     <script src="{{url('js/pm1.js')}}"></script>
-
-    <script>
-function goBack() {
-  window.history.back();
-}
-</script>
 </html>

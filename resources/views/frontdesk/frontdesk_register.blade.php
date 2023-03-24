@@ -32,7 +32,7 @@
                 </div>
                 <div class="flex flex-col justify-center p-2 md:px-6 py-4">
                     <h3 class="text-2xl font-semibold mb-4">Sign Up</h3>
-                    <hr class="h-px mb-5 bg-[#FFB200] border-0">
+                    <hr class="h-px mb-5 bg-[#55AFAB] border-0">
 
                     <form method="POST" action="{{ route('frontdesk.register.create') }}">
                     @csrf
@@ -90,8 +90,7 @@
                     <x-input-error :messages="$errors->get('terms')" class="mt-2" />
 
                     <div class="w-1/2 flex flex-col m-auto">
-                        <br>
-                        <button style ="width: 500px; position: relative; left: -120px;" class="bg-[#FFB200] hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded">
+                        <button class="bg-[#E0C822] hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded">
                             Register
                         </button>
                     </div>

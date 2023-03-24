@@ -16,7 +16,6 @@ return new class extends Migration
             $table ->unsignedBigInteger('guest_id')->nullable();
             $table ->unsignedBigInteger('frontdesk_id')->nullable();
             $table ->unsignedBigInteger('reservation_id');
-            $table ->string('booking_types');
             $table ->string('salutation');
             $table ->string('first_name');
             $table ->string('last_name');
@@ -24,7 +23,9 @@ return new class extends Migration
             $table ->string('address');
             $table ->string('phone_number');
             $table ->string('payment_method');
-            $table ->string('department')->nullable();    
+            $table ->string('payment_status');
+            $table ->string('department')->nullable();  
+            $table->softDeletes();  
             $table->timestamps();
             $table->foreign('guest_id')
             ->references('id')->on('users')

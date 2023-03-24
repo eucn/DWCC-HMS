@@ -180,12 +180,10 @@
 
     <div class="pagetitle">
       <h1>Booking History</h1>
-      <br>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
           <li class="breadcrumb-item active">Booking History</li>
-          <br>
         </ol>
       </nav>
     </div><!-- End Page Title -->
@@ -221,11 +219,9 @@
 
               {{-- <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Filter</button> --}}
             </form>
-            <br>
-            <hr style="border-top: 2px solid #3C4048;position: relative; left: 8px;">
 
             <table class="table table-condensed table-sm table-bordered">   
-                <thead class="bg-[#51bdb8] text-white">   
+                <thead class="bg-[#36ae7c] text-white">   
                     <tr style="text-align:center">   
                         <th scope="col">No.</th>
                         <th scope="col">Name</th>

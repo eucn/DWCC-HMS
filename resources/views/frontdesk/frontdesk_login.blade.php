@@ -8,8 +8,7 @@
 
     <title>Login</title>
 
-   <!-- Logo -->
-  <link rel="icon" type="image/png" sizes="16x16" href="../images/logo.png">
+   
 
 <link href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" rel="stylesheet"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -43,9 +42,9 @@
                     class="w-[400px] h-full hidden rounded-l-2xl md:block object-cover">
             </div>
             <div class="flex flex-col justify-center p-2 md:p-8">
-                <h3 class="text-2xl font-semibold mb-4 text-[#55AFAB]">| Frontdesk Access</h3>
+                <h3 class="text-2xl font-semibold mb-4">Sign In</h3>
                 <hr class="h-px mb-5 bg-[#55AFAB] border-0">
-                
+                <p class="text-xl font-bold mb-4 mx-auto text-[#55AFAB]">Frontdesk Access</p>
 
                 @if(Session::has('error'))
                 <div class="alert alert-warning alert-dismissible fade show text-red-500" role="alert">
@@ -82,14 +81,14 @@
                         </div>
                         
                         @if (Route::has('password.request'))
-                            <a class="underline text-sm text-blue-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
+                            <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
                                 {{ __('Forgot your password?') }}
                             </a>
                         @endif
                     </div>
-        <br>
+        
                     <div class="w-1/2 flex flex-col m-auto">
-                        <button style ="width: 350px; position: relative; left: -90px;" class="bg-[#FFB200] hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded">
+                        <button class="bg-[#E0C822] hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded">
                             {{ __('Login') }}
                         </button>
                     </div>

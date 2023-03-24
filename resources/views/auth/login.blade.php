@@ -63,14 +63,14 @@
                         </div>
                         
                         @if (Route::has('password.request'))
-                            <a class="underline text-sm text-blue-600 hover:text-blue-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
+                            <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
                                 {{ __('Forgot your password?') }}
                             </a>
                         @endif
                     </div>
-        <br>
+        
                     <div class="w-1/2 flex flex-col m-auto">
-                        <button style ="width: 350px; position: relative; left: -90px;" class="bg-[#E6AF2E] hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded">
+                        <button class="bg-[#E0C822] hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded">
                             {{ __('Login') }}
                         </button>
                     </div>

@@ -5,8 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @vite('resources/css/app.css')
-    <title>Reserve Dates</title>
 
+    <title>Reserve Dates</title>
+   
     <style>
 /* Darker background on mouse-over */
 button[disabled] {
@@ -18,7 +19,7 @@ button[disabled]:hover {
 }
 </style>
 </head>
-<body class="bg-gray-100">
+<body style="background-color: #ffffff;">
     <!-- Navbar -->
   <x-app-layout>
     <div class="bg-cover bg-center h-[350px] max-w-full" style="background-image: url({{ asset('./images/roomtype.jpg') }});">
@@ -47,7 +48,9 @@ button[disabled]:hover {
     </div>
     <!-- Rooms -->
     <section class="container w-[85%] mx-auto mt-10">
-      <h2 class="text-2xl font-bold mb-5">Reserve Dates</h2>
+    
+      <h2 class="text-2xl font-bold mb-5">Check Room Availability</h2>
+      <hr style="border: 2px solid #E6AF2E; width: 270px;  position: relative; left: -2px; top: -20px; ">
       <div class="w-full flex flex-col bg-gray-200 rounded-2xl p-5">
         <div class="md:flex-row justify-center">
           <div class="w-full px-10 mx-auto">
@@ -85,8 +88,8 @@ button[disabled]:hover {
                 </div>
               @endif              
             </div>
-              <div class="flex justify-end my-3 ">
-                <button class="bg-yellow-500 text-white active:bg-yellow-800 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+              <div class="flex justify-end my-3 " >
+                <button style="background-color: #E6AF2E;"class=" text-white active:bg-yellow-800 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                   type="submit" required>Continue</button>
               </div>
             </form>
@@ -98,9 +101,14 @@ button[disabled]:hover {
       <h2 class="text-2xl font-bold mb-5">Available Rooms</h2>
       <div class="flex flex-wrap justify-center rounded-lg bg-gray-200">
       @foreach ($rooms as $room)
+<<<<<<< HEAD
+      <hr style="border: 1px solid #E6AF2E; width: 188px;  position: relative; left: -2px; top: -20px; ">
+       <form method="POST" action="{{ route('view.room', ['room_id' => $room->id]) }}" >
+=======
        <form method="POST" action="{{ route('view.room', ['room_id' => $room->id]) }}"
          {{-- class=" {{ (!$checkin_date || !$checkout_date || $isRoomReserved[$room->id])  ? 'bg-gray-400 cursor-not-allowed' : ''}} opacity-2" --}}
          >
+>>>>>>> ac6003d06f488d9ea1b3842bc20ebb3af350afa2
           @csrf
           <div class="opacity-2">
           <input type="hidden" name="check_in_date" value="{{ session('check_in_date') }}" 
@@ -134,7 +142,7 @@ button[disabled]:hover {
                   <p class="text-gray-700 text-base">
                     {{$room->room_type}}
                   </p>
-                  <p class="text-gray-700 text-base">
+                  <strong><p style="color: #E6AF2E;"><strong>
                     {{$room->rate}} / Night
                   </p>
                   <p class="text-gray-700 text-base">
@@ -145,6 +153,13 @@ button[disabled]:hover {
               </div>  
               <div class="px-6 py-2">
                 <div class="flex justify-end">
+<<<<<<< HEAD
+                  <button type="submit" name="room2" value="{{ $room->id }}" 
+                  {{-- {{ $isRoom2Reserved ? 'disabled' : '' }}    --}}
+                  class="inline-flex items-center  hover:bg-yellow-600 text-black active:bg-yellow-800 
+                  {{-- {{ $isRoom2Reserved ? 'bg-gray-400 cursor-not-allowed' : '' }}  --}}
+                  font-semibold text-sm px-3 w-21 py-[10px] rounded shadow hover:shadow-lg outline-none focus:outline-none  ease-linear transition-all duration-150" style="background-color: #E6AF2E; color: #ffffff;">
+=======
                   <button type="submit" name="room_id_{{ $room->id }}" 
                    value="{{ $room->id }}" 
                   {{ ( $isRoomReserved[$room->id]) ? 'disabled' : '' }}   
@@ -152,9 +167,10 @@ button[disabled]:hover {
                   {{ ( $isRoomReserved[$room->id])
                    ? 'bg-gray-400 cursor-not-allowed' : '' }} 
                   font-semibold text-sm px-3 w-21 py-[10px] rounded shadow hover:shadow-lg outline-none focus:outline-none  ease-linear transition-all duration-150">
+>>>>>>> ac6003d06f488d9ea1b3842bc20ebb3af350afa2
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" />
-                    </svg>&nbsp; Details
+                    </svg>&nbsp; DETAILS
                   </button>                      
               </div>
               </div>

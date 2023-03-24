@@ -89,7 +89,7 @@
                     </div>
         <br>
                     <div class="w-1/2 flex flex-col m-auto">
-                        <button style ="width: 350px; position: relative; left: -90px;" class="bg-[#FFB200] hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded">
+                        <button style ="width: 350px; position: relative; left: -90px;" class="bg-[#E6AF2E] hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded">
                             {{ __('Login') }}
                         </button>
                     </div>

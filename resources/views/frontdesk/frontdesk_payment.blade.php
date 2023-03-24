@@ -244,7 +244,7 @@
                 <tr class=" text-center pt-2" >
                   <td  scope="col">
                   {{ $index + 1 }} 
-                    {{-- <p class="text-[0px]">{{ $data->reservation_id }} --}}
+                    <p class="text-[0px]">{{ $data->reservation_id }}
                     </p></td>
                     <td scope="col">{{ $data->first_name }} &nbsp; {{ $data->last_name }}</td>
                     <td scope="col"> {{ \Carbon\Carbon::parse($data->checkin_date)->format('F j, Y') }}</td> 

@@ -247,12 +247,11 @@
             </thead>
 
             <tbody>
-              {{-- @foreach ($reservationData as $index => $data) --}}
-              @foreach ($reservationData as $data)
+              @foreach ($reservationData as $index => $data)
+              {{-- @foreach ($reservationData as $data) --}}
               <tr style="text-align:center" style="height: 250px;">
                 <td scope="col">
-                  {{-- {{ $index + 1 }} --}}
-                  <p class="">{{ $data->reservation_id }}
+                  {{ $index + 1 }}
                 </td>
                 <td scope="col">{{ $data->first_name }} &nbsp; {{ $data->last_name }}</td>
                 <td scope="col">{{ $data->payment_method }}</td>
@@ -304,32 +303,6 @@
                   </div>
                
                 </div>
-<<<<<<< HEAD
-                </div>
-              @endforeach
-            </tbody>
-   <!-- Delete Modal -->
-   <div class="modal fade" id="delete_modal" role="dialog">
-                    <div class="modal-dialog">
-    <!-- Modal content-->
-    <div class="modal-content" style="height: 230px;">
-                        <div class="modal-header">
-                          <button type="button"  style="position:relative; left: 350px; color: red;" class="close" data-dismiss="modal">&times;</button>
-                          <h4 class="modal-title" style="position:relative; left: -190px; color:#51bdb8;">Cancel Booking Details</h4>
-                    </div>
-                          <form action="#" method="post">
-                          
-                @csrf
-                @method('DELETE')
-                <div class="modal-body">
-                <input id="id" name="id">
-               <strong> <h4 class="text-center">Are you sure you want to cancel this reservation?</strong></h4>
-                <input id="firstName" name="firstName"><input id="lastName" name="lastName">
-
-                <button type="button" style="position: relative; top: 50px; left: -65px;"class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                <button type="submit" style="position: relative; top: 16px; left: 350px;"  class="btn btn-primary">Yes, Continue  </button>
-=======
->>>>>>> ac6003d06f488d9ea1b3842bc20ebb3af350afa2
               </div>
               <!-- Delete Modal -->
               <div class="modal fade" id="delete_modal{{ $data->reservation_id }}" id="view_modal" role="dialog">

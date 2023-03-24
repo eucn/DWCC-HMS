@@ -64,10 +64,10 @@
             @if (Route::has('login')) 
                 @auth
                 <a href="{{ route('login') }}"
-                class="bg-[#E0C822]   hover:bg-yellow-600 text-black rounded w-21 py-2 px-2 cursor-pointer">Book Now</a>
+                class="bg-[#E6AF2E]   hover:bg-yellow-600 text-white rounded w-21 py-2 px-2 cursor-pointer">Book Now</a>
                 @else
                 <a href="{{ route('login') }}"
-                class="bg-[#E0C822]   hover:bg-yellow-600 text-black rounded w-21 py-2 px-2 cursor-pointer">Book Now</a>
+                class="bg-[#E6AF2E]   hover:bg-yellow-600 text-white rounded w-21 py-2 px-2 cursor-pointer">Book Now</a>
                 @endauth  
             @endif  
             </div> 

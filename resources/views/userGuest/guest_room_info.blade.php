@@ -57,37 +57,35 @@
                         height="30" width="25" /></div>
             </div> --}}
 
-            <div class="flex justify-center">
-                {{-- <p >Check-in & </p>
-        <p >Check-out Date</p>
-        <p >Guest<br/></p>
-        <p >Information</p>
-        <p >Booking<br/></p>
-        <p >Summary</p>
-        <p >Payment<br/></p>
-        <p >Confirmation</p> --}}
-            </div>
+            {{-- <div class="flex justify-center">
+             <p >Check-in & </p>
+            <p >Check-out Date</p>
+            <p >Guest<br/></p>
+            <p >Information</p>
+            <p >Booking<br/></p>
+            <p >Summary</p>
+            <p >Payment<br/></p>
+            <p >Confirmation</p> 
+            </div> --}}
             <section class="room_details mx-[100px] mt-[70px]">
                 <form method="POST"  action="{{ route('save.reservation')}}" >
                     @csrf
                 <div class="mb-10">
                     <div class="flex item-center">
-                        <h2 class="text-[30px] text-[#4C4C4C] font-bold ml-7">Room 
+                        <h2 class="text-[30px] text-[#4C4C4C] font-bold ml-7 ">Room 
                             <input type="text" class="border-none bg-none text-[30px] w-10 h-8" 
                             value="{{ $rooms->id }}" name="room_id" style="background-color: transparent;" readonly>
                         </h2>
                     </div>
-                
-                    <div class="bg-black mx-auto w-[96%] h-[6px]"></div>
+                    <hr class="bg-[#444444] mx-4 h-[5px] py-23">
                 </div>
-
-                <div class="flex  justify-center space-x-3 h-auto">
+                <div class="flex justify-center space-x-3 h-auto">
                     {{-- Left --}}
                     <div class="flex bg-gray-300 w-[800px] h-[450px] rounded-md">
                         <div class="image mx-4 my-4">
                             <img class="h-[305px] " src="{{ asset('./images/room1.jpg') }}" alt="">
                             <div class="flex space-x-5">
-                                <div class="bg-white border-2 border-yellow-400 h-[90px] w-[190px] my-3 rounded-md">
+                                <div class="bg-white border-2  h-[90px] w-[190px] my-3 rounded-md" style="border-color: #F3C623;">
                                     <h1 class=" items-center font-bold mt-2 ml-1 pl-3">Capacity</h1>
                                     <div class="bg-black w-auto mx-1 h-[1px]">
                                         <p class="p-3 inline-flex items-center">
@@ -99,7 +97,7 @@
                                             {{ $rooms->max_capacity }} Person</p>
                                     </div>
                                 </div>
-                                <div class="bg-white border-2 border-yellow-400 h-[90px] w-[190px] my-3  rounded-md">
+                                <div class="bg-white border-2  h-[90px] w-[190px] my-3  rounded-md" style="border-color: #F3C623;">
                                     <h1 class="font-bold mt-2 ml-1 pl-3 ">Beds</h1>
                                     <div class="bg-black w-auto mx-1 h-[1px]">
                                         <p class="pl-2 pt-3 inline-flex items-center text-sm ">
@@ -122,7 +120,7 @@
                             </p>
                             <div class="items-center">
                                 <div
-                                    class="bg-white border-2 mx-auto border-yellow-400 h-[90px] w-[300px] my-2 rounded-md">
+                                    class="bg-white border-2 mx-auto  h-[90px] w-[300px] my-2 rounded-md" style="border-color: #E6AF2E;">
                                     <h1 class="font-bold mt-2  ml-1 pl-3">Amenities</h1>
                                     <div class="bg-black w-auto h-[1px] "></div>
                                     <p class="p-3 inline-flex items-center ">
@@ -134,7 +132,7 @@
                                         </svg> {{ $rooms->amenities }}</p>
                                 </div>
                             </div>
-                            <div class="text-right pt-[60px]">
+                            <div class="text-right pt-[60px]" style="position: relative; left: -75px;">
                                 <div class="text-[25px] font-bold">PHP<span class="font-regular">
                                         {{ $rooms->rate }}/nights</span></div>
                             </div>
@@ -186,7 +184,7 @@
                                     </div>
                                     <div class="pt-[70px] text-center">
                                         <button type="submit"
-                                            class="bg-yellow-500 hover:bg-yellow-600  text-white active:bg-yellow-800 font-bold uppercase text-sm px-[80px] py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                                        style="background-color: #E6AF2E;" class=" hover:bg-yellow-600  text-white active:bg-yellow-800 font-bold uppercase text-sm px-[80px] py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                                             id="next">Book Now</button>
                                     </div>
                                     <div>
@@ -196,9 +194,12 @@
                                     </div>
                                 </div>
                             </form>
+                            
                         </div>
                     </div>
                 </div>
+            </div>
+                <button style="background-color: #7c7c7c; position: relative; top: 50px; left: 1050px;" onclick="goBack()"   class=" hover:bg-gray-600 text-white active:bg-yellow-800 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">Back</button>
             </section>
 
             {{-- script for add and subtract btn --}}
@@ -221,5 +222,11 @@
 </body>
 <script src="{{url('js/progressbar.js')}}"></script>
 <script src="{{url('js/pm1.js')}}"></script>
+
+<script>
+function goBack() {
+  window.history.back();
+}
+</script>
 
 </html>

@@ -228,13 +228,13 @@
       <table class="table table-condensed table-sm table-bordered">   
                 <thead class="bg-[#51bdb8] text-white">   
                     <tr style="text-align:center">   
-                        <th No. scope="col" class="text-center px-4">No.</th>
-                        <th scope="col" class="text-center">Name</th>
-                        <th scope="col" class="w-[150px;] text-center">Check-in Date</th>
-                        <th scope="col" class="text-center">Check-out Date</th>
-                        <th scope="col" class="text-center">Payment Method</th>
+                        <th No. scope="col" class="text-center px-4"> &nbsp No.</th>
+                        <th scope="col" class="text-center" style=" text-align: center;">  Name</th>
+                        <th scope="col" class="w-[150px; text-align: center;] text-center"> &nbsp &nbsp Check-in Date</th>
+                        <th scope="col" class="text-center"> &nbsp Check-out Date</th>
+                        <th scope="col" class="text-center"> &nbsp Payment Method</th>
                         <th scope="col" class="text-center">Payment Status</th>
-                        <th scope="col" class="text-center">Booking Type</th>
+                        <th scope="col" class="text-center"> &nbsp Booking Type</th>
                         <th scope="col" style="width: 150px; text-align:center;"> &nbsp &nbsp  Action</th>
                         <div class="container">       
                     </tr>   
@@ -244,7 +244,7 @@
                 <tr class=" text-center pt-2" >
                   <td  scope="col">
                   {{ $index + 1 }} 
-                    {{-- <p class="text-[0px]">{{ $data->reservation_id }} --}}
+                    <p class="text-[0px]">{{ $data->reservation_id }}
                     </p></td>
                     <td scope="col">{{ $data->first_name }} &nbsp; {{ $data->last_name }}</td>
                     <td scope="col"> {{ \Carbon\Carbon::parse($data->checkin_date)->format('F j, Y') }}</td> 
@@ -253,7 +253,7 @@
                     <td scope="col">{{ $data->payment_status }}</td>
                     <td scope="col">{{ $data->booking_types }}</td>
                     <td scope="col"> <button type="button" 
-                    class="btn btn-primary btn-sm" data-toggle="modal" data-target="#view_modal{{  $data->reservation_id }}" id="editModal"
+                    class="btn btn-primary btn-sm" data-toggle="modal" style="background-color: #0B8457; border-color: none;"data-target="#view_modal{{  $data->reservation_id }}" id="editModal"
                     >Confirm Payment</button></td>
                 </tr>
                 <!-- View Modal -->
@@ -290,7 +290,7 @@
                       <div class="modal-footer text-center">
                         <div class="">
                           <button type="submit" class="btn btn-default"
-                            style="background-color: #F59E0B; color: #FFFFFF; font-weight: regular;font-size: 15px; padding: 0.75rem 1.5rem; border-radius: 0.375rem; box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05), 0 1px 3px 1px rgba(0, 0, 0, 0.1); transition: all 0.15s ease; outline: none; margin-right: 0.25rem; margin-bottom: 0.25rem;">
+                            style="background-color: #277BC0; color: #FFFFFF; font-weight: regular;font-size: 15px; padding: 0.75rem 1.5rem; border-radius: 0.375rem; box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05), 0 1px 3px 1px rgba(0, 0, 0, 0.1); transition: all 0.15s ease; outline: none; margin-right: 0.25rem; margin-bottom: 0.25rem;">
                             Confirm</button>
                         </div>
                       </div>

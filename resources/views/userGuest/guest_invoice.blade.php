@@ -214,10 +214,9 @@
                   onclick="toggleModal('modal-id')">
                   Continue
                 </button> --}}
-                <a href="{{ route('guest.view.invoice') }}" target="_blank" class="bg-yellow-500 text-white active:bg-yellow-800 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">View</a>
+                <a href="{{ route('guest.view.invoice') }}" target="_blank" class=" text-white bg-[#00BD56] active:bg-yellow-800 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">View</a>
 
-                <a href="{{ route('generate.invoice')}}" 
-                 class="bg-yellow-500 text-white active:bg-yellow-800 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">Download</a>
+                <a href="{{ route('generate.invoice')}}"  class="text-white bg-[#277BC0] active:bg-yellow-800 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">Download</a>
             </form>
 
                 <div

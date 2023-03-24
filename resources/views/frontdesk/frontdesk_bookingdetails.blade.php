@@ -238,29 +238,20 @@
                 <td scope="col" style="width: 200px;">Name</th>
                 <td scope="col">Payment Method</td>
                 <td Booking scope="col">Booking Status</td>
-<<<<<<< HEAD
-                <td scope="col">Check-in / Check-out Date</td>  
-                <td scope="col"  style="width: 140px; text-align:center;"> &nbsp &nbsp Action</td>
-   
-<div class="container">
-  <!-- View Modal -->
-=======
                 <td scope="col">Check-in / Check-out Date</td>
                 <td scope="col" style="width: 200px; text-align:center;">&nbsp &nbsp &nbsp Action</td>
 
                 <div class="container">
                   <!-- View Modal -->
->>>>>>> 99b595389ec170e5fa084ebba76032cf4f0bda6d
               </tr>
             </thead>
 
             <tbody>
-              {{-- @foreach ($reservationData as $index => $data) --}}
-              @foreach ($reservationData as $data)
+              @foreach ($reservationData as $index => $data)
+              {{-- @foreach ($reservationData as $data) --}}
               <tr style="text-align:center" style="height: 250px;">
                 <td scope="col">
-                  {{-- {{ $index + 1 }} --}}
-                  <p class="">{{ $data->reservation_id }}
+                  {{ $index + 1 }}
                 </td>
                 <td scope="col">{{ $data->first_name }} &nbsp; {{ $data->last_name }}</td>
                 <td scope="col">{{ $data->payment_method }}</td>

@@ -312,10 +312,10 @@
                         onclick="toggleModal('modal-id')">
                         Continue
                       </button> --}}
-                      <a href="{{ route('frontdesk.invoice.view.pdf') }}" target="_blank" class="bg-yellow-500 text-white active:bg-yellow-800 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">View</a>
+                      <a href="{{ route('frontdesk.invoice.view.pdf') }}" target="_blank" class=" bg-[#00BD56] text-white active:bg-yellow-800 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">View</a>
       
                       <a href="{{ route('generate.invoice')}}" 
-                       class="bg-yellow-500 text-white active:bg-yellow-800 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">Download</a>
+                       class=" bg-[#277BC0] text-white active:bg-yellow-800 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">Download</a>
                   </form>
       
                       <div

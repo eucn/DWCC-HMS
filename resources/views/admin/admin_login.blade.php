@@ -6,7 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @vite('resources/css/app.css')
     <title>Login</title>
-
+    
+    <!-- Logo -->
+    <link rel="icon" type="image/png" sizes="16x16" href="../images/sitelogo.png">
     <!-- Bootstrap 4 -->
     <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous"> -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
@@ -38,9 +40,9 @@
                     class="w-[400px] h-full hidden rounded-l-2xl md:block object-cover">
             </div>
             <div class="flex flex-col justify-center p-2 md:p-8">
-                <h3 class="text-2xl font-semibold mb-4">Sign In</h3>
+                <h3 class="text-2xl font-semibold mb-4 text-[#55AFAB]">| Admin Access</h3>
                 <hr class="h-px mb-5 bg-[#55AFAB] border-0">
-                <p class="text-xl font-bold mb-4 mx-auto text-[#55AFAB]">Admin Access</p>
+            
 
                 @if(Session::has('error'))
                 <div class="alert alert-warning alert-dismissible fade show text-red-500" role="alert">
@@ -77,14 +79,14 @@
                         </div>
                         
                         @if (Route::has('password.request'))
-                            <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
+                            <a class="underline text-sm text-blue-600 hover:text-blue-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
                                 {{ __('Forgot your password?') }}
                             </a>
                         @endif
                     </div>
-        
-                    <div class="w-1/2 flex flex-col m-auto">
-                        <button class="bg-[#E0C822] hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded">
+                    <br>
+                    <div class="w-1/2 flex flex-col m-auto">  
+                        <button style ="width: 350px; position: relative; left: -90px;"class="bg-[#E6AF2E] hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded">
                             {{ __('Login') }}
                         </button>
                     </div>

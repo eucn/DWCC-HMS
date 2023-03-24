@@ -238,19 +238,11 @@
                 <td scope="col" style="width: 200px;">Name</th>
                 <td scope="col">Payment Method</td>
                 <td Booking scope="col">Booking Status</td>
-<<<<<<< HEAD
-                <td scope="col">Check-in / Check-out Date</td>  
-                <td scope="col"  style="width: 140px; text-align:center;"> &nbsp &nbsp Action</td>
-   
-<div class="container">
-  <!-- View Modal -->
-=======
                 <td scope="col">Check-in / Check-out Date</td>
                 <td scope="col" style="width: 200px; text-align:center;">&nbsp &nbsp &nbsp Action</td>
 
                 <div class="container">
                   <!-- View Modal -->
->>>>>>> ac6003d06f488d9ea1b3842bc20ebb3af350afa2
               </tr>
             </thead>
 

@@ -57,31 +57,29 @@
                         height="30" width="25" /></div>
             </div> --}}
 
-            <div class="flex justify-center">
-                {{-- <p >Check-in & </p>
-        <p >Check-out Date</p>
-        <p >Guest<br/></p>
-        <p >Information</p>
-        <p >Booking<br/></p>
-        <p >Summary</p>
-        <p >Payment<br/></p>
-        <p >Confirmation</p> --}}
-            </div>
+            {{-- <div class="flex justify-center">
+             <p >Check-in & </p>
+            <p >Check-out Date</p>
+            <p >Guest<br/></p>
+            <p >Information</p>
+            <p >Booking<br/></p>
+            <p >Summary</p>
+            <p >Payment<br/></p>
+            <p >Confirmation</p> 
+            </div> --}}
             <section class="room_details mx-[100px] mt-[70px]">
                 <form method="POST"  action="{{ route('save.reservation')}}" >
                     @csrf
                 <div class="mb-10">
                     <div class="flex item-center">
-                        <h2 class="text-[30px] text-[#4C4C4C] font-bold ml-7">Room 
+                        <h2 class="text-[30px] text-[#4C4C4C] font-bold ml-7 ">Room 
                             <input type="text" class="border-none bg-none text-[30px] w-10 h-8" 
                             value="{{ $rooms->id }}" name="room_id" style="background-color: transparent;" readonly>
                         </h2>
                     </div>
-                
-                   <hr style="color: #444444; border: solid 2px; width: 1085px; position: relative; left: 30px;">
+                    <hr class="bg-[#444444] mx-4 h-[5px] py-23">
                 </div>
-
-                <div class="flex  justify-center space-x-3 h-auto">
+                <div class="flex justify-center space-x-3 h-auto">
                     {{-- Left --}}
                     <div class="flex bg-gray-300 w-[800px] h-[450px] rounded-md">
                         <div class="image mx-4 my-4">
@@ -200,7 +198,7 @@
                         </div>
                     </div>
                 </div>
-                
+            </div>
                 <button style="background-color: #7c7c7c; position: relative; top: 50px; left: 1050px;" onclick="goBack()"   class=" hover:bg-gray-600 text-white active:bg-yellow-800 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">Back</button>
             </section>
 

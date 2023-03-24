@@ -17,14 +17,17 @@ class GuestInformationController extends Controller
         $room_id = Session::get('room_id');
         $checkin_date = Session::get('check_in_date');
         $checkout_date = Session::get('check_out_date');
-    
+
+        $checkin_date_formatted = date('Y-m-d', strtotime($checkin_date));
+        $checkout_date_formatted = date('Y-m-d', strtotime($checkout_date));
+
         $reservations = Reservations::where('room_id', $room_id)
-        ->where(function($query) use ($checkin_date, $checkout_date) {
-            $query->whereBetween('checkin_date', [$checkin_date, $checkout_date])
-                ->orWhereBetween('checkout_date', [$checkin_date, $checkout_date])
-                ->orWhere(function($query) use ($checkin_date, $checkout_date) {
-                    $query->where('checkin_date', '<', $checkin_date)
-                            ->where('checkout_date', '>', $checkout_date);
+        ->where(function($query) use ($checkin_date_formatted, $checkout_date_formatted) {
+            $query->whereBetween('checkin_date', [$checkin_date_formatted, $checkout_date_formatted])
+                ->orWhereBetween('checkout_date', [$checkin_date_formatted, $checkout_date_formatted])
+                ->orWhere(function($query) use ($checkin_date_formatted, $checkout_date_formatted) {
+                    $query->where('checkin_date', '<', $checkin_date_formatted)
+                            ->where('checkout_date', '>', $checkout_date_formatted);
                 });
         })
         ->get();
@@ -109,7 +112,7 @@ class GuestInformationController extends Controller
             $guestInformation->company_name = $company_name;
             $guestInformation->address = $address;
             $guestInformation->phone_number = $phone_number;
-
+            $guestInformation->payment_status = 'Unpaidgu'; 
             if($payment_method == "Cash"){
                 $guestInformation->payment_method = $payment_method;
             }else if($payment_method == "Department Charge"){
@@ -130,11 +133,11 @@ class GuestInformationController extends Controller
                 }
             }
             $guestInformation->save();
-            Session::forget('room_id');
-            Session::forget('check_in_date');
-            Session::forget('check_out_date');
-            Session::forget('guest_num');
-            Session::forget('number_of_nights');
+            // Session::forget('room_id');
+            // Session::forget('check_in_date');
+            // Session::forget('check_out_date');
+            // Session::forget('guest_num');
+            // Session::forget('number_of_nights');
             }
     // Redirect to a success page
         return redirect()->route('view.invoice');   

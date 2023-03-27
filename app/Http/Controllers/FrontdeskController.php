@@ -76,7 +76,7 @@ class FrontdeskController extends Controller
 
         event(new Registered($frontdesk));
         // return redirect('/frontdesk/login');
-        return redirect()->route('#');
+        return redirect()->route('admin.frontdeskList');
     }
   
     public function FrontdeskBookingDetails(){

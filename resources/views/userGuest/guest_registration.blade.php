@@ -97,49 +97,56 @@
                           <p class="text-sm sm:text-base">Please complete the form below</p>
                         </div>
                   
-                        <div class="bg-white rounded-lg border-2 shadow-md w-full pb-4">
+                        <div class="relative bg-white rounded-lg border-2 shadow-md w-full pb-4">
                           <div class="border-b-2 border-gray-300 px-4 py-3">
                             <h3 class="text-lg sm:text-2xl font-semibold">Guest Information</h3>
                           </div>
                   
                           <div class="space-y-4 font-regular text-base sm:text-lg pb-10 ">
-                            <div class="flex flex-col lg:flex-row justify-center">
-                                <div class="mx-4 md:mx-6 py-3">
-                                  <label class="" for="salutation">Salutation:</label>
-                                  <select class="w-full md:w-[125px]" name="salutation" id="salutation" value="{{ old('salutation') }}" placeholder="Ms.">
+                            <div class="flex flex-col lg:flex-row lg:space-x-10 sm:mx-10 md:mx-10 mx-4 py-3">
+                              {{-- sm:mx-10 md:mx-10 sm:space-x-10 sm:space-x-10 --}}
+                                <div class="pt-5">
+                                  <label class="" for="salutation">Salutation:</label>&nbsp; &nbsp;
+                                  <div class="">
+                                  <select class="w-full md:w-[130px] py-[10px] shadow leading-tight focus:outline-none focus:shadow-outline" name="salutation" id="salutation" value="{{ old('salutation') }}" placeholder="Ms.">
                                     <option value="Ms." {{ old('salutation') == 'Ms.' ? 'selected' : '' }}>Ms.</option>
                                     <option value="Mrs." {{ old('salutation') == 'Mrs.' ? 'selected' : '' }}>Mrs.</option>
                                     <option value="Mr." {{ old('salutation') == 'Mr.' ? 'selected' : '' }}>Mr.</option>
                                   </select>   
+                                  </div>
                                 </div>
-                          
-                                <div class="px-4 md:px-6 py-3">
-                                  <label class="" for="fullname">Full Name:&nbsp;<span class="text-red-700 font-bold">*</span></label>
-                                  <input type="text" class="w-full md:w-[400px]" name="first_name" id="first_name" value="{{ old('first_name') }}" placeholder="Full Name" required>  
+                                <div class="pt-5">
+                                  <label class="" for="fullname">Full Name:&nbsp;<span class="text-red-700 font-bold ">*</span></label>
+                                  <div class=" ">
+                                    <input type="text" class="w-full sm:w-full md:w-full lg:w-2/3 min-w-[410px]  py-[10px]  shadow leading-tight focus:outline-none focus:shadow-outline" name="first_name" id="first_name" value="{{ old('first_name') }}" placeholder="First Name" required>  
+                                  </div>
                                 </div>
-                          
-                                <div class="px-4 md:px-6 py-3">
-                                  <label class="opacity-0" type="hidden" for="lastname">LastName</label>
-                                  <input type="text" class="w-full md:w-[400px]" name="last_name" id="last_name" value="{{ old('last_name') }}" placeholder="Last Name" required>  
+                        
+                                <div class="pt-5">
+                                  <label class="opacity-0" type="text" for="lastname">LastName</label>
+                                  <div class="">
+                                  <input type="text" class="w-full sm:w-full md:w-full lg:w-2/3 min-w-[410px] py-[10px]  shadow leading-tight focus:outline-none focus:shadow-outline" name="last_name" id="last_name" value="{{ old('last_name') }}" placeholder="Last Name" required>  
                                 </div>
-                          
+                                {{-- sm:w-full md:w-full lg:w-[410px] --}}
+                                </div>
                             </div>
                   
-                            <div class="mx-4 sm:mx-10">                                
-                              <label for="companyName">Company Name</label>
-                              <input type="text" name="company_name" id="company_name" class="w-full" value="{{ old('company_name') }}" placeholder="Company Name" >                             
-                            </div>
-                  
-                            <div class="mx-4 sm:mx-10">
-                              <label for="Address">Address&nbsp;<span class="text-red-700 font-bold">*</label>
-                              <input type="text" name="address" id="address" value="{{ old('address') }}" placeholder="Address" class="w-full" required>                              
-                            </div>
-                  
-                            <div class="mx-4 sm:mx-10">
-                              <label for="address">Phone Number&nbsp;<span class="text-red-700 font-bold">*</label><br>
-                              <input type="number"  name="phone_number" id="phone_number" value="{{ old('phone_number') }}" class="w-full sm:w-[200px]" placeholder="+63" required>                              
-                              <x-input-error :messages="$errors->get('phone_number')" class="mt-2" />
-                            </div>
+            
+                              <div class="mx-4 sm:mx-10 ">                                
+                                <label for="companyName">Company Name</label>
+                                <input type="text" name="company_name" id="company_name" class="w-full  py-[10px]  shadow leading-tight focus:outline-none focus:shadow-outline value="{{ old('company_name') }}" placeholder="Company Name" >                             
+                              </div>
+                    
+                              <div class="mx-4 sm:mx-10">
+                                <label for="Address">Address&nbsp;<span class="text-red-700 font-bold">*</label>
+                                <input type="text" name="address" id="address" value="{{ old('address') }}" placeholder="Address" class="w-full py-[10px]  shadow leading-tight focus:outline-none focus:shadow-outline" required>                              
+                              </div>
+                    
+                              <div class="mx-4 sm:mx-10">
+                                <label for="address">Phone Number&nbsp;<span class="text-red-700 font-bold">*</label><br>
+                                <input type="number"  name="phone_number" id="phone_number" value="{{ old('phone_number') }}" class="w-full sm:w-[200px]  py-[10px]  shadow leading-tight focus:outline-none focus:shadow-outline" placeholder="+63" required>                              
+                                <x-input-error :messages="$errors->get('phone_number')" class="mt-2" />
+                              </div>
                           </div>
                         </div>
                   
@@ -193,19 +200,19 @@
                                 if ($(this).val() === 'Cash') {
                                   // If cash is selected, unselect the department charge and hide its options
                                   $('input[name=payment_method_dept]').prop('checked', false);
-                                  $('#department_charge_options').hide();
+                                  $('#department_charge_options').fadeOut('slow');
                                 } else if ($(this).val() === 'Department Charge') {
                                   // If department charge is selected, unselect the cash and show its options
                                   $('input[name=payment_method_cash]').prop('checked', false);
-                                  $('#department_charge_options').show();
+                                  $('#department_charge_options').fadeIn('slow');
                                 }
                               });
                             });
                             </script>
                             </div>
-                            <div class="flex justify-end mt-20">
-                            <button  style="background-color: #7c7c7c;" onclick="goBack()" class=" hover:bg-gray-600 text-white active:bg-yellow-800 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">Back</button>
-                                <button  style="background-color: #E6AF2E;" class=" hover:bg-yellow-600 text-white active:bg-yellow-800 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">Continue</button>
+                            <div class="flex justify-end mt-10">
+                            <button  class="bg-[#7c7c7c] hover:bg-gray-600 text-white active:bg-gray-800 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" onclick="goBack()">Back</button>
+                                <button  class="bg-[#E6AF2E] hover:bg-yellow-600 text-white active:bg-yellow-800 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">Continue</button>
                               </div> 
                             </div>
                         </div>  

@@ -142,7 +142,7 @@
       </li><!-- End Manage Rooms Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="index.html">
+        <a class="nav-link collapsed" href="{{ route('admin.bookingHistory') }}">
           <i class="fa-regular fa-file icon-nav"></i>
           <span>Booking History</span>
         </a>
@@ -180,11 +180,11 @@
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Manage Rooms</h1>
+      <h1>Manage Rooms</h1><br>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
-          <li class="breadcrumb-item active">Manage Rooms</li>
+          <li class="breadcrumb-item active">Manage Rooms</li><br>
         </ol>
       </nav>
     </div><!-- End Page Title -->
@@ -203,19 +203,18 @@
             <!-- Button trigger modal -->
             <div class="ml-auto">
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                  Add New
-                </button>
+                <i class="fa-solid fa-plus"></i>&nbsp Add New</button>
             </div>
           </div>
 
-          <hr>
+          <hr style="border-top: 2px solid #3C4048;position: relative; left: 8px;">
 
           <!-- Modal -->
           <div class="modal fade" id="exampleModal">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Add New Room</h4>
+                <h4 class="modal-title" style="color: #51bdb8;">Add New Room</h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
@@ -261,13 +260,14 @@
                         <input class="form-control" type="number" name="rate">
                         <x-input-error :messages="$errors->get('rate')"/>
                     </div>
-                    <div class="form-group mb-2">
-                        <label>Photos</label>
-                        <input type="file" name="photos" id="photos">
+                    <div class="form-group">
+														<label for="image" class="col-form-label" style=" font-weight: 500;">Image:</label>
+														<input type="file" name="photos" class="form-control" id="photos">
+												
                         <x-input-error :messages="$errors->get('photos')"/>
                     </div>
-                    <button type="submit" class="btn btn-primary">Save</button>
-                    <button type="reset" class="btn btn-primary">Reset</button>
+                    <button type="submit" style="position: relative; left: 400px;" class="btn btn-primary">Save</button>
+                    <button type="reset" style="position: relative; left: 250px; background-color: #7c7c7c; border: none;" class="btn btn-primary">Cancel</button>
                 </form>
             </div>
     </div>
@@ -282,21 +282,36 @@
             </div>
           @endif
 
-          <div class="d-flex justify-content-between mb-3">
-            <div class="row mt-3">
-        <div class="d-flex align-items-center">
-            <label for="records_per_page" class="col-auto mr-2">Records per page:</label>
-            <select name="records_per_page" id="records_per_page" class="form-control mr-2" onchange="window.location.href = this.value;">
-                <option value="{{ url()->current() }}?records_per_page=10"  'selected' : '' }}>10</option>
-                <option value="{{ url()->current() }}?records_per_page=25"  'selected' : '' }}>25</option>
-                <option value="{{ url()->current() }}?records_per_page=50"  'selected' : '' }}>50</option>
-                <option value="{{ url()->current() }}?records_per_page=100"  'selected' : '' }}>100</option>
-            </select>
-        </div>
-        <div class="">
-         
-        </div>
-        </div>
+            <!-- Left side columns -->
+        <div class="col-lg-12">
+          <div class="row">
+
+            <div class="d-flex justify-content-between mb-3">
+              <div class="row mt-3">
+                <div class="d-flex align-items-center">
+                  <b><label for="records_per_page" class="col-auto mr-2"
+                      style="position: relative; top: 2px; right: -3px;color:#434242;">Show</label></b>
+                  <select name="records_per_page" id="records_per_page" class="form-control mr-2" style="position: relative; left:-15px;"
+                    onchange="window.location.href = this.value;">
+                    <option value="{{ url()->current() }}?records_per_page=10" 'selected' : '' }}>10</option>
+                    <option value="{{ url()->current() }}?records_per_page=25" 'selected' : '' }}>25</option>
+                    <option value="{{ url()->current() }}?records_per_page=50" 'selected' : '' }}>50</option>
+                    <option value="{{ url()->current() }}?records_per_page=100" 'selected' : '' }}>100</option>
+                    {{-- <option value="100">10</option>
+                    <option value="100">25</option>
+                    <option value="100">50</option>
+                    <option value="100">100</option> --}}
+                  </select>
+                
+                  <b>
+                    <p style="position: relative; top: 7px; left: -20px;color:#434242;">entries</p>
+                  </b>
+                </div>
+                <div class="">
+                </div>
+              </div>
+            </div>
+          </div><!-- End Left side columns -->
             <!-- <div class="ml-auto">
                 <form action="{{ route('admin.room.create') }}" method="POST">
                     @csrf
@@ -307,7 +322,7 @@
           </div>
 
             <table class="table table-condensed table-sm table-bordered">   
-                <thead class="bg-[#36ae7c] text-white">   
+                <thead class="bg-[#51bdb8] text-white">   
                     <tr style="text-align:center">   
                         <th scope="col">Room No.</th>
                         <th scope="col">Room Type</th>
@@ -317,7 +332,7 @@
                         <th scope="col">Status</th>
                         <th scope="col">Rate</th>
                         <th scope="col">Photos</th>
-                        <th scope="col">Action</th>
+                        <th scope="col" >Action</th>
                     </tr>   
                 </thead>   
                 <tbody>   
@@ -333,80 +348,105 @@
                         <td>
                           <img src="{{ asset($roomData->photos) }}" alt="Room" width="70px" height="70px">                 
                         </td>
-                        <td>
+                        <td style="width: 150px;" >
                           <form action="{{ route('admin.room.create') }}" method="POST">
                           
-                          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal{{ $roomData->id }}">
-    Edit Record
-</button>
+                          <button type="button" class="btn btn-primary" style="position:relative;left: -25px; top: 20px;" data-bs-toggle="modal" data-bs-target="#editModal{{ $roomData->id }}">
+                          <i class="fa-regular fa-pen-to-square"></i>
+                          </button>
+                          <button type="button" class="btn btn-danger" style="position:relative;left: -25px; top: 20px;" data-bs-toggle="modal" data-bs-target="#delete{{ $roomData->id }}">
+                          <i class="fa-solid fa-trash"></i>
+                          </button>
 
-<!-- Edit Modal -->
-<div class="modal fade" id="editModal{{ $roomData->id }}" tabindex="-1" aria-labelledby="editModal{{ $roomData->id }}Label" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <form method="POST" action="/room/{{$roomData->id}}">
-                @csrf
-                @method('PUT')
-                <div class="modal-header">
-                    <h5 class="modal-title" id="editModal{{ $roomData->room_number }}Label">Edit Room</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-          
-                     <div class="form-group">
-                        <label for="name">Room Number</label>
-                        <input type="text" name="name" id="name" value="{{ $roomData->room_number }}">
-                    </div>
-                    <div class="form-group">
-                        <label for="room_description">Description</label>
-                        <textarea name="description" class="form-control">{{ $roomData->room_description }}</textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="room_type">Room Type</label>
-                        <input type="text" name="room_type" class="form-control" value="{{ $roomData->room_type }}">
-                    </div>
-                    <div class="form-group">
-                        <label for="max_capacity">Maximum Capacity</label>
-                        <input type="text" name="max_capacity" class="form-control" value="{{ $roomData->max_capacity }}">
-                    </div>
-                    <div class="form-group">
-                        <label for="amenities">Amenities</label>
-                        <input type="text" name="amenities" class="form-control" value="{{ $roomData->amenities }}">
-                    </div>
-                    <div class="form-group">
-                        <label for="status">Status</label>
-                        <input type="text" name="status" class="form-control" value="{{ $roomData->status }}">
-                    </div>
-                    <div class="form-group">
-                        <label for="rate">Rate</label>
-                        <input type="text" name="rate" class="form-control" value="{{ $roomData->rate }}">
-                    </div>
-                  
-                </div> 
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Save changes</button>
-                </div>
-            </form>
-      
-        </div>
-    </div>
-</div> 
-
-                                </div>
+                        <!-- Edit Modal -->
+                        <div class="modal fade" id="editModal{{ $roomData->id }}" tabindex="-1" aria-labelledby="editModal{{ $roomData->id }}Label" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <form method="POST" action="'admin.room.update">
+                                        @csrf
+                                        @method('PUT')
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" style="color: #51bdb8;" id="editModal{{ $roomData->room_number }}Label">Edit Room</h5>
+                                            <button type="button" class="btn-close" style="color:red;" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                  
+                                            <div class="form-group">
+                                                <label for="name" style="position: relative; left: -175px;">Room Number</label><br>
+                                                <input type="text"  style="position: relative; left: -5px; width: 450px;" name="name" id="name" value="{{ $roomData->room_number }}">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="room_description" style="position: relative; left: -188px; ">Description</label>
+                                                <textarea name="description"  class="form-control">{{ $roomData->room_description }}</textarea>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="room_type"  style="position: relative; left: -188px; ">Room Type</label>
+                                                <input type="text" name="room_type" class="form-control" value="{{ $roomData->room_type }}">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="max_capacity"  style="position: relative; left: -165px; ">Maximum Capacity</label>
+                                                <input type="text" name="max_capacity" class="form-control" value="{{ $roomData->max_capacity }}">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="amenities"  style="position: relative; left: -190px; ">Amenities</label>
+                                                <input type="text" name="amenities" class="form-control" value="{{ $roomData->amenities }}">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="status"  style="position: relative; left: -210px; ">Status</label>
+                                                <input type="text" name="status" class="form-control" value="{{ $roomData->status }}">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="rate"  style="position: relative; left: -210px; ">Rate</label>
+                                                <input type="text" name="rate" class="form-control" value="{{ $roomData->rate }}">
+                                            </div>
+                                          
+                                        </div> 
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-primary">Save changes</button>
+                                        </div>
+                                    </form>
+                                  </div>
                               </div>
-                              <form action="{{ route('admin.room.destroy', $roomData->id) }}" method="POST">
-    @csrf
-    @method('DELETE')
-    <button type="submit" class="btn btn-danger">Delete Room</button>
-</form>
-                          
+                            </div> ``
+
+
+
+                        <!-- <form action="{{ route('admin.room.destroy', $roomData->id) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" style="position:relative;left: 28px; top: -20px;" class="btn btn-danger"><i class="fa-solid fa-trash"></i></button>
+                        </form>      
                         </td>
-                    </tr>
+                    </tr> -->
+                    <div class="modal fade" id="delete{{ $roomData->id }}" id="view_modal" role="dialog">
+                <div class="modal-dialog">
+                  <!-- Modal content-->
+                  <div class="modal-content" style="height: 230px;">
+                    <div class="modal-header">
+                      <button type="button" style="position:relative; left: 350px; color: red;" class="close"
+                        data-dismiss="modal">&times;</button>
+                      <h4 class="modal-title" style="position:relative; left: -190px; color:#51bdb8;">Confirm Delete
+                      </h4>
+                    </div>
+                    <form  action="{{ route('admin.room.destroy',  $roomData->id) }}" method="POST">
+                      @csrf
+                      @method('DELETE')
+                      <div class="modal-body">
+                        <input id="id" name="id">
+                        <strong>
+                          <h4 class="text-center">Are you sure you want to Delete this Room?
+                        </strong></h4>
+                      </div>
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit"class="btn btn-primary">Yes,Continue </button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
                   @endforeach
                 </tbody>   
             </table>
-
           </div>
         </div><!-- End Left side columns -->
 

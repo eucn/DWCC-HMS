@@ -55,24 +55,28 @@ class GuestController extends Controller
         $checkin_date = session('check_in_date');
         $checkout_date = session('check_out_date');
     
-        $isRoomReserved = [];
-    
-        if ($checkin_date && $checkout_date) {
+        if (!$checkin_date || !$checkout_date) {
+            return view('dashboard', [
+                'rooms' => $rooms,
+                'isRoomReserved' => array_fill_keys($rooms->pluck('id')->toArray(), true),
+                'checkin_date' => $checkin_date,
+                'checkout_date' => $checkout_date,
+                'displayImage' => true,
+            ]);
+        } else {
+            $isRoomReserved = [];
             foreach ($rooms as $room) {
                 $isRoomReserved[$room->id] = $this->isRoomReserved($room->id, $checkin_date, $checkout_date);
             }
-        } else {
-            foreach ($rooms as $room) {
-                $isRoomReserved[$room->id] = true;
-            }
+            return view('dashboard', [
+                'rooms' => $rooms,
+                'isRoomReserved' => $isRoomReserved,
+                'checkin_date' => $checkin_date,
+                'checkout_date' => $checkout_date,
+                'displayImage' => false,
+            ]);
         }
-        return view('dashboard',[
-
-            'rooms'=>$rooms, 
-            'isRoomReserved'=>$isRoomReserved,
-            'checkin_date' => $checkin_date,
-            'checkout_date' => $checkout_date,
-        ]);
+        
     }
     public function isRoomReserved($roomTypeId, $checkin_date, $checkout_date)
     {

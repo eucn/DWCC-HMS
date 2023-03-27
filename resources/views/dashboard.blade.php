@@ -11,6 +11,9 @@
 
   <style>
     /* Darker background on mouse-over */
+    html {
+    scroll-behavior: smooth;
+  } 
     button[disabled] {
       background-color: gray;
       cursor: not-allowed;
@@ -21,7 +24,6 @@
     }
   </style>
 </head>
-
 <body style="background-color: #ffffff;">
   <!-- Navbar -->
   <x-app-layout>
@@ -99,10 +101,12 @@
                           
               </div>
               <div class="flex justify-end my-3 ">
+                <a href="#scroll-section">
                 <button 
                   class="text-white bg-[#E6AF2E] hover:bg-yellow-600 active:bg-yellow-800 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                   type="submit" required>Continue</button>
               </div>
+              </a>
             </form>
           </div>
         </div>
@@ -110,7 +114,7 @@
     </section>
   
 
-    <section class="container w-[85%] sm:w-[85%] lg:w-[85%] md:w-[85%] mx-auto mt-10 bg">
+    <section class="container w-[85%] sm:w-[85%] lg:w-[85%] md:w-[85%] mx-auto mt-10 bg" id="scroll-section">
       <h2 class="text-2xl font-bold mb-5">Available Rooms</h2>
       <hr style="border: 2px solid #E6AF2E; width: 188px;  position: relative; left: -2px; top: -20px; ">
         <div class="flex flex-wrap justify-center p-10 rounded-lg bg-gray-200 ">
@@ -122,19 +126,18 @@
                 <input type="hidden" name="check_out_date" value="{{ session('check_out_date') }}"/>
                 <input type="hidden" name="number_of_nights" value="{{ session('number_of_nights') }}" />
                 <div class="max-w-sm rounded-md overflow-hidden shadow-lg m-2 bg-white">
-                  @if(!$checkin_date || !$checkout_date)
-                   @if($isRoomReserved[$room->id])
-                   <img class="w-full " src="{{ asset('./images/room1.jpg') }}" alt="Room Image">
-                  @endif
-                  @else               
+                  @if ($displayImage)
+                  <img class="w-full" src="{{ asset('./images/room1.jpg') }}" alt="Room Image">
+                   @elseif ($isRoomReserved[$room->id])
                   <div class="relative">
-                    <img class="w-full opacity-50" src="{{ asset('./images/room1.jpg') }}" alt="Room Image">
-                      <div class="absolute  top-0 left-0 right-0 bottom-0 flex justify-center items-center">
-                      <h1 class="text-[30px] font-bold text-gray-00 border-2 border-black p-2">Not Available</h1>
-                    </div>
+                      <img class="w-full opacity-50" src="{{ asset('./images/room1.jpg') }}" alt="Room Image">
+                      <div class="absolute top-0 left-0 right-0 bottom-0 flex justify-center items-center">
+                          <h1 class="text-[30px] font-bold text-gray-00 border-2 border-black p-2">Not Available</h1>
+                      </div>
                   </div>
+                  @else
+                  <img class="w-full" src="{{ asset('./images/room1.jpg') }}" alt="Room Image">
                   @endif
-                
                     <div class="px-6 py-4">
                       <div>
                         <div class="text-black font-extrabold text-lg">Room {{$room->id}}</div>
@@ -145,9 +148,9 @@
                     </div>
                   <div class="px-6 py-2 mb-3">
                     <div class="flex justify-end">
-                      <button type="submit" name="room_id_{{ $room->id }}" value="{{ $room->id }}" {{ ( !$checkin_date || !$checkout_date || $isRoomReserved[$room->id]) ? 'disabled' : '' }}
+                      <button type="submit" name="room_id_{{ $room->id }}" value="{{ $room->id }}" {{ ( $isRoomReserved[$room->id]) ? 'disabled' : '' }}
                         class="inline-flex items-center bg-[#E6AF2E] hover:bg-yellow-600 text-black active:bg-yellow-800 
-                        {{ ( !$checkin_date || !$checkout_date || $isRoomReserved[$room->id])?  : '' }}  font-semibold text-sm px-3 w-21 py-[10px] rounded shadow hover:shadow-lg outline-none focus:outline-none  ease-linear transition-all duration-150">
+                        {{ ( $isRoomReserved[$room->id])?  : '' }}  font-semibold text-sm px-3 w-21 py-[10px] rounded shadow hover:shadow-lg outline-none focus:outline-none  ease-linear transition-all duration-150">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                           <path stroke-linecap="round" stroke-linejoin="round"d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" />
                         </svg>&nbsp; DETAILS

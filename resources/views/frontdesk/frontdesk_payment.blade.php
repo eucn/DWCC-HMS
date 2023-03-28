@@ -30,6 +30,12 @@
   <link href="{{ asset('template/assets/vendor/remixicon/remixicon.css') }}" rel="stylesheet">
   <link href="{{ asset('template/assets/vendor/simple-datatables/style.css') }}" rel="stylesheet">
 
+    <!-- Modal -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+
   <!-- Template Main CSS File -->
   <link href="{{ asset('template/assets/css/style.css') }}" rel="stylesheet">
 
@@ -166,9 +172,9 @@
   </aside><!-- End Sidebar-->
 
   <main id="main" class="main">
-
+      
     <div class="pagetitle">
-      <h1>Payment</h1>
+      <h1>Payment</h1><br>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
@@ -195,7 +201,7 @@
                 <option value="{{ url()->current() }}?records_per_page=50"  'selected' : '' }}>50</option>
                 <option value="{{ url()->current() }}?records_per_page=100"  'selected' : '' }}>100</option>
             </select>
-            <b><p style="position: relative; top: 8px; left: 1px;color:#434242;">entries</p></b>
+            <b><p style="position: relative; top: 6px; left: 1px;color:#434242;">entries</p></b>
 
     
         </div>
@@ -212,29 +218,91 @@
         
 
       </div>
-
+      @if (Session::has('success'))
+      <div class="alert alert-success">
+          {{ Session::get('success') }}
+          </div>
+      @endif
       <div>
             <br>
       <table class="table table-condensed table-sm table-bordered">   
                 <thead class="bg-[#51bdb8] text-white">   
                     <tr style="text-align:center">   
-                        <th scope="col">No.</th>
-                        <th scope="col">Name</th>
-                        <th scope="col" style="width: 200px;">Check-in Date</th>
-                        <th scope="col">Maximum Check-out Date</th>
-                        <th scope="col">Payment Method</th>
-                        <th scope="col">Action</th>
-                        
+                        <th No. scope="col" class="text-center px-4"> &nbsp No.</th>
+                        <th scope="col" class="text-center" style=" text-align: center;">  Name</th>
+                        <th scope="col" class="w-[150px; text-align: center;] text-center"> &nbsp &nbsp Check-in Date</th>
+                        <th scope="col" class="text-center"> &nbsp Check-out Date</th>
+                        <th scope="col" class="text-center"> &nbsp Payment Method</th>
+                        <th scope="col" class="text-center">Payment Status</th>
+                        <th scope="col" class="text-center"> &nbsp Booking Type</th>
+                        <th scope="col" style="width: 150px; text-align:center;"> &nbsp &nbsp  Action</th>
+                        <div class="container">       
                     </tr>   
                 </thead>   
-                </tbody>   
-            </table>
-</div>
+                </tbody> 
+                @foreach ($reservationData as $index => $data)
+                <tr class=" text-center pt-2" >
+                  <td  scope="col">
+                  {{ $index + 1 }} 
+                    <p class="text-[0px]">{{ $data->reservation_id }}
+                    </p></td>
+                    <td scope="col">{{ $data->first_name }} &nbsp; {{ $data->last_name }}</td>
+                    <td scope="col"> {{ \Carbon\Carbon::parse($data->checkin_date)->format('F j, Y') }}</td> 
+                    <td> {{ \Carbon\Carbon::parse($data->checkout_date)->format('F j, Y') }}</td>
+                    <td scope="col">{{ $data->payment_method }}</td>
+                    <td scope="col">{{ $data->payment_status }}</td>
+                    <td scope="col">{{ $data->booking_types }}</td>
+                    <td scope="col"> <button type="button" 
+                    class="btn btn-primary btn-sm" data-toggle="modal" style="background-color: #0B8457; border-color: none;"data-target="#view_modal{{  $data->reservation_id }}" id="editModal"
+                    >Confirm Payment</button></td>
+                </tr>
+                <!-- View Modal -->
+              <div class="modal fade" id="view_modal{{  $data->reservation_id }}" role="dialog">
+                <div class="modal-dialog">
+                  <form action="{{ route('frontdesk.bookingstatus', ['reservation_Id' => $data->reservation_id]) }}" method="POST">
+                    @csrf
+                    <input type="hidden" name="reservation_id" value="{{ $data->reservation_id }}">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" style="position:relative; left: 350px; color: red;" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title" style="position:relative; left: -200px; color:#51bdb8;">Payment Information</h4>
+                      </div>
+                      <div class="modal-body">
+                        <div class="row justify-content-center">
+                          <div class="col-10">
+                            <div class="form-group">
+                              <label for="first_name" class="font-weight-bold text-gray-700" style="position:relative; left: -20px;">First Name:</label>
+                              <input class="form-control" style="position:relative; left: -20px; width: 450px;" type="text" name="first_name" id="first_name" value="{{ $data->first_name }}">
+                            </div>
+                            <div class="form-group">
+                              <label for="last_name" class="font-weight-bold text-gray-700" style="position:relative; left: -20px;">Last Name:</label>
+                              <input class="form-control" style="position:relative; left: -20px; width: 450px;" type="text" name="last_name" id="last_name" value="{{ $data->last_name }}">
+                            </div>
+                            <div class="form-group">
+                              <label for="receipt_no" style="position:relative; left: -20px;" class="font-weight-bold text-gray-700">Receipt No.:</label>
+                              <input class="form-control" style="position:relative; left: -20px; width: 450px;" type="text" name="receipt_no" id="receipt_no" value="">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <div class="modal-footer text-center">
+                        <div class="">
+                          <button type="submit" class="btn btn-default"
+                            style="background-color: #277BC0; color: #FFFFFF; font-weight: regular;font-size: 15px; padding: 0.75rem 1.5rem; border-radius: 0.375rem; box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05), 0 1px 3px 1px rgba(0, 0, 0, 0.1); transition: all 0.15s ease; outline: none; margin-right: 0.25rem; margin-bottom: 0.25rem;">
+                            Confirm</button>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+                @endforeach  
+              </table>
+            </div>
    
     </section>
-    
-    <hr style="border-top: 1px solid #3C4048; width: 1150px; position:relative; top: -90px;">
-
   </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->

@@ -28,7 +28,7 @@
         
     </head>
 
-    <body>
+    <body style="background-color: white;">
         {{-- App.blade.php --}}
         <x-app-layout>
             <div class="flex items-center justify-center my-10 mx-10 pb-3 bg-gray-100">

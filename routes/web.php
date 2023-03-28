@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\FrontdeskController;
+use App\Http\Controllers\FrontdeskInvoiceController;
 use App\Http\Controllers\Admin\MRoomController;
 use App\Http\Controllers\Guest\GuestController;
 use App\Http\Controllers\Admin\ManageRoomController;
@@ -63,7 +64,8 @@ Route::prefix('admin')->group(function (){
             Route::get('/room/edit', [ManageRoomController::class, 'edit'])->name('admin.room.edit');
             Route::put('/{room}', [ManageRoomController::class, 'update'])->name('admin.room.update');
             Route::delete('/{room}', [ManageRoomController::class, 'destroy'])->name('admin.room.destroy');
-            Route::put('/{room}', [ManageRoomController::class, 'update'])->name('admin.room.update');
+            Route::put('/room/{id}', [ManageRoomController::class, 'update'])->name('admin.room.update');
+          
 
     Route::prefix('booking-history')->group(function () {
             Route::get('/', [BookingHistoryController::class, 'index'])->name('admin.bookingHistory')->middleware('admin');;
@@ -95,24 +97,25 @@ Route::prefix('admin')->group(function (){
 
 
 //-------------- Frontdesk Routes --------------//
-Route::prefix('frontdesk')->group(function (){
+Route::prefix('frontdesk')->group(function(){
     Route::get('/login',[FrontdeskController::class, 'Index'])->name('frontdesk_login_form');
     Route::post('/login/owner',[FrontdeskController::class, 'FrontdeskLogin'])->name('frontdesk.login');
     // Hindi pwedeng maview ang dashboard ng admin hanggat di nag login dahil nilagyan ko sya ng middleware
     Route::get('/dashboard',[FrontdeskController::class, 'Dashboard'])->name('frontdesk.dashboard')->middleware('frontdesk');
     Route::get('/logout',[FrontdeskController::class, 'FrontdeskLogout'])->name('frontdesk.logout')->middleware('frontdesk');
-
     Route::get('/register', [FrontdeskController::class, 'FrontdeskRegister'])->name('frontdesk.register');
     Route::post('/register/create',[FrontdeskController::class, 'FrontdeskRegisterCreate'])->name('frontdesk.register.create');
-    Route::get('/reservation', [FrontdeskReservationController::class, 'FrontdeskReservation'])->name('frontdesk.reservation');
-    Route::post('/reservation/create', [FrontdeskReservationController::class, 'getRoomId'])->name('frontdesk.reservation.create');
-    Route::post('/reservation/create', [FrontdeskReservationController::class, 'FrontdeskReservationSave'])->name('frontdesk.reservation.save');
+    Route::get('/reservation/view', [FrontdeskController::class, 'FrontdeskReservation'])->name('frontdesk.reservation');
+    Route::post('/reservation/create/roomid', [FrontdeskController::class, 'GetRoomID'])->name('frontdesk.reservation.create');
+    Route::post('/reservation', [FrontdeskController::class, 'FrontdeskReservationSave'])->name('frontdesk.reservation.save');
+    Route::get('/reservation/guest_invoice', [FrontdeskInvoiceController::class, 'FrontdeskViewInvoice'])->name('frontdesk.invoice.view');
+    Route::get('/reservation/guest_invoice/view', [FrontdeskInvoiceController::class, 'ViewInvoice'])->name('frontdesk.invoice.view.pdf');
     Route::get('/bookingdetails', [FrontdeskController::class, 'FrontdeskBookingDetails'])->name('frontdesk.bookingdetails');
-      
+    Route::delete('/bookingdetails/{reservation_id}',  [FrontdeskController::class, 'softDeletesReservation'])->name('frontdesk.bookingdetails.softdelete');
+    Route::get('/bookingdetails/deleted-guest-information',  [FrontdeskController::class, 'ViewDeletesReservation'])->name('frontdesk.bookingdetails.softdelete.view');
     Route::get('/reports', [FrontdeskController::class, 'FrontdeskReports'])->name('frontdesk.reports');
     Route::get('/payment', [FrontdeskController::class, 'FrontdeskPayment'])->name('frontdesk.payment');
-
-
+    Route::post('/update-booking-status/{reservation_Id}',  [FrontdeskController::class, 'updateBookingStatus'])->name('frontdesk.bookingstatus');
 });
 //-------------- End Frontdesk Routes --------------//
 
@@ -120,14 +123,15 @@ Route::prefix('frontdesk')->group(function (){
 
 Route::post('/dashboard', [GuestController::class, 'GuestReservation'])->middleware(['auth', 'verified'])->name('store.date');
 Route::get('/dashboard', [GuestController::class, 'ViewDashboard'])->name('guest.dashboard');
-Route::post('/userGuest/room_info1/{room_id}', [GuestReservationController::class, 'GuestViewRoom'])->name('view.room1');
-Route::post('/userGuest/room_info2/{room_id}', [GuestReservationController::class, 'GuestViewRoom'])->name('view.room2');
-
+Route::post('/userGuest/room_info/{room_id}', [GuestReservationController::class, 'GuestViewRoom'])->name('view.room');
 Route::post('/userGuest/guest_registration', [GuestReservationController::class, 'GuestSaveReserve'])->name('save.reservation');
 Route::get('/userGuest/guest_registration', [GuestReservationController::class, 'ViewGuestInfo'])->name('registration.form');
 Route::post('/userGuest/guest_information', [GuestInformationController::class, 'GuestInfo'])->name('save.guest.info');
 Route::post('/userGuest/invoice', [GuestInformationController::class, 'GuestInfo'])->name('save.invoice');
 Route::get('/guest_users/invoice', [GuestInvoiceController::class, 'view_invoice'])->name('view.invoice');
+
+Route::get('/view-invoice', [GuestInvoiceController::class, 'ViewInvoice'])->name('guest.view.invoice');
+Route::get('/generate-invoice', [GuestInvoiceController::class, 'GenerateInvoice'])->name('generate.invoice');
 
 //-------------- End Guest Routes --------------//
 

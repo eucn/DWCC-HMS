@@ -179,23 +179,12 @@
 
     <hr style="border-top: 2px solid #3C4048;position: relative; left: 8px;">
     <section class="col-md-11 mx-auto">
-      {{-- <div class="justify-between mx-[50px]">   --}}
-              @if(session()->has('error'))
-              <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative text-center" role="alert">
-                <strong>{{ session('error') }}</strong>
-            </div>
-            @endif
-            @if(session()->has('success'))
-              <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative text-center" role="alert">
-                  <strong>{{ session('success') }}</strong>
-              </div>
-          @endif
-      {{-- </div>  --}}
       <div class="container  px-4 sm:px-6 lg:px-8">
           <!-- Flex container -->
           <div class="justify-between mx-[50px]">
             <!-- Room Info -->
             <form method="POST" action="{{ route('frontdesk.reservation.save') }}" >
+              @csrf
               <div class="mx-auto mt-8" style="width:1000px;  position: relative; left: -110px;">
                 <div class="bg-white rounded-lg shadow-md border-2 w-full " style="height: 500px;">
                   <div class="border-b-2 border-gray-300 px-4 py-3">
@@ -225,8 +214,8 @@
                   <div class="space-y-4 font-regular text-base sm:text-lg pb-10 ">
                     <div class="flex flex-col lg:flex-row justify-center">
                       <div class="mx-4 md:mx-4 py-3" style="position:relative; left: 250px; top: -145px; ">
-                        <label class="" for="room_no">Room No:</label><br>
-                        <input class="first-letter:w-full md:w-[475px] py-1.5 border-2 text-center border-gray-900" name="room_no" id="room_no" value="{{ old('room_no') }}" readonly>
+                        <label class="" for="room_no" >Room No:</label><br>
+                        <input class="first-letter:w-full md:w-[475px] py-1.5 border-2 text-center " style="border: 1px solid gray;" name="room_no" id="room_no" value="{{ old('room_no') }}" readonly>
                       </div>
                     </div>
                   </div>
@@ -272,7 +261,7 @@
 
               <div class="grid grid-cols-1 mt-1">
                 <div class=" py-2 flex items-center">
-                  <label style="position:relative; top: -80px; left: -95px;"
+                  <label style="position:relative; top: -120px; left: -95px;"
                     class="block text-gray-900 font-medium mr-4" for="number-of-nights">Number of Night/s:</label>
                   <input type="" id="number_of_nights" name="number_of_nights"
                     style="font-weight: bold; position: relative; top: -80px; left: -95px;"
@@ -291,36 +280,26 @@
                   @endif
                 </div>
               </div>
+              
               <div class="py-2">
                 <p style="position: relative; top: -150px; left: -95px; top: -285px;" class="text-medium font-semibold">
                   Number of Guest</p>
                 <div class="flex items-center justify-center">
-                  <a style="position: relative; top: -150px; left: 215px; top: -285px;"
+                  <a style="position: relative; top: -150px; left: 210px; top: -285px;"
                     class="bg-gray-100 hover:bg-gray-400 text-gray-700 px-2 py-2 rounded-r shadow-md transition duration-300 ease-in-out cursor-pointer"
                     onclick="add('guest_num')">+</a>
-                  <input style="position: relative; top: -150px; left: -225px; top: -285px; width: 410px;" readonly
+                  <input style="position: relative; top: -150px; left: -230px; top: -285px; width: 418px;" readonly
                     type="number" id="guest_num" name="guest_num" value="1" min="1"
                     class="w-[200px] text-center text-gray-700 bg-white py-2">
                   <a style="position: relative; top: -150px; left: -670px; top: -285px;"
                     class="bg-gray-100 hover:bg-gray-400 text-gray-700 px-2 py-2 rounded-l shadow-md transition duration-300 ease-in-out cursor-pointer"
                     onclick="subtract('guest_num')">-</a>
+                    </div>
+                    <br>
                 </div>
-              </div>
-              <div class="py-2">
-                <p style="position: relative; top: -150px; left: 400px; top: -385px;" class="text-medium font-semibold">
-                  Extra Bed</p>
-                <div class="flex items-center justify-center mt-2">
-                  <a style="position: relative; top: -150px; left: 695px; top: -385px;"
-                    class="bg-gray-100 hover:bg-gray-400 text-gray-700 px-2 py-2 rounded-r shadow-md transition duration-300 ease-in-out cursor-pointer"
-                    onclick="add('extra_bed')">+</a>
-                  <input style="position: relative; top: -150px; left: 260px; top: -386px; width: 410px;" readonly
-                    type="number" id="extra_bed" name="extra_bed" value="1" min="1"
-                    class="w-[200px] text-center text-gray-700 bg-white py-2">
-                  <a style="position: relative; top: -150px; left: -180px; top: -385px;"
-                    class="bg-gray-100 hover:bg-gray-400 text-gray-700 px-2 py-2 rounded-l shadow-md transition duration-300 ease-in-out cursor-pointer"
-                    onclick="subtract('extra_bed')">-</a>
-                </div>
-              </div>
+                <br>
+                <br>
+                <br>
 
              <!-- Guest Info -->
             <div class="bg-white rounded-lg border-2 shadow-md w-full pb-4"
@@ -425,10 +404,11 @@
             Save
           </button>
             <!-- <button  class="bg-yellow-500 text-white active:bg-yellow-800 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">Continue</button> -->
-            <button type="submit" class="btn btn-primary" style="background-color: #E0C822 " data-bs-toggle="modal"
-              data-bs-target="#modalDialogScrollable">
-              continue
-            </button>
+            <!-- <button type="submit" class="btn btn-primary" style="background-color: #E0C822 " data-bs-toggle="modal" -->
+              <!-- data-bs-target="#modalDialogScrollable"> -->
+              <!-- continue -->
+      <!-- /    </button> -->
+          </div>
           </form>
             {{-- <!-- Modal -->
             <div class="modal fade" id="modalDialogScrollable" tabindex="-1">

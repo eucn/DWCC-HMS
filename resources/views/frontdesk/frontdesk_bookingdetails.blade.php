@@ -29,6 +29,11 @@
   <link href="{{ asset('template/assets/vendor/remixicon/remixicon.css') }}" rel="stylesheet">
   <link href="{{ asset('template/assets/vendor/simple-datatables/style.css') }}" rel="stylesheet">
 
+  <!-- Modal -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
   <!-- Template Main CSS File -->
   <link href="{{ asset('template/assets/css/style.css') }}" rel="stylesheet">
 
@@ -165,6 +170,7 @@
 
     <div class="pagetitle">
       <h1>Booking Details</h1>
+      <br>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
@@ -179,14 +185,29 @@
         <!-- Left side columns -->
         <div class="col-lg-12">
           <div class="row">
+            @if(session('success'))
+            <div class="alert alert-success">
+              {{ session('success') }}
+            </div>
+            @endif
+
+            @if($errors->any())
+            <div class="alert alert-danger">
+              <ul>
+                @foreach($errors->all() as $error)
+                <li>{{ $error }}</li>
+                @endforeach
+              </ul>
+            </div>
+            @endif
 
             <div class="d-flex justify-content-between mb-3">
               <div class="row mt-3">
                 <div class="d-flex align-items-center">
                   <b><label for="records_per_page" class="col-auto mr-2"
-                      style="position: relative; top: 2px; right: -3px;color:#434242;">Show</label></b>
+                      style="position: relative; top: 2px; left: 22px;color:#434242;">Show</label></b>
                   <select name="records_per_page" id="records_per_page" class="form-control mr-2"
-                    onchange="window.location.href = this.value;">
+                    style="position: relative; left: 22px;" onchange="window.location.href = this.value;">
                     <option value="{{ url()->current() }}?records_per_page=10" 'selected' : '' }}>10</option>
                     <option value="{{ url()->current() }}?records_per_page=25" 'selected' : '' }}>25</option>
                     <option value="{{ url()->current() }}?records_per_page=50" 'selected' : '' }}>50</option>
@@ -196,8 +217,9 @@
                     <option value="100">50</option>
                     <option value="100">100</option> --}}
                   </select>
+
                   <b>
-                    <p style="position: relative; top: 8px; left: 1px;color:#434242;">entries</p>
+                    <p style="position: relative; top: 7px; left: 22px;color:#434242;">entries</p>
                   </b>
                 </div>
                 <div class="">
@@ -206,35 +228,117 @@
             </div>
           </div><!-- End Left side columns -->
         </div>
+        <hr style="border-top: 2px solid #3C4048;position: relative; left: 8px;">
         <div>
           <br>
           <table class="table table-condensed table-sm table-bordered">
             <thead class="bg-[#51bdb8] text-white">
               <tr style="text-align:center">
-                <th scope="col">No.</th>
-                <th scope="col" style="width: 200px;">Name</th>
-                <th scope="col">Payment Method</th>
-                <th Booking scope="col">Booking Status</th>
-                <th scope="col">Check-in / Check-out Date</th>  
-                <th scope="col">Action</th>
+                <td scope="col">No.</td>
+                <td scope="col" style="width: 200px;">Name</th>
+                <td scope="col">Payment Method</td>
+                <td Booking scope="col">Booking Status</td>
+                <td scope="col">Check-in / Check-out Date</td>
+                <td scope="col" style="width: 200px; text-align:center;">&nbsp &nbsp &nbsp Action</td>
+
+                <div class="container">
+                  <!-- View Modal -->
               </tr>
             </thead>
+
             <tbody>
               @foreach ($reservationData as $index => $data)
-                  <tr style="text-align:center" >
-                    <td  scope="col">{{ $index + 1 }}</td>
-                      <td scope="col">{{ $data->first_name }} &nbsp; {{ $data->last_name }}</td>
-                      <td scope="col">{{ $data->payment_method }}</td>
-                      <td scope="col">{{ $data->booking_status }}</td>
-                      <td scope="col"> {{ \Carbon\Carbon::parse($data->checkin_date)->format('F j, Y') }} &nbsp; - &nbsp;
-                        {{ \Carbon\Carbon::parse($data->checkout_date)->format('F j, Y') }}
-                      </td> 
-                      <td scope="col"></td>
-                  </tr>
-              @endforeach
+              {{-- @foreach ($reservationData as $data) --}}
+              <tr style="text-align:center" style="height: 250px;">
+                <td scope="col">
+                  {{ $index + 1 }}
+                </td>
+                <td scope="col">{{ $data->first_name }} &nbsp; {{ $data->last_name }}</td>
+                <td scope="col">{{ $data->payment_method }}</td>
+                <td scope="col">{{ $data->booking_status }}</td>
+                <td scope="col"> {{ \Carbon\Carbon::parse($data->checkin_date)->format('F j, Y') }} &nbsp; - &nbsp;
+                  {{ \Carbon\Carbon::parse($data->checkout_date)->format('F j, Y') }}
+                </td>
+                <td scope="col">
+                  <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
+                    data-target="#view_modal{{ $data->reservation_id }}">
+                    <i class="fa-solid fa-eye"></i></button>
+                  <button type="button" class="btn btn-danger btn-sm" data-toggle="modal"
+                    data-target="#delete_modal{{ $data->reservation_id }}">
+                    <i class="fa-solid fa-trash"></i></button>
+                </td>
+              </tr>
+              <!-- View Modal -->
+              <div class="modal fade" id="view_modal{{ $data->reservation_id }}" role="dialog">
+                <div class="modal-dialog">
+
+                  <!-- Modal content-->
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" style="position:relative; left: 350px; color: red;" class="close"
+                        data-dismiss="modal">&times;</button>
+                      <h4 class="modal-title" style="position:relative; left: -230px; color:#51bdb8;">Booking Details
+                      </h4>
+                    </div>
+                    <div class="modal-body">
+                      <strong>
+                        <p style="color:#434242;">Name:
+                      </strong><span>{{ $data->first_name }}&nbsp;{{ $data->last_name }}</span></p>
+                      <strong>
+                        <p style="color:#434242;">Payment Method:
+                      </strong> <span>{{ $data->payment_method }}</span></p>
+                      <strong>
+                        <p style="color:#434242;">Booking Status:
+                      </strong><span>{{$data->booking_status}}</span></p>
+                      <strong>
+                        <p style="color:#434242;">Check-in / Check-out Date:
+                      </strong> <span>
+                        {{ \Carbon\Carbon::parse($data->checkin_date)->format('F j, Y') }} &nbsp; - &nbsp;
+                        {{ \Carbon\Carbon::parse($data->checkout_date)->format('F j, Y') }}</span>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal"
+                        style="background-color: #19A7CE; color:#ffffff;">Close</button>
+                    </div>
+                  </div>
+               
+                </div>
+              </div>
+              <!-- Delete Modal -->
+              <div class="modal fade" id="delete_modal{{ $data->reservation_id }}" id="view_modal" role="dialog">
+                <div class="modal-dialog">
+                  <!-- Modal content-->
+                  <div class="modal-content" style="height: 230px;">
+                    <div class="modal-header">
+                      <button type="button" style="position:relative; left: 350px; color: red;" class="close"
+                        data-dismiss="modal">&times;</button>
+                      <h4 class="modal-title" style="position:relative; left: -190px; color:#51bdb8;">Cancel Booking
+                        Details
+                      </h4>
+                    </div>
+                    <form  action="{{ route('frontdesk.bookingdetails.softdelete', $data->reservation_id) }}" method="POST">
+                      @csrf
+                      @method('DELETE')
+                      <div class="modal-body">
+                        <input id="id" name="id">
+                        <strong>
+                          <h4 class="text-center">Are you sure you want to cancel this reservation?
+                        </strong></h4>
+                        <input id="firstName" name="firstName"><input id="lastName" name="lastName">
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button type="submit"class="btn btn-primary">Yes,Continue </button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+                @endforeach
             </tbody>
           </table>
         </div>
+      </div>
+    </div>
     </section>
   </main><!-- End #main -->
 

@@ -36,7 +36,7 @@ class ManageRoomController extends Controller
         $path = $request->file('photos')->storeAs('images', $fileName, 'public');
         $requestData["photos"] = '/storage/'.$path;
         Manage_Room::create($requestData);
-        return redirect()->route('admin.room.index')->with('success', 'The record has been successfully added.');
+        return redirect()->route('admin.room.index')->with('success', 'The Room has been successfully added.');
     }
 
     public function edit($id){
@@ -68,14 +68,20 @@ class ManageRoomController extends Controller
         $room->amenities = $request->input('amenities');
         $room->status = $request->input('status');
         $room->rate = $request->input('rate');
-    $room->update($request->all());
+        $room->update($request->all());
         $room->save();
-
-        return redirect()->route('admin.room.index')->with('success', 'Room has been updated.')->with('room', $room);
+        
+        // return redirect()->route('admin.room.index')->with('success', 'Room has been updated.')->with('room', $room);
+        return redirect()->back()->with('success', 'Room has been updated.')->with('room', $room);
     }
+    else{
+    return redirect()->route('admin.room.index')->with('not success', 'Room did not updated.')->with('room', $room);}
+
+    
 
 
 }
+
 
 }
 

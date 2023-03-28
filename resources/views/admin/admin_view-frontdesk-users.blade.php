@@ -204,7 +204,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalLabel">ADD NEW Frontdesk Account</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -259,7 +259,7 @@
                     <x-input-error :messages="$errors->get('terms')" class="mt-2" />
 
 <div class="w-1/2 flex flex-col m-auto">
-    <button class="bg-[#E0C822]  text-white font-bold py-2 px-4 rounded">
+    <button class="bg-[#277BC0]  text-white font-bold py-2 px-4 rounded">
         Register
     </button>
 </div>

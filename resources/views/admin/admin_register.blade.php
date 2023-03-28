@@ -9,7 +9,10 @@
     <link href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" rel="stylesheet"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-     <!-- Logo -->
+    <link href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" rel="stylesheet"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+  <!-- Logo -->
   <link rel="icon" type="image/png" sizes="16x16" href="../images/logo.png">
     <style>
         .toggle-password-eye {
@@ -90,7 +93,8 @@
                     <x-input-error :messages="$errors->get('terms')" class="mt-2" />
 
                     <div class="w-1/2 flex flex-col m-auto">
-                        <button class="bg-[#E0C822] hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded">
+                        <br>
+                        <button style ="width: 500px; position: relative; left: -120px;" class="bg-[#E6AF2E] hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded">
                             Register
                         </button>
                     </div>
@@ -104,5 +108,5 @@
             </div>
         </div>
 </body>
-<script src= "{{url('js/main.js')}}"></script>
+<script src= "{{url('js1/eyevisibility.js')}}"></script>
 </html>

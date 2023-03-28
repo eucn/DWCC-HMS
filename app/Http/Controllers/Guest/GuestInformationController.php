@@ -17,14 +17,17 @@ class GuestInformationController extends Controller
         $room_id = Session::get('room_id');
         $checkin_date = Session::get('check_in_date');
         $checkout_date = Session::get('check_out_date');
-    
+
+        $checkin_date_formatted = date('Y-m-d', strtotime($checkin_date));
+        $checkout_date_formatted = date('Y-m-d', strtotime($checkout_date));
+
         $reservations = Reservations::where('room_id', $room_id)
-        ->where(function($query) use ($checkin_date, $checkout_date) {
-            $query->whereBetween('checkin_date', [$checkin_date, $checkout_date])
-                ->orWhereBetween('checkout_date', [$checkin_date, $checkout_date])
-                ->orWhere(function($query) use ($checkin_date, $checkout_date) {
-                    $query->where('checkin_date', '<', $checkin_date)
-                            ->where('checkout_date', '>', $checkout_date);
+        ->where(function($query) use ($checkin_date_formatted, $checkout_date_formatted) {
+            $query->whereBetween('checkin_date', [$checkin_date_formatted, $checkout_date_formatted])
+                ->orWhereBetween('checkout_date', [$checkin_date_formatted, $checkout_date_formatted])
+                ->orWhere(function($query) use ($checkin_date_formatted, $checkout_date_formatted) {
+                    $query->where('checkin_date', '<', $checkin_date_formatted)
+                            ->where('checkout_date', '>', $checkout_date_formatted);
                 });
         })
         ->get();
@@ -36,26 +39,25 @@ class GuestInformationController extends Controller
             $room_id = Session::get('room_id');
             $checkIn  = Session::get('check_in_date');
             $checkOut = Session::get('check_out_date');
-            $extraBed = Session::get('extra_bed');
             $numGuests = Session::get('guest_num');
             $numNights = Session::get('number_of_nights');
             $checkindateSave = date('Y-m-d', strtotime($checkIn));
             $checkoutdateSave = date('Y-m-d', strtotime($checkOut));
 
-            $add_numGuests = 300;
+            $additionalFeePerGuest  = 300;
             $roomPrice = Manage_Room::where('id', $room_id)->value('rate');
             if ($numNights > 1) {
                 $total_roomPrice = $roomPrice * $numNights;
             } else {
                 $total_roomPrice = $roomPrice;
             }
-
-            if ($numGuests > 1) {
-            $numGuestFee = $add_numGuests *  $numGuests;
-            } else {
-                $numGuestFee  = 0;
+            $max_capacity = Manage_Room::where('id', $room_id)->value('max_capacity');
+            $numAdditionalGuests = $numGuests - $max_capacity;
+            if ($numAdditionalGuests > 0 ) {
+                $total_numGuestFee = $numAdditionalGuests  *  $additionalFeePerGuest;
+            } else{
+                $total_numGuestFee  = 0;
             }
-            $total_numGuestFee =  $numGuestFee ;
             $totalPrice = $total_roomPrice +  $total_numGuestFee;
 
             $reservation = new Reservations;
@@ -65,14 +67,14 @@ class GuestInformationController extends Controller
             $reservation->checkout_date = $checkoutdateSave;
             $reservation->nights = $numNights;
             $reservation->booking_status = 'Pending';
+            $reservation->booking_types = 'Online'; 
             $reservation->base_price = $roomPrice;
             $reservation->total_price = $totalPrice;
             $reservation->guests_num = $numGuests;
+            $reservation->additional_guests = $numAdditionalGuests;
             $reservation->guests_Fee = $total_numGuestFee;
-            $reservation->extra_bed = $extraBed;
             $reservation->save();
 
-            // $reservation_id = auth()->user()->id;
             $phone_number = $request->validate([
                 'phone_number' => 'required|regex:/^09[0-9]{9}$/',
             ], [
@@ -104,14 +106,13 @@ class GuestInformationController extends Controller
             $guestInformation = new GuestInformation();
             $guestInformation->guest_id = $guest_id;
             $guestInformation->reservation_id = $reservation_id;
-            $reservation->booking_types = 'Online';
             $guestInformation->salutation = $salutation;
             $guestInformation->first_name = $first_name;
             $guestInformation->last_name = $last_name;  
             $guestInformation->company_name = $company_name;
             $guestInformation->address = $address;
             $guestInformation->phone_number = $phone_number;
-
+            $guestInformation->payment_status = 'Unpaidgu'; 
             if($payment_method == "Cash"){
                 $guestInformation->payment_method = $payment_method;
             }else if($payment_method == "Department Charge"){
@@ -131,9 +132,12 @@ class GuestInformationController extends Controller
                     $guestInformation->department = $department_id;
                 }
             }
-
             $guestInformation->save();
-
+            // Session::forget('room_id');
+            // Session::forget('check_in_date');
+            // Session::forget('check_out_date');
+            // Session::forget('guest_num');
+            // Session::forget('number_of_nights');
             }
     // Redirect to a success page
         return redirect()->route('view.invoice');   

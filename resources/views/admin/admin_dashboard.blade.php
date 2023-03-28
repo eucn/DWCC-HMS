@@ -9,7 +9,10 @@
   <title>Admin Dashboard</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
-
+   
+      <!-- Logo -->
+      <link rel="icon" type="image/png" sizes="16x16" href="../images/sitelogo.png"> 
+      
   <!-- Favicons -->
   <link href="{{ asset('template/assets/img/favicon.png') }}" rel="icon">
   <link href="{{ asset('template/assets/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
@@ -144,22 +147,23 @@
       </li><!-- End Booking History Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
+        <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" >
           <i class="fa-solid fa-user icon-nav"></i><span>Accounts</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
-        <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+        <ul id="tables-nav" class="nav-content collapsed " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="tables-general.html">
+            <a href="{{ route('admin.frontdeskList') }}">
               <i class="bi bi-circle"></i><span>Frontdesk</span>
             </a>
           </li>
           <li>
-            <a href="tables-data.html">
+            <a href="{{ route('admin.guestList') }}">
               <i class="bi bi-circle"></i><span>Guest</span>
             </a>
           </li>
         </ul>
-      </li><!-- End Tables Nav -->
+      </li>
+      <!-- End Tables Nav -->
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="index.html">

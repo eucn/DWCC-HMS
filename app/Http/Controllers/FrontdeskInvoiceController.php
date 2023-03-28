@@ -1,30 +1,30 @@
 <?php
 
-namespace App\Http\Controllers\Guest;
+namespace App\Http\Controllers;
 
+use Barryvdh\DomPDF\PDF;
 use App\Models\Manage_Room;
 use App\Models\Reservations;
 use Illuminate\Http\Request;
 use App\Models\GuestInformation;
-use App\Http\Controllers\Controller;
-use Barryvdh\DomPDF\Facade\Pdf;
 
-class GuestInvoiceController extends Controller
+class FrontdeskInvoiceController extends Controller
 {
-    public function view_invoice() {
-        $reservation = Reservations::where('guest_id', auth()->user()->id)->latest()->first();
-        $guestRegistration = GuestInformation::where('guest_id', auth()->user()->id)->latest()->first();
+    //
+    public function FrontdeskViewInvoice() {
+        $reservation = Reservations::where('frontdesk_id', auth()->user()->id)->latest()->first();
+        $guestRegistration = GuestInformation::where('frontdesk_id', auth()->user()->id)->latest()->first();
         // $rooms = Rooms::where('guest_id', auth()->user()->id)->latest()->first();
         $rooms = Manage_Room::where('id', function ($query) {
             $query->select('room_id')
                   ->from('reservations')
-                  ->where('guest_id', auth()->user()->id)
+                  ->where('frontdesk_id', auth()->user()->id)
                   ->latest()
                   ->first();
         })->first();
         
 
-        return view('userGuest.guest_invoice', [
+        return view('frontdesk.frontdesk_invoice', [
             'reservation' => $reservation,
             'guestRegistration' => $guestRegistration,
             'rooms' => $rooms,
@@ -32,13 +32,13 @@ class GuestInvoiceController extends Controller
     }
 
     public function ViewInvoice(){
-       $reservation = Reservations::where('guest_id', auth()->user()->id)->latest()->first();
-        $guestRegistration = GuestInformation::where('guest_id', auth()->user()->id)->latest()->first();
+       $reservation = Reservations::where('frontdesk_id', auth()->user()->id)->latest()->first();
+        $guestRegistration = GuestInformation::where('frontdesk_id', auth()->user()->id)->latest()->first();
         // $rooms = Rooms::where('guest_id', auth()->user()->id)->latest()->first();
         $rooms = Manage_Room::where('id', function ($query) {
             $query->select('room_id')
                   ->from('reservations')
-                  ->where('guest_id', auth()->user()->id)
+                  ->where('frontdesk_id', auth()->user()->id)
                   ->latest()
                   ->first();
         })->first();
@@ -53,17 +53,17 @@ class GuestInvoiceController extends Controller
             'rooms' => $rooms
         ]; 
             
-        return view('userGuest.guest_generate-invoice', $data);
+        return view('frontdesk.frontdesk_generate-invoice', $data);
     }
 
     public function GenerateInvoice(){
-        $reservation = Reservations::where('guest_id', auth()->user()->id)->latest()->first();
-        $guestRegistration = GuestInformation::where('guest_id', auth()->user()->id)->latest()->first();
+        $reservation = Reservations::where('frontdesk_id', auth()->user()->id)->latest()->first();
+        $guestRegistration = GuestInformation::where('frontdesk_id', auth()->user()->id)->latest()->first();
         // $rooms = Rooms::where('guest_id', auth()->user()->id)->latest()->first();
         $rooms = Manage_Room::where('id', function ($query) {
             $query->select('room_id')
                   ->from('reservations')
-                  ->where('guest_id', auth()->user()->id)
+                  ->where('frontdesk_id', auth()->user()->id)
                   ->latest()
                   ->first();
         })->first();
@@ -76,7 +76,7 @@ class GuestInvoiceController extends Controller
             'rooms' => $rooms
         ]; 
 
-        $pdf = PDF::loadView('userGuest.guest_generate-invoice', $data);
+        $pdf = PDF::loadView('frontdesk.frontdesk_generate-invoice', $data);
      
         return $pdf->download('invoice.pdf');
     }

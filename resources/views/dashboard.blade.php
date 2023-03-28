@@ -11,6 +11,9 @@
 
   <style>
     /* Darker background on mouse-over */
+    html {
+    scroll-behavior: smooth;
+  } 
     button[disabled] {
       background-color: gray;
       cursor: not-allowed;
@@ -21,7 +24,6 @@
     }
   </style>
 </head>
-
 <body style="background-color: #ffffff;">
   <!-- Navbar -->
   <x-app-layout>
@@ -72,38 +74,49 @@
                   id="check_out_date" name="check_out_date" type="date" value="{{ session('check_out_date') }}"
                   required>
               </div>
-              @error('check_out_date')
-              <div class="text-red-500">{{ $message }}</div>
-              @enderror
+
               <div class="py-2 flex items-center">
                 <label class="block text-gray-900 font-bold mr-4" for="number-of-nights">Number of Nights:</label>
                 <input type="" id="number_of_nights" name="number_of_nights" value="{{ session('number_of_nights') }}"
                   class="bg-transparent pointer-events-none rounded py-2 px-3 text-gray-900 leading-tight focus:outline-none focus:border-blue-500"
                   readonly>
               </div>
+             
               <div class="mx-auto">
-                @if ($errors->has('message'))
-                <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
-                  {{ $errors->first('message') }}
-                  <span class="absolute top-0 bottom-0 right-5 px-5 py-3">
-                    {{-- <button type="button" class="close" data-bs-dismiss="alert">×</button> --}}
-                  </span>
-                </div>
-                @endif
+                @if ($errors->any())
+                <div id="error-message" class="flex flex-row items-center justify-between bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative transition duration-500 ease-in-out" role="alert">
+                  <div class="flex-grow">
+                    @foreach ($errors->all() as $error)
+                      <div>{{ $error }}</div>
+                    @endforeach
+                  </div>
+                  <div class="ml-4">
+                    <button type="button" class="close" onclick="document.getElementById('error-message').classList.add('opacity-0', 'h-0');">
+                      <span class="text-xl-center text-red-500 font-extrabold">X</span>
+                  </div>
+                    </button>    
+                  </div>
+                </div>          
+              @endif
+                          
               </div>
               <div class="flex justify-end my-3 ">
+                <a href="#scroll-section">
                 <button 
                   class="text-white bg-[#E6AF2E] hover:bg-yellow-600 active:bg-yellow-800 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                   type="submit" required>Continue</button>
               </div>
+              </a>
             </form>
           </div>
         </div>
       </div>
     </section>
+  
 
-    <section class="container w-[85%] sm:w-[85%] lg:w-[85%] md:w-[85%] mx-auto mt-10 bg">
+    <section class="container w-[85%] sm:w-[85%] lg:w-[85%] md:w-[85%] mx-auto mt-10 bg" id="scroll-section">
       <h2 class="text-2xl font-bold mb-5">Available Rooms</h2>
+      <hr style="border: 2px solid #E6AF2E; width: 188px;  position: relative; left: -2px; top: -20px; ">
         <div class="flex flex-wrap justify-center p-10 rounded-lg bg-gray-200 ">
             @foreach ($rooms as $room)
             <div class="w-[400px] md:w-[400px]  lg:w-[400px]  m-5">
@@ -113,25 +126,27 @@
                 <input type="hidden" name="check_out_date" value="{{ session('check_out_date') }}"/>
                 <input type="hidden" name="number_of_nights" value="{{ session('number_of_nights') }}" />
                 <div class="max-w-sm rounded-md overflow-hidden shadow-lg m-2 bg-white">
-                  @if(!$checkin_date || !$checkout_date || $isRoomReserved[$room->id])
+                  @if ($displayImage)
+                  <img class="w-full" src="{{ asset('./images/room1.jpg') }}" alt="Room Image">
+                   @elseif ($isRoomReserved[$room->id])
                   <div class="relative">
-                    <img class="w-full opacity-50" src="{{ asset('./images/room1.jpg') }}" alt="Room Image">
-                      <div class="absolute  top-0 left-0 right-0 bottom-0 flex justify-center items-center">
-                      <h1 class="text-[30px] font-bold text-gray-00 border-2 border-black p-2"> Not Available</h1>
-                    </div>
+                      <img class="w-full opacity-50" src="{{ asset('./images/room1.jpg') }}" alt="Room Image">
+                      <div class="absolute top-0 left-0 right-0 bottom-0 flex justify-center items-center">
+                          <h1 class="text-[30px] font-bold text-gray-00 border-2 border-black p-2">Not Available</h1>
+                      </div>
                   </div>
                   @else
-                  <img class="w-full " src="{{ asset('./images/room1.jpg') }}" alt="Room Image">
+                  <img class="w-full" src="{{ asset('./images/room1.jpg') }}" alt="Room Image">
                   @endif
                     <div class="px-6 py-4">
                       <div>
                         <div class="text-black font-extrabold text-lg">Room {{$room->id}}</div>
                         <strong class="text-gray-700 text-base">{{$room->room_type}}</strong>
                           <p><strong style="color: #E6AF2E;">{{$room->rate}} / Night</strong></p>
-                            <p class="text-gray-700 text-base">This Queen Bed size room provides comfort for all guests of DWCC MicroHotel</p>
+                            <p class="text-gray-700 text-base">{{ Str::limit(Str::before($room->room_description, '.'),60) }}</p>
                       </div>
                     </div>
-                  <div class="px-6 py-2">
+                  <div class="px-6 py-2 mb-3">
                     <div class="flex justify-end">
                       <button type="submit" name="room_id_{{ $room->id }}" value="{{ $room->id }}" {{ ( $isRoomReserved[$room->id]) ? 'disabled' : '' }}
                         class="inline-flex items-center bg-[#E6AF2E] hover:bg-yellow-600 text-black active:bg-yellow-800 
@@ -154,18 +169,14 @@
     <script>
       const check_in_date = document.getElementById('check_in_date');
       const check_out_date = document.getElementById('check_out_date');
+      const numberOfNights = document.getElementById('number_of_nights');
       check_in_date.min = new Date().toISOString().split('T')[0];
       check_out_date.min = new Date().toISOString().split('T')[0];
-    </script>
-
-    <script>
-      const checkInDate = document.getElementById('check_in_date');
-      const checkOutDate = document.getElementById('check_out_date');
-      const numberOfNights = document.getElementById('number_of_nights');
-      checkOutDate.addEventListener('change', function() {
+  
+      check_out_date.addEventListener('change', function() {
         const oneDay = 24 * 60 * 60 * 1000; // hours * minutes * seconds * milliseconds
-        const checkIn = new Date(checkInDate.value);
-        const checkOut = new Date(checkOutDate.value);
+        const checkIn = new Date(check_in_date.value);
+        const checkOut = new Date(check_out_date.value);
         const diffDays = Math.round(Math.abs((checkOut - checkIn) / oneDay));
         numberOfNights.value = diffDays;
       });

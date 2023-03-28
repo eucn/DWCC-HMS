@@ -12,7 +12,8 @@ class GuestController extends Controller
 
 {    
     public function GuestReservation(Request $request)
-    {
+    { 
+        $errorsArray = [];
         $request->validate([
             'check_in_date' => 'required|date|after_or_equal:today',
             'check_out_date' => 'required|date|after:check_in_date',
@@ -22,12 +23,11 @@ class GuestController extends Controller
             'check_out_date.required' => 'The check-out date is required.',
             'check_out_date.after' => 'The check-out date must be after the check-in date.',
         ]);
-        
- 
+    // $roomIds = Manage_Room::pluck('id
         $checkInDate = $request->input('check_in_date');
         $checkOutDate = $request->input('check_out_date');    
         $numberOfNights = $request->input('number_of_nights');
-
+      
         $request->session()->put('check_in_date', $checkInDate);
         $request->session()->put('check_out_date', $checkOutDate);
         $request->session()->put('number_of_nights', $numberOfNights);
@@ -39,35 +39,44 @@ class GuestController extends Controller
         })->pluck('room_id')->toArray();
         
         if (count(array_diff($roomIds->toArray(), $reservedRoomIds)) == 0) {
-            return back()->withErrors(['message' => 'No available room(s) from the selected dates due to its occupancy. You may try to select another date'])->withInput();
+            $errorsArray[] = 'No available room(s) from the selected dates due to its occupancy. You may try to select another date';
+        }
+        
+        if (!empty($errorsArray)) {
+            return back()->withErrors($errorsArray)->withInput();
         }
         // Show the Description of Rooms
-        return redirect()->route('guest.dashboard');  
+        return redirect()->route('guest.dashboard');
     }
-    public function ViewDashboard( ){
+    public function ViewDashboard(Request $request){
         $rooms = Manage_Room::all();
           // Format the session date using the date() function
           
         $checkin_date = session('check_in_date');
         $checkout_date = session('check_out_date');
     
-        $isRoomReserved = [];
-    
-        if ($checkin_date && $checkout_date) {
+        if (!$checkin_date || !$checkout_date) {
+            return view('dashboard', [
+                'rooms' => $rooms,
+                'isRoomReserved' => array_fill_keys($rooms->pluck('id')->toArray(), true),
+                'checkin_date' => $checkin_date,
+                'checkout_date' => $checkout_date,
+                'displayImage' => true,
+            ]);
+        } else {
+            $isRoomReserved = [];
             foreach ($rooms as $room) {
                 $isRoomReserved[$room->id] = $this->isRoomReserved($room->id, $checkin_date, $checkout_date);
             }
-        } else {
-            foreach ($rooms as $room) {
-                $isRoomReserved[$room->id] = true;
-            }
+            return view('dashboard', [
+                'rooms' => $rooms,
+                'isRoomReserved' => $isRoomReserved,
+                'checkin_date' => $checkin_date,
+                'checkout_date' => $checkout_date,
+                'displayImage' => false,
+            ]);
         }
-        return view('dashboard',[
-            'rooms'=>$rooms, 
-            'isRoomReserved'=>$isRoomReserved,
-            'checkin_date' => $checkin_date,
-            'checkout_date' => $checkout_date,
-        ]);
+        
     }
     public function isRoomReserved($roomTypeId, $checkin_date, $checkout_date)
     {

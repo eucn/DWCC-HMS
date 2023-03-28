@@ -120,7 +120,6 @@ Route::prefix('frontdesk')->group(function(){
 //-------------- End Frontdesk Routes --------------//
 
 //-------------- Guest Routes --------------//
-
 Route::post('/dashboard', [GuestController::class, 'GuestReservation'])->middleware(['auth', 'verified'])->name('store.date');
 Route::get('/dashboard', [GuestController::class, 'ViewDashboard'])->name('guest.dashboard');
 Route::post('/userGuest/room_info/{room_id}', [GuestReservationController::class, 'GuestViewRoom'])->name('view.room');

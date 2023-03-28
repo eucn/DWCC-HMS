@@ -172,7 +172,7 @@
       <h1>Booking Details</h1>
       <br>
       <nav>
-        <ol class="breadcrumb">
+        <ol class="breadcrumb" style="background-color:">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
           <li class="breadcrumb-item active">Booking Details</li>
         </ol>

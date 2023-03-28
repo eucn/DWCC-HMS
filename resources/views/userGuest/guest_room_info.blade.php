@@ -231,5 +231,4 @@
 </body>
 <script src="{{url('js/progressbar.js')}}"></script>
 <script src="{{url('js/pm1.js')}}"></script>
-
 </html>

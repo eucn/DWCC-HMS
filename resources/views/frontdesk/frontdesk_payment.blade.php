@@ -223,6 +223,11 @@
           {{ Session::get('success') }}
           </div>
       @endif
+      @if (Session::has('error'))
+      <div class="alert alert-error">
+          {{ Session::get('error') }}
+          </div>
+      @endif
       <div>
             <br>
       <table class="table table-condensed table-sm table-bordered">   
@@ -236,14 +241,19 @@
                         <th scope="col" class="text-center">Payment Status</th>
                         <th scope="col" class="text-center"> &nbsp Booking Type</th>
                         <th scope="col" style="width: 150px; text-align:center;"> &nbsp &nbsp  Action</th>
-                        <div class="container">       
+                        <div class="container"> 
                     </tr>   
                 </thead>   
                 </tbody> 
+                @php
+                $counter = 1;
+              @endphp
                 @foreach ($reservationData as $index => $data)
+                @if ($data->payment_status != 'Paid')
                 <tr class=" text-center pt-2" >
-                  <td  scope="col">
-                  {{ $index + 1 }} 
+                  <td scope="col">
+                    {{-- {{ $index + 1 }}  --}}
+                    {{ $counter }}
                     <p class="text-[0px]">{{ $data->reservation_id }}
                     </p></td>
                     <td scope="col">{{ $data->first_name }} &nbsp; {{ $data->last_name }}</td>
@@ -256,8 +266,11 @@
                     class="btn btn-primary btn-sm" data-toggle="modal" style="background-color: #0B8457; border-color: none;"data-target="#view_modal{{  $data->reservation_id }}" id="editModal"
                     >Confirm Payment</button></td>
                 </tr>
+                @php
+                $counter++;
+               @endphp
                 <!-- View Modal -->
-              <div class="modal fade" id="view_modal{{  $data->reservation_id }}" role="dialog">
+              <div class="modal fade" id="view_modal{{  $data->reservation_id }}" role="dialog" id="my-modal" data-backdrop="static">
                 <div class="modal-dialog">
                   <form action="{{ route('frontdesk.bookingstatus', ['reservation_Id' => $data->reservation_id]) }}" method="POST">
                     @csrf
@@ -273,20 +286,23 @@
                           <div class="col-10">
                             <div class="form-group">
                               <label for="first_name" class="font-weight-bold text-gray-700" style="position:relative; left: -20px;">First Name:</label>
-                              <input class="form-control" style="position:relative; left: -20px; width: 450px;" type="text" name="first_name" id="first_name" value="{{ $data->first_name }}">
+                              <input class="form-control" style="position:relative; left: -20px; width: 450px;" type="text" name="first_name" id="first_name" value="{{ $data->first_name }}" required>
                             </div>
                             <div class="form-group">
                               <label for="last_name" class="font-weight-bold text-gray-700" style="position:relative; left: -20px;">Last Name:</label>
-                              <input class="form-control" style="position:relative; left: -20px; width: 450px;" type="text" name="last_name" id="last_name" value="{{ $data->last_name }}">
+                              <input class="form-control" style="position:relative; left: -20px; width: 450px;" type="text" name="last_name" id="last_name" value="{{ $data->last_name }}" required>
                             </div>
                             <div class="form-group">
                               <label for="receipt_no" style="position:relative; left: -20px;" class="font-weight-bold text-gray-700">Receipt No.:</label>
-                              <input class="form-control" style="position:relative; left: -20px; width: 450px;" type="text" name="receipt_no" id="receipt_no" value="">
-                            </div>
+                              <input class="form-control" style="position:relative; left: -20px; width: 450px;" type="text" name="receipt_no" id="receipt_no" value="" required>
                           </div>
+                        <div>
+                          @error('receipt_no')
+                          <div class="alert alert-danger">{{ $message }}</div>
+                          @enderror
+                        </div>
                         </div>
                       </div>
-                      
                       <div class="modal-footer text-center">
                         <div class="">
                           <button type="submit" class="btn btn-default"
@@ -298,10 +314,11 @@
                   </form>
                 </div>
               </div>
+              @endif
                 @endforeach  
-              </table>
-            </div>
-   
+            </table>
+          </div>
+     
     </section>
   </main><!-- End #main -->
 
@@ -327,7 +344,39 @@
 
   <!-- Template Main JS File -->
   <script src="{{ asset('template/assets/js/main.js') }}"></script>
+  <script>
+function addUser() {
+   $("form").validate({
+      rules: {
+         first_name: {
+            required: true
+         },
+         last_name: {
+            required: true
+         },
+         receipt_no: {
+            required: true
+         }
+      },
+      messages: {
+         first_name: {
+            required: "Please enter your first name"
+         },
+         last_name: {
+            required: "Please enter your last name"
+         },
+         receipt_no: {
+            required: "Please enter a receipt number"
+         }
+      },
+      submitHandler: function(form) {
+         form.submit();
+      }
+   });
+}
 
+  </script>
+  
 </body>
 
 </html>

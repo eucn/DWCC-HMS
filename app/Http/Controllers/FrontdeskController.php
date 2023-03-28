@@ -297,23 +297,29 @@ class FrontdeskController extends Controller
     }
     public function updateBookingStatus(Request $request)
     {
-        $invoice_no = $request->input('reservation_id');
+        $request->validate([
+            'receipt_no' => ['required'],
+        ]);
+        $invoice_no = $request->input('receipt_no');
 
         $guestInformation = GuestInformation::where('reservation_id', $invoice_no)->first();
         
         if ($guestInformation) {
-            $guestInformation->payment_status = 'Paid';
-            $guestInformation->save();
+            // Check if the reservation ID in the guest information table matches the reservation ID in the reservation table
+            if ($guestInformation->reservation_id === $guestInformation->reservation->id) {
+                $guestInformation->payment_status = 'Paid';
+                $guestInformation->save();
+            
+                $reservation = $guestInformation->reservation;
+                $reservation->booking_status = 'Confirmed';
+                $reservation->save();
         
-            $reservation = $guestInformation->reservation;
-            $reservation->booking_status = 'Confirmed';
-            $reservation->save();
-        
-            return redirect()->back()->with('success', 'Booking status updated successfully.');
+                return redirect()->back()->with('success', 'The payment status was verified successfully.');
+            } else {
+                return redirect()->back()->with('error', 'The invoice number does not match the reservation ID.');
+            }
         } else {
             return redirect()->back()->with('error', 'The input invoice number is incorrect');
         }
-        
-    }
-
+    }   
 }

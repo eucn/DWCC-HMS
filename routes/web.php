@@ -51,6 +51,8 @@ Route::prefix('admin')->group(function (){
     Route::get('/frontdesk-list', [AdminController::class, 'FrontdeskList'])->name('admin.frontdeskList');
     Route::get('/room-list', [AdminController::class, 'Rooms'])->name('admin.roomList');
 
+    Route::post('/admin/update/{id}', [AdminController::class, 'update'])->name('admin.room.update');
+
     // Create Frontdesk
     
   
@@ -61,10 +63,12 @@ Route::prefix('admin')->group(function (){
              Route::get('/create', [ManageRoomController::class, 'create'])->name('admin.room.create');
             Route::post('/', [ManageRoomController::class, 'store'])->name('admin.room.store');
             // Route::get('/{room}', [ManageRoomController::class, 'show'])->name('admin.room.show');
-            Route::get('/room/edit', [ManageRoomController::class, 'edit'])->name('admin.room.edit');
+            // Route::get('/room/edit', [ManageRoomController::class, 'edit'])->name('admin.room.edit');
             Route::put('/{room}', [ManageRoomController::class, 'update'])->name('admin.room.update');
             Route::delete('/{room}', [ManageRoomController::class, 'destroy'])->name('admin.room.destroy');
-            Route::put('/room/{id}', [ManageRoomController::class, 'update'])->name('admin.room.update');
+            // Route::put('/room/{id}', [ManageRoomController::class, 'update'])->name('admin.room.update');
+            
+
           
 
     Route::prefix('booking-history')->group(function () {

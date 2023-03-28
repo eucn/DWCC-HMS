@@ -221,11 +221,9 @@
 
               {{-- <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Filter</button> --}}
             </form>
-            <br>
-            <hr style="border-top: 2px solid #3C4048;position: relative; left: 8px;">
 
             <table class="table table-condensed table-sm table-bordered">   
-                <thead class="bg-[#51bdb8] text-white">   
+                <thead class="bg-[#36ae7c] text-white">   
                     <tr style="text-align:center">   
                         <th scope="col">No.</th>
                         <th scope="col">Name</th>
@@ -233,7 +231,6 @@
                         <th scope="col">Booking Status</th>
                         <th scope="col">Check-in/Check-out</th>
                         <th scope="col">Room Type</th>
-                        <th scope="col">Rate</th>
                         <th scope="col">Rate</th>
                     </tr>   
                 </thead>   
@@ -247,10 +244,7 @@
                         <td>{{ $booking->checkin_date->format('M j, Y') }} - {{ $booking->checkout_date->format('M j, Y') }}</td>
                         <td>{{ $booking-> room_type }}</td>
                         <td>{{ $booking-> rate }}</td>
-                        <td>{{ $booking-> total_price }}</td>
-                        
-                    
-                        
+                        <td>{{ $booking-> total_price }}</td>      
                     </tr>
                   @endforeach
                 </tbody>   

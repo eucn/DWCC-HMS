@@ -43,7 +43,7 @@ class ManageRoomController extends Controller
 { 
      
     $room = manage_room::findOrFail($id);
-    return view('room_number', compact('room'));
+    return view('room_number', compact('room_number'));
 
 }
 
@@ -56,31 +56,53 @@ class ManageRoomController extends Controller
          return redirect()->route('admin.room.index')->with('success', 'Room has been deleted.')->with('rooms', $room);;
      }
 
-     public function update(Request $request, $id)
-{
-    $room = manage_room::findOrFail($id);
+//      public function update(Request $request, $id)
+// {
+//     $room = manage_room::findOrFail($id);
 
-    if ($room) {
-        $room->room_number = $request->input('room_number');
-        $room->room_description = $request->input('room_description');
-        $room->room_type = $request->input('room_type');
-        $room->max_capacity = $request->input('max_capacity');
-        $room->amenities = $request->input('amenities');
-        $room->status = $request->input('status');
-        $room->rate = $request->input('rate');
-        $room->update($request->all());
-        $room->save();
+//     if ($room) {
+//         $room->room_number = $request->input('room_number');
+//         $room->room_description = $request->input('room_description');
+//         $room->room_type = $request->input('room_type');
+//         $room->max_capacity = $request->input('max_capacity');
+//         $room->amenities = $request->input('amenities');
+//         $room->status = $request->input('status');
+//         $room->rate = $request->input('rate');
+//         $room->update($request->all());
+//         $room->save();
         
-        // return redirect()->route('admin.room.index')->with('success', 'Room has been updated.')->with('room', $room);
-        return redirect()->back()->with('success', 'Room has been updated.')->with('room', $room);
-    }
-    else{
-    return redirect()->route('admin.room.index')->with('not success', 'Room did not updated.')->with('room', $room);}
+//         // return redirect()->route('admin.room.index')->with('success', 'Room has been updated.')->with('room', $room);
+//         return redirect()->back()->with('success', 'Room has been updated.')->with('room', $room);
+//     }
+//     else{
+//     return redirect()->route('admin.room.index')->with('not success', 'Room did not updated.')->with('room', $room);}
 
     
 
 
-}
+// }
+
+public function update(Request $request, $id)
+    {
+        $room = Manage_Room::find($id);
+
+        if (!$room) {
+            abort(404, 'Room not found');
+        }
+                $room->room_description = $request->input('room_description');
+                $room->room_type = $request->input('room_type');
+                $room->max_capacity = $request->input('max_capacity');
+                $room->amenities = $request->input('amenities');
+                $room->status = $request->input('status');
+                $room->rate = $request->input('rate');
+                $room->update($request->all());
+                $room->save();
+
+        $room->save();
+
+        return redirect()->route('admin.room.index')->with('success', 'Room is updated.')->with('rooms', $room);
+    }
+
 
 
 }

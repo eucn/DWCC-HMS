@@ -207,6 +207,7 @@
             </div>
           </div>
 
+
           <hr style="border-top: 2px solid #3C4048;position: relative; left: 8px;">
 
           <!-- Modal -->
@@ -349,55 +350,57 @@
                           <img src="{{ asset($roomData->photos) }}" alt="Room" width="70px" height="70px">                 
                         </td>
                         <td style="width: 150px;" >
-                          <form action="{{ route('admin.room.create') }}" method="POST">
-                          
+
                           <button type="button" class="btn btn-primary" style="position:relative;left: -25px; top: 20px;" data-bs-toggle="modal" data-bs-target="#editModal{{ $roomData->id }}">
                           <i class="fa-regular fa-pen-to-square"></i>
                           </button>
+                          
                           <button type="button" class="btn btn-danger" style="position:relative;left: -25px; top: 20px;" data-bs-toggle="modal" data-bs-target="#delete{{ $roomData->id }}">
                           <i class="fa-solid fa-trash"></i>
                           </button>
+
+                         
 
                         <!-- Edit Modal -->
                         <div class="modal fade" id="editModal{{ $roomData->id }}" tabindex="-1" aria-labelledby="editModal{{ $roomData->id }}Label" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
-                                    <form method="POST" action="'admin.room.update">
+                                    <form  action="{{ route('admin.room.update',  $roomData->id) }}" method="POST">
                                         @csrf
                                         @method('PUT')
                                         <div class="modal-header">
-                                            <h5 class="modal-title" style="color: #51bdb8;" id="editModal{{ $roomData->room_number }}Label">Edit Room</h5>
+                                            <h5 class="modal-title" style="color: #51bdb8;" id="editModal{{ $roomData->id }}Label">Edit Room</h5>
                                             <button type="button" class="btn-close" style="color:red;" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
                                   
                                             <div class="form-group">
                                                 <label for="name" style="position: relative; left: -175px;">Room Number</label><br>
-                                                <input type="text"  style="position: relative; left: -5px; width: 450px;" name="name" id="name" value="{{ $roomData->room_number }}">
+                                                <input type="text"  style="position: relative; left: -5px; width: 450px;" name="room_number" id="room_number" value="{{ $roomData->room_number }}">
                                             </div>
                                             <div class="form-group">
                                                 <label for="room_description" style="position: relative; left: -188px; ">Description</label>
-                                                <textarea name="description"  class="form-control">{{ $roomData->room_description }}</textarea>
+                                                <textarea name="room_description"  class="form-control" id="room_description">{{ $roomData->room_description }}</textarea>
                                             </div>
                                             <div class="form-group">
                                                 <label for="room_type"  style="position: relative; left: -188px; ">Room Type</label>
-                                                <input type="text" name="room_type" class="form-control" value="{{ $roomData->room_type }}">
+                                                <input type="text" name="room_type" id="room_type" class="form-control" value="{{ $roomData->room_type }}">
                                             </div>
                                             <div class="form-group">
                                                 <label for="max_capacity"  style="position: relative; left: -165px; ">Maximum Capacity</label>
-                                                <input type="text" name="max_capacity" class="form-control" value="{{ $roomData->max_capacity }}">
+                                                <input type="text"  id="max_capacity" name="max_capacity" class="form-control" value="{{ $roomData->max_capacity }}">
                                             </div>
                                             <div class="form-group">
                                                 <label for="amenities"  style="position: relative; left: -190px; ">Amenities</label>
-                                                <input type="text" name="amenities" class="form-control" value="{{ $roomData->amenities }}">
+                                                <input type="text" name="amenities" id="amenities" class="form-control" value="{{ $roomData->amenities }}">
                                             </div>
                                             <div class="form-group">
                                                 <label for="status"  style="position: relative; left: -210px; ">Status</label>
-                                                <input type="text" name="status" class="form-control" value="{{ $roomData->status }}">
+                                                <input type="text" name="status" id="status" class="form-control" value="{{ $roomData->status }}">
                                             </div>
                                             <div class="form-group">
                                                 <label for="rate"  style="position: relative; left: -210px; ">Rate</label>
-                                                <input type="text" name="rate" class="form-control" value="{{ $roomData->rate }}">
+                                                <input type="text" name="rate" id="rate" class="form-control" value="{{ $roomData->rate }}">
                                             </div>
                                           
                                         </div> 
@@ -408,7 +411,7 @@
                                     </form>
                                   </div>
                               </div>
-                            </div> ``
+                            </div> 
 
 
 

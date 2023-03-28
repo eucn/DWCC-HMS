@@ -300,14 +300,14 @@
                         <td>{{ $frontdesk->created_at }}</td>                                  
                         <td>
                         <!--View Button-->	
-                        <button type="button" class="btn btn-primary" id="modal2" data-bs-toggle="modal" data-bs-target="#modalDialogScrollable">
+                        <button type="button" class="btn btn-primary" id="modal2" data-bs-toggle="modal" data-bs-target="#modalDialogScrollable{{ $frontdesk->id }}">
                               View
                               </button>
                           </td>  
 
                           <!-- Modal -->
                               
-                              <div class="modal fade" id="modalDialogScrollable" tabindex="-1">
+                              <div class="modal fade" id="modalDialogScrollable{{ $frontdesk->id }}" tabindex="-1">
                                 <div class="modal-dialog modal-dialog-scrollable">
                                   <div class="modal-content">
                                     <div class="modal-header">

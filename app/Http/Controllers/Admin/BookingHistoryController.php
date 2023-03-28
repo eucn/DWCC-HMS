@@ -84,19 +84,17 @@ class BookingHistoryController extends Controller
     {
         //
     }
-
     public function filter(Request $request)
     {
-        // $todayDate = Carbon::now()->format('Y-m-d');
-        // $bookings = Reservations:: when($request->date != null, function($q) use ($request){
-
-        //     return $q->whereDate('created_at',$request->date);
-        // }, function($q) use ($todayDate) {
-             
-        //     return $q->whereDate('created_at',$request->date);
-        // })
-        // ->paginate(10); 
-
-        // return view('admin.admin_booking-history', compact('bookings'));
+       
+        $todayDate = Carbon::now()->format('Y-m-d');
+        $bookings = Reservations::when($request->date != null, function($q) use ($request) {
+            return $q->whereDate('created_at', $request->date);
+        }, function($q) use ($todayDate) {
+            return $q->whereDate('created_at', $todayDate);
+        })
+        ->paginate(10); 
+    
+        return view('admin.admin_booking-history', compact('bookings'));
     }
 }

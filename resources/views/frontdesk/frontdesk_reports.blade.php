@@ -16,7 +16,9 @@
 
   <!-- Google Fonts -->
   <link href="https://fonts.gstatic.com" rel="preconnect">
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+    rel="stylesheet">
 
   <!-- Vendor CSS Files -->
   <link href="{{ asset('template/assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
@@ -32,12 +34,9 @@
 
   <!-- Font Awesome -->
   <script src="https://kit.fontawesome.com/3a364cef47.js" crossorigin="anonymous"></script>
-    <script
-      defer
-      src="https://use.fontawesome.com/releases/v6.1.1/js/all.js"
-      integrity="sha384-xBXmu0dk1bEoiwd71wOonQLyH+VpgR1XcDH3rtxrLww5ajNTuMvBdL5SOiFZnNdp"
-      crossorigin="anonymous">
-    </script>
+  <script defer src="https://use.fontawesome.com/releases/v6.1.1/js/all.js"
+    integrity="sha384-xBXmu0dk1bEoiwd71wOonQLyH+VpgR1XcDH3rtxrLww5ajNTuMvBdL5SOiFZnNdp" crossorigin="anonymous">
+  </script>
 
   <!-- =======================================================
   * Template Name: NiceAdmin - v2.4.0
@@ -144,15 +143,15 @@
       </li><!-- End Booking History Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed"  href="{{ route('frontdesk.bookingdetails') }}">
+        <a class="nav-link collapsed" href="{{ route('frontdesk.bookingdetails') }}">
           <i class="fa-solid fa-book-open-reader icon-nav"></i>
           <span>Booking Details</span>
         </a>
-       
+
       </li><!-- End Tables Nav -->
 
       <li class="nav-item">
-        <a class="nav-link "  href="{{ route('frontdesk.reports') }}">
+        <a class="nav-link " href="{{ route('frontdesk.reports') }}">
           <i class="fa-solid fa-file-lines icon-nav"></i>
           <span>Reports</span>
         </a>
@@ -174,56 +173,70 @@
       </nav>
     </div><!-- End Page Title -->
 
-    <div class="space-y-4 font-regular text-base sm:text-lg pb-10 ">
-                          <div class="flex flex-col lg:flex-row justify-center">
-                            <div class="mx-4 md:mx-4 py-3" style="position:relative; left: -388px; ">
-                                <label class="" for="room_type" >Status</label><br>
-                                <select class="w-full md:w-[220px]" name="room_type" id="room_type" value="{{ old('room_type') }}" placeholder="Completed">
-                                  <option value="Single Size" {{ old('room_type') == 'Completed' ? 'selected' : '' }}>Completed</option>
-                                  <option value="Queen Size" {{ old('room_type') == 'Cancelled' ? 'selected' : '' }}>Cancelled</option>
-                                  <option value="Queen Size" {{ old('room_type') == 'Pending' ? 'selected' : '' }}>Pending</option>
-                                 
-                                 
-                                </select>   
-                              </div>
-                              </div>
-                      </div>
-                      <div class="space-y-4 font-regular text-base sm:text-lg pb-10 ">
-                          <div class="flex flex-col lg:flex-row justify-center">
-                            <div class="mx-4 md:mx-4 py-3" style="position:relative; left: 250px; top: -100px; ">
-                      <div class="grid grid-cols-1 ">
-                <div class=" py-2">
-                <label class="" for="room_no" style="position:relative; left: -390px; top: -60px;">Check-in Date:</label><br>
-               
-                  <input
-                    class="w-full border-gray-900  py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-grey-500"
-                    id="check_in_date" name="check_in_date" type="date" style="width: 220px;height:50px;position:relative; left: -390px; top: -58px; border-color: gray;" value="{{ old('check_in_date') }}">
-                    {{-- <x-input-error :messages="$errors->get('check_in_date')" class="mt-2" /> --}}
-                </div>
-              </div>
-              </div>
+    <section class="mb-[50px]">
+      <div class="flex item-center">
+        <div class="mr-5">
+          <div>Status</div>
+          <select id="select" name="select" class="block w-[170px] mt-1 pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md">
+            <option value="option1">Completed</option>
+            <option value="option2">Pending</option>
+            <option value="option3">Cancelled</option>
+          </select>
+        </div>
+        <div class="mr-10">
+          <div>Check-in Date</div>
+          <input type="date" class="block w-[170px] mt-1 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md">
+        </div>
+        <div class="mr-10">
+          <div>Check-in Date</div>
+          <input type="date" class="block w-[170px] mt-1 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md">
+        </div>
+        <div class="mr-10">
+            <div class="opacity-1">Button</div>
+            <button class="bg-[#005289] w-[120px] mt-1 py-2 text-white rounded-md">Preview</button>
+        </div>
+      </div>
+    </section>
+    <section>
+      <table id="" class="table table-condensed table-sm table-bordered">   
+        <thead class="bg-[#51bdb8] text-white">   
+            <tr class="text-center ">   
+                <th scope="col" class="w-[70px] sm-w-[70] text-center py-3">Invoice No.</th>
+                <th scope="col" class="text-center px-1 py-3">Name</th>
+                <th scope="col" class="text-center px-1 py-3">Booking Status</th>
+                <th scope="col" class="text-center px-1 py-3">Check-in Date</th>
+                <th scope="col" class="text-center px-1 py-3">Check-out Date</th>
+                <th scope="col" class="text-center px-1 py-3">Room No.</th>
+                <th scope="col" class="text-center px-1 py-3">Room Type</th>
+                <th scope="col" class="text-center px-1 py-3">Nights</th>
+                <th scope="col" class="text-center px-1 py-3">Price</th>
+            </tr>   
+        </thead>   
+        </tbody> 
+        @foreach ($reports as $index => $report)
+        @if ($report->payment_status != 'Paid')
+        <tr class="text-center py-5" >
+          <td scope="col">
+            {{ $index + 1 }} 
+            {{-- {{ $counter }} --}}
+            {{-- <p class="text-[0px] text">{{ $data->reservation_id }}</p> --}}
+            </td>
+            <td scope="col">{{ $report->first_name }} &nbsp; {{ $report->last_name }}</td>
+            <td scope="col">{{ $report->booking_status }}</td>
+            <td scope="col"> {{ \Carbon\Carbon::parse($report->checkin_date)->format('F j, Y') }}</td> 
+            <td> {{ \Carbon\Carbon::parse($report->checkout_date)->format('F j, Y') }}</td>
+            <td scope="col">{{ $report->room_id }}</td>
+            {{-- <td scope="col">{{ $report->room_type }}</td> --}}
+            <td scope="col">{{ $report->nights }}</td>
+            <td scope="col">{{ $report->total_price }}</td>
+        </tr>
+      @endif
+        @endforeach  
+    </table>
+    </section>
 
-              </div>
-                              </div>
-                      </div>
-                      <div class="space-y-4 font-regular text-base sm:text-lg pb-10 ">
-                          <div class="flex flex-col lg:flex-row justify-center">
-                            <div class="mx-4 md:mx-4 py-3" style="position:relative; left: 250px; top: -100px; ">
-                      <div class="grid grid-cols-1 ">
-                <div class=" py-2">
-                <label class="" for="room_no" style="position:relative; left: -120px; top: -230px;">Check-out Date:</label><br>
-               
-                  <input
-                    class="w-full border-gray-900  py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-grey-500"
-                    id="check_in_date" name="check_out_date" type="date" style="width: 220px;height:50px;position:relative; left: -130px; top: -225px; border-color: gray;" value="{{ old('check_in_date') }}">
-                    {{-- <x-input-error :messages="$errors->get('check_out_date')" class="mt-2" /> --}}
-                </div>
-              </div>
-              </div>
-
-             
   </main><!-- End #main -->
-  <hr style="border-top: 2px solid gray; position:relative;top: -400px;">
+  {{-- <hr style="border-top: 2px solid gray; position:relative;top: -400px;"> --}}
   <!-- ======= Footer ======= -->
   <footer id="footer" class="footer">
     <div class="copyright">
@@ -232,7 +245,8 @@
 
   </footer><!-- End Footer -->
 
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+      class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files -->
   <script src="{{ asset('template/assets/vendor/apexcharts/apexcharts.min.js') }}"></script>

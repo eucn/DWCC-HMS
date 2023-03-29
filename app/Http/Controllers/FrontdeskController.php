@@ -283,7 +283,18 @@ class FrontdeskController extends Controller
 
 
     public function FrontdeskReports(){
-        return view('frontdesk.frontdesk_reports');
+
+        $reports = GuestInformation::join('reservations', 'guest_information.reservation_id', '=', 'reservations.id')
+        ->join('manage_rooms', 'reservations.room_id', '=', 'manage_rooms.id')
+        ->select('guest_information.reservation_id','guest_information.first_name',
+        'guest_information.last_name', 'reservations.booking_status','reservations.nights'
+        ,'reservations.checkin_date','reservations.total_price', 'reservations.checkout_date')
+        ->orderBy('guest_information.first_name', 'asc')
+        ->get();
+        return view('frontdesk.frontdesk_reports', [
+            'reports' => $reports,
+        ]);
+        return view('');
     }
     public function FrontdeskPayment(){
         $reservations = GuestInformation::join('reservations', 'guest_information.reservation_id', '=', 'reservations.id')

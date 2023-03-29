@@ -126,7 +126,7 @@
       </li>
 
       <li class="nav-item">
-        <a class="nav-link " href="{{ route('admin.dashboard') }}">
+        <a class="nav-link collapsed" href="{{ route('admin.dashboard') }}">
           <i class="bi bi-grid"></i>
           <span>Dashboard</span>
         </a>
@@ -166,7 +166,7 @@
       <!-- End Tables Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="{{ route('admin.reports') }}">
+        <a class="nav-link " href="{{ route('admin.reports') }}">
           <i class="fa-regular fa-file-lines icon-nav"></i>
           <span>Reports</span>
         </a>
@@ -179,11 +179,11 @@
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Dashboard</h1>
+      <h1>Reports</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
-          <li class="breadcrumb-item active">Dashboard</li>
+          <li class="breadcrumb-item active">Reports</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
@@ -195,68 +195,24 @@
         <div class="col-lg-12">
           <div class="row">
 
-            <!-- Sales Card -->
-            <div class="col-xxl-4 col-md-4">
-              <div class="card info-card sales-card">
+            <div class="flex flex-row space-x-4">
+      <div class="flex flex-col">
+        <label for="status">Status</label>
+        <select id="status" name="status">
+          <option value="cancelled">Cancelled</option>
+          <option value="pending">Pending</option>
+        </select>
+      </div>
 
-                <div class="card-body">
-                  <h5 class="card-title">Registered Guest Users</h5>
+      <div class="flex flex-col">
+        <label for="check_in_date">Check-in Date</label>
+        <input type="date" id="check_in_date" name="check_in_date">
+      </div>
 
-                  <div class="d-flex align-items-center">
-                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i class="fa-solid fa-user"></i>
-                    </div>
-                    <div class="ps-3">
-                      <h6>{{ $totalGuest }}</h6>
-                      <a href="{{ route('admin.guestList') }}">View</a>
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-            </div><!-- End Sales Card -->
-
-            <!-- Revenue Card -->
-            <div class="col-xxl-4 col-md-4">
-              <div class="card info-card revenue-card">
-
-                <div class="card-body">
-                  <h5 class="card-title">Registered Frontdesk Users</h5>
-
-                  <div class="d-flex align-items-center">
-                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i class="fa-solid fa-user"></i>
-                    </div>
-                    <div class="ps-3">
-                      <h6>{{ $totalFrontdesk }}</h6>
-                      <a href="{{ route('admin.frontdeskList') }}">View</a>
-                    </div>
-                  </div>
-              </div>
-
-              </div>
-            </div><!-- End Revenue Card -->
-
-            <!-- Rooms Card -->
-            <div class="col-xxl-4 col-md-4">
-              <div class="card info-card room-card">
-
-                <div class="card-body">
-                  <h5 class="card-title">Rooms</h5>
-
-                  <div class="d-flex align-items-center">
-                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i class="fa-solid fa-bed"></i>
-                    </div>
-                    <div class="ps-3">
-                      <h6>{{ $totalRoom }}</h6>
-                      <a href="{{ route('admin.roomList') }}">View</a>
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-            </div><!-- End Room Card -->
+      <div class="flex flex-col">
+        <label for="check_out_date">Check-out Date</label>
+        <input type="date" id="check_out_date" name="check_out_date">
+      </div>
 
           </div>
         </div><!-- End Left side columns -->

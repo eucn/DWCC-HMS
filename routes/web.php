@@ -16,6 +16,8 @@ use App\Http\Controllers\Guest\GuestReservationController;
 use App\Models\Manage_Room;
 use App\Http\Controllers\Guest\PDFController;
 use App\Http\Controllers\Admin\BookingHistoryController;
+use App\Http\Controllers\Admin\ReportsController;
+
 
 /*
 
@@ -67,34 +69,20 @@ Route::prefix('admin')->group(function (){
             Route::put('/{room}', [ManageRoomController::class, 'update'])->name('admin.room.update');
             Route::delete('/{room}', [ManageRoomController::class, 'destroy'])->name('admin.room.destroy');
             // Route::put('/room/{id}', [ManageRoomController::class, 'update'])->name('admin.room.update');
-            
+        });   
 
           
-
+    // Admin Booking History
     Route::prefix('booking-history')->group(function () {
             Route::get('/', [BookingHistoryController::class, 'index'])->name('admin.bookingHistory')->middleware('admin');;
             Route::get('/filter', [BookingHistoryController::class, 'filter'])->name('admin.filter-history');
         });
-          
-
-            // Route::delete('/admin_delete-rooms/{id}', [ManageRoomController::class, 'destroy'])->name('admin_delete-rooms.destroy');
-
+    
+    // Admin Reports
+    Route::prefix('reports')->group(function () {
+            Route::get('/', [ReportsController::class, 'index'])->name('admin.reports')->middleware('admin');
+           
         });
-
-    // Rooms
-//     Route::prefix('room')->group(function (){
-//         Route::resource('/', MRoomController::class)->name('admin.room.index');
-//         Route::resource('/', MRoomController::class)->names([
-//     'index' => 'admin.admin_manage-rooms',
-//     'create' => 'rooms.create',
-//     'store' => 'rooms.store',
-//     'show' => 'rooms.show',
-//     'edit' => 'rooms.edit',
-//     'update' => 'rooms.update',
-//     'destroy' => 'rooms.destroy',
-// ]);
-
-//     });
 });
 //-------------- End Admin Routes --------------//
 

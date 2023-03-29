@@ -69,10 +69,15 @@ class ManageRoomController extends Controller
     }
      public function destroy($id)
      {
-         $room = manage_room::findOrFail($id);
-         $room->delete();
+        $room = Manage_Room::find($id);
+        $room->delete();
+
+        return redirect()->route('admin.room.index')->with('success', 'Room deleted successfully');
+
+        //  $room = manage_room::findOrFail($id);
+        //  $room->delete();
          
-         return redirect()->route('admin.room.index')->with('success', 'Room has been deleted.')->with('rooms', $room);;
+        //  return redirect()->route('admin.room.index')->with('success', 'Room has been deleted.')->with('rooms', $room);;
      }
 
 public function update(Request $request, $id)

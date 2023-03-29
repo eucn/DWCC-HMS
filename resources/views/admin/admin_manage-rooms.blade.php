@@ -346,7 +346,7 @@
                         <td>
                           <img src="{{ asset('uploads/rooms/' . $roomData->photos) }}" alt="Room" width="70px" height="70px">                
                         </td>
-                        <td style="width: 150px;" >
+                        <td style="width: 150px;">
 
                           <button type="button" class="btn btn-primary" style="position:relative;left: -25px; top: 20px;" data-bs-toggle="modal" data-bs-target="#editModal{{ $roomData->id }}">
                           <i class="fa-regular fa-pen-to-square"></i>
@@ -355,95 +355,108 @@
                           <button type="button" class="btn btn-danger" style="position:relative;left: -25px; top: 20px;" data-bs-toggle="modal" data-bs-target="#delete{{ $roomData->id }}">
                           <i class="fa-solid fa-trash"></i>
                           </button>
-
-                         
-
-                        <!-- Edit Modal -->
+                          </td>
+                        <!-- Start Edit Modal -->
                         <div class="modal fade" id="editModal{{ $roomData->id }}" tabindex="-1" aria-labelledby="editModal{{ $roomData->id }}Label" aria-hidden="true">
+                          <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="editModal{{ $roomData->id }}Label">Edit Room Details</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <form action="{{ route('admin.room.update',  $roomData->id) }}" method="POST" id="editForm" enctype="multipart/form-data">
+                                @csrf
+                                @method('PUT')
+
+
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <label>Room Number</label>
+                                        <input class="form-control" type="number" name="room_number" id="room_number" placeholder="Enter Room Number" >
+                                        <x-input-error :messages="$errors->get('room_number')" />
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Room Type</label>
+                                        <input class="form-control" type="text" name="room_type" id="room_type" placeholder="Enter Room Type">
+                                        <x-input-error :messages="$errors->get('room_type')" />
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Description</label>
+                                        <input class="form-control" type="text" name="room_description" id="room_description" placeholder="Enter Description">
+                                        <x-input-error :messages="$errors->get('room_description')" />
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Maximum Room Capacity</label>
+                                        <input class="form-control" type="number" name="max_capacity" id="max_capacity" placeholder="Enter Maximum Room Capacity">
+                                        <x-input-error :messages="$errors->get('max_capacity')" />
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Amenities</label>
+                                        <input class="form-control" type="text" name="amenities" id="amenities" placeholder="Enter Amenities">
+                                        <x-input-error :messages="$errors->get('amenities')" />
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Status</label>
+                                        <input class="form-control" type="text" name="status" id="status" placeholder="Enter Room Status">
+                                        <x-input-error :messages="$errors->get('status')" />
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Rate</label>
+                                        <input class="form-control" type="text" name="rate" id="rate" placeholder="Enter Room Rate">
+                                        <x-input-error :messages="$errors->get('rate')" />
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Photos</label>
+                                        <input type="file" name="photos" class="form-control" id="photos">
+                                        <x-input-error :messages="$errors->get('photos')" />
+                                    </div>
+                                    
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                  <button type="submit" class="btn btn-primary">Save changes</button>
+                                </div>
+                              </form>
+                            </div>
+                          </div>
+                        </div>
+                        {{-- End Edit Modal --}}
+  
+                        <!-- Delete Product Modal -->
+                        <div class="modal fade" id="delete{{ $roomData->id }}" tabindex="-1" aria-labelledby="deleteProductModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
-                                    <form  action="{{ route('admin.room.update',  $roomData->id) }}" method="POST">
-                                        @csrf
-                                        @method('PUT')
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" style="color: #51bdb8;" id="editModal{{ $roomData->id }}Label">Edit Room</h5>
-                                            <button type="button" class="btn-close" style="color:red;" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                  
-                                            <div class="form-group">
-                                                <label for="name" style="position: relative; left: -175px;">Room Number</label><br>
-                                                <input type="text"  style="position: relative; left: -5px; width: 450px;" name="room_number" id="room_number" value="{{ $roomData->room_number }}">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="room_description" style="position: relative; left: -188px; ">Description</label>
-                                                <textarea name="room_description"  class="form-control" id="room_description">{{ $roomData->room_description }}</textarea>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="room_type"  style="position: relative; left: -188px; ">Room Type</label>
-                                                <input type="text" name="room_type" id="room_type" class="form-control" value="{{ $roomData->room_type }}">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="max_capacity"  style="position: relative; left: -165px; ">Maximum Capacity</label>
-                                                <input type="text"  id="max_capacity" name="max_capacity" class="form-control" value="{{ $roomData->max_capacity }}">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="amenities"  style="position: relative; left: -190px; ">Amenities</label>
-                                                <input type="text" name="amenities" id="amenities" class="form-control" value="{{ $roomData->amenities }}">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="status"  style="position: relative; left: -210px; ">Status</label>
-                                                <input type="text" name="status" id="status" class="form-control" value="{{ $roomData->status }}">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="rate"  style="position: relative; left: -210px; ">Rate</label>
-                                                <input type="text" name="rate" id="rate" class="form-control" value="{{ $roomData->rate }}">
-                                            </div>
-                                          
-                                        </div> 
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                            <button type="submit" class="btn btn-primary">Save changes</button>
-                                        </div>
-                                    </form>
-                                  </div>
-                              </div>
-                            </div> 
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="deleteProductModalLabel">Delete Room</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        Are you sure you want to delete this room?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                        <form id="deleteProductForm" action="{{ route('admin.room.destroy',  $roomData->id) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>            
+                        {{-- End Delete Modal --}}
 
-
-
-                        <!-- <form action="{{ route('admin.room.destroy', $roomData->id) }}" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" style="position:relative;left: 28px; top: -20px;" class="btn btn-danger"><i class="fa-solid fa-trash"></i></button>
-                        </form>      
-                        </td>
-                    </tr> -->
-                    <div class="modal fade" id="delete{{ $roomData->id }}" id="view_modal" role="dialog">
-                <div class="modal-dialog">
-                  <!-- Modal content-->
-                  <div class="modal-content" style="height: 230px;">
-                    <div class="modal-header">
-                      <button type="button" style="position:relative; left: 350px; color: red;" class="close"
-                        data-dismiss="modal">&times;</button>
-                      <h4 class="modal-title" style="position:relative; left: -190px; color:#51bdb8;">Confirm Delete
-                      </h4>
-                    </div>
-                    <form  action="{{ route('admin.room.destroy',  $roomData->id) }}" method="POST">
-                      @csrf
-                      @method('DELETE')
-                      <div class="modal-body">
-                        <input id="id" name="id">
-                        <strong>
-                          <h4 class="text-center">Are you sure you want to Delete this Room?
-                        </strong></h4>
-                      </div>
-                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                        <button type="submit"class="btn btn-primary">Yes,Continue </button>
-                      </div>
-                    </form>
-                  </div>
-                </div>
+                    </tr> 
+                    
                   @endforeach
                 </tbody>   
             </table>
@@ -478,7 +491,15 @@
   <!-- Template Main JS File -->
   <script src="{{ asset('template/assets/js/main.js') }}"></script>
 
-  <<script>
+  <!-- JavaScript code to show the modal for deleting a product -->
+<script>
+    function deleteProduct(id) {
+        $('#delete').modal('show');
+        $('#deleteProductForm').attr('action', '/room/' + id);
+    }
+</script>
+
+  <script>
   $(document).ready(function() {
     $('#saveButton').click(function() {
       var recordId = $('#exampleModal').data('id');
@@ -507,16 +528,16 @@
   {{-- Jquery --}}
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-    {{-- DataTables CDN Links --}}
-  <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
-  <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap4.min.js"></script>
-  {{-- <script src="https://cdn.datatables.net/1.11.6/js/jquery.dataTables.min.js"></script> --}}
+      {{-- DataTables CDN Links --}}
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap4.min.js"></script>
+    {{-- <script src="https://cdn.datatables.net/1.11.6/js/jquery.dataTables.min.js"></script> --}}
 
-  <script type="text/javascript">
-    $(document).ready(function (){
-      var table = $('#datatable').DataTable();
-    });
-  </script>
+    <script type="text/javascript">
+      $(document).ready(function (){
+        var table = $('#datatable').DataTable();
+      });
+    </script>
 
 </body>
 

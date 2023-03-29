@@ -47,6 +47,9 @@
       integrity="sha384-xBXmu0dk1bEoiwd71wOonQLyH+VpgR1XcDH3rtxrLww5ajNTuMvBdL5SOiFZnNdp"
       crossorigin="anonymous">
     </script>
+  
+  {{-- DataTables Link --}}
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap4.min.css">
 
   <!-- =======================================================
   * Template Name: NiceAdmin - v2.4.0
@@ -189,26 +192,6 @@
         <!-- Left side columns -->
         <div class="col-lg-12">
           <div class="row">
-         
-       
-          <div class="d-flex justify-content-between mb-3">
-            <div class="row mt-3">
-        <div class="d-flex align-items-center">
-        <b><label for="records_per_page" class="col-auto mr-2" style="position: relative; top: 2px; right: -3px;color:#434242;">Show</label></b>
-            <select name="records_per_page" id="records_per_page" class="form-control mr-2" onchange="window.location.href = this.value;">
-                <option value="{{ url()->current() }}?records_per_page=10"  'selected' : '' }}>10</option>
-                <option value="{{ url()->current() }}?records_per_page=25"  'selected' : '' }}>25</option>
-                <option value="{{ url()->current() }}?records_per_page=50"  'selected' : '' }}>50</option>
-                <option value="{{ url()->current() }}?records_per_page=100"  'selected' : '' }}>100</option>
-            </select>
-            <b><p style="position: relative; top: 6px; left: 1px;color:#434242;">entries</p></b>
-
-    
-        </div>
-            
-        <div class="">
-         
-        </div>
         
         </div>
     
@@ -230,7 +213,7 @@
       @endif
       <div>
             <br>
-      <table class="table table-condensed table-sm table-bordered">   
+      <table id="datatable" class="table table-condensed table-sm table-bordered">   
                 <thead class="bg-[#51bdb8] text-white">   
                     <tr style="text-align:center">   
                         <th No. scope="col" class="text-center px-4"> &nbsp No.</th>
@@ -344,6 +327,18 @@
 
   <!-- Template Main JS File -->
   <script src="{{ asset('template/assets/js/main.js') }}"></script>
+
+   {{-- DataTables CDN Links --}}
+  <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap4.min.js"></script>
+  {{-- <script src="https://cdn.datatables.net/1.11.6/js/jquery.dataTables.min.js"></script> --}}
+
+  <script type="text/javascript">
+    $(document).ready(function (){
+      var table = $('#datatable').DataTable();
+    });
+  </script>
+
   <script>
 function addUser() {
    $("form").validate({

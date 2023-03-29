@@ -43,6 +43,9 @@
     integrity="sha384-xBXmu0dk1bEoiwd71wOonQLyH+VpgR1XcDH3rtxrLww5ajNTuMvBdL5SOiFZnNdp" crossorigin="anonymous">
   </script>
 
+  {{-- DataTables Link --}}
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap4.min.css">
+
   <!-- =======================================================
   * Template Name: NiceAdmin - v2.4.0
   * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
@@ -203,25 +206,7 @@
 
             <div class="d-flex justify-content-between mb-3">
               <div class="row mt-3">
-                <div class="d-flex align-items-center">
-                  <b><label for="records_per_page" class="col-auto mr-2"
-                      style="position: relative; top: 2px; left: 22px;color:#434242;">Show</label></b>
-                  <select name="records_per_page" id="records_per_page" class="form-control mr-2"
-                    style="position: relative; left: 22px;" onchange="window.location.href = this.value;">
-                    <option value="{{ url()->current() }}?records_per_page=10" 'selected' : '' }}>10</option>
-                    <option value="{{ url()->current() }}?records_per_page=25" 'selected' : '' }}>25</option>
-                    <option value="{{ url()->current() }}?records_per_page=50" 'selected' : '' }}>50</option>
-                    <option value="{{ url()->current() }}?records_per_page=100" 'selected' : '' }}>100</option>
-                    {{-- <option value="100">10</option>
-                    <option value="100">25</option>
-                    <option value="100">50</option>
-                    <option value="100">100</option> --}}
-                  </select>
-
-                  <b>
-                    <p style="position: relative; top: 7px; left: 22px;color:#434242;">entries</p>
-                  </b>
-                </div>
+              
                 <div class="">
                 </div>
               </div>
@@ -231,7 +216,7 @@
         <hr style="border-top: 2px solid #3C4048;position: relative; left: 8px;">
         <div>
           <br>
-          <table class="table table-condensed table-sm table-bordered">
+          <table id="datatable" class="table table-condensed table-sm table-bordered">
             <thead class="bg-[#51bdb8] text-white">
               <tr style="text-align:center">
                 <td scope="col">No.</td>
@@ -365,6 +350,17 @@
 
   <!-- Template Main JS File -->
   <script src="{{ asset('template/assets/js/main.js') }}"></script>
+
+  {{-- DataTables CDN Links --}}
+  <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap4.min.js"></script>
+  {{-- <script src="https://cdn.datatables.net/1.11.6/js/jquery.dataTables.min.js"></script> --}}
+
+  <script type="text/javascript">
+    $(document).ready(function (){
+      var table = $('#datatable').DataTable();
+    });
+  </script>
 
 </body>
 

@@ -41,6 +41,8 @@
       crossorigin="anonymous">
     </script>
   
+  {{-- DataTables Link --}}
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap4.min.css">
   
 
   <!-- =======================================================
@@ -214,7 +216,7 @@
     </div>
 </form>
 
-<table class="table table-condensed table-sm table-bordered">
+<table id="datatable" class="table table-condensed table-sm table-bordered">
     <thead class="bg-[#36ae7c] text-white">
         <tr style="text-align:center">
             <th scope="col">No.</th>
@@ -273,6 +275,20 @@
 
   <!-- Template Main JS File -->
   <script src="{{ asset('template/assets/js/main.js') }}"></script>
+
+  {{-- Jquery --}}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+     {{-- DataTables CDN Links --}}
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap4.min.js"></script>
+    {{-- <script src="https://cdn.datatables.net/1.11.6/js/jquery.dataTables.min.js"></script> --}}
+
+    <script type="text/javascript">
+      $(document).ready(function (){
+        var table = $('#datatable').DataTable();
+      });
+    </script>
 
 </body>
 </html>

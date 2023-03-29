@@ -85,16 +85,31 @@ class BookingHistoryController extends Controller
         //
     }
     public function filter(Request $request)
-    {
-       
-        $todayDate = Carbon::now()->format('Y-m-d');
-        $bookings = Reservations::when($request->date != null, function($q) use ($request) {
-            return $q->whereDate('created_at', $request->date);
+{
+    $query = GuestInformation::join('reservations', 'guest_information.reservation_id', '=', 'reservations.id')
+        ->join('manage_rooms', 'reservations.room_id', '=', 'manage_rooms.id')
+        ->select(
+            'guest_information.first_name',
+            'guest_information.last_name',
+            'reservations.booking_status',
+            'reservations.checkin_date',
+            'reservations.checkout_date',
+            'manage_rooms.room_type',
+            'manage_rooms.rate',
+            'reservations.total_price',
+            'reservations.created_at'
+        )
+        ->orderBy('reservations.created_at', 'asc');
+
+    $todayDate = Carbon::now()->format('Y-m-d');
+    $bookings = $query->when($request->date != null, function($q) use ($request) {
+            return $q->whereDate('reservations.created_at', $request->date);
         }, function($q) use ($todayDate) {
-            return $q->whereDate('created_at', $todayDate);
+            return $q->whereDate('reservations.created_at', $todayDate);
         })
         ->paginate(10); 
-    
-        return view('admin.admin_booking-history', compact('bookings'));
-    }
+
+    return view('admin.admin_booking-history', compact('bookings'));
+}
+
 }

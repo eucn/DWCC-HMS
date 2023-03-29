@@ -197,58 +197,51 @@
         <div class="col-lg-12">
           <div class="row">
 
-            <form class="flex justify-end" action="{{ route('admin.filter-history') }}" method="GET">
-              <div class="flex items-center space-x-2 mb-3">
-                <label for="start-date" class="text-gray-600 font-medium">Filter</label>
-                <input type="date" id="start-date" name="date" value="{{ date('Y-m-d')}}" class="form-control px-4 py-2  border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+          <form class="flex justify-end" action="{{ route('admin.filter-history') }}" method="GET">
+    <div class="flex items-center space-x-2 mb-3">
+        <label for="start-date" class="text-gray-600 font-medium">Filter</label>
+        <input type="date" id="start-date" name="date" value="{{ request('date', date('Y-m-d')) }}" class="form-control px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
 
-                {{-- <label for="filter" class="ml-4 mr-2">Select time range:</label> --}}
-                <select id="filter" name="filter" class="form-select mr-2">
-                  <option value="today">Today</option>
-                  <option value="yesterday">Yesterday</option>
-                  <option value="last-7-days">Last 7 Days</option>
-                  <option value="last-14-days">Last 14 Days</option>
-                  <option value="last-30-days">Last 30 Days</option>
-                </select>
-                <button type="submit" class="btn btn-primary">Filter</button>
-              </div>
+        {{-- <label for="filter" class="ml-4 mr-2">Select time range:</label> --}}
+        <select id="filter" name="filter" class="form-select mr-2">
+            <option value="today" {{ request('filter') == 'today' ? 'selected' : '' }}>Today</option>
+            <option value="yesterday" {{ request('filter') == 'yesterday' ? 'selected' : '' }}>Yesterday</option>
+            <option value="last-7-days" {{ request('filter') == 'last-7-days' ? 'selected' : '' }}>Last 7 Days</option>
+            <option value="last-14-days" {{ request('filter') == 'last-14-days' ? 'selected' : '' }}>Last 14 Days</option>
+            <option value="last-30-days" {{ request('filter') == 'last-30-days' ? 'selected' : '' }}>Last 30 Days</option>
+        </select>
+        <button type="submit" class="btn btn-primary">Filter</button>
+    </div>
+</form>
 
-{{-- 
-              <div class=" space-y-1">
-                <label for="end-date" class="text-gray-600 font-medium">End date:</label>
-                <input type="date" id="end-date" name="end-date" class="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-              </div> --}}
+<table class="table table-condensed table-sm table-bordered">
+    <thead class="bg-[#36ae7c] text-white">
+        <tr style="text-align:center">
+            <th scope="col">No.</th>
+            <th scope="col">Name</th>
+            <th scope="col">Booked at</th>
+            <th scope="col">Booking Status</th>
+            <th scope="col">Check-in/Check-out</th>
+            <th scope="col">Room Type</th>
+            <th scope="col">Rate</th>
+        </tr>
+    </thead>
+    <tbody>
 
-              {{-- <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Filter</button> --}}
-            </form>
+        @foreach($bookings as $index => $booking)
+        <tr style="text-align:center">
+            <td>{{ $index + 1 }}</td>
+            <td>{{ $booking-> first_name }} {{ $booking-> last_name }}</td>
+            <td>{{ $booking-> created_at->format('M j, Y') }}</td>
+            <td>{{ $booking-> booking_status }}</td>
+            <td>{{ \Carbon\Carbon::parse($booking->checkin_date)->format('M j, Y') }} - {{ \Carbon\Carbon::parse($booking->checkout_date)->format('M j, Y') }}</td>
+            <td>{{ $booking-> room_type }}</td>
+            <td>{{ $booking-> rate }}</td>
+        </tr>
+        @endforeach
+    </tbody>
+</table>
 
-            <table class="table table-condensed table-sm table-bordered">   
-                <thead class="bg-[#36ae7c] text-white">   
-                    <tr style="text-align:center">   
-                        <th scope="col">No.</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Booked at</th>
-                        <th scope="col">Booking Status</th>
-                        <th scope="col">Check-in/Check-out</th>
-                        <th scope="col">Room Type</th>
-                        <th scope="col">Rate</th>
-                    </tr>   
-                </thead>   
-                <tbody>   
-                  @foreach($bookings as $index => $booking)
-                    <tr style="text-align:center">
-                        <td>{{ $index + 1 }}</td>
-                        <td>{{ $booking-> first_name }} {{ $booking-> last_name }}</td>
-                        <td>{{ $booking-> created_at->format('M j, Y') }}</td>
-                        <td>{{ $booking-> booking_status }}</td>
-                        <td>{{ $booking->checkin_date->format('M j, Y') }} - {{ $booking->checkout_date->format('M j, Y') }}</td>
-                        <td>{{ $booking-> room_type }}</td>
-                        <td>{{ $booking-> rate }}</td>
-                        <td>{{ $booking-> total_price }}</td>      
-                    </tr>
-                  @endforeach
-                </tbody>   
-            </table>
 
           </div>
         </div><!-- End Left side columns -->

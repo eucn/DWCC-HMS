@@ -225,8 +225,8 @@
             <td scope="col">{{ $report->booking_status }}</td>
             <td scope="col"> {{ \Carbon\Carbon::parse($report->checkin_date)->format('F j, Y') }}</td> 
             <td> {{ \Carbon\Carbon::parse($report->checkout_date)->format('F j, Y') }}</td>
-            <td scope="col">{{ $report->room_id }}</td>
-            {{-- <td scope="col">{{ $report->room_type }}</td> --}}
+            <td scope="col">{{ $report->room_number }}</td>
+            <td scope="col">{{ $report->room_type }}</td>
             <td scope="col">{{ $report->nights }}</td>
             <td scope="col">{{ $report->total_price }}</td>
         </tr>

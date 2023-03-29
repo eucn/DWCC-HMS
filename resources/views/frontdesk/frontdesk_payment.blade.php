@@ -216,9 +216,9 @@
       <table id="datatable" class="table table-condensed table-sm table-bordered">   
                 <thead class="bg-[#51bdb8] text-white">   
                     <tr style="text-align:center">   
-                        <th No. scope="col" class="text-center px-4"> &nbsp No.</th>
-                        <th scope="col" class="text-center" style=" text-align: center;">  Name</th>
-                        <th scope="col" class="w-[150px; text-align: center;] text-center"> &nbsp &nbsp Check-in Date</th>
+                        <th No. scope="col" class="w-[50px] text-center px-4"> &nbsp No. &nbsp</th>
+                        <th scope="col" class="text-center">Name</th>
+                        <th scope="col" class="text-center"> &nbsp &nbsp Check-in Date</th>
                         <th scope="col" class="text-center"> &nbsp Check-out Date</th>
                         <th scope="col" class="text-center"> &nbsp Payment Method</th>
                         <th scope="col" class="text-center">Payment Status</th>

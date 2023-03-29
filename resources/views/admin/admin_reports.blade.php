@@ -195,24 +195,67 @@
         <div class="col-lg-12">
           <div class="row">
 
-            <div class="flex flex-row space-x-4">
-      <div class="flex flex-col">
-        <label for="status">Status</label>
-        <select id="status" name="status">
-          <option value="cancelled">Cancelled</option>
-          <option value="pending">Pending</option>
-        </select>
-      </div>
+            <section class="mb-[50px]">
+                <div class="flex item-center">
+                    <div class="mr-5">
+                    <div>Status</div>
+                    <select id="select" name="select" class="block w-[170px] mt-1 pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md">
+                        <option value="option1">Completed</option>
+                        <option value="option2">Pending</option>
+                        <option value="option3">Cancelled</option>
+                    </select>
+                    </div>
+                    <div class="mr-10">
+                    <div>Check-in Date</div>
+                    <input type="date" class="block w-[170px] mt-1 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md">
+                    </div>
+                    <div class="mr-10">
+                    <div>Check-in Date</div>
+                    <input type="date" class="block w-[170px] mt-1 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md">
+                    </div>
+                    <div class="mr-10">
+                        <div class="opacity-1">Button</div>
+                        <button class="bg-[#005289] w-[120px] mt-1 py-2 text-white rounded-md">Preview</button>
+                    </div>
+                </div>
+            </section>
 
-      <div class="flex flex-col">
-        <label for="check_in_date">Check-in Date</label>
-        <input type="date" id="check_in_date" name="check_in_date">
-      </div>
+            <table id="" class="table table-condensed table-sm table-bordered">   
+                <thead class="bg-[#51bdb8] text-white">   
+                    <tr class="text-center ">   
+                        <th scope="col" class="w-[70px] sm-w-[70] text-center py-3">Invoice No.</th>
+                        <th scope="col" class="text-center px-1 py-3">Name</th>
+                        <th scope="col" class="text-center px-1 py-3">Booking Status</th>
+                        <th scope="col" class="text-center px-1 py-3">Check-in Date</th>
+                        <th scope="col" class="text-center px-1 py-3">Check-out Date</th>
+                        <th scope="col" class="text-center px-1 py-3">Room No.</th>
+                        <th scope="col" class="text-center px-1 py-3">Room Type</th>
+                        <th scope="col" class="text-center px-1 py-3">Nights</th>
+                        <th scope="col" class="text-center px-1 py-3">Price</th>
+                    </tr>   
+                </thead>   
+                </tbody> 
+                @foreach ($reports as $index => $report)
+                @if ($report->payment_status != 'Paid')
+                <tr class="text-center py-5" >
+                <td scope="col">
+                    {{ $index + 1 }} 
+                    {{-- {{ $counter }} --}}
+                    {{-- <p class="text-[0px] text">{{ $data->reservation_id }}</p> --}}
+                    </td>
+                    <td scope="col">{{ $report->first_name }} &nbsp; {{ $report->last_name }}</td>
+                    <td scope="col">{{ $report->booking_status }}</td>
+                    <td scope="col"> {{ \Carbon\Carbon::parse($report->checkin_date)->format('F j, Y') }}</td> 
+                    <td> {{ \Carbon\Carbon::parse($report->checkout_date)->format('F j, Y') }}</td>
+                    <td scope="col">{{ $report->room_number }}</td>
+                    <td scope="col">{{ $report->room_type }}</td>
+                    <td scope="col">{{ $report->nights }}</td>
+                    <td scope="col">{{ $report->total_price }}</td>
+                </tr>
+            @endif
+                @endforeach  
+            </table>
 
-      <div class="flex flex-col">
-        <label for="check_out_date">Check-out Date</label>
-        <input type="date" id="check_out_date" name="check_out_date">
-      </div>
 
           </div>
         </div><!-- End Left side columns -->

@@ -130,14 +130,14 @@
       </li><!-- End Dashboard Nav -->
 
       <li class="nav-item">
-        <a class="nav-link nav-link-icon collapsed" href="#">
+        <a class="nav-link nav-link-icon collapsed" href="{{ route('admin.room.index') }}">
           <i class="fa-solid fa-bed icon-nav"></i>
           <span>Manage Rooms</span>
         </a>
       </li><!-- End Manage Rooms Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="index.html">
+        <a class="nav-link collapsed" href="{{ route('admin.bookingHistory') }}">
           <i class="fa-regular fa-file icon-nav"></i>
           <span>Booking History</span>
         </a>

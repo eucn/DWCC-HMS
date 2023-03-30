@@ -203,15 +203,6 @@
     <div class="flex items-center space-x-2 mb-3">
         <label for="start-date" class="text-gray-600 font-medium">Filter</label>
         <input type="date" id="start-date" name="date" value="{{ request('date', date('Y-m-d')) }}" class="form-control px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-
-        {{-- <label for="filter" class="ml-4 mr-2">Select time range:</label> --}}
-        <select id="filter" name="filter" class="form-select mr-2">
-            <option value="today" {{ request('filter') == 'today' ? 'selected' : '' }}>Today</option>
-            <option value="yesterday" {{ request('filter') == 'yesterday' ? 'selected' : '' }}>Yesterday</option>
-            <option value="last-7-days" {{ request('filter') == 'last-7-days' ? 'selected' : '' }}>Last 7 Days</option>
-            <option value="last-14-days" {{ request('filter') == 'last-14-days' ? 'selected' : '' }}>Last 14 Days</option>
-            <option value="last-30-days" {{ request('filter') == 'last-30-days' ? 'selected' : '' }}>Last 30 Days</option>
-        </select>
         <button type="submit" class="btn btn-primary">Filter</button>
     </div>
 </form>

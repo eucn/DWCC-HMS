@@ -225,9 +225,9 @@
         <tr style="text-align:center">
             <td>{{ $index + 1 }}</td>
             <td>{{ $booking-> first_name }} {{ $booking-> last_name }}</td>
-            <td>{{ $booking-> created_at->format('M j, Y') }}</td>
+            <td>{{ $booking-> created_at->format(' F j, Y') }}</td>
             <td>{{ $booking-> booking_status }}</td>
-            <td>{{ \Carbon\Carbon::parse($booking->checkin_date)->format('M j, Y') }} - {{ \Carbon\Carbon::parse($booking->checkout_date)->format('M j, Y') }}</td>
+            <td>{{ \Carbon\Carbon::parse($booking->checkin_date)->format('F j, Y') }} - {{ \Carbon\Carbon::parse($booking->checkout_date)->format('M j, Y') }}</td>
             <td>{{ $booking-> room_type }}</td>
             <td>{{ $booking-> rate }}</td>
         </tr>

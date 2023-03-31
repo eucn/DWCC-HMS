@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 //Login
+use Barryvdh\DomPDF\PDF;
 use App\Models\Frontdesk;
 use Illuminate\View\View;
 use App\Models\Manage_Room;
@@ -10,9 +11,9 @@ use App\Models\Reservations;
 use Illuminate\Http\Request;
 use App\Models\GuestInformation;
 use Illuminate\Support\Facades\DB;
-use App\Models\Walkin_Reservations;
 
 //Register
+use App\Models\Walkin_Reservations;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -21,10 +22,9 @@ use Illuminate\Auth\Events\Registered;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Session;
 use App\Http\Requests\Auth\LoginRequest;
-use Illuminate\Validation\Rules\Password;
 
 // Reports
-use PDF;
+use Illuminate\Validation\Rules\Password;
 
 class FrontdeskController extends Controller
 {
@@ -33,7 +33,25 @@ class FrontdeskController extends Controller
     }
 
     public function Dashboard(){
-        return view('frontdesk.frontdesk_dashboard');
+      
+        $completeBookingsCount = Reservations::whereDate('created_at', today())
+        ->where('booking_status', 'Completed')
+        ->count();
+
+        $currentDate = date('Y-m-d');
+        $AvailableRoomCount = Manage_Room::whereNotIn('id', function($query) use ($currentDate) {
+            $query->select('room_id')
+                  ->from('reservations')
+                  ->where('checkin_date', '<=', $currentDate)
+                  ->where('checkout_date', '>=', $currentDate);
+        })->count();
+        $todayReservationsCount = Reservations::whereDate('created_at', today())->count();
+
+        return view('frontdesk.frontdesk_dashboard',[
+        'confirmedBookingsCount'=>$completeBookingsCount,
+        'roomCount'=>$AvailableRoomCount,
+        'todayReservationsCount'=>$todayReservationsCount,  
+      ]);
     }
 
     //Handle an incoming login request.
@@ -128,6 +146,7 @@ class FrontdeskController extends Controller
     if (!$reservations->isEmpty()) {
         // room is already reserved, return an error message or redirect back with an error message
         return redirect()->back()->with('error', 'The room is already reserved for the selected dates.');
+        
     }else{
             $room_id = $request->input('room_no');
             $checkin_date = $request->input('check_in_date');
@@ -234,6 +253,19 @@ class FrontdeskController extends Controller
         // Session::flash('success', 'Your reservation was successful.');
         return redirect()->route('frontdesk.view.invoice');
 
+    }
+    public function FrontdeskBookingDetails(){
+
+        $reservations = GuestInformation::join('reservations', 'guest_information.reservation_id', '=', 'reservations.id')
+        ->join('manage_rooms', 'reservations.room_id', '=', 'manage_rooms.id')
+        ->select('guest_information.reservation_id','guest_information.first_name','guest_information.last_name', 'guest_information.payment_method','reservations.booking_status', 'reservations.checkin_date','reservations.total_price', 'reservations.checkout_date',)
+        ->orderBy('guest_information.first_name', 'asc')
+        ->get();
+
+        return view('frontdesk.frontdesk_bookingdetails', [
+            'reservationData' => $reservations,
+
+        ]);
     }
 
     // SOFT DELETE

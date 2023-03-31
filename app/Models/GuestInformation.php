@@ -27,4 +27,9 @@ class GuestInformation extends Model
     {
         return $this->belongsTo(Reservations::class);
     }
+
+    public function manage_room()
+    {
+        return $this->belongsTo(Manage_Room::class);
+    }
 }

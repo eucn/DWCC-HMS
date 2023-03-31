@@ -24,6 +24,9 @@ use Illuminate\Support\Facades\Session;
 use App\Http\Requests\Auth\LoginRequest;
 use Illuminate\Validation\Rules\Password;
 
+// Reports
+use PDF;
+
 class FrontdeskController extends Controller
 {
     public function Index(){
@@ -283,6 +286,9 @@ class FrontdeskController extends Controller
 
 
     public function FrontdeskReports(){
+        $status = '';
+        $checkinDate = '';
+        $checkoutDate = '';
 
         $reports = GuestInformation::join('reservations', 'guest_information.reservation_id', '=', 'reservations.id')
         ->join('manage_rooms', 'reservations.room_id', '=', 'manage_rooms.id')
@@ -292,11 +298,85 @@ class FrontdeskController extends Controller
         'manage_rooms.room_number')
         ->orderBy('guest_information.first_name', 'asc')
         ->get();
+
         return view('frontdesk.frontdesk_reports', [
             'reports' => $reports,
+            'status' => $status,
+            'checkinDate' => $checkinDate,
+            'checkoutDate' => $checkoutDate,
         ]);
-        return view('');
     }
+
+    public function preview(Request $request)
+    {
+        // Retrieve the input values from the request
+        $status = $request->input('status', '');
+        $checkinDate = $request->input('checkin_date');
+        $checkoutDate = $request->input('checkout_date');
+
+        // Retrieve the filtered orders
+        $reports = GuestInformation::leftJoin('reservations', 'guest_information.reservation_id', '=', 'reservations.id')
+        ->leftJoin('manage_rooms', 'reservations.room_id', '=', 'manage_rooms.id')
+        ->select('guest_information.first_name','guest_information.last_name','reservations.booking_status', 'reservations.checkin_date', 'reservations.checkout_date', 'reservations.total_price', 'reservations.nights', 'manage_rooms.room_number', 'manage_rooms.room_type')
+        
+        ->when($status, function ($query, $status) {
+            return $query->where('reservations.booking_status', $status);
+        })
+        ->when($checkinDate, function ($query, $checkinDate) {
+            return $query->where('reservations.checkin_date', '>=', $checkinDate);
+        })
+        ->when($checkoutDate, function ($query, $checkoutDate) {
+            return $query->where('reservations.checkout_date', '<=', $checkoutDate);
+        })
+        ->get();
+        // ->paginate(10);
+        
+
+        // Pass the orders and input values to the view
+        return view('frontdesk.frontdesk_reports', [
+            'reports' => $reports,
+            'status' => $status,
+            'checkinDate' => $checkinDate,
+            'checkoutDate' => $checkoutDate,
+        ]);
+    }
+
+    public function printPDF(Request $request)
+    {
+        // Retrieve the input values from the request
+        $status = $request->input('status', '');
+        $checkinDate = $request->input('checkin_date');
+        $checkoutDate = $request->input('checkout_date');
+
+        // Retrieve the filtered orders
+        $reports = GuestInformation::leftJoin('reservations', 'guest_information.reservation_id', '=', 'reservations.id')
+            ->leftJoin('manage_rooms', 'reservations.room_id', '=', 'manage_rooms.id')
+            ->select('guest_information.first_name', 'guest_information.last_name', 'reservations.booking_status', 'reservations.checkin_date', 'reservations.checkout_date', 'reservations.total_price', 'reservations.nights', 'manage_rooms.room_number', 'manage_rooms.room_type')
+            ->when($status, function ($query, $status) {
+                return $query->where('reservations.booking_status', $status);
+            })
+            ->when($checkinDate, function ($query, $checkinDate) {
+                return $query->where('reservations.checkin_date', '>=', $checkinDate);
+            })
+            ->when($checkoutDate, function ($query, $checkoutDate) {
+                return $query->where('reservations.checkout_date', '<=', $checkoutDate);
+            })
+            ->get();
+
+        // Pass the orders and input values to the view
+        $data = [
+            'reports' => $reports,
+            'date' => date('d/m/Y'),
+            // 'image_url' => public_path('images/DWCCLOGO.png'),
+        ];
+
+        $pdf = PDF::loadView('frontdesk.frontdesk_reports-details', $data)
+        ->setPaper('letter', 'landscape');
+
+        return $pdf->stream();
+    }
+
+
     public function FrontdeskPayment(){
         $reservations = GuestInformation::join('reservations', 'guest_information.reservation_id', '=', 'reservations.id')
         ->join('manage_rooms', 'reservations.room_id', '=', 'manage_rooms.id')

@@ -195,7 +195,33 @@
         <div class="col-lg-12">
           <div class="row">
 
-            <section class="mb-[50px]">
+            <form id="filter-form" action="{{ route('admin.reports.preview') }}" method="get" class="mb-[50px]">
+              <div class="flex item-center">
+                  <div class="mr-5">
+                    <div>Status</div>
+                    <select id="status" name="status" class="block w-[170px] mt-1 pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md">
+                        <option value=""{{ empty($status) ? ' selected' : '' }}>All</option>
+                        <option value="complete"{{ $status === 'complete' ? ' selected' : '' }}>Complete</option>
+                        <option value="pending"{{ $status === 'pending' ? ' selected' : '' }}>Pending</option>
+                        <option value="cancelled"{{ $status === 'cancelled' ? ' selected' : '' }}>Cancelled</option>
+                    </select>
+                  </div>
+                  <div class="mr-10">
+                    <div>Check-in Date</div>
+                      <input type="date" name="checkin_date" id="checkin_date" value="{{ $checkinDate }}" class="block w-[170px] mt-1 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md">
+                  </div>
+                  <div class="mr-10">
+                    <div>Check-in Date</div>
+                      <input type="date" name="checkout_date" id="checkout_date" value="{{ $checkoutDate }}" class="block w-[170px] mt-1 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md">
+                  </div>
+                  <div class="mr-10">
+                    <div class="opacity-1">Button</div>
+                      <button type="submit" class="bg-[#005289] w-[120px] mt-1 py-2 text-white rounded-md">Preview</button>
+                  </div>
+                </div>
+              </form>
+
+            {{-- <section class="mb-[50px]">
                 <div class="flex item-center">
                     <div class="mr-5">
                     <div>Status</div>
@@ -218,7 +244,17 @@
                         <button class="bg-[#005289] w-[120px] mt-1 py-2 text-white rounded-md">Preview</button>
                     </div>
                 </div>
-            </section>
+            </section> --}}
+
+            <form action="{{ route('admin.reports.print', ['status' => $status, 'checkin_date' => $checkinDate, 'checkout_date' => $checkoutDate])}}" method="post" target="_blank">
+              @csrf
+              <div class="d-flex justify-content-between mb-3">
+                <div class="ml-auto">
+                    <button type="submit" class="bg-[#005289] w-[120px] mt-1 py-2 text-white rounded-md">Print</button>
+                </div>
+              </div>
+            </form>
+            
 
             <table id="" class="table table-condensed table-sm table-bordered">   
                 <thead class="bg-[#51bdb8] text-white">   
@@ -247,7 +283,7 @@
                     <td scope="col">{{ $report->booking_status }}</td>
                     <td scope="col"> {{ \Carbon\Carbon::parse($report->checkin_date)->format('F j, Y') }}</td> 
                     <td> {{ \Carbon\Carbon::parse($report->checkout_date)->format('F j, Y') }}</td>
-                    <td scope="col">{{ $report->room_number }}</td>
+                    <td scope="col">{{ $report->room_number}}</td>
                     <td scope="col">{{ $report->room_type }}</td>
                     <td scope="col">{{ $report->nights }}</td>
                     <td scope="col">{{ $report->total_price }}</td>
@@ -256,7 +292,7 @@
                 @endforeach  
             </table>
 
-
+            {{-- {{ $reports->links() }}  --}}
           </div>
         </div><!-- End Left side columns -->
 
@@ -287,6 +323,28 @@
 
   <!-- Template Main JS File -->
   <script src="{{ asset('template/assets/js/main.js') }}"></script>
+
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Get the filter form
+    var filterForm = document.getElementById('filter-form');
+
+    // Get the reset button
+    var resetBtn = filterForm.querySelector('button[type="reset"]');
+
+    // Add an event listener to the reset button
+    resetBtn.addEventListener('click', function(event) {
+      // Prevent the form from resetting normally
+      event.preventDefault();
+
+      // Reset the form elements
+      filterForm.reset();
+
+      // Replace the current URL with the original URL
+      window.history.replaceState({}, '', "{{ route('admin.reports') }}");
+    });
+  });
+</script>
 
 </body>
 

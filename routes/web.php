@@ -59,7 +59,7 @@ Route::prefix('admin')->group(function (){
     Route::patch('/admin/{id}/deactivate', [AdminController::class, 'deactivate'])->name('admin.deactivate');
     Route::patch('/admin/{id}/activate', [AdminController::class, 'activate'])->name('admin.activate');
     
-  
+ 
 
     // Manage Rooms
     Route::prefix('room')->group(function () {
@@ -92,7 +92,9 @@ Route::prefix('admin')->group(function (){
 
 
 //-------------- Frontdesk Routes --------------//
-Route::prefix('frontdesk')->group(function(){
+Route::prefix('frontdesk')->middleware(['deactivateFrontdesk'])->group(function () {
+    // Routes that require auth and DeactivateFrontdesk middleware
+  
     Route::get('/login',[FrontdeskController::class, 'Index'])->name('frontdesk_login_form');
     Route::post('/login/owner',[FrontdeskController::class, 'FrontdeskLogin'])->name('frontdesk.login');
     // Hindi pwedeng maview ang dashboard ng admin hanggat di nag login dahil nilagyan ko sya ng middleware
@@ -122,24 +124,31 @@ Route::prefix('frontdesk')->group(function(){
     Route::patch('/frontdesk/{id}/deactivate', [FrontdeskController::class, 'deactivate'])->name('frontdesk.deactivate');
     Route::patch('/frontdesk/{id}/activate', [FrontdeskController::class, 'activate'])->name('frontdesk.activate');
 });
+// Route::prefix('frontdesk')->group(function(){
+    
+// });
 //-------------- End Frontdesk Routes --------------//
 
 //-------------- Guest Routes --------------//
-Route::post('/dashboard', [GuestController::class, 'GuestReservation'])->middleware(['auth', 'verified'])->name('store.date');
-Route::get('/dashboard', [GuestController::class, 'ViewDashboard'])->name('guest.dashboard');
-Route::post('/userGuest/room_info/{room_id}', [GuestReservationController::class, 'GuestViewRoom'])->name('view.room');
-Route::post('/userGuest/guest_registration', [GuestReservationController::class, 'GuestSaveReserve'])->name('save.reservation');
-Route::get('/userGuest/guest_registration', [GuestReservationController::class, 'ViewGuestInfo'])->name('registration.form');
-Route::post('/userGuest/guest_information', [GuestInformationController::class, 'GuestInfo'])->name('save.guest.info');
-Route::post('/userGuest/invoice', [GuestInformationController::class, 'GuestInfo'])->name('save.invoice');
-Route::get('/guest_users/invoice', [GuestInvoiceController::class, 'view_invoice'])->name('view.invoice');
+
+Route::group(['middleware' => ['auth', 'deactivate']], function (){
+    Route::post('/dashboard', [GuestController::class, 'GuestReservation'])->middleware(['auth', 'verified'])->name('store.date');
+    Route::get('/dashboard', [GuestController::class, 'ViewDashboard'])->name('guest.dashboard');
+    Route::post('/userGuest/room_info/{room_id}', [GuestReservationController::class, 'GuestViewRoom'])->name('view.room');
+    Route::post('/userGuest/guest_registration', [GuestReservationController::class, 'GuestSaveReserve'])->name('save.reservation');
+    Route::get('/userGuest/guest_registration', [GuestReservationController::class, 'ViewGuestInfo'])->name('registration.form');
+    Route::post('/userGuest/guest_information', [GuestInformationController::class, 'GuestInfo'])->name('save.guest.info');
+    Route::post('/userGuest/invoice', [GuestInformationController::class, 'GuestInfo'])->name('save.invoice');
+    Route::get('/guest_users/invoice', [GuestInvoiceController::class, 'view_invoice'])->name('view.invoice');
 
 
-// Route::delete('/users/{id}', [GuestController::class, 'destroy'])->name('users.destroy');
+    // Route::delete('/users/{id}', [GuestController::class, 'destroy'])->name('users.destroy');
 
 
-Route::get('/view-invoice', [GuestInvoiceController::class, 'ViewInvoice'])->name('guest.view.invoice');
-Route::get('/generate-invoice', [GuestInvoiceController::class, 'GenerateInvoice'])->name('generate.invoice');
+    Route::get('/view-invoice', [GuestInvoiceController::class, 'ViewInvoice'])->name('guest.view.invoice');
+    Route::get('/generate-invoice', [GuestInvoiceController::class, 'GenerateInvoice'])->name('generate.invoice');
+
+});
 
 
 //-------------- End Guest Routes --------------//

@@ -169,7 +169,7 @@
 </li><!-- End Tables Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="index.html">
+        <a class="nav-link collapsed" href="{{ route('admin.reports') }}">
           <i class="fa-regular fa-file-lines icon-nav"></i>
           <span>Reports</span>
         </a>

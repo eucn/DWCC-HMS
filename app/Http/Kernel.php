@@ -65,5 +65,7 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'admin' => \App\Http\Middleware\Admin::class,
         'frontdesk' => \App\Http\Middleware\Frontdesk::class,
+        'deactivate' => \App\Http\Middleware\GuestDeactivate::class,
+        'deactivateFrontdesk' => \App\Http\Middleware\FrontdeskDeactivate::class,
     ];
 }

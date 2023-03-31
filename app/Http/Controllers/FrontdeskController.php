@@ -409,5 +409,7 @@ class FrontdeskController extends Controller
         } else {
             return redirect()->back()->with('error', 'The input invoice number is incorrect');
         }
-    }   
+    }
+    
+    
 }

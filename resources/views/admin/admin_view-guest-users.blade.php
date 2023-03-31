@@ -10,9 +10,8 @@
   <meta content="" name="description">
   <meta content="" name="keywords">
 
-  <!-- Favicons -->
-  <link href="{{ asset('template/assets/img/favicon.png') }}" rel="icon">
-  <link href="{{ asset('template/assets/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
+  <!-- Logo -->
+  <link rel="icon" type="image/png" sizes="16x16" href="../images/sitelogo.png">
 
   <!-- Google Fonts -->
   <link href="https://fonts.gstatic.com" rel="preconnect">
@@ -162,7 +161,7 @@
 </li><!-- End Tables Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="index.html">
+        <a class="nav-link collapsed" href="{{ route('admin.reports') }}">
           <i class="fa-regular fa-file-lines icon-nav"></i>
           <span>Reports</span>
         </a>
@@ -230,23 +229,29 @@
               <td>{{ $user->name }}</td>
               <td>{{ $user->email }}</td>
               <td>{{ $user->created_at }}</td>
-              <td>{{ $user->Acc_Stat }}</td>                                    
+              {{-- <td>{{ $user->Acc_Stat }}</td>--}}
+              <td>
+                @if ($user->Acc_Stat == 'Deactivate')
+                    <p>{{ $user->Acc_Stat }}</p>
+                @elseif ($user->Acc_Stat == 'Activate')
+                    <p>{{ $user->Acc_Stat }}</p>
+                @endif
+              </td>
               <td>
               <!--View Button-->	
-              <!-- <center>
-                  <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal_viewsuserdetails" data-profile="../profile-pictures/default-profile.png" data-fname="Nikolas" data-mname="G." data-lname="Ocampo" data-gender="" data-email="" data-batch="2023" data-program="MIT" data-nprog="1"><svg class="svg-inline--fa fa-eye" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="eye" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg=""><path fill="currentColor" d="M279.6 160.4C282.4 160.1 285.2 160 288 160C341 160 384 202.1 384 256C384 309 341 352 288 352C234.1 352 192 309 192 256C192 253.2 192.1 250.4 192.4 247.6C201.7 252.1 212.5 256 224 256C259.3 256 288 227.3 288 192C288 180.5 284.1 169.7 279.6 160.4zM480.6 112.6C527.4 156 558.7 207.1 573.5 243.7C576.8 251.6 576.8 260.4 573.5 268.3C558.7 304 527.4 355.1 480.6 399.4C433.5 443.2 368.8 480 288 480C207.2 480 142.5 443.2 95.42 399.4C48.62 355.1 17.34 304 2.461 268.3C-.8205 260.4-.8205 251.6 2.461 243.7C17.34 207.1 48.62 156 95.42 112.6C142.5 68.84 207.2 32 288 32C368.8 32 433.5 68.84 480.6 112.6V112.6zM288 112C208.5 112 144 176.5 144 256C144 335.5 208.5 400 288 400C367.5 400 432 335.5 432 256C432 176.5 367.5 112 288 112z"></path></svg><!-- <i class="fa-solid fa-eye"></i> Font Awesome fontawesome.com -->
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalDialogScrollable{{ $user->id }}">
-                    <i class="fa-solid fa-eye">View</i>
-                    </button>
+                <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modalDialogScrollable{{ $user->id }}">
+                  <i class="fa-solid fa-eye"></i>
+                </button>
 
-                     <!-- Button trigger activate modal -->
- <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#activate{{ $user->id }}">
-    <i class="fa-solid fa-user"></i>
-</button>
-                        <!-- Button trigger deactivate modal -->
-                        <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deactivate{{ $user->id }}">
-    <i class="fa-solid fa-user-slash"></i>
-</button>
+                <!-- Button trigger activate modal -->
+                <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#activate{{ $user->id }}">
+                    <i class="fa-solid fa-user"></i>
+                </button>
+
+                <!-- Button trigger deactivate modal -->
+                <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deactivate{{ $user->id }}">
+                    <i class="fa-solid fa-user-slash"></i>
+                </button>
 
                 </td>  
                 </tr> 

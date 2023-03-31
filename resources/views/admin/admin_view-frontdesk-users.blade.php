@@ -10,9 +10,8 @@
   <meta content="" name="description">
   <meta content="" name="keywords">
 
-  <!-- Favicons -->
-  <link href="{{ asset('template/assets/img/favicon.png') }}" rel="icon">
-  <link href="{{ asset('template/assets/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
+  <!-- Logo -->
+  <link rel="icon" type="image/png" sizes="16x16" href="../images/sitelogo.png">
 
   <!-- Google Fonts -->
   <link href="https://fonts.gstatic.com" rel="preconnect">
@@ -167,7 +166,7 @@
 </li><!-- End Tables Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="index.html">
+        <a class="nav-link collapsed" href="{{ route('admin.reports') }}">
           <i class="fa-regular fa-file-lines icon-nav"></i>
           <span>Reports</span>
         </a>
@@ -299,20 +298,29 @@
                         <td>{{ $frontdesk->name }}</td>
                         <td>{{ $frontdesk->email }}</td>
                         <td>{{ $frontdesk->created_at }}</td>  
-                        <td>{{ $frontdesk->Acc_Stat }}</td>                                 
+                        {{-- <td>{{ $frontdesk->Acc_Stat }}</td>--}}
+                        <td>
+                @if ($frontdesk->Acc_Stat == 'Deactivate')
+                    <p>{{ $frontdesk->Acc_Stat }}</p>
+                @elseif ($frontdesk->Acc_Stat == 'Activate')
+                    <p>{{ $frontdesk->Acc_Stat }}</p>
+                @endif
+              </td>
                         <td>
                         <!--View Button-->	
-                        <button type="button" class="btn btn-primary" id="modal2" data-bs-toggle="modal" data-bs-target="#modalDialogScrollable{{ $frontdesk->id }}">
-                              View
-                              </button>
-                                                  <!-- Button trigger activate modal -->
- <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#activate{{ $frontdesk->id }}">
-    <i class="fa-solid fa-user"></i>
-</button>
+                        <button type="button" class="btn btn-primary btn-sm" id="modal2" data-bs-toggle="modal" data-bs-target="#modalDialogScrollable{{ $frontdesk->id }}">
+                         <i class="fa-solid fa-eye"></i>
+                        </button>
+
+                        <!-- Button trigger activate modal -->
+                        <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#activate{{ $frontdesk->id }}">
+                            <i class="fa-solid fa-user"></i>
+                        </button>
+
                         <!-- Button trigger deactivate modal -->
                         <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deactivate{{ $frontdesk->id }}">
-    <i class="fa-solid fa-user-slash"></i>
-</button>
+                            <i class="fa-solid fa-user-slash"></i>
+                        </button>
                           </td>  
 
                           <!-- Modal -->
@@ -353,7 +361,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-primary">Deactivate</button>
+                    <button type="submit" class="btn btn-danger">Deactivate</button>
                 </div>
             </form>
         </div>

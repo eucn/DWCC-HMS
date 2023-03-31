@@ -196,7 +196,7 @@
                       <i class="fa-solid fa-check-to-slot"></i>
                     </div>
                     <div class="ps-3">
-                      <h6>2</h6>
+                      <h6>{{ $confirmedBookingsCount }}</h6>
 
                     </div>
                   </div>
@@ -217,7 +217,7 @@
                       <i class="fa-solid fa-users"></i>
                     </div>
                     <div class="ps-3">
-                      <h6>2</h6>
+                      <h6>{{ $todayReservationsCount }}</h6>
                      
                     </div>
                   </div>
@@ -238,8 +238,7 @@
                       <i class="fa-solid fa-bed"></i>
                     </div>
                     <div class="ps-3">
-                      <h6>2</h6>
-
+                      <h6>{{ $roomCount }}</h6>
                     </div>
                   </div>
                 </div>

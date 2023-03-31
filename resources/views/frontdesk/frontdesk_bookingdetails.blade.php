@@ -5,14 +5,10 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   @vite('resources/css/app.css')
-
+  <link rel="icon" type="image/png" sizes="16x16" href="../images/sitelogo.png">
   <title>Frontdesk Dashboard</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
-
-  <!-- Favicons -->
-  <link href="{{ asset('template/assets/img/favicon.png') }}" rel="icon">
-  <link href="{{ asset('template/assets/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
   <link href="https://fonts.gstatic.com" rel="preconnect">
@@ -222,6 +218,7 @@
                   <th No. scope="col" class="w-[50px] text-center px-4"> &nbsp No. &nbsp</th>
                   <th scope="col" class="text-center">Name</th>
                   <th scope="col" class="text-center"> &nbsp Payment Method</th>
+                  <th scope="col" class="text-center"> &nbsp Booking Status</th>
                   <th scope="col" class="text-center"> &nbsp &nbsp Check-in Date</th>
                   <th scope="col" class="text-center"> &nbsp Check-out Date</th>
                   <th scope="col" style="width: 150px; text-align:center;"> &nbsp &nbsp  Action</th>
@@ -239,9 +236,8 @@
                 <td scope="col">{{ $data->first_name }} &nbsp; {{ $data->last_name }}</td>
                 <td scope="col">{{ $data->payment_method }}</td>
                 <td scope="col">{{ $data->booking_status }}</td>
-                <td scope="col"> {{ \Carbon\Carbon::parse($data->checkin_date)->format('F j, Y') }} &nbsp; - &nbsp;
-                  {{ \Carbon\Carbon::parse($data->checkout_date)->format('F j, Y') }}
-                </td>
+                <td scope="col"> {{ \Carbon\Carbon::parse($data->checkin_date)->format('F j, Y') }}</td>
+                <td scope="col"> {{ \Carbon\Carbon::parse($data->checkout_date)->format('F j, Y') }}</td>
                 <td scope="col">
                   <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
                     data-target="#view_modal{{ $data->reservation_id }}">
@@ -361,5 +357,3 @@
   </script>
 
 </body>
-
-</html>

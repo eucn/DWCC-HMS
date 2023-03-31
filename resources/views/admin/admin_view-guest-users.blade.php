@@ -261,8 +261,9 @@
                       <div class="modal-dialog modal-dialog-scrollable">
                         <div class="modal-content">
                           <div class="modal-header">
-                            <h5 class="modal-title">View Information</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <h5 class="modal-title" style="color: #55afab;">View Information</h5>
+                            <button type="button" style="position:relative; left: 1px; color: #dc3545;" class="close"
+                        data-dismiss="modal">&times;</button>
                           </div>
                           <div class="modal-body">
                           <h6><strong>Name:</strong> {{ $user->name }}</h6><br>
@@ -285,8 +286,9 @@
                 @csrf
                 @method('PATCH')
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Deactivate User</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <h5 class="modal-title" id="exampleModalLabel"  style="color: #55afab;">Deactivate User</h5>
+                    <button type="button" style="position:relative; left: 1px; color: #dc3545;" class="close"
+                        data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
                     <p>Are you sure you want to deactivate this user?</p>
@@ -308,15 +310,16 @@
                 @csrf
                 @method('PATCH')
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Activate User</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <h5 class="modal-title" id="exampleModalLabel " style="color: #55afab;">Activate User</h5>
+                    <button type="button" style="position:relative; left: 1px; color: #dc3545;" class="close"
+                        data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
                     <p>Are you sure you want to activate this user?</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-success">Activate</button>
+                    <button type="submit" class="btn btn-primary">Activate</button>
                 </div>
             </form>
         </div>

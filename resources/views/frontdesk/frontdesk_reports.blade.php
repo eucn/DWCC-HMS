@@ -6,13 +6,14 @@
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   @vite('resources/css/app.css')
 
+  <!-- Logo -->
+  <link rel="icon" type="image/png" sizes="16x16" href="../images/sitelogo.png">
+
   <title>Frontdesk Dashboard</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
-  <!-- Favicons -->
-  <link href="{{ asset('template/assets/img/favicon.png') }}" rel="icon">
-  <link href="{{ asset('template/assets/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
+
 
   <!-- Google Fonts -->
   <link href="https://fonts.gstatic.com" rel="preconnect">
@@ -199,18 +200,18 @@
     </section>
     <section>
       <table id="" class="table table-condensed table-sm table-bordered">   
-        <thead class="bg-[#51bdb8] text-white">   
-            <tr class="text-center ">   
-                <th scope="col" class="w-[70px] sm-w-[70] text-center py-3">Invoice No.</th>
-                <th scope="col" class="text-center px-1 py-3">Name</th>
-                <th scope="col" class="text-center px-1 py-3">Booking Status</th>
-                <th scope="col" class="text-center px-1 py-3">Check-in Date</th>
-                <th scope="col" class="text-center px-1 py-3">Check-out Date</th>
-                <th scope="col" class="text-center px-1 py-3">Room No.</th>
-                <th scope="col" class="text-center px-1 py-3">Room Type</th>
-                <th scope="col" class="text-center px-1 py-3">Nights</th>
-                <th scope="col" class="text-center px-1 py-3">Price</th>
-            </tr>   
+        <thead class="bg-[#36ae7c] text-white">   
+          <tr class="text-center">
+            <th scope="col" class="px-4 py-1">Invoice No.</th>
+            <th scope="col" class="px-4 py-1">Name</th>
+            <th scope="col" class="px-4 py-1">Booking Status</th>
+            <th scope="col" class="px-4 py-1">Check-in Date</th>
+            <th scope="col" class="px-4 py-1">Check-out Date</th>
+            <th scope="col" class="px-4 py-1">Room No.</th>
+            <th scope="col" class="px-4 py-1">Room Type</th>
+            <th scope="col" class="px-4 py-1">Nights</th>
+            <th scope="col" class="px-4 py-1">Price</th>
+        </tr>
         </thead>   
         </tbody> 
         @foreach ($reports as $index => $report)

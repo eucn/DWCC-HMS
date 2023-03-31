@@ -19,18 +19,6 @@
                         placeholder="Enter your name" >
                         <x-input-error :messages="$errors->get('name')" class="mt-2" />
                     </div>
-
-                    <!-- <div class="py-1">
-                        <span class="mb-2 text-sm font-semibold">First Name</span>
-                        <input type="text" name="firstname" id="firstname" class="w-full p-1 border border-gray-300 rounded-md placeholder:font:light placeholder:text-gray-500 placeholder:text-sm py-1"
-                        placeholder="Enter your first name">
-                    </div>
-                    <div class="py-1">
-                        <span class="mb-2 text-sm font-semibold">Last Name</span>
-                        <input type="text" name="lastname" id="lastname" 
-                            class="w-full p-1 border border-gray-300 rounded-md placeholder:font:light placeholder:text-gray-500 placeholder:text-sm py-1"
-                        placeholder="Enter your last name">
-                    </div> -->
                     <div class="py-1">
                         <span class="mb-2 text-sm font-semibold">Email
                             <span class="text-red-500 text-sm ">*</span> </span>

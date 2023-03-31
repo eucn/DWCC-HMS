@@ -6,16 +6,12 @@
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   @vite('resources/css/app.css')
 
+      <!-- Logo -->
+ <link rel="icon" type="image/png" sizes="16x16" href="../images/sitelogo.png">
+
   <title>Admin Dashboard</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
-   
-      <!-- Logo -->
-      <link rel="icon" type="image/png" sizes="16x16" href="../images/sitelogo.png"> 
-      
-  <!-- Favicons -->
-  <link href="{{ asset('template/assets/img/favicon.png') }}" rel="icon">
-  <link href="{{ asset('template/assets/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
   <link href="https://fonts.gstatic.com" rel="preconnect">

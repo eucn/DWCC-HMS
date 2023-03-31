@@ -6,22 +6,16 @@
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   @vite('resources/css/app.css')
 
-  <title>Frontdesk Dashboard</title>
+ <!-- Logo -->
+ <link rel="icon" type="image/png" sizes="16x16" href="../images/sitelogo.png">
+
+  <title>Admin Reservation</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
-  <script data-require="jquery@3.1.1" data-semver="3.1.1"
-    src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-
-  <!-- Favicons -->
-  <link href="{{ asset('template/assets/img/favicon.png') }}" rel="icon">
-  <link href="{{ asset('template/assets/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
-
   <!-- Google Fonts -->
   <link href="https://fonts.gstatic.com" rel="preconnect">
-  <link
-    href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
-    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
   <!-- Vendor CSS Files -->
   <link href="{{ asset('template/assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
@@ -35,11 +29,14 @@
   <!-- Template Main CSS File -->
   <link href="{{ asset('template/assets/css/style.css') }}" rel="stylesheet">
 
-  <!-- Font Awesome -->
-  <script src="https://kit.fontawesome.com/3a364cef47.js" crossorigin="anonymous"></script>
-  <script defer src="https://use.fontawesome.com/releases/v6.1.1/js/all.js"
-    integrity="sha384-xBXmu0dk1bEoiwd71wOonQLyH+VpgR1XcDH3rtxrLww5ajNTuMvBdL5SOiFZnNdp" crossorigin="anonymous">
-  </script>
+ <!-- Font Awesome -->
+ <script src="https://kit.fontawesome.com/3a364cef47.js" crossorigin="anonymous"></script>
+ <script
+   defer
+   src="https://use.fontawesome.com/releases/v6.1.1/js/all.js"
+   integrity="sha384-xBXmu0dk1bEoiwd71wOonQLyH+VpgR1XcDH3rtxrLww5ajNTuMvBdL5SOiFZnNdp"
+   crossorigin="anonymous">
+ </script>
   {{-- Script for Select Room_types --}}
 
   <!-- =======================================================
@@ -436,6 +433,10 @@
       });
     });
   </script>
+  <!-- Template Main JS File -->
+  <script src="{{ asset('template/assets/js/main.js') }}"></script>
+  
+  
 </body>
 
 </html>

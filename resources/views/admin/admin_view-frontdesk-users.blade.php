@@ -288,6 +288,7 @@
                         <th scope="col">Name</th>
                         <th scope="col">Email</th>
                         <th scope="col">Registered at</th>
+                        <th scope="col">Account Status</th>
                         <th scope="col">Action</th>
                     </tr>   
                 </thead>   
@@ -297,12 +298,21 @@
                         <td>{{ $frontdesk->id }}</td>
                         <td>{{ $frontdesk->name }}</td>
                         <td>{{ $frontdesk->email }}</td>
-                        <td>{{ $frontdesk->created_at }}</td>                                  
+                        <td>{{ $frontdesk->created_at }}</td>  
+                        <td>{{ $frontdesk->Acc_Stat }}</td>                                 
                         <td>
                         <!--View Button-->	
                         <button type="button" class="btn btn-primary" id="modal2" data-bs-toggle="modal" data-bs-target="#modalDialogScrollable{{ $frontdesk->id }}">
                               View
                               </button>
+                                                  <!-- Button trigger activate modal -->
+ <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#activate{{ $frontdesk->id }}">
+    <i class="fa-solid fa-user"></i>
+</button>
+                        <!-- Button trigger deactivate modal -->
+                        <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deactivate{{ $frontdesk->id }}">
+    <i class="fa-solid fa-user-slash"></i>
+</button>
                           </td>  
 
                           <!-- Modal -->
@@ -323,7 +333,56 @@
                                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>  
                                     </div>  
                                   </div> 
-                               </div>                            
+                               </div>
+                              </div>     
+                                   <!-- Deactivate Modal -->
+            
+                     
+<div class="modal fade" id="deactivate{{ $frontdesk->id }}" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form method="POST" action="{{ route('frontdesk.deactivate', $frontdesk->id) }}">
+                @csrf
+                @method('PATCH')
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Deactivate User</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to deactivate this user?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Deactivate</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+                   
+
+ <!-- activate modal -->
+ <div class="modal fade" id="activate{{ $frontdesk->id }}" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form method="POST" action="{{ route('frontdesk.activate', $frontdesk->id) }}">
+                @csrf
+                @method('PATCH')
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Activate User</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to activate this user?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-success">Activate</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
                     </tr>     
                     @endforeach
                 </tbody>   

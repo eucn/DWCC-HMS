@@ -238,7 +238,12 @@
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalDialogScrollable{{ $user->id }}">
                     <i class="fa-solid fa-eye">View</i>
                     </button>
-                        <!-- Button trigger modal -->
+
+                     <!-- Button trigger activate modal -->
+ <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#activate{{ $user->id }}">
+    <i class="fa-solid fa-user"></i>
+</button>
+                        <!-- Button trigger deactivate modal -->
                         <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deactivate{{ $user->id }}">
     <i class="fa-solid fa-user-slash"></i>
 </button>
@@ -283,7 +288,30 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-primary">Deactivate</button>
+                    <button type="submit" class="btn btn-danger">Deactivate</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+        <!-- activate modal -->
+<div class="modal fade" id="activate{{ $user->id }}" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form method="POST" action="{{ route('admin.activate', $user->id) }}">
+                @csrf
+                @method('PATCH')
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Activate User</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to activate this user?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-success">Activate</button>
                 </div>
             </form>
         </div>

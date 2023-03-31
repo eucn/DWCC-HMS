@@ -357,6 +357,21 @@ class FrontdeskController extends Controller
         return $pdf->stream();
     }
 
+    public function deactivate($id)
+    {
+        $frontdesk = Frontdesk::findOrFail($id);
+        $frontdesk->Acc_Stat = 'Deactivate';
+        $frontdesk->save();
+        return redirect()->back()->with('success', 'User deactivated successfully!');
+    }
+    public function activate($id)
+    {
+        $frontdesk = Frontdesk::findOrFail($id);
+        $frontdesk->Acc_Stat = 'Activate';
+        $frontdesk->save();
+        return redirect()->back()->with('success', 'User deactivated successfully!');
+    }
+
 
     public function FrontdeskPayment(){
         $reservations = GuestInformation::join('reservations', 'guest_information.reservation_id', '=', 'reservations.id')

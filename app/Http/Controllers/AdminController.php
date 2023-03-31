@@ -187,5 +187,12 @@ class AdminController extends Controller
                 $user->save();
                 return redirect()->back()->with('success', 'User deactivated successfully!');
             }
+            public function activate($id)
+            {
+                $user = User::findOrFail($id);
+                $user->Acc_Stat = 'Activate';
+                $user->save();
+                return redirect()->back()->with('success', 'User deactivated successfully!');
+            }
             
         }

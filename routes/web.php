@@ -57,6 +57,7 @@ Route::prefix('admin')->group(function (){
 
     // Deactivate users
     Route::patch('/admin/{id}/deactivate', [AdminController::class, 'deactivate'])->name('admin.deactivate');
+    Route::patch('/admin/{id}/activate', [AdminController::class, 'activate'])->name('admin.activate');
     
   
 
@@ -117,6 +118,9 @@ Route::prefix('frontdesk')->group(function(){
     Route::get('/reports', [FrontdeskController::class, 'FrontdeskReports'])->name('frontdesk.reports');
     Route::get('/reports/preview', [FrontdeskController::class, 'preview'])->name('frontdesk.reports.preview');
     Route::post('/reports/print', [FrontdeskController::class, 'printPDF'])->name('frontdesk.reports.print');
+
+    Route::patch('/frontdesk/{id}/deactivate', [FrontdeskController::class, 'deactivate'])->name('frontdesk.deactivate');
+    Route::patch('/frontdesk/{id}/activate', [FrontdeskController::class, 'activate'])->name('frontdesk.activate');
 });
 //-------------- End Frontdesk Routes --------------//
 

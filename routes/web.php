@@ -97,11 +97,13 @@ Route::prefix('frontdesk')->group(function(){
     Route::get('/logout',[FrontdeskController::class, 'FrontdeskLogout'])->name('frontdesk.logout')->middleware('frontdesk');
     Route::get('/register', [FrontdeskController::class, 'FrontdeskRegister'])->name('frontdesk.register');
     Route::post('/register/create',[FrontdeskController::class, 'FrontdeskRegisterCreate'])->name('frontdesk.register.create');
+
     Route::get('/reservation/view', [FrontdeskController::class, 'FrontdeskReservation'])->name('frontdesk.reservation');
     Route::post('/reservation/create/roomid', [FrontdeskController::class, 'GetRoomID'])->name('frontdesk.reservation.create');
-    Route::post('/reservation', [FrontdeskController::class, 'FrontdeskReservationSave'])->name('frontdesk.reservation.save');
-    Route::get('/reservation/guest_invoice', [FrontdeskInvoiceController::class, 'FrontdeskViewInvoice'])->name('frontdesk.invoice.view');
-    Route::get('/reservation/guest_invoice/view', [FrontdeskInvoiceController::class, 'ViewInvoice'])->name('frontdesk.invoice.view.pdf');
+    Route::post('/reservation', [FrontdeskController::class, 'FrontdeskReservationSave'])->name('frontdesk.save.reservation');
+    Route::get('/reservation/frontdesk_view_invoice', [FrontdeskInvoiceController::class, 'FrontdeskViewInvoice'])->name('frontdesk.view.invoice');
+    Route::get('/reservation/frontdesk_guest_invoice/view', [FrontdeskInvoiceController::class, 'ViewInvoiceAsPdf'])->name('frontdesk.invoice.view.pdf');
+    Route::get('/reservation/frontdesk_guest_invoice/generate', [FrontdeskInvoiceController::class, 'FrontdeskGenerateInvoice'])->name('frontdesk.invoice.generate.pdf');
     Route::get('/bookingdetails', [FrontdeskController::class, 'FrontdeskBookingDetails'])->name('frontdesk.bookingdetails');
     Route::delete('/bookingdetails/{reservation_id}',  [FrontdeskController::class, 'softDeletesReservation'])->name('frontdesk.bookingdetails.softdelete');
     Route::get('/bookingdetails/deleted-guest-information',  [FrontdeskController::class, 'ViewDeletesReservation'])->name('frontdesk.bookingdetails.softdelete.view');

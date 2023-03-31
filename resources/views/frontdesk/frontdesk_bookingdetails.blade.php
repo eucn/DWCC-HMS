@@ -217,19 +217,17 @@
         <div>
           <br>
           <table id="datatable" class="table table-condensed table-sm table-bordered">
-            <thead class="bg-[#51bdb8] text-white">
-              <tr style="text-align:center">
-                <td scope="col">No.</td>
-                <td scope="col" style="width: 200px;">Name</th>
-                <td scope="col">Payment Method</td>
-                <td Booking scope="col">Booking Status</td>
-                <td scope="col">Check-in / Check-out Date</td>
-                <td scope="col" style="width: 200px; text-align:center;">&nbsp &nbsp &nbsp Action</td>
-
-                <div class="container">
-                  <!-- View Modal -->
-              </tr>
-            </thead>
+            <thead class="bg-[#36ae7c] text-white">   
+              <tr style="text-align:center">   
+                  <th No. scope="col" class="w-[50px] text-center px-4"> &nbsp No. &nbsp</th>
+                  <th scope="col" class="text-center">Name</th>
+                  <th scope="col" class="text-center"> &nbsp Payment Method</th>
+                  <th scope="col" class="text-center"> &nbsp &nbsp Check-in Date</th>
+                  <th scope="col" class="text-center"> &nbsp Check-out Date</th>
+                  <th scope="col" style="width: 150px; text-align:center;"> &nbsp &nbsp  Action</th>
+                  <div class="container"> 
+              </tr>   
+             </thead>   
 
             <tbody>
               @foreach ($reservationData as $index => $data)

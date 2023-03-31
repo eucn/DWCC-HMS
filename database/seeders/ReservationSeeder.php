@@ -34,7 +34,7 @@ class ReservationSeeder extends Seeder
             $reservation->guest_id = $user->id;
             $reservation->frontdesk_id = $frontdesk->id;
             $reservation->room_id = $room->id;
-            $reservation->booking_status = $faker->randomElement(['Pending', 'cancelled']);
+            $reservation->booking_status = $faker->randomElement(['Complete']);
             $reservation->booking_types = $faker->randomElement(['Online', 'Walk-in']);
             $reservation->nights = $faker->numberBetween(1, 14);
             $checkinDate = $faker->dateTimeBetween('now', '+1 month');

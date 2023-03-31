@@ -6,15 +6,15 @@
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   @vite('resources/css/app.css')
 
+      <!-- Logo -->
+ <link rel="icon" type="image/png" sizes="16x16" href="../images/sitelogo.png">
+
   <title>Admin Dashboard</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/css/bootstrap.min.css" integrity="sha512-SbiR/eusphKoMVVXysTKG/7VseWii+Y3FdHrt0EpKgpToZeemhqHeZeLWLhJutz/2ut2Vw1uQEj2MbRF+TVBUA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-  <!-- Favicons -->
-  <link href="{{ asset('template/assets/img/favicon.png') }}" rel="icon">
-  <link href="{{ asset('template/assets/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
   <link href="https://fonts.gstatic.com" rel="preconnect">

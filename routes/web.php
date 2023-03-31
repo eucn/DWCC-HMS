@@ -82,7 +82,8 @@ Route::prefix('admin')->group(function (){
     // Admin Reports
     Route::prefix('reports')->group(function () {
             Route::get('/', [ReportsController::class, 'index'])->name('admin.reports')->middleware('admin');
-           
+            Route::get('/preview', [ReportsController::class, 'preview'])->name('admin.reports.preview')->middleware('admin');
+            Route::post('/print', [ReportsController::class, 'printPDF'])->name('admin.reports.print')->middleware('admin');
         });
 });
 //-------------- End Admin Routes --------------//
@@ -98,17 +99,24 @@ Route::prefix('frontdesk')->group(function(){
     Route::get('/logout',[FrontdeskController::class, 'FrontdeskLogout'])->name('frontdesk.logout')->middleware('frontdesk');
     Route::get('/register', [FrontdeskController::class, 'FrontdeskRegister'])->name('frontdesk.register');
     Route::post('/register/create',[FrontdeskController::class, 'FrontdeskRegisterCreate'])->name('frontdesk.register.create');
+
     Route::get('/reservation/view', [FrontdeskController::class, 'FrontdeskReservation'])->name('frontdesk.reservation');
     Route::post('/reservation/create/roomid', [FrontdeskController::class, 'GetRoomID'])->name('frontdesk.reservation.create');
-    Route::post('/reservation', [FrontdeskController::class, 'FrontdeskReservationSave'])->name('frontdesk.reservation.save');
-    Route::get('/reservation/guest_invoice', [FrontdeskInvoiceController::class, 'FrontdeskViewInvoice'])->name('frontdesk.invoice.view');
-    Route::get('/reservation/guest_invoice/view', [FrontdeskInvoiceController::class, 'ViewInvoice'])->name('frontdesk.invoice.view.pdf');
+    Route::post('/reservation', [FrontdeskController::class, 'FrontdeskReservationSave'])->name('frontdesk.save.reservation');
+    Route::get('/reservation/frontdesk_view_invoice', [FrontdeskInvoiceController::class, 'FrontdeskViewInvoice'])->name('frontdesk.view.invoice');
+    Route::get('/reservation/frontdesk_guest_invoice/view', [FrontdeskInvoiceController::class, 'ViewInvoiceAsPdf'])->name('frontdesk.invoice.view.pdf');
+    Route::get('/reservation/frontdesk_guest_invoice/generate', [FrontdeskInvoiceController::class, 'FrontdeskGenerateInvoice'])->name('frontdesk.invoice.generate.pdf');
     Route::get('/bookingdetails', [FrontdeskController::class, 'FrontdeskBookingDetails'])->name('frontdesk.bookingdetails');
     Route::delete('/bookingdetails/{reservation_id}',  [FrontdeskController::class, 'softDeletesReservation'])->name('frontdesk.bookingdetails.softdelete');
     Route::get('/bookingdetails/deleted-guest-information',  [FrontdeskController::class, 'ViewDeletesReservation'])->name('frontdesk.bookingdetails.softdelete.view');
-    Route::get('/reports', [FrontdeskController::class, 'FrontdeskReports'])->name('frontdesk.reports');
+    
     Route::get('/payment', [FrontdeskController::class, 'FrontdeskPayment'])->name('frontdesk.payment');
     Route::post('/update-booking-status/{reservation_Id}',  [FrontdeskController::class, 'updateBookingStatus'])->name('frontdesk.bookingstatus');
+
+    // Reports
+    Route::get('/reports', [FrontdeskController::class, 'FrontdeskReports'])->name('frontdesk.reports');
+    Route::get('/reports/preview', [FrontdeskController::class, 'preview'])->name('frontdesk.reports.preview');
+    Route::post('/reports/print', [FrontdeskController::class, 'printPDF'])->name('frontdesk.reports.print');
 });
 //-------------- End Frontdesk Routes --------------//
 
@@ -128,6 +136,7 @@ Route::get('/guest_users/invoice', [GuestInvoiceController::class, 'view_invoice
 
 Route::get('/view-invoice', [GuestInvoiceController::class, 'ViewInvoice'])->name('guest.view.invoice');
 Route::get('/generate-invoice', [GuestInvoiceController::class, 'GenerateInvoice'])->name('generate.invoice');
+
 
 //-------------- End Guest Routes --------------//
 

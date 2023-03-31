@@ -128,14 +128,14 @@
       </li>
 
       <li class="nav-item">
-        <a class="nav-link " href="{{ route('frontdesk.reservation') }}">
+        <a class="nav-link collapsed" href="{{ route('frontdesk.reservation') }}">
           <i class="bi bi-grid"></i>
           <span>Dashboard</span>
         </a>
       </li><!-- End Dashboard Nav -->
 
       <li class="nav-item">
-        <a class="nav-link nav-link-icon collapsed" href="{{ route('frontdesk.reservation') }}">
+        <a class="nav-link nav-link-icon " href="{{ route('frontdesk.reservation') }}">
           <i class="fa-solid fa-bell icon-nav"></i>
           <span>Reservation</span>
         </a>
@@ -179,7 +179,7 @@
       </nav>
     </div><!-- End Page Title -->
 
-    <section class="section dashboard">
+          <section class="section dashboard">
             <div class="container mx-auto pt-10 px-4 sm:px-6 lg:px-8">
               <!-- Flex container -->
               <div class="justify-between mx-[50px]">
@@ -314,7 +314,7 @@
                       </button> --}}
                       <a href="{{ route('frontdesk.invoice.view.pdf') }}" target="_blank" class=" bg-[#00BD56] text-white active:bg-yellow-800 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">View</a>
       
-                      <a href="{{ route('generate.invoice')}}" 
+                      <a href="{{ route('frontdesk.invoice.generate.pdf')}}" 
                        class=" bg-[#277BC0] text-white active:bg-yellow-800 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">Download</a>
                   </form>
       
@@ -452,10 +452,9 @@
                         </script>
                         @else
                         <h1>No records</h1>
-                        @endif
-                      </div>
+                 @endif
+            </div>
     </section>
-
   </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->

@@ -6,13 +6,14 @@
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   @vite('resources/css/app.css')
 
+  <!-- Logo -->
+  <link rel="icon" type="image/png" sizes="16x16" href="../images/sitelogo.png">
+
   <title>Frontdesk Dashboard</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
-  <!-- Favicons -->
-  <link href="{{ asset('template/assets/img/favicon.png') }}" rel="icon">
-  <link href="{{ asset('template/assets/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
+
 
   <!-- Google Fonts -->
   <link href="https://fonts.gstatic.com" rel="preconnect">
@@ -173,44 +174,55 @@
       </nav>
     </div><!-- End Page Title -->
 
-    <section class="mb-[50px]">
+    <form id="filter-form" action="{{ route('frontdesk.reports.preview') }}" method="get" class="mb-[50px]">
       <div class="flex item-center">
-        <div class="mr-5">
-          <div>Status</div>
-          <select id="select" name="select" class="block w-[170px] mt-1 pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md">
-            <option value="option1">Completed</option>
-            <option value="option2">Pending</option>
-            <option value="option3">Cancelled</option>
-          </select>
-        </div>
-        <div class="mr-10">
-          <div>Check-in Date</div>
-          <input type="date" class="block w-[170px] mt-1 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md">
-        </div>
-        <div class="mr-10">
-          <div>Check-in Date</div>
-          <input type="date" class="block w-[170px] mt-1 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md">
-        </div>
-        <div class="mr-10">
+          <div class="mr-5">
+            <div>Status</div>
+            <select id="status" name="status" class="block w-[170px] mt-1 pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md">
+                <option value=""{{ empty($status) ? ' selected' : '' }}>All</option>
+                <option value="complete"{{ $status === 'complete' ? ' selected' : '' }}>Complete</option>
+                <option value="pending"{{ $status === 'pending' ? ' selected' : '' }}>Pending</option>
+                <option value="cancelled"{{ $status === 'cancelled' ? ' selected' : '' }}>Cancelled</option>
+            </select>
+          </div>
+          <div class="mr-10">
+            <div>Check-in Date</div>
+              <input type="date" name="checkin_date" id="checkin_date" value="{{ $checkinDate }}" class="block w-[170px] mt-1 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md">
+          </div>
+          <div class="mr-10">
+            <div>Check-in Date</div>
+              <input type="date" name="checkout_date" id="checkout_date" value="{{ $checkoutDate }}" class="block w-[170px] mt-1 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md">
+          </div>
+          <div class="mr-10">
             <div class="opacity-1">Button</div>
-            <button class="bg-[#005289] w-[120px] mt-1 py-2 text-white rounded-md">Preview</button>
+              <button type="submit" class="bg-[#005289] w-[120px] mt-1 py-2 text-white rounded-md">Preview</button>
+          </div>
+        </div>
+    </form>
+
+    <form action="{{ route('frontdesk.reports.print', ['status' => $status, 'checkin_date' => $checkinDate, 'checkout_date' => $checkoutDate])}}" method="post" target="_blank">
+      @csrf
+      <div class="d-flex justify-content-between mb-3">
+        <div class="ml-auto">
+            <button type="submit" class="bg-[#005289] w-[120px] mt-1 py-2 text-white rounded-md">Print</button>
         </div>
       </div>
-    </section>
+    </form>
+
     <section>
       <table id="" class="table table-condensed table-sm table-bordered">   
-        <thead class="bg-[#51bdb8] text-white">   
-            <tr class="text-center ">   
-                <th scope="col" class="w-[70px] sm-w-[70] text-center py-3">Invoice No.</th>
-                <th scope="col" class="text-center px-1 py-3">Name</th>
-                <th scope="col" class="text-center px-1 py-3">Booking Status</th>
-                <th scope="col" class="text-center px-1 py-3">Check-in Date</th>
-                <th scope="col" class="text-center px-1 py-3">Check-out Date</th>
-                <th scope="col" class="text-center px-1 py-3">Room No.</th>
-                <th scope="col" class="text-center px-1 py-3">Room Type</th>
-                <th scope="col" class="text-center px-1 py-3">Nights</th>
-                <th scope="col" class="text-center px-1 py-3">Price</th>
-            </tr>   
+        <thead class="bg-[#36ae7c] text-white">   
+          <tr class="text-center">
+            <th scope="col" class="px-4 py-1">Invoice No.</th>
+            <th scope="col" class="px-4 py-1">Name</th>
+            <th scope="col" class="px-4 py-1">Booking Status</th>
+            <th scope="col" class="px-4 py-1">Check-in Date</th>
+            <th scope="col" class="px-4 py-1">Check-out Date</th>
+            <th scope="col" class="px-4 py-1">Room No.</th>
+            <th scope="col" class="px-4 py-1">Room Type</th>
+            <th scope="col" class="px-4 py-1">Nights</th>
+            <th scope="col" class="px-4 py-1">Price</th>
+        </tr>
         </thead>   
         </tbody> 
         @foreach ($reports as $index => $report)

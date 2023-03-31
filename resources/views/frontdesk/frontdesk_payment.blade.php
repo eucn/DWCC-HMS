@@ -6,16 +6,14 @@
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   @vite('resources/css/app.css')
 
-  <!-- Logo -->
-  <link rel="icon" type="image/png" sizes="16x16" href="../images/sitelogo.png">
+ <!-- Logo -->
+ <link rel="icon" type="image/png" sizes="16x16" href="../images/sitelogo.png">
 
   <title>Frontdesk Dashboard</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
-  <!-- Favicons -->
-  <link href="{{ asset('template/assets/img/favicon.png') }}" rel="icon">
-  <link href="{{ asset('template/assets/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
+ 
 
   <!-- Google Fonts -->
   <link href="https://fonts.gstatic.com" rel="preconnect">
@@ -214,9 +212,9 @@
       <div>
             <br>
       <table id="datatable" class="table table-condensed table-sm table-bordered">   
-                <thead class="bg-[#51bdb8] text-white">   
+                <thead class="bg-[#36ae7c] text-white">   
                     <tr style="text-align:center">   
-                        <th No. scope="col" class="w-[50px] text-center px-4"> &nbsp No. &nbsp</th>
+                        <th scope="col" class="w-[50px] text-center px-4"> &nbspNo.&nbsp</th>
                         <th scope="col" class="text-center">Name</th>
                         <th scope="col" class="text-center"> &nbsp &nbsp Check-in Date</th>
                         <th scope="col" class="text-center"> &nbsp Check-out Date</th>
@@ -224,7 +222,6 @@
                         <th scope="col" class="text-center">Payment Status</th>
                         <th scope="col" class="text-center"> &nbsp Booking Type</th>
                         <th scope="col" style="width: 150px; text-align:center;"> &nbsp &nbsp  Action</th>
-                        <div class="container"> 
                     </tr>   
                 </thead>   
                 </tbody> 

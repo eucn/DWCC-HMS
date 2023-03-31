@@ -151,6 +151,38 @@
         </tbody>
     </table>
 		
+	{{-- <table width="50px">
+		<thead>
+			<tr class="bg-blue">
+            	<th colspan="2">Booking Details</th>
+        	</tr>
+		</thead>
+		
+		<tbody>
+            <tr>
+                <td><b>Number of Nights:</b></td>
+                <td>{{$reservation->nights}}</td>
+            </tr>
+			<tr>
+                <td><b>Additional Beds:</b></td>
+                <td>{{$reservation->extra_bed}}</td>
+            </tr>
+			<tr>
+                <td><b>Date Checked-in:</b></td>
+                <td>{{$reservation->checkin_date}}</td>
+            </tr>
+			<tr>
+                <td><b>Date Checked-out:</b></td>
+                <td>{{$reservation->checkout_date}}</td>
+            </tr>
+			<tr>
+                <td><b>Payment Method:</b></td>
+                <td >{{ $guestRegistration->payment_method}}</td>
+            </tr>
+           
+        </tbody>
+	</table> --}}
+
     <table>
         <thead>
             <tr>

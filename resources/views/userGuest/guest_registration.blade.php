@@ -97,7 +97,7 @@
                           <p class="text-sm sm:text-base">Please complete the form below</p>
                         </div>
                   
-                        <div class="relative bg-white rounded-lg border-2 shadow-md w-full pb-4">
+                        <div class="relative bg-white rounded-lg border-2 shadow-md w-full pb-[20px]">
                           <div class="border-b-2 border-gray-300 px-4 py-3">
                             <h3 class="text-lg sm:text-2xl font-semibold">Guest Information</h3>
                           </div>
@@ -108,7 +108,7 @@
                                 <div class="pt-5">
                                   <label class="" for="salutation">Salutation:</label>&nbsp; &nbsp;
                                   <div class="">
-                                  <select class="w-full md:w-[130px] py-[10px] shadow leading-tight focus:outline-none focus:shadow-outline" name="salutation" id="salutation" value="{{ old('salutation') }}" placeholder="Ms.">
+                                  <select class="w-full md:w-[130px] py-[10px] shadow leading-tight rounded-md  focus:outline-none focus:shadow-outline" name="salutation" id="salutation" value="{{ old('salutation') }}" placeholder="Ms.">
                                     <option value="Ms." {{ old('salutation') == 'Ms.' ? 'selected' : '' }}>Ms.</option>
                                     <option value="Mrs." {{ old('salutation') == 'Mrs.' ? 'selected' : '' }}>Mrs.</option>
                                     <option value="Mr." {{ old('salutation') == 'Mr.' ? 'selected' : '' }}>Mr.</option>
@@ -130,8 +130,7 @@
                                 {{-- sm:w-full md:w-full lg:w-[410px] --}}
                                 </div>
                             </div>
-                  
-            
+                
                               <div class="mx-4 sm:mx-10 ">                                
                                 <label for="companyName">Company Name</label>
                                 <input type="text" name="company_name" id="company_name" class="w-full  py-[10px]  shadow leading-tight focus:outline-none focus:shadow-outline value="{{ old('company_name') }}" placeholder="Company Name" >                             

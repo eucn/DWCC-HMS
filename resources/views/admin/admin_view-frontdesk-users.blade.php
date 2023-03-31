@@ -142,7 +142,7 @@
       </li><!-- End Manage Rooms Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="index.html">
+        <a class="nav-link collapsed" href="{{ route('admin.bookingHistory') }}">
           <i class="fa-regular fa-file icon-nav"></i>
           <span>Booking History</span>
         </a>

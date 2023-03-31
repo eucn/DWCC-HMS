@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Frontdesk;
-
 //Login
+use App\Models\Frontdesk;
 use Illuminate\View\View;
 use App\Models\Manage_Room;
 use App\Models\Reservations;
@@ -12,9 +11,9 @@ use Illuminate\Http\Request;
 use App\Models\GuestInformation;
 use Illuminate\Support\Facades\DB;
 use App\Models\Walkin_Reservations;
-use App\Http\Controllers\Controller;
 
 //Register
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\RedirectResponse;
@@ -229,33 +228,14 @@ class FrontdeskController extends Controller
                 }
             }
             $guestInformation->save();
+            // return redirect()->back()->with('success', 'Save reservation');
             
         }
         // Session::flash('success', 'Your reservation was successful.');
-        return redirect()->route('frontdesk.invoice.view');
+        return redirect()->route('frontdesk.view.invoice');
 
     }
-    
-    public function showRoomById(Request $request)
-    {
-        $room_types = $request->input('room_type');
-        $room = Reservations::table('rooms')->select('room_no')->where('room_type', $room_types)->first();
-        return view('frontdesk.reservation', ['roomNo' => $room->room_no]);
-    }
-  
-    public function FrontdeskBookingDetails(){
 
-        $reservations = GuestInformation::join('reservations', 'guest_information.reservation_id', '=', 'reservations.id')
-        ->join('manage_rooms', 'reservations.room_id', '=', 'manage_rooms.id')
-        ->select('guest_information.reservation_id','guest_information.first_name','guest_information.last_name', 'guest_information.payment_method','reservations.booking_status', 'reservations.checkin_date','reservations.total_price', 'reservations.checkout_date',)
-        ->orderBy('guest_information.first_name', 'asc')
-        ->get();
-
-        return view('frontdesk.frontdesk_bookingdetails', [
-            'reservationData' => $reservations,
-
-        ]);
-    }
     // SOFT DELETE
     public function softDeletesReservation($reservation_id)
     {
@@ -403,7 +383,7 @@ class FrontdeskController extends Controller
                 $guestInformation->save();
             
                 $reservation = $guestInformation->reservation;
-                $reservation->booking_status = 'Confirmed';
+                $reservation->booking_status = 'Completed';
                 $reservation->save();
         
                 return redirect()->back()->with('success', 'The payment status was verified successfully.');

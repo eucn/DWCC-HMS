@@ -179,4 +179,20 @@ class AdminController extends Controller
                 Manage_Room::create($requestData);
                 return redirect()->route('admin.frontdesk-List.index')->with('success', 'The record has been successfully added.');
             }
+
+            public function deactivate($id)
+            {
+                $user = User::findOrFail($id);
+                $user->Acc_Stat = 'Deactivate';
+                $user->save();
+                return redirect()->back()->with('success', 'User deactivated successfully!');
+            }
+            public function activate($id)
+            {
+                $user = User::findOrFail($id);
+                $user->Acc_Stat = 'Activate';
+                $user->save();
+                return redirect()->back()->with('success', 'User deactivated successfully!');
+            }
+            
         }

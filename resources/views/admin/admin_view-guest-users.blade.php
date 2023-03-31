@@ -144,22 +144,22 @@
       </li><!-- End Booking History Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
-          <i class="fa-solid fa-user icon-nav"></i><span>Accounts</span><i class="bi bi-chevron-down ms-auto"></i>
-        </a>
-        <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-          <li>
-            <a href="tables-general.html">
-              <i class="bi bi-circle"></i><span>Frontdesk</span>
-            </a>
-          </li>
-          <li>
-            <a href="tables-data.html">
-              <i class="bi bi-circle"></i><span>Guest</span>
-            </a>
-          </li>
-        </ul>
-      </li><!-- End Tables Nav -->
+  <a class="nav-link dropdown-toggle collapsed" href="#" id="accounts-dropdown" data-bs-toggle="dropdown" aria-expanded="false">
+    <i class="fa-solid fa-user icon-nav"></i><span>Accounts</span><i class="bi bi-chevron-down ms-auto"></i>
+  </a>
+  <ul id="tables-nav" class="dropdown-menu" aria-labelledby="accounts-dropdown">
+    <li>
+      <a class="dropdown-item" href="{{ route('admin.frontdeskList') }}">
+        <i class="bi bi-circle"></i><span>Frontdesk</span>
+      </a>
+    </li>
+    <li>
+      <a class="dropdown-item" href="{{ route('admin.guestList') }}">
+        <i class="bi bi-circle"></i><span>Guest</span>
+      </a>
+    </li>
+  </ul>
+</li><!-- End Tables Nav -->
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="index.html">
@@ -212,62 +212,123 @@
   </tbody>
 </table> -->
 
-            <table class="table table-condensed table-sm table-bordered">   
-                <thead class="bg-[#36ae7c] text-white">   
-                    <tr style="text-align:center">   
-                        <th scope="col">#</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Registered at</th>
-                        <th scope="col">Action</th>
-                    </tr>   
-                </thead>   
-                <tbody>   
-                @foreach ($users as $user)
-                    <tr>     
-                        <td>{{ $user->id }}</td>
-                        <td>{{ $user->name }}</td>
-                        <td>{{ $user->email }}</td>
-                        <td>{{ $user->created_at }}</td>                                  
-                        <td>
-                        <!--View Button-->	
-                        <!-- <center>
-                            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal_viewsuserdetails" data-profile="../profile-pictures/default-profile.png" data-fname="Nikolas" data-mname="G." data-lname="Ocampo" data-gender="" data-email="" data-batch="2023" data-program="MIT" data-nprog="1"><svg class="svg-inline--fa fa-eye" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="eye" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg=""><path fill="currentColor" d="M279.6 160.4C282.4 160.1 285.2 160 288 160C341 160 384 202.1 384 256C384 309 341 352 288 352C234.1 352 192 309 192 256C192 253.2 192.1 250.4 192.4 247.6C201.7 252.1 212.5 256 224 256C259.3 256 288 227.3 288 192C288 180.5 284.1 169.7 279.6 160.4zM480.6 112.6C527.4 156 558.7 207.1 573.5 243.7C576.8 251.6 576.8 260.4 573.5 268.3C558.7 304 527.4 355.1 480.6 399.4C433.5 443.2 368.8 480 288 480C207.2 480 142.5 443.2 95.42 399.4C48.62 355.1 17.34 304 2.461 268.3C-.8205 260.4-.8205 251.6 2.461 243.7C17.34 207.1 48.62 156 95.42 112.6C142.5 68.84 207.2 32 288 32C368.8 32 433.5 68.84 480.6 112.6V112.6zM288 112C208.5 112 144 176.5 144 256C144 335.5 208.5 400 288 400C367.5 400 432 335.5 432 256C432 176.5 367.5 112 288 112z"></path></svg><!-- <i class="fa-solid fa-eye"></i> Font Awesome fontawesome.com -->
-                          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalDialogScrollable{{ $user->id }}">
-                              View
-                              </button>
-                          </td>  
+  <table class="table table-condensed table-sm table-bordered">   
+      <thead class="bg-[#36ae7c] text-white">   
+          <tr style="text-align:center">   
+              <th scope="col">#</th>
+              <th scope="col">Name</th>
+              <th scope="col">Email</th>
+              <th scope="col">Registered at</th>
+              <th scope="col">Account Status</th>
+              <th scope="col">Action</th>
+          </tr>   
+      </thead>   
+      <tbody>   
+      @foreach ($users as $user)
+          <tr>     
+              <td>{{ $user->id }}</td>
+              <td>{{ $user->name }}</td>
+              <td>{{ $user->email }}</td>
+              <td>{{ $user->created_at }}</td>
+              <td>{{ $user->Acc_Stat }}</td>                                    
+              <td>
+              <!--View Button-->	
+              <!-- <center>
+                  <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal_viewsuserdetails" data-profile="../profile-pictures/default-profile.png" data-fname="Nikolas" data-mname="G." data-lname="Ocampo" data-gender="" data-email="" data-batch="2023" data-program="MIT" data-nprog="1"><svg class="svg-inline--fa fa-eye" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="eye" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg=""><path fill="currentColor" d="M279.6 160.4C282.4 160.1 285.2 160 288 160C341 160 384 202.1 384 256C384 309 341 352 288 352C234.1 352 192 309 192 256C192 253.2 192.1 250.4 192.4 247.6C201.7 252.1 212.5 256 224 256C259.3 256 288 227.3 288 192C288 180.5 284.1 169.7 279.6 160.4zM480.6 112.6C527.4 156 558.7 207.1 573.5 243.7C576.8 251.6 576.8 260.4 573.5 268.3C558.7 304 527.4 355.1 480.6 399.4C433.5 443.2 368.8 480 288 480C207.2 480 142.5 443.2 95.42 399.4C48.62 355.1 17.34 304 2.461 268.3C-.8205 260.4-.8205 251.6 2.461 243.7C17.34 207.1 48.62 156 95.42 112.6C142.5 68.84 207.2 32 288 32C368.8 32 433.5 68.84 480.6 112.6V112.6zM288 112C208.5 112 144 176.5 144 256C144 335.5 208.5 400 288 400C367.5 400 432 335.5 432 256C432 176.5 367.5 112 288 112z"></path></svg><!-- <i class="fa-solid fa-eye"></i> Font Awesome fontawesome.com -->
+                <button type="button" style = "width: 35px; height: 30px; position: relative; left: 40px;" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalDialogScrollable{{ $user->id }}">
+                <i class="fa-regular fa-eye" style="position: relative;left: -4px; top: -4px;"></i>
+                    </button>
 
-                          <!-- Modal -->
-                              
-                              <div class="modal fade" id="modalDialogScrollable{{ $user->id }}" tabindex="-1">
-                                <div class="modal-dialog modal-dialog-scrollable">
-                                  <div class="modal-content">
-                                    <div class="modal-header">
-                                      <h5 class="modal-title">View Information</h5>
-                                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                    <h6><strong>Name:</strong> {{ $user->name }}</h6><br>
-                                    <h6><strong>Email:</strong> {{ $user->email }}</h6><br>
-                                    <h6><strong>Registered at:</strong> {{ $user->created_at }}</h6><br>
-                                    </div>
-                                    <div class="modal-footer">
-                                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>  
-                                    </div>  
-                                  </div> 
-                               </div>                                        
+                     <!-- Button trigger activate modal -->
+ <button type="button" style="position: relative; left: 40px;" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#activate{{ $user->id }}">
+ <i class="fa-sharp fa-solid fa-user-check"></i>
+</button>
+                        <!-- Button trigger deactivate modal -->
+                        <button type="button" style="position: relative; left: 40px;" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deactivate{{ $user->id }}">
+    <i class="fa-solid fa-user-slash"></i>
+</button>
+
+                </td>  
+                </tr> 
+                <!-- View Modal -->
+                    
+                    <div class="modal fade" id="modalDialogScrollable{{ $user->id }}" tabindex="-1">
+                      <div class="modal-dialog modal-dialog-scrollable">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" style="color: #55afab;">View Information</h5>
+                            <button type="button" style="position:relative; left: 1px; color: #dc3545;" class="close"
+                        data-dismiss="modal">&times;</button>
+                          </div>
+                          <div class="modal-body">
+                          <h6><strong>Name:</strong> {{ $user->name }}</h6><br>
+                          <h6><strong>Email:</strong> {{ $user->email }}</h6><br>
+                          <h6><strong>Registered at:</strong> {{ $user->created_at }}</h6><br>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>  
+                          </div>  
+                        </div> 
+                      </div>    
+                    </div>
+                      <!-- Deactivate Modal -->
+            
+                     
+<div class="modal fade" id="deactivate{{ $user->id }}" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form method="POST" action="{{ route('admin.deactivate', $user->id) }}">
+                @csrf
+                @method('PATCH')
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"  style="color: #55afab;">Deactivate User</h5>
+                    <button type="button" style="position:relative; left: 1px; color: #dc3545;" class="close"
+                        data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to deactivate this user?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-danger">Deactivate</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+        <!-- activate modal -->
+<div class="modal fade" id="activate{{ $user->id }}" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form method="POST" action="{{ route('admin.activate', $user->id) }}">
+                @csrf
+                @method('PATCH')
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel " style="color: #55afab;">Activate User</h5>
+                    <button type="button" style="position:relative; left: 1px; color: #dc3545;" class="close"
+                        data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to activate this user?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Activate</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+                        
                     </tr>     
                     @endforeach
                 </tbody>   
             </table>
-
           </div>
         </div><!-- End Left side columns -->
-
       </div>
     </section>
-
   </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->
@@ -289,10 +350,29 @@
   <script src="{{ asset('template/assets/vendor/simple-datatables/simple-datatables.js') }}"></script>
   <script src="{{ asset('template/assets/vendor/tinymce/tinymce.min.js') }}"></script>
   <script src="{{ asset('template/assets/vendor/php-email-form/validate.js') }}"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.3/umd/popper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/js/bootstrap.min.js"></script>
+
 
   <!-- Template Main JS File -->
   <script src="{{ asset('template/assets/js/main.js') }}"></script>
+  
+
+  <script>
+  // Listen for the confirm button click
+  $('#confirmDeactivateBtn').click(function() {
+    // Submit the form
+    $('#deactivateForm').submit();
+  });
+  
+  // Reset the form when the modal is closed
+  $('#deactivateModal').on('hidden.bs.modal', function () {
+    $('#deactivateForm')[0].reset();
+  });
+</script>
 
 </body>
+
 
 </html>

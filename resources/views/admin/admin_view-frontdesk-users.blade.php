@@ -149,22 +149,22 @@
       </li><!-- End Booking History Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
-          <i class="fa-solid fa-user icon-nav"></i><span>Accounts</span><i class="bi bi-chevron-down ms-auto"></i>
-        </a>
-        <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-          <li>
-            <a href="tables-general.html">
-              <i class="bi bi-circle"></i><span>Frontdesk</span>
-            </a>
-          </li>
-          <li>
-            <a href="tables-data.html">
-              <i class="bi bi-circle"></i><span>Guest</span>
-            </a>
-          </li>
-        </ul>
-      </li><!-- End Tables Nav -->
+  <a class="nav-link dropdown-toggle collapsed" href="#" id="accounts-dropdown" data-bs-toggle="dropdown" aria-expanded="false">
+    <i class="fa-solid fa-user icon-nav"></i><span>Accounts</span><i class="bi bi-chevron-down ms-auto"></i>
+  </a>
+  <ul id="tables-nav" class="dropdown-menu" aria-labelledby="accounts-dropdown">
+    <li>
+      <a class="dropdown-item" href="{{ route('admin.frontdeskList') }}">
+        <i class="bi bi-circle"></i><span>Frontdesk</span>
+      </a>
+    </li>
+    <li>
+      <a class="dropdown-item" href="{{ route('admin.guestList') }}">
+        <i class="bi bi-circle"></i><span>Guest</span>
+      </a>
+    </li>
+  </ul>
+</li><!-- End Tables Nav -->
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="index.html">
@@ -197,23 +197,24 @@
           <div class="row">
 
   <div class="ml-auto">
-  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-  ADD NEW
+  <button type="button" style="position: relative; left: 900px" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  <i class="fa-solid fa-plus"></i>&nbsp Add New
 </button>
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">ADD NEW Frontdesk Account</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <h5 class="modal-title" id="exampleModalLabel" style=" color: #55afab;">Add Frontdesk Account</h5>
+        <button type="button" style="position:relative; left: 1px; color: #dc3545;" class="close"
+                        data-dismiss="modal">&times;</button>
       </div>
-      <div class="modal-body">
-      <div class="flex items-center justify-center min-h-screen bg-gray-100">
+      <div class="modal-body" style="height: 450px;">
+      <div class="flex items-center justify-center min-h-screen bg-white-100">
                     <hr class="h-px mb-5 bg-[#55AFAB] border-0">
 
                     <form method="POST" action="{{ route('frontdesk.register.create') }}">
                     @csrf
-                    <div class="py-1">
+                    <div class="py-1" style="position: relative; top: -200px; left: 1px;">
                         
                         <span class="mb-2 text-sm font-semibold">Name <span class="text-red-500 text-sm ">*</span></span>
                         <input type="text" name="name" :value="old('name')" required autofocus id="name" class="w-full p-1 border border-gray-300 rounded-md placeholder:font:light placeholder:text-gray-500 placeholder:text-sm py-1"
@@ -232,7 +233,7 @@
                             class="w-full p-1 border border-gray-300 rounded-md placeholder:font:light placeholder:text-gray-500 placeholder:text-sm py-1"
                         placeholder="Enter your last name">
                     </div> -->
-                    <div class="py-1">
+                    <div class="py-1" style="position: relative; top: -190px; left: 1px;">
                         <span class="mb-2 text-sm font-semibold">Email
                             <span class="text-red-500 text-sm ">*</span> </span>
                         <input type="email" name="email" :value="old('email')" required id="email"
@@ -240,8 +241,8 @@
                             placeholder="Enter your email">
                             <x-input-error :messages="$errors->get('email')" class="mt-2" />
                     </div>
-                    <div class="py-1">
-                        <span class="mb-2 text-sm font-semibold">Password <span class="text-red-500 text-sm ">*</span></span>
+                    <div class="py-1" style="position: relative; top: -180px; left: 1px;">
+                        <span class="mb-2 text-sm font-semibold" >Password <span class="text-red-500 text-sm ">*</span></span>
                         <input type="password" name="password"
                             required autocomplete="new-password" id="password" 
                             class="w-full p-1 border border-gray-300 rounded-md placeholder:font:light placeholder:text-gray-500
@@ -249,25 +250,25 @@
                             placeholder="Enter your password" >
                             <x-input-error :messages="$errors->get('password')" class="mt-2" />
                     </div>
-                    <div class="py-1">
-                        <span class="mb-2 text-sm font-semibold">Confirm Password <span class="text-red-500 text-sm ">*</span></span>
+                    <div class="py-1" style="position: relative; top: -170px; left: 1px;">
+                        <span class="mb-2 text-sm font-semibold" >Confirm Password <span class="text-red-500 text-sm ">*</span></span>
                         <input type="password" name="password_confirmation" required id="password"
                             class="w-full p-1 border border-gray-300 rounded-md placeholder:font:light placeholder:text-gray-500 placeholder:text-sm py-1"
-                            placeholder="Confirm your password">
+                            placeholder="Confirm your password" style="width: 450px;">
                             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
                     </div>
                     <x-input-error :messages="$errors->get('terms')" class="mt-2" />
 
-<div class="w-1/2 flex flex-col m-auto">
-    <button class="bg-[#277BC0]  text-white font-bold py-2 px-4 rounded">
-        Register
-    </button>
-</div>
+<!-- <div class="w-1/2 flex flex-col m-auto"> -->
+    <!-- <button class="bg-[#277BC0]  text-white font-bold py-2 px-4 rounded"> -->
+        <!-- Register -->
+    <!-- </button> -->
+<!-- </div> -->
 
       </div>
-      <div class="modal-footer">
+      <div class="modal-footer" style="position: relative; top: -300px; left:5px;">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-primary">Register</button>
       </div>
     </div>
   </div>
@@ -288,6 +289,7 @@
                         <th scope="col">Name</th>
                         <th scope="col">Email</th>
                         <th scope="col">Registered at</th>
+                        <th scope="col">Account Status</th>
                         <th scope="col">Action</th>
                     </tr>   
                 </thead>   
@@ -297,12 +299,21 @@
                         <td>{{ $frontdesk->id }}</td>
                         <td>{{ $frontdesk->name }}</td>
                         <td>{{ $frontdesk->email }}</td>
-                        <td>{{ $frontdesk->created_at }}</td>                                  
+                        <td>{{ $frontdesk->created_at }}</td>  
+                        <td>{{ $frontdesk->Acc_Stat }}</td>                                 
                         <td>
                         <!--View Button-->	
-                        <button type="button" class="btn btn-primary" id="modal2" data-bs-toggle="modal" data-bs-target="#modalDialogScrollable{{ $frontdesk->id }}">
-                              View
+                        <button type="button"  style = "width: 35px; height: 30px; position: relative; left: 40px;" class="btn btn-primary" id="modal2" data-bs-toggle="modal" data-bs-target="#modalDialogScrollable{{ $frontdesk->id }}">
+                        <i class="fa-regular fa-eye" style="position: relative;left: -4px; top: -4px;"></i>
                               </button>
+     <!-- Button trigger activate modal -->
+ <button type="button"  style="position: relative; left: 40px;" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#activate{{ $frontdesk->id }}">
+ <i class="fa-sharp fa-solid fa-user-check"></i>
+</button>
+  <!-- Button trigger deactivate modal -->
+                        <button type="button" style="position: relative; left: 40px;" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deactivate{{ $frontdesk->id }}">
+    <i class="fa-solid fa-user-slash"></i>
+</button>
                           </td>  
 
                           <!-- Modal -->
@@ -312,7 +323,8 @@
                                   <div class="modal-content">
                                     <div class="modal-header">
                                       <h5 class="modal-title">View Information</h5>
-                                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                      <button type="button" style="position:relative; left: 1px; color: #dc3545;" class="close"
+                        data-dismiss="modal">&times;</button>
                                     </div>
                                     <div class="modal-body">
                                     <h6><strong>Name:</strong> {{ $frontdesk->name }}</h6><br>
@@ -323,7 +335,58 @@
                                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>  
                                     </div>  
                                   </div> 
-                               </div>                            
+                               </div>
+                              </div>     
+                                   <!-- Deactivate Modal -->
+            
+                     
+<div class="modal fade" id="deactivate{{ $frontdesk->id }}" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form method="POST" action="{{ route('frontdesk.deactivate', $frontdesk->id) }}">
+                @csrf
+                @method('PATCH')
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Deactivate User</h5>
+                    <button type="button" style="position:relative; left: 1px; color: #dc3545;" class="close"
+                        data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to deactivate this user?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Deactivate</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+                   
+
+ <!-- activate modal -->
+ <div class="modal fade" id="activate{{ $frontdesk->id }}" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form method="POST" action="{{ route('frontdesk.activate', $frontdesk->id) }}">
+                @csrf
+                @method('PATCH')
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Activate User</h5>
+                    <button type="button" style="position:relative; left: 1px; color: #dc3545;" class="close"
+                        data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to activate this user?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-success">Activate</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
                     </tr>     
                     @endforeach
                 </tbody>   

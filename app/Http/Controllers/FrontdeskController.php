@@ -95,6 +95,7 @@ class FrontdeskController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'Acc_Stat' => 'Activate',
         ]);
 
         event(new Registered($frontdesk));
@@ -386,6 +387,21 @@ class FrontdeskController extends Controller
         ->setPaper('letter', 'landscape');
 
         return $pdf->stream();
+    }
+
+    public function deactivate($id)
+    {
+        $frontdesk = Frontdesk::findOrFail($id);
+        $frontdesk->Acc_Stat = 'Deactivate';
+        $frontdesk->save();
+        return redirect()->back()->with('success', 'User deactivated successfully!');
+    }
+    public function activate($id)
+    {
+        $frontdesk = Frontdesk::findOrFail($id);
+        $frontdesk->Acc_Stat = 'Activate';
+        $frontdesk->save();
+        return redirect()->back()->with('success', 'User deactivated successfully!');
     }
 
 

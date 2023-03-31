@@ -23,6 +23,7 @@ class UserSeeder extends Seeder
                 'email' => $faker->unique()->email,
                 'password' => Hash::make($faker->password),
                 'remember_token' => Str::random(10),
+                'Acc_Stat' =>  $faker->randomElement([ 'Activate', 'Deactivate']),
             ]);
         }
     }

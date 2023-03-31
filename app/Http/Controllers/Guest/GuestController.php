@@ -5,6 +5,7 @@ use DateTime;
 use Carbon\Carbon;
 use App\Models\Manage_Room;
 use App\Models\Reservations;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -99,6 +100,14 @@ class GuestController extends Controller
     
         return count($reservations) > 0;
     }
-    
+
+// public function destroy($id)
+// {
+//   $user = User::findOrFail($id);
+//   $user->activate = false;
+//   $user->save();
+//   return redirect()->back()->with('success', "User $user->name has been deactivated successfully.");
+// }
+
     
 }

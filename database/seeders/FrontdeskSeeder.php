@@ -19,12 +19,14 @@ class FrontdeskSeeder extends Seeder
     {
         $faker = Faker::create();
 
-        for ($i = 0; $i < 2; $i++) {
+        for ($i = 0; $i < 5; $i++) {
             Frontdesk::create([
                 'name' => $faker->name,
                 'email' => $faker->unique()->email,
                 'password' => Hash::make($faker->password),
                 'status' => 1,
+                'Acc_Stat' =>  $faker->randomElement([ 'Activate', 'Deactivate']),
+
             ]);
         }
     }

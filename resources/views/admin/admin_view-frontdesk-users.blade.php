@@ -149,22 +149,22 @@
       </li><!-- End Booking History Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
-          <i class="fa-solid fa-user icon-nav"></i><span>Accounts</span><i class="bi bi-chevron-down ms-auto"></i>
-        </a>
-        <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-          <li>
-            <a href="tables-general.html">
-              <i class="bi bi-circle"></i><span>Frontdesk</span>
-            </a>
-          </li>
-          <li>
-            <a href="tables-data.html">
-              <i class="bi bi-circle"></i><span>Guest</span>
-            </a>
-          </li>
-        </ul>
-      </li><!-- End Tables Nav -->
+  <a class="nav-link dropdown-toggle collapsed" href="#" id="accounts-dropdown" data-bs-toggle="dropdown" aria-expanded="false">
+    <i class="fa-solid fa-user icon-nav"></i><span>Accounts</span><i class="bi bi-chevron-down ms-auto"></i>
+  </a>
+  <ul id="tables-nav" class="dropdown-menu" aria-labelledby="accounts-dropdown">
+    <li>
+      <a class="dropdown-item" href="{{ route('admin.frontdeskList') }}">
+        <i class="bi bi-circle"></i><span>Frontdesk</span>
+      </a>
+    </li>
+    <li>
+      <a class="dropdown-item" href="{{ route('admin.guestList') }}">
+        <i class="bi bi-circle"></i><span>Guest</span>
+      </a>
+    </li>
+  </ul>
+</li><!-- End Tables Nav -->
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="index.html">

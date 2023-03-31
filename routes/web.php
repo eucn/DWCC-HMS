@@ -55,7 +55,8 @@ Route::prefix('admin')->group(function (){
 
     Route::post('/admin/update/{id}', [AdminController::class, 'update'])->name('admin.room.update');
 
-    // Create Frontdesk
+    // Deactivate users
+    Route::patch('/admin/{id}/deactivate', [AdminController::class, 'deactivate'])->name('admin.deactivate');
     
   
 
@@ -120,6 +121,10 @@ Route::get('/userGuest/guest_registration', [GuestReservationController::class, 
 Route::post('/userGuest/guest_information', [GuestInformationController::class, 'GuestInfo'])->name('save.guest.info');
 Route::post('/userGuest/invoice', [GuestInformationController::class, 'GuestInfo'])->name('save.invoice');
 Route::get('/guest_users/invoice', [GuestInvoiceController::class, 'view_invoice'])->name('view.invoice');
+
+
+// Route::delete('/users/{id}', [GuestController::class, 'destroy'])->name('users.destroy');
+
 
 Route::get('/view-invoice', [GuestInvoiceController::class, 'ViewInvoice'])->name('guest.view.invoice');
 Route::get('/generate-invoice', [GuestInvoiceController::class, 'GenerateInvoice'])->name('generate.invoice');

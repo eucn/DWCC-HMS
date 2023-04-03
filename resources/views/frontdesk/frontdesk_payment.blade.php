@@ -199,7 +199,7 @@
         
 
       </div>
-      @if (Session::has('success'))
+      {{-- @if (Session::has('success'))
       <div class="alert alert-success">
           {{ Session::get('success') }}
           </div>
@@ -208,6 +208,32 @@
       <div class="alert alert-error">
           {{ Session::get('error') }}
           </div>
+      @endif --}}
+      <div class="mx-auto">
+        @if (Session::has('error'))
+        <div id="error-message" class="flex flex-row items-center justify-between bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative transition duration-500 ease-in-out" role="alert">
+          <div class="flex-grow">
+            {{ Session::get('error') }}
+          </div>
+          <div class="ml-4">
+            <button type="button" style="opacity:70" class="close" onclick="document.getElementById('error-message').classList.add('opacity-0', 'h-0');">
+              <span class="text-xl-center text-red-500 font-extrabold">X</span>
+          </div>
+            </button>    
+          </div>
+        </div> 
+        @elseif (Session::has('success'))
+        <div id="error-message" class="flex flex-row items-center justify-between bg-red-100 border border-green-400 text-green-700 px-4 py-3 rounded relative transition duration-500 ease-in-out" role="alert">
+          <div class="flex-grow">
+            {{ Session::get('success') }}
+          </div>
+          <div class="ml-4">
+            <button type="button" style="opacity:70" class="close" onclick="document.getElementById('error-message').classList.add('opacity-0', 'h-0');">
+              <span class="text-xl-center text-green-500 font-extrabold">X</span>
+          </div>
+            </button>    
+          </div>
+        </div> 
       @endif
       <div>
             <br>

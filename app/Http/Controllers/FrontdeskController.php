@@ -133,26 +133,31 @@ class FrontdeskController extends Controller
         $checkin_date = $request->input('check_in_date');
         $checkout_date = $request->input('check_out_date');
     
+        $checkin_date_formatted = date('Y-m-d', strtotime($checkin_date));
+        $checkout_date_formatted = date('Y-m-d', strtotime($checkout_date));
+
         $reservations = Reservations::where('room_id', $room_id)
-        ->where(function($query) use ($checkin_date, $checkout_date) {
-            $query->whereBetween('checkin_date', [$checkin_date, $checkout_date])
-                ->orWhereBetween('checkout_date', [$checkin_date, $checkout_date])
-                ->orWhere(function($query) use ($checkin_date, $checkout_date) {
-                    $query->where('checkin_date', '<', $checkin_date)
-                            ->where('checkout_date', '>', $checkout_date);
+        ->where(function($query) use ($checkin_date_formatted, $checkout_date_formatted) {
+            $query->whereBetween('checkin_date', [$checkin_date_formatted, $checkout_date_formatted])
+                ->orWhereBetween('checkout_date', [$checkin_date_formatted, $checkout_date_formatted])
+                ->orWhere(function($query) use ($checkin_date_formatted, $checkout_date_formatted) {
+                    $query->where('checkin_date', '<', $checkin_date_formatted)
+                          ->where('checkout_date', '>', $checkout_date_formatted);
+                })
+                ->orWhere(function($query) use ($checkin_date_formatted, $checkout_date_formatted) {
+                    $query->where('checkin_date', '=', $checkin_date_formatted)
+                          ->where('checkout_date', '=', $checkout_date_formatted);
                 });
         })
         ->get();
-
-    if (!$reservations->isEmpty()) {
+    
+    if ($reservations->isEmpty()) {
         // room is already reserved, return an error message or redirect back with an error message
         return redirect()->back()->with('error', 'The room is already reserved for the selected dates.');
-        
     }else{
             $room_id = $request->input('room_no');
             $checkin_date = $request->input('check_in_date');
             $checkout_date = $request->input('check_out_date');
-            $extraBed =  $request->input('extra_bed');
             $numGuests = $request->input('guest_num');
             $numNights = $request->input('number_of_nights');
             

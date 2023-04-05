@@ -152,17 +152,17 @@
 
     <li class="nav-item">
   <a class="nav-link dropdown-toggle collapsed" href="#" id="accounts-dropdown" data-bs-toggle="dropdown" aria-expanded="false">
-    <i class="fa-solid fa-user icon-nav"></i><span>Accounts</span><i class="bi bi-chevron-down ms-auto"></i>
+    <i class="fa-solid fa-user icon-nav"></i><span>Accounts</span>
   </a>
   <ul id="tables-nav" class="dropdown-menu" aria-labelledby="accounts-dropdown">
     <li>
       <a class="dropdown-item" href="{{ route('admin.frontdeskList') }}">
-        <i class="bi bi-circle"></i><span>Frontdesk</span>
+      <i class="fa-sharp fa-solid fa-user-tie"></i><span>&nbsp Frontdesk</span>
       </a>
     </li>
     <li>
       <a class="dropdown-item" href="{{ route('admin.guestList') }}">
-        <i class="bi bi-circle"></i><span>Guest</span>
+      <i class="fa-solid fa-users"></i><span>&nbsp Guest</span>
       </a>
     </li>
   </ul>
@@ -224,32 +224,32 @@
                 <form action="{{ route('admin.room.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
 
-                    <div class="form-group mb-2">
+                    <div class="form-group mb-2 font-semibold">
                         <label>Room Number</label>
                         <input class="form-control" type="number" name="room_number">
                         <x-input-error :messages="$errors->get('room_number')"/>
                     </div>
-                    <div class="form-group mb-2">
+                    <div class="form-group mb-2 font-semibold">
                         <label>Room Type</label>
                         <input class="form-control" type="text" name="room_type">
                         <x-input-error :messages="$errors->get('room_type')"/>
                     </div>
-                    <div class="form-group mb-2">
+                    <div class="form-group mb-2 font-semibold">
                         <label>Description</label>
                         <input class="form-control" type="text" name="room_description">
                         <x-input-error :messages="$errors->get('room_description')"/>
                     </div>
-                    <div class="form-group mb-2">
+                    <div class="form-group mb-2 font-semibold">
                         <label>Maximum Room Capacity</label>
                         <input class="form-control" type="number" name="max_capacity">
                         <x-input-error :messages="$errors->get('max_capacity')"/>
                     </div>
-                    <div class="form-group mb-2">
+                    <div class="form-group mb-2 font-semibold">
                         <label>Amenities</label>
                         <input class="form-control" type="text" name="amenities">
                         <x-input-error :messages="$errors->get('amenities')"/>
                     </div>
-                    <div class="form-group mb-2">
+                    <div class="form-group mb-2 font-semibold">
                         <label>Status</label>
                         <input class="form-control" type="text" name="status">
                         <x-input-error :messages="$errors->get('status')"/>
@@ -258,19 +258,20 @@
                             <option value="unavailable">Unavailable</option>
                         </select> -->
                     </div>
-                    <div class="form-group mb-2">
+                    <div class="form-group mb-2 font-semibold ">
                         <label>Rate</label>
                         <input class="form-control" type="number" name="rate">
                         <x-input-error :messages="$errors->get('rate')"/>
                     </div>
-                    <div class="form-group">
-														<label for="image" class="col-form-label" style=" font-weight: 500;">Image:</label>
+                    <div class="form-group font-semibold" >
+														<label for="image" class="col-form-label" >Image:</label>
+                            <p>(png/jpeg)</p>
 														<input type="file" name="photos" class="form-control" id="photos">
 												
                         <x-input-error :messages="$errors->get('photos')"/>
                     </div>
                     <button type="submit" style="position: relative; left: 400px;" class="btn btn-primary">Save</button>
-                    <button type="reset" style="position: relative; left: 250px; background-color: #7c7c7c; border: none;" class="btn btn-primary">Cancel</button>
+                    <button type="reset" style="position: relative; left: 260px; background-color: #7c7c7c; border: none;" class="btn btn-primary">Cancel</button>
                 </form>
             </div>
     </div>
@@ -317,19 +318,19 @@
                 </form>
             </div> -->
           </div>
-
+<br>
             <table id="datatable" class="table table-condensed table-sm table-bordered">   
                 <thead class="bg-[#51bdb8] text-white">   
                     <tr style="text-align:center">   
-                        <th scope="col">Room No.</th>
-                        <th scope="col">Room Type</th>
-                        <th scope="col" style="width: 200px;">Description</th>
-                        <th scope="col">Maximum Room Capacity</th>
-                        <th scope="col">Amenities</th>
-                        <th scope="col">Status</th>
-                        <th scope="col">Rate</th>
-                        <th scope="col">Photos</th>
-                        <th scope="col" >Action</th>
+                        <th scope="col" style="text-align:center" >Room No.</th>
+                        <th scope="col" style="text-align:center" >Room Type</th>
+                        <th scope="col" style="text-align:center">Description</th>
+                        <th scope="col" style="text-align:center">Maximum Room Capacity</th>
+                        <th scope="col" style="text-align:center">Amenities</th>
+                        <th scope="col" style="text-align:center">Status</th>
+                        <th scope="col" style="text-align:center">Rate</th>
+                        <th scope="col" style="text-align:center" style="text-align:center">Photos</th>
+                        <th scope="col"  style="text-align:center; width: 5px;">Action</th>
                     </tr>   
                 </thead>   
                 <tbody>   
@@ -347,11 +348,11 @@
                         </td>
                         <td style="width: 150px;">
 
-                          <button type="button" class="btn btn-primary" style="position:relative;left: -25px; top: 20px;" data-bs-toggle="modal" data-bs-target="#editModal{{ $roomData->id }}">
+                          <button type="button" class="btn btn-primary" style="position:relative;left:5px; top: 20px;" data-bs-toggle="modal" data-bs-target="#editModal{{ $roomData->id }}">
                           <i class="fa-regular fa-pen-to-square"></i>
                           </button>
                           
-                          <button type="button" class="btn btn-danger" style="position:relative;left: -25px; top: 20px;" data-bs-toggle="modal" data-bs-target="#delete{{ $roomData->id }}">
+                          <button type="button" class="btn btn-danger" style="position:relative;left: 5px; top: 20px;" data-bs-toggle="modal" data-bs-target="#delete{{ $roomData->id }}">
                           <i class="fa-solid fa-trash"></i>
                           </button>
                           </td>
@@ -360,7 +361,7 @@
                           <div class="modal-dialog" role="document">
                             <div class="modal-content">
                               <div class="modal-header">
-                                <h5 class="modal-title" id="editModal{{ $roomData->id }}Label">Edit Room Details</h5>
+                                <h5 class="modal-title" id="editModal{{ $roomData->id }}Label"  style="color: #51bdb8;">Edit Room Details</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                   <span aria-hidden="true">&times;</span>
                                 </button>
@@ -371,50 +372,51 @@
 
 
                                 <div class="modal-body">
-                                    <div class="form-group">
+                                    <div class="form-group font-semibold">
                                         <label>Room Number</label>
                                         <input class="form-control" type="number" name="room_number" id="room_number" placeholder="Enter Room Number" >
                                         <x-input-error :messages="$errors->get('room_number')" />
                                     </div>
 
-                                    <div class="form-group">
+                                    <div class="form-group font-semibold">
                                         <label>Room Type</label>
                                         <input class="form-control" type="text" name="room_type" id="room_type" placeholder="Enter Room Type">
                                         <x-input-error :messages="$errors->get('room_type')" />
                                     </div>
 
-                                    <div class="form-group">
+                                    <div class="form-group font-semibold">
                                         <label>Description</label>
                                         <input class="form-control" type="text" name="room_description" id="room_description" placeholder="Enter Description">
                                         <x-input-error :messages="$errors->get('room_description')" />
                                     </div>
 
-                                    <div class="form-group">
+                                    <div class="form-group font-semibold">
                                         <label>Maximum Room Capacity</label>
                                         <input class="form-control" type="number" name="max_capacity" id="max_capacity" placeholder="Enter Maximum Room Capacity">
                                         <x-input-error :messages="$errors->get('max_capacity')" />
                                     </div>
 
-                                    <div class="form-group">
+                                    <div class="form-group font-semibold">
                                         <label>Amenities</label>
                                         <input class="form-control" type="text" name="amenities" id="amenities" placeholder="Enter Amenities">
                                         <x-input-error :messages="$errors->get('amenities')" />
                                     </div>
 
-                                    <div class="form-group">
+                                    <div class="form-group font-semibold">
                                         <label>Status</label>
                                         <input class="form-control" type="text" name="status" id="status" placeholder="Enter Room Status">
                                         <x-input-error :messages="$errors->get('status')" />
                                     </div>
 
-                                    <div class="form-group">
+                                    <div class="form-group font-semibold">
                                         <label>Rate</label>
                                         <input class="form-control" type="text" name="rate" id="rate" placeholder="Enter Room Rate">
                                         <x-input-error :messages="$errors->get('rate')" />
                                     </div>
 
-                                    <div class="form-group">
+                                    <div class="form-group font-semibold">
                                         <label>Photos</label>
+                                        <p>(png/jpeg)</p>
                                         <input type="file" name="photos" class="form-control" id="photos">
                                         <x-input-error :messages="$errors->get('photos')" />
                                     </div>
@@ -435,7 +437,7 @@
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="deleteProductModalLabel">Delete Room</h5>
+                                        <h5 class="modal-title" id="deleteProductModalLabel" style="color: #51bdb8;">Delete Room</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">

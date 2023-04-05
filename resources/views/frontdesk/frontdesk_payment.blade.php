@@ -237,8 +237,9 @@
       @endif
       <div>
             <br>
+            
       <table id="datatable" class="table table-condensed table-sm table-bordered">   
-                <thead class="bg-[#36ae7c] text-white">   
+                <thead class="bg-[#55afab] text-white">   
                     <tr style="text-align:center">   
                         <th scope="col" class="w-[50px] text-center px-4"> &nbspNo.&nbsp</th>
                         <th scope="col" class="text-center">Name</th>
@@ -247,7 +248,7 @@
                         <th scope="col" class="text-center"> &nbsp Payment Method</th>
                         <th scope="col" class="text-center">Payment Status</th>
                         <th scope="col" class="text-center"> &nbsp Booking Type</th>
-                        <th scope="col" style="width: 150px; text-align:center;"> &nbsp &nbsp  Action</th>
+                        <th scope="col" style="width: 50px; text-align:center;"> &nbsp &nbsp  Action</th>
                     </tr>   
                 </thead>   
                 </tbody> 
@@ -270,8 +271,9 @@
                     <td scope="col">{{ $data->booking_types }}</td>
                     <td scope="col"> <button type="button" 
                     class="btn btn-primary btn-sm" data-toggle="modal" style="background-color: #0B8457; border-color: none;"data-target="#view_modal{{  $data->reservation_id }}" id="editModal"
-                    >Confirm Payment</button></td>
+                    ><i class="fa-solid fa-circle-check"></i></button></td>
                 </tr>
+                
                 @php
                 $counter++;
                @endphp
@@ -312,7 +314,7 @@
                       <div class="modal-footer text-center">
                         <div class="">
                           <button type="submit" class="btn btn-default"
-                            style="background-color: #277BC0; color: #FFFFFF; font-weight: regular;font-size: 15px; padding: 0.75rem 1.5rem; border-radius: 0.375rem; box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05), 0 1px 3px 1px rgba(0, 0, 0, 0.1); transition: all 0.15s ease; outline: none; margin-right: 0.25rem; margin-bottom: 0.25rem;">
+                            style="background-color: #277BC0; color: #FFFFFF; font-weight: regular;font-size: 15px; position: relative; top: 20px; left: 10px;">
                             Confirm</button>
                         </div>
                       </div>

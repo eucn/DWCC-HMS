@@ -148,17 +148,17 @@
 
       <li class="nav-item">
   <a class="nav-link dropdown-toggle collapsed" href="#" id="accounts-dropdown" data-bs-toggle="dropdown" aria-expanded="false">
-    <i class="fa-solid fa-user icon-nav"></i><span>Accounts</span><i class="bi bi-chevron-down ms-auto"></i>
+    <i class="fa-solid fa-user icon-nav"></i><span>Accounts</span>
   </a>
   <ul id="tables-nav" class="dropdown-menu" aria-labelledby="accounts-dropdown">
     <li>
       <a class="dropdown-item" href="{{ route('admin.frontdeskList') }}">
-        <i class="bi bi-circle"></i><span>Frontdesk</span>
+      <i class="fa-sharp fa-solid fa-user-tie"></i><span>&nbsp Frontdesk</span>
       </a>
     </li>
     <li>
       <a class="dropdown-item" href="{{ route('admin.guestList') }}">
-        <i class="bi bi-circle"></i><span>Guest</span>
+      <i class="fa-solid fa-users"></i><span>&nbsp Guest</span>
       </a>
     </li>
   </ul>
@@ -215,8 +215,8 @@
                       <input type="date" name="checkout_date" id="checkout_date" value="{{ $checkoutDate }}" class="block w-[170px] mt-1 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md">
                   </div>
                   <div class="mr-10">
-                    <div class="opacity-1">Button</div>
-                      <button type="submit" class="bg-[#005289] w-[120px] mt-1 py-2 text-white rounded-md">Preview</button>
+                    <div class="opacity-1"></div>
+                      <button type="submit"  style ="position: relative; top: 20px;" class="bg-[#259F6C] w-[120px] mt-1 py-2 text-white rounded-md">Preview</button>
                   </div>
                 </div>
               </form>
@@ -250,11 +250,11 @@
               @csrf
               <div class="d-flex justify-content-between mb-3">
                 <div class="ml-auto">
-                    <button type="submit" class="bg-[#005289] w-[120px] mt-1 py-2 text-white rounded-md">Print</button>
+                    <button type="submit" class="bg-[#277bc0] w-[120px] mt-1 py-2 text-white rounded-md">Print</button>
                 </div>
               </div>
             </form>
-            
+            <hr style="border-top: 2px solid #3C4048;position: relative; left: 8px;">
 
             <table id="" class="table table-condensed table-sm table-bordered">   
                 <thead class="bg-[#51bdb8] text-white">   

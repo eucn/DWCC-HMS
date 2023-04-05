@@ -7,6 +7,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   @vite('resources/css/app.css')
 
+    <!-- Logo -->
+    <link rel="icon" type="image/png" sizes="16x16" href="../images/sitelogo.png">
+    
   <title>Reserve Dates</title>
 
   <style>
@@ -159,8 +162,8 @@
                   </div>
                 </div>
                 <div class="mx-auto mt-5">
-                  <hr class="mx-auto w-[188px] h-[5px] bg-[#E6AF2E] ">
-                </div>
+                 
+             </div>
               </form>
             </div>
           @endforeach

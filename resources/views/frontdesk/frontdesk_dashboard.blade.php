@@ -6,8 +6,9 @@
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   @vite('resources/css/app.css')
 
-  <!-- Logo -->
-  <link rel="icon" type="image/png" sizes="16x16" href="../images/sitelogo.png">
+ 
+    <!-- Logo -->
+    <link rel="icon" type="image/png" sizes="16x16" href="../images/sitelogo.png">
     
 <link href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" rel="stylesheet"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

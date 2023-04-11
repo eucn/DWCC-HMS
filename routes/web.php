@@ -84,6 +84,7 @@ Route::prefix('admin')->group(function (){
     Route::prefix('reports')->group(function () {
             Route::get('/', [ReportsController::class, 'index'])->name('admin.reports')->middleware('admin');
             Route::get('/preview', [ReportsController::class, 'preview'])->name('admin.reports.preview')->middleware('admin');
+            Route::get('/clear', [ReportsController::class, 'preview'])->name('admin.reports.clear')->middleware('admin');
             Route::post('/print', [ReportsController::class, 'printPDF'])->name('admin.reports.print')->middleware('admin');
         });
 });
@@ -119,6 +120,9 @@ Route::prefix('frontdesk')->middleware(['deactivateFrontdesk'])->group(function 
     // Reports
     Route::get('/reports', [FrontdeskController::class, 'FrontdeskReports'])->name('frontdesk.reports');
     Route::get('/reports/preview', [FrontdeskController::class, 'preview'])->name('frontdesk.reports.preview');
+    Route::get('/reports/clear', [FrontdeskController::class, 'preview'])->name('frontdesk.reports.clear');
+    // Route::get('/admin/reports/clear', 'App\Http\Controllers\Admin\ReportsController@clear')->name('admin.reports.clear');
+
     Route::post('/reports/print', [FrontdeskController::class, 'printPDF'])->name('frontdesk.reports.print');
 
     Route::patch('/frontdesk/{id}/deactivate', [FrontdeskController::class, 'deactivate'])->name('frontdesk.deactivate');

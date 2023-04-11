@@ -217,7 +217,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" style="color: #51bdb8;">Add New Room</h4>
+                <h4 class="modal-title">Add New Room</h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
@@ -226,32 +226,32 @@
 
                     <div class="form-group mb-2">
                         <label>Room Number</label>
-                        <input class="form-control" type="number" name="room_number">
+                        <input class="form-control" type="number" name="room_number" placeholder="Enter Room Number">
                         <x-input-error :messages="$errors->get('room_number')"/>
                     </div>
                     <div class="form-group mb-2">
                         <label>Room Type</label>
-                        <input class="form-control" type="text" name="room_type">
+                        <input class="form-control" type="text" name="room_type" placeholder="Enter Room Type">
                         <x-input-error :messages="$errors->get('room_type')"/>
                     </div>
                     <div class="form-group mb-2">
                         <label>Description</label>
-                        <input class="form-control" type="text" name="room_description">
+                        <input class="form-control" type="text" name="room_description" placeholder="Enter Description">
                         <x-input-error :messages="$errors->get('room_description')"/>
                     </div>
                     <div class="form-group mb-2">
                         <label>Maximum Room Capacity</label>
-                        <input class="form-control" type="number" name="max_capacity">
+                        <input class="form-control" type="number" name="max_capacity"  placeholder="Enter Maximum Capacity">
                         <x-input-error :messages="$errors->get('max_capacity')"/>
                     </div>
                     <div class="form-group mb-2">
                         <label>Amenities</label>
-                        <input class="form-control" type="text" name="amenities">
+                        <input class="form-control" type="text" name="amenities"  placeholder="Enter Amenities">
                         <x-input-error :messages="$errors->get('amenities')"/>
                     </div>
                     <div class="form-group mb-2">
                         <label>Status</label>
-                        <input class="form-control" type="text" name="status">
+                        <input class="form-control" type="text" name="status"  placeholder="Enter Status">
                         <x-input-error :messages="$errors->get('status')"/>
                         <!-- <select class="form-control" name="status">
                             <option value="available">Available</option>
@@ -260,7 +260,7 @@
                     </div>
                     <div class="form-group mb-2">
                         <label>Rate</label>
-                        <input class="form-control" type="number" name="rate">
+                        <input class="form-control" type="number" name="rate"  placeholder="Enter Rate">
                         <x-input-error :messages="$errors->get('rate')"/>
                     </div>
                     <div class="form-group">
@@ -347,21 +347,24 @@
                         </td>
                         <td style="width: 150px;">
 
-                          <button type="button" class="btn btn-primary" style="position:relative;left: -25px; top: 20px;" data-bs-toggle="modal" data-bs-target="#editModal{{ $roomData->id }}">
+                          {{-- <button type="button" class="btn btn-primary" style="position:relative;left: -25px; top: 20px;" data-bs-toggle="modal" data-bs-target="#editModal{{ $roomData->id }}">
+                          <i class="fa-regular fa-pen-to-square"></i>
+                          </button> --}}
+                          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal{{ $roomData->id }}">
                           <i class="fa-regular fa-pen-to-square"></i>
                           </button>
                           
-                          <button type="button" class="btn btn-danger" style="position:relative;left: -25px; top: 20px;" data-bs-toggle="modal" data-bs-target="#delete{{ $roomData->id }}">
+                          <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete{{ $roomData->id }}">
                           <i class="fa-solid fa-trash"></i>
                           </button>
-                          </td>
+                        </td>
                         <!-- Start Edit Modal -->
-                        <div class="modal fade" id="editModal{{ $roomData->id }}" tabindex="-1" aria-labelledby="editModal{{ $roomData->id }}Label" aria-hidden="true">
+                        <div class="modal fade" id="editModal{{ $roomData->id }}" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
                           <div class="modal-dialog" role="document">
                             <div class="modal-content">
                               <div class="modal-header">
-                                <h5 class="modal-title" id="editModal{{ $roomData->id }}Label">Edit Room Details</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <h5 class="modal-title" id="editModalLabel">Edit Room Details</h5>
+                                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                                   <span aria-hidden="true">&times;</span>
                                 </button>
                               </div>
@@ -373,55 +376,56 @@
                                 <div class="modal-body">
                                     <div class="form-group">
                                         <label>Room Number</label>
-                                        <input class="form-control" type="number" name="room_number" id="room_number" placeholder="Enter Room Number" >
+                                        <input class="form-control" type="number" name="room_number" id="room_number" value="{{ $roomData-> room_number }}" placeholder="Enter Room Number" >
                                         <x-input-error :messages="$errors->get('room_number')" />
                                     </div>
 
                                     <div class="form-group">
                                         <label>Room Type</label>
-                                        <input class="form-control" type="text" name="room_type" id="room_type" placeholder="Enter Room Type">
+                                        <input class="form-control" type="text" name="room_type" id="room_type" value="{{ $roomData-> room_type }}" placeholder="Enter Room Type">
                                         <x-input-error :messages="$errors->get('room_type')" />
                                     </div>
 
                                     <div class="form-group">
                                         <label>Description</label>
-                                        <input class="form-control" type="text" name="room_description" id="room_description" placeholder="Enter Description">
+                                        <input class="form-control" type="text" name="room_description" id="room_description" value="{{ $roomData-> room_description }}" placeholder="Enter Description">
                                         <x-input-error :messages="$errors->get('room_description')" />
                                     </div>
 
                                     <div class="form-group">
                                         <label>Maximum Room Capacity</label>
-                                        <input class="form-control" type="number" name="max_capacity" id="max_capacity" placeholder="Enter Maximum Room Capacity">
+                                        <input class="form-control" type="number" name="max_capacity" value="{{ $roomData-> max_capacity }}" id="max_capacity" placeholder="Enter Maximum Room Capacity">
                                         <x-input-error :messages="$errors->get('max_capacity')" />
                                     </div>
 
                                     <div class="form-group">
                                         <label>Amenities</label>
-                                        <input class="form-control" type="text" name="amenities" id="amenities" placeholder="Enter Amenities">
+                                        <input class="form-control" type="text" name="amenities" id="amenities" value="{{ $roomData-> amenities }}" placeholder="Enter Amenities">
                                         <x-input-error :messages="$errors->get('amenities')" />
                                     </div>
 
                                     <div class="form-group">
                                         <label>Status</label>
-                                        <input class="form-control" type="text" name="status" id="status" placeholder="Enter Room Status">
+                                        <input class="form-control" type="text" name="status" id="status" value="{{ $roomData-> status }}" placeholder="Enter Room Status">
                                         <x-input-error :messages="$errors->get('status')" />
                                     </div>
 
                                     <div class="form-group">
                                         <label>Rate</label>
-                                        <input class="form-control" type="text" name="rate" id="rate" placeholder="Enter Room Rate">
+                                        <input class="form-control" type="text" name="rate" id="rate" value="{{ $roomData-> rate }}" placeholder="Enter Room Rate">
                                         <x-input-error :messages="$errors->get('rate')" />
                                     </div>
 
                                     <div class="form-group">
                                         <label>Photos</label>
                                         <input type="file" name="photos" class="form-control" id="photos">
+                                        <img src="{{ asset('uploads/rooms/' . $roomData->photos) }}" alt="Room" width="70px" height="70px">
                                         <x-input-error :messages="$errors->get('photos')" />
                                     </div>
                                     
                                 </div>
                                 <div class="modal-footer">
-                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                   <button type="submit" class="btn btn-primary">Save changes</button>
                                 </div>
                               </form>
@@ -489,6 +493,14 @@
 
   <!-- Template Main JS File -->
   <script src="{{ asset('template/assets/js/main.js') }}"></script>
+
+  <!-- JavaScript code to show the modal for deleting a product -->
+  <script>
+    function editRoom(id) {
+        $('#editModal').modal('show');
+        $('#editForm').attr('action', '/room/' + id);
+    }
+  </script>
 
   <!-- JavaScript code to show the modal for deleting a product -->
 <script>

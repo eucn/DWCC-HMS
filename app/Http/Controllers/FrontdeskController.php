@@ -132,7 +132,12 @@ class FrontdeskController extends Controller
         } else {
             return abort(401, 'Unauthorized');
         }
-
+        $phone_number = $request->validate([
+            'phone_number' => 'required|regex:/^09[0-9]{9}$/',
+        ], [
+            'phone_number.required' => 'The phone number field is required.',
+            'phone_number.regex' => 'The phone number must contain 11 digit.'
+        ]);
         // $frontdesk_id = auth()->user()->id;
     
         // $room_type = $request->input('room_type');
@@ -161,7 +166,9 @@ class FrontdeskController extends Controller
     if (!$reservations->isEmpty()){
         // room is already reserved, return an error message or redirect back with an error message
         return redirect()->back()->with('error', 'The room is already reserved for the selected dates.');
+    
     }else{
+
             $room_id = $request->input('room_no');
             $checkin_date = $request->input('check_in_date');
             $checkout_date = $request->input('check_out_date');
@@ -202,12 +209,7 @@ class FrontdeskController extends Controller
             $reservation->guests_Fee = $total_numGuestFee;
             $reservation->save();
 
-            $phone_number = $request->validate([
-                'phone_number' => 'required|regex:/^09[0-9]{9}$/',
-            ], [
-                'phone_number.required' => 'The phone number field is required.',
-                'phone_number.regex' => 'The phone number must contain 11 digit.'
-            ]);
+         
             $reservation_id = Reservations::select('id')->latest('id')->value('id');
             // Validate the request data
 

@@ -6,15 +6,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @vite('resources/css/app.css')
+
+ 
+  
     {{-- <link href="{{ asset('css/room_info.css') }}" rel="stylesheet"> --}}
 
     <script data-require="jquery@3.1.1" data-semver="3.1.1"
         src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
+       <!-- Logo -->
+       <link rel="icon" type="image/png" sizes="16x16" href="../images/sitelogo.png">
     <title>Room Information</title>
-    <style>
-
-    </style>
+    
 </head>
 
 <body class="bg-gray-100">

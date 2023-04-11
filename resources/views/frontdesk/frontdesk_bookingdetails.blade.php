@@ -213,7 +213,7 @@
         <div>
           <br>
           <table id="datatable" class="table table-condensed table-sm table-bordered">
-            <thead class="bg-[#36ae7c] text-white">   
+            <thead class="bg-[#55afab] text-white">   
               <tr style="text-align:center">   
                   <th No. scope="col" class="w-[50px] text-center px-4"> &nbsp No. &nbsp</th>
                   <th scope="col" class="text-center">Name</th>
@@ -221,7 +221,7 @@
                   <th scope="col" class="text-center"> &nbsp Booking Status</th>
                   <th scope="col" class="text-center"> &nbsp &nbsp Check-in Date</th>
                   <th scope="col" class="text-center"> &nbsp Check-out Date</th>
-                  <th scope="col" style="width: 150px; text-align:center;"> &nbsp &nbsp  Action</th>
+                  <th scope="col" style="width: 100px; text-align:center;"> &nbsp &nbsp  Action</th>
                   <div class="container"> 
               </tr>   
              </thead>   

@@ -147,23 +147,26 @@
         </a>
       </li><!-- End Booking History Nav -->
 
+
       <li class="nav-item">
   <a class="nav-link dropdown-toggle collapsed" href="#" id="accounts-dropdown" data-bs-toggle="dropdown" aria-expanded="false">
-    <i class="fa-solid fa-user icon-nav"></i><span>Accounts</span><i class="bi bi-chevron-down ms-auto"></i>
+    <i class="fa-solid fa-user icon-nav"></i><span>Accounts</span></i>
   </a>
   <ul id="tables-nav" class="dropdown-menu" aria-labelledby="accounts-dropdown">
     <li>
       <a class="dropdown-item" href="{{ route('admin.frontdeskList') }}">
-        <i class="bi bi-circle"></i><span>Frontdesk</span>
+      <i class="fa-sharp fa-solid fa-user-tie"></i><span>&nbsp Frontdesk</span>
       </a>
     </li>
     <li>
       <a class="dropdown-item" href="{{ route('admin.guestList') }}">
-        <i class="bi bi-circle"></i><span>Guest</span>
+      <i class="fa-solid fa-users"></i><span>&nbsp Guest</span>
       </a>
     </li>
   </ul>
-</li><!-- End Tables Nav -->
+</li>
+
+      <!-- End Tables Nav -->
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="{{ route('admin.reports') }}">
@@ -207,13 +210,13 @@
         <button type="button" style="position:relative; left: 1px; color: #dc3545;" class="close"
                         data-dismiss="modal">&times;</button>
       </div>
-      <div class="modal-body" style="height: 450px;">
+      <div class="modal-body" style="height: 420px;">
       <div class="flex items-center justify-center min-h-screen bg-white-100">
                     <hr class="h-px mb-5 bg-[#55AFAB] border-0">
 
                     <form method="POST" action="{{ route('frontdesk.register.create') }}">
                     @csrf
-                    <div class="py-1" style="position: relative; top: -200px; left: 1px;">
+                    <div class="py-1" style="position: relative; top: -170px; left: 1px;">
                         
                         <span class="mb-2 text-sm font-semibold">Name <span class="text-red-500 text-sm ">*</span></span>
                         <input type="text" name="name" :value="old('name')" required autofocus id="name" class="w-full p-1 border border-gray-300 rounded-md placeholder:font:light placeholder:text-gray-500 placeholder:text-sm py-1"
@@ -232,7 +235,7 @@
                             class="w-full p-1 border border-gray-300 rounded-md placeholder:font:light placeholder:text-gray-500 placeholder:text-sm py-1"
                         placeholder="Enter your last name">
                     </div> -->
-                    <div class="py-1" style="position: relative; top: -190px; left: 1px;">
+                    <div class="py-1" style="position: relative; top: -165px; left: 1px;">
                         <span class="mb-2 text-sm font-semibold">Email
                             <span class="text-red-500 text-sm ">*</span> </span>
                         <input type="email" name="email" :value="old('email')" required id="email"
@@ -240,7 +243,7 @@
                             placeholder="Enter your email">
                             <x-input-error :messages="$errors->get('email')" class="mt-2" />
                     </div>
-                    <div class="py-1" style="position: relative; top: -180px; left: 1px;">
+                    <div class="py-1" style="position: relative; top: -160px; left: 1px;">
                         <span class="mb-2 text-sm font-semibold" >Password <span class="text-red-500 text-sm ">*</span></span>
                         <input type="password" name="password"
                             required autocomplete="new-password" id="password" 
@@ -249,7 +252,7 @@
                             placeholder="Enter your password" >
                             <x-input-error :messages="$errors->get('password')" class="mt-2" />
                     </div>
-                    <div class="py-1" style="position: relative; top: -170px; left: 1px;">
+                    <div class="py-1" style="position: relative; top: -155px; left: 1px;">
                         <span class="mb-2 text-sm font-semibold" >Confirm Password <span class="text-red-500 text-sm ">*</span></span>
                         <input type="password" name="password_confirmation" required id="password"
                             class="w-full p-1 border border-gray-300 rounded-md placeholder:font:light placeholder:text-gray-500 placeholder:text-sm py-1"
@@ -265,7 +268,7 @@
 <!-- </div> -->
 
       </div>
-      <div class="modal-footer" style="position: relative; top: -300px; left:5px;">
+      <div class="modal-footer" style="position: relative; top: -280px; left:5px;">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary">Register</button>
       </div>
@@ -282,25 +285,25 @@
 
 
             <table class="table table-condensed table-sm table-bordered">   
-                <thead class="bg-[#36ae7c] text-white">   
+                <thead class="bg-[#51bdb8] text-white">   
                     <tr style="text-align:center">   
                         <th scope="col">#</th>
                         <th scope="col">Name</th>
                         <th scope="col">Email</th>
                         <th scope="col">Registered at</th>
                         <th scope="col">Account Status</th>
-                        <th scope="col">Action</th>
+                        <th scope="col" style="width: 150px;">Action</th>
                     </tr>   
                 </thead>   
                 <tbody>   
                 @foreach ($frontdesks as $frontdesk)
                     <tr>     
-                        <td>{{ $frontdesk->id }}</td>
-                        <td>{{ $frontdesk->name }}</td>
-                        <td>{{ $frontdesk->email }}</td>
-                        <td>{{ $frontdesk->created_at }}</td>  
+                        <td style="text-align:center">{{ $frontdesk->id }}</td>
+                        <td style="text-align:center">{{ $frontdesk->name }}</td>
+                        <td style="text-align:center">{{ $frontdesk->email }}</td>
+                        <td style="text-align:center">{{ $frontdesk->created_at }}</td>  
                         {{-- <td>{{ $frontdesk->Acc_Stat }}</td>--}}
-                        <td>
+                        <td style="text-align:center">
                 @if ($frontdesk->Acc_Stat == 'Deactivate')
                     <p>{{ $frontdesk->Acc_Stat }}</p>
                 @elseif ($frontdesk->Acc_Stat == 'Activate')
@@ -309,17 +312,17 @@
               </td>
                         <td>
                         <!--View Button-->	
-                        <button type="button" class="btn btn-primary btn-sm" id="modal2" data-bs-toggle="modal" data-bs-target="#modalDialogScrollable{{ $frontdesk->id }}">
+                        <button type="button"  style="position: relative; left: 15px;" class="btn btn-primary btn-sm" id="modal2" data-bs-toggle="modal" data-bs-target="#modalDialogScrollable{{ $frontdesk->id }}">
                          <i class="fa-solid fa-eye"></i>
                         </button>
 
                         <!-- Button trigger activate modal -->
-                        <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#activate{{ $frontdesk->id }}">
+                        <button type="button" style="position: relative; left: 20px;" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#activate{{ $frontdesk->id }}">
                             <i class="fa-solid fa-user"></i>
                         </button>
 
                         <!-- Button trigger deactivate modal -->
-                        <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deactivate{{ $frontdesk->id }}">
+                        <button type="button" style="position: relative; left: 25px;" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deactivate{{ $frontdesk->id }}">
                             <i class="fa-solid fa-user-slash"></i>
                         </button>
                           </td>  
@@ -330,9 +333,9 @@
                                 <div class="modal-dialog modal-dialog-scrollable">
                                   <div class="modal-content">
                                     <div class="modal-header">
-                                      <h5 class="modal-title">View Information</h5>
+                                      <h5 class="modal-title" style=" color: #55afab;">View Information</h5>
                                       <button type="button" style="position:relative; left: 1px; color: #dc3545;" class="close"
-                        data-dismiss="modal">&times;</button>
+                        data-dismiss="modal">&times;</button> 
                                     </div>
                                     <div class="modal-body">
                                     <h6><strong>Name:</strong> {{ $frontdesk->name }}</h6><br>
@@ -355,7 +358,7 @@
                 @csrf
                 @method('PATCH')
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Deactivate User</h5>
+                    <h5 class="modal-title" id="exampleModalLabel" style=" color: #55afab;">Deactivate User</h5>
                     <button type="button" style="position:relative; left: 1px; color: #dc3545;" class="close"
                         data-dismiss="modal">&times;</button>
                 </div>
@@ -380,7 +383,7 @@
                 @csrf
                 @method('PATCH')
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Activate User</h5>
+                    <h5 class="modal-title" id="exampleModalLabel" style=" color: #55afab;">Activate User</h5>
                     <button type="button" style="position:relative; left: 1px; color: #dc3545;" class="close"
                         data-dismiss="modal">&times;</button>
                 </div>

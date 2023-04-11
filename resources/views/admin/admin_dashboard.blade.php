@@ -144,17 +144,17 @@
 
       <li class="nav-item">
   <a class="nav-link dropdown-toggle collapsed" href="#" id="accounts-dropdown" data-bs-toggle="dropdown" aria-expanded="false">
-    <i class="fa-solid fa-user icon-nav"></i><span>Accounts</span><i class="bi bi-chevron-down ms-auto"></i>
+    <i class="fa-solid fa-user icon-nav"></i><span>Accounts</span></i>
   </a>
   <ul id="tables-nav" class="dropdown-menu" aria-labelledby="accounts-dropdown">
     <li>
       <a class="dropdown-item" href="{{ route('admin.frontdeskList') }}">
-        <i class="bi bi-circle"></i><span>Frontdesk</span>
+      <i class="fa-sharp fa-solid fa-user-tie"></i><span>&nbsp Frontdesk</span>
       </a>
     </li>
     <li>
       <a class="dropdown-item" href="{{ route('admin.guestList') }}">
-        <i class="bi bi-circle"></i><span>Guest</span>
+      <i class="fa-solid fa-users"></i><span>&nbsp Guest</span>
       </a>
     </li>
   </ul>

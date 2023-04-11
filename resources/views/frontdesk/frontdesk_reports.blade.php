@@ -164,10 +164,12 @@
 
   <main id="main" class="main">
 
-    <div class="pagetitle">
-      <h1>Reports</h1>
+    
+  <div class="pagetitle">
+      <h1>Booking Details</h1>
+      <br>
       <nav>
-        <ol class="breadcrumb">
+        <ol class="breadcrumb" style="background-color:">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
           <li class="breadcrumb-item active">Reports</li>
         </ol>
@@ -190,28 +192,29 @@
               <input type="date" name="checkin_date" id="checkin_date" value="{{ $checkinDate }}" class="block w-[170px] mt-1 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md">
           </div>
           <div class="mr-10">
-            <div>Check-in Date</div>
+            <div>Check-out Date</div>
               <input type="date" name="checkout_date" id="checkout_date" value="{{ $checkoutDate }}" class="block w-[170px] mt-1 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md">
           </div>
           <div class="mr-10">
-            <div class="opacity-1">Button</div>
-              <button type="submit" class="bg-[#005289] w-[120px] mt-1 py-2 text-white rounded-md">Preview</button>
+            <div class="opacity-1"></div>
+              <button style ="position: relative; top: 20px;"type="submit" class="bg-[#259F6C] w-[120px] mt-1 py-2 text-white rounded-md">Preview</button>
           </div>
         </div>
     </form>
+    <hr style="border-top: 2px solid #3C4048;position: relative; left: 8px;">
 
     <form action="{{ route('frontdesk.reports.print', ['status' => $status, 'checkin_date' => $checkinDate, 'checkout_date' => $checkoutDate])}}" method="post" target="_blank">
       @csrf
       <div class="d-flex justify-content-between mb-3">
         <div class="ml-auto">
-            <button type="submit" class="bg-[#005289] w-[120px] mt-1 py-2 text-white rounded-md">Print</button>
+            <button type="submit" class="bg-[#277bc0] w-[120px] mt-1 py-2 text-white rounded-md">Print</button>
         </div>
       </div>
     </form>
 
     <section>
       <table id="" class="table table-condensed table-sm table-bordered">   
-        <thead class="bg-[#36ae7c] text-white">   
+        <thead class="bg-[#55afab] text-white">   
           <tr class="text-center">
             <th scope="col" class="px-4 py-1">Invoice No.</th>
             <th scope="col" class="px-4 py-1">Name</th>

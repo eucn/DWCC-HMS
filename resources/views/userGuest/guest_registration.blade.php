@@ -5,6 +5,8 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         @vite('resources/css/app.css')
+           <!-- Logo -->
+    <link rel="icon" type="image/png" sizes="16x16" href="../images/sitelogo.png">
         <script
             data-require="jquery@3.1.1"
             data-semver="3.1.1"

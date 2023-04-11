@@ -151,17 +151,17 @@
 
       <li class="nav-item">
   <a class="nav-link dropdown-toggle collapsed" href="#" id="accounts-dropdown" data-bs-toggle="dropdown" aria-expanded="false">
-    <i class="fa-solid fa-user icon-nav"></i><span>Accounts</span><i class="bi bi-chevron-down ms-auto"></i>
+    <i class="fa-solid fa-user icon-nav"></i><span>Accounts</span></i>
   </a>
   <ul id="tables-nav" class="dropdown-menu" aria-labelledby="accounts-dropdown">
     <li>
       <a class="dropdown-item" href="{{ route('admin.frontdeskList') }}">
-        <i class="bi bi-circle"></i><span>Frontdesk</span>
+      <i class="fa-sharp fa-solid fa-user-tie"></i><span>&nbsp Frontdesk</span>
       </a>
     </li>
     <li>
       <a class="dropdown-item" href="{{ route('admin.guestList') }}">
-        <i class="bi bi-circle"></i><span>Guest</span>
+      <i class="fa-solid fa-users"></i><span>&nbsp Guest</span>
       </a>
     </li>
   </ul>
@@ -191,7 +191,7 @@
         </ol>
       </nav>
     </div><!-- End Page Title -->
-
+    <hr style="border-top: 2px solid #3C4048;position: relative; left: 6px;">
     <section class="section dashboard">
       <div class="row">
 
@@ -200,27 +200,30 @@
           <div class="row">
 
           <form class="flex justify-end" action="{{ route('admin.filter-history') }}" method="GET">
-    <div class="flex items-center space-x-2 mb-3">
+    <div class="flex items-center space-x-2 mb-3" style="position: relative; top: 10px; left: 3px;">
         <label for="start-date" class="text-gray-600 font-medium">Filter</label>
         <input type="date" id="start-date" name="date" value="{{ request('date', date('Y-m-d')) }}" class="form-control px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
         <button type="submit" class="btn btn-primary">Filter</button>
+       
     </div>
+  
 </form>
-
 <table id="datatable" class="table table-condensed table-sm table-bordered">
-    <thead class="bg-[#36ae7c] text-white">
+  <br>
+    <thead class="bg-[#51bdb8] text-white">
         <tr style="text-align:center">
-            <th scope="col">No.</th>
-            <th scope="col">Name</th>
-            <th scope="col">Booked at</th>
-            <th scope="col">Booking Status</th>
-            <th scope="col">Check-in/Check-out</th>
-            <th scope="col">Room Type</th>
-            <th scope="col">Rate</th>
+            <th scope="col"  style="text-align:center">No.</th>
+            <th scope="col" style="text-align:center">Name</th>
+            <th scope="col" style="text-align:center">Booked at</th>
+            <th scope="col" style="text-align:center">Booking Status</th>
+            <th scope="col" style="text-align:center">Check-in/Check-out</th>
+            <th scope="col" style="text-align:center">Room Type</th>
+            <th scope="col" style="text-align:center">Rate</th>
         </tr>
     </thead>
+   
     <tbody>
-
+ 
         @foreach($bookings as $index => $booking)
         <tr style="text-align:center">
             <td>{{ $index + 1 }}</td>

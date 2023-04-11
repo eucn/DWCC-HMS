@@ -144,17 +144,17 @@
 
       <li class="nav-item">
   <a class="nav-link dropdown-toggle collapsed" href="#" id="accounts-dropdown" data-bs-toggle="dropdown" aria-expanded="false">
-    <i class="fa-solid fa-user icon-nav"></i><span>Accounts</span><i class="bi bi-chevron-down ms-auto"></i>
+    <i class="fa-solid fa-user icon-nav"></i><span>Accounts</span>
   </a>
   <ul id="tables-nav" class="dropdown-menu" aria-labelledby="accounts-dropdown">
     <li>
       <a class="dropdown-item" href="{{ route('admin.frontdeskList') }}">
-        <i class="bi bi-circle"></i><span>Frontdesk</span>
+      <i class="fa-sharp fa-solid fa-user-tie"></i><span>&nbsp Frontdesk</span>
       </a>
     </li>
     <li>
       <a class="dropdown-item" href="{{ route('admin.guestList') }}">
-        <i class="bi bi-circle"></i><span>Guest</span>
+      <i class="fa-solid fa-users"></i><span>&nbsp Guest</span>
       </a>
     </li>
   </ul>
@@ -212,25 +212,25 @@
 </table> -->
 
   <table class="table table-condensed table-sm table-bordered">   
-      <thead class="bg-[#36ae7c] text-white">   
+      <thead class="bg-[#51bdb8] text-white">   
           <tr style="text-align:center">   
               <th scope="col">#</th>
               <th scope="col">Name</th>
               <th scope="col">Email</th>
               <th scope="col">Registered at</th>
               <th scope="col">Account Status</th>
-              <th scope="col">Action</th>
+              <th scope="col" style="width: 150px;">Action</th>
           </tr>   
       </thead>   
       <tbody>   
       @foreach ($users as $user)
           <tr>     
               <td>{{ $user->id }}</td>
-              <td>{{ $user->name }}</td>
-              <td>{{ $user->email }}</td>
-              <td>{{ $user->created_at }}</td>
-              {{-- <td>{{ $user->Acc_Stat }}</td>--}}
-              <td>
+              <td style="text-align:center">{{ $user->name }}</td>
+              <td style="text-align:center">{{ $user->email }}</td>
+              <td style="text-align:center">{{ $user->created_at }}</td>
+              {{-- <td style="text-align:center">{{ $user->Acc_Stat }}</td>--}}
+              <td style="text-align:center">
                 @if ($user->Acc_Stat == 'Deactivate')
                     <p>{{ $user->Acc_Stat }}</p>
                 @elseif ($user->Acc_Stat == 'Activate')
@@ -239,17 +239,17 @@
               </td>
               <td>
               <!--View Button-->	
-                <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modalDialogScrollable{{ $user->id }}">
+                <button type="button"  style="position: relative; left: 10px;"  class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modalDialogScrollable{{ $user->id }}">
                   <i class="fa-solid fa-eye"></i>
                 </button>
 
                 <!-- Button trigger activate modal -->
-                <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#activate{{ $user->id }}">
+                <button type="button"  style="position: relative; left: 15px;"  class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#activate{{ $user->id }}">
                     <i class="fa-solid fa-user"></i>
                 </button>
 
                 <!-- Button trigger deactivate modal -->
-                <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deactivate{{ $user->id }}">
+                <button type="button"  style="position: relative; left: 20px;"  class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deactivate{{ $user->id }}">
                     <i class="fa-solid fa-user-slash"></i>
                 </button>
 

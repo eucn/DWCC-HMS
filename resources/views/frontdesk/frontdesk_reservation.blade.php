@@ -62,12 +62,8 @@
 
     <nav class="header-nav ms-auto">
       <ul class="d-flex align-items-center">
-
-        <li class="nav-item d-block d-lg-none">
-          <a class="nav-link nav-icon search-bar-toggle " href="#">
-            <i class="bi bi-search"></i>
-          </a>
-        </li><!-- End Search Icon-->
+        
+        <!-- End Search Icon-->
 
         <li class="nav-item dropdown pe-3">
 
@@ -160,7 +156,6 @@
     </ul>
 
   </aside><!-- End Sidebar-->
-
   <main id="main" class="main">
 
     <div class="pagetitle">
@@ -172,11 +167,21 @@
         </ol>
       </nav>
     </div><!-- End Page Title -->
-    @if (Session::has('success'))
-    <div class="alert alert-success">
-        {{ Session::get('success') }}
+    <div class="mx-auto">
+      @if (Session::has('error'))
+      <div id="error-message" class="flex flex-row items-center justify-between bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative transition duration-500 ease-in-out" role="alert">
+        <div class="flex-grow">
+          {{ Session::get('error') }}
         </div>
+        <div class="ml-4">
+          <button type="button" class="close" onclick="document.getElementById('error-message').classList.add('opacity-0', 'h-0');">
+            <span class="text-xl-center text-red-500 font-extrabold">X</span>
+        </div>
+          </button>    
+        </div>
+      </div>          
     @endif
+
     <form method="POST" action="{{ route('frontdesk.save.reservation') }}">
       @csrf
       <section class="lg:container lg:mx-auto">
@@ -185,10 +190,10 @@
             <h3 class="text- sm:text-2xl font-semibold">Room Information</h3>
           </div>
           <div class="pt-3">
-            <div class="flex flex-col md:flex-row mx-4 md:mx-4 ">
-              <div class="flex-grow justify-center md:mx-5 md:w-2/6 lg:w-2/3 py-2">
-                <label class="block" for="room_type">Room Type:</label>
-                <select class="w-full sm:w-[450px] md:w-[450px] lg:w-full py-[7px] focus:outline-none rounded-md "
+            <div class="flex flex-col md:flex-row">
+              <div class="flex-1 mx-4">
+                <label class="block mt-3 font-semibold" for="room_type">Room Type:</label>
+                <select class="w-full mt-2 focus:outline-none rounded-md "
                   style="border: 1px solid gray;" name="room_type" id="room_type">
                   @foreach ($room_type as $roomType)
                   <option value="{{ $roomType }}" {{ old('room_type') == $roomType ? 'selected' : '' }}>
@@ -197,57 +202,60 @@
                   @endforeach
                 </select>
               </div>
-              <div class="flex-grow justify-center md:mx-5 md:w-2/6 lg:w-2/3 py-2">
-                <label class="block" for="room_no">Room No:</label>
+              <div class="flex-1 mx-4">
+                <label class="block mt-3  font-semibold" for="room_no">Room No:</label>
                 <input
-                  class="w-full sm:w-[450px] md:w-[450px] lg:w-full py-[7px]
+                  class="w-full mt-2 py-[7px]
                  border-1 text-center border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                   style="border: 1px solid gray;" name="room_no" id="room_no" value="{{ old('room_no') }}" readonly>
-              </div>
+             </div>
             </div>
-            <div class="flex flex-col md:flex-row mx-4 md:mx-4">
-              <div class="flex-grow justify-center md:mx-5  md:w-2/6 lg:w-2/3 py-2">
-                <label class="" for="room_no">Check-in Date:</label>
+            <div class="flex flex-col md:flex-row">
+              <div class="flex-1 mx-4">
+                <label class="block mt-3 font-semibold" for="room_no">Check-in Date:</label>
                 <input
-                  class="w-full sm:w-[450px] md:w-[450px] lg:w-full py-[7px] border-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                  class="w-full mt-2 py-[7px] border-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                   style="border: 1px solid gray;" id="check_in_date" name="check_in_date" type="date"
                   value="{{ old('check_in_date') }}">
               </div>
-              <div class="flex-grow justify-center md:mx-5 md:w-2/6 lg:w-2/3  py-2">
-                <label class="" for="room_no">Check-out Date:</label>
+              <div class="flex-1 mx-4">
+                <label class="block mt-3 font-semibold" for="room_no">Check-out Date:</label>
                 <input
-                  class="w-full sm:w-[450px] md:w-[450px] lg:w-full py-[7px] border-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                  class="w-full mt-2 py-[7px] border-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                   style="border: 1px solid gray;" id="check_out_date" name="check_out_date" type="date"
                   value="{{ old('check_out_date') }}">
               </div>
             </div>
-            <div class="ml-5 sm:ml-5">
+            <div class="">
               <div class="flex flex-col md:flex-row mx-4 md:mx-5">
-                <label class="" for="room_no">Number of Guest</label>
+                <label class="font-semibold mt-3" for="room_no">Number of Guest</label>
               </div>
               <div class="flex flex-col md:flex-row mx-4 md:mx-5">
-                <div class="w-full sm:w-[450px] md:w-[450px] lg:w-[420px]">
-                  <div class="flex items-center border border-gray-500 rounded">
-                    <button type="button" onclick="subtract(' guest_num')"
-                      class="flex flex-col items-center justify-center py-[7px]  w-10 h-10 bg-gray-100 hover:bg-gray-400 text-gray-700 hover:text-white border-r border-gray-500 focus:outline-none focus:ring-1 focus:ring-offset-2 focus:ring-gray-500 rounded-l">
+                <div class="w-full md:w-[450px] ">
+                  <div class="flex items-center border mt-2 border-gray-500 rounded">
+                    <button type="button" onclick="subtract('guest_num')"
+                      class="flex flex-col items-center justify-center py-[7px]  w-10 h-10 bg-gray-100 hover:bg-gray-400 text-gray-700 hover:text-white border-r border-gray-500 focus:outline-none focus:ring-gray-600 rounded-l">
                       -
                     </button>
                     <input type="number" id="guest_num" name="guest_num" value="1" min="1"
-                      class="w-full sm:w-[410px] md:w-[410px] lg:w-full flex-1 text-center text-gray-700 bg-white py-[7px]"
+                      class="w-full sm:w-[410px] md:w-[410px] lg:w-full  flex-1 text-center text-gray-700 bg-white py-[7px]"
                       readonly>
                     <button type="button" onclick="add('guest_num')"
-                      class="flex flex-col items-center justify-center py-[7px]  w-10 h-10 bg-gray-100 hover:bg-gray-400 text-gray-700 hover:text-white border-l border-gray-500 focus:outline-none focus:ring-1 focus:ring-offset-2 focus:ring-gray-500 rounded-r">
+                      class="flex flex-col items-center justify-center py-[7px]  w-10 h-10 bg-gray-100 hover:bg-gray-400 text-gray-700 hover:text-white border-l border-gray-500 focus:outline-none focus:ring-gray-600 rounded-r">
                       +
                     </button>
                   </div>
                 </div>
               </div>
-              <div class="flex items-center ml-5 sm:ml-5 lg: py-[7px]">
-                <div class="block text-gray-900 font-medium mr-4 lg:mt-5" for="number-of-nights">Number of Night/s:</div>
-                <input type="" id="number_of_nights" name="number_of_nights"
-                 value="{{ old('number_of_nights') }}"
-                 class="bg-transparent pointer-events-none rounded py-2 px-3 text-gray-900 leading-tight focus:outline-none focus:border-blue-500"
-                 readonly>
+              <div class="flex items-center md:flex-row mx-4 md:mx-5 mt- py-[7px]">
+                <label class="mt-1 ml-3 font-semibold" for="font-bold">Number of Nights</label>
+                <div>
+                  <input type="text" id="number_of_nights" name="number_of_nights"
+                  value="{{ old('number_of_nights') }}"
+                  class="bg-transparent pointer-events-non border-transparent rounded mx-2 w-10 text-gray-900 text-left leading-tight focus:outline-none focus:border-blue-500"
+                  readonly
+                  >           
+                </div>
               </div>
             </div>
           </div>
@@ -257,14 +265,14 @@
     <section class="lg:container lg:mx-auto ">
       <div class="relative bg-white rounded-lg border-2 shadow-md w-full pb-4">
         <div class="border-b-2 border-gray-300 px-4 py-3">
-          <h3 class="text-lg sm:text-2xl font-semibold">Guest Information</h3>
+          <h3 class="text-lg sm:text-2xl font-bold">Guest Information</h3>
         </div>
-        <div class="space-y-4 font-regular text-base sm:text-lg ">
+        <div class="space-y-4 font-regular text-base  ">
             <div class="flex flex-col lg:flex-row lg:space-x-10 sm:mx-10 md:mx-10 mx-4 py-3">
               <div class="w-full lg:w-auto pt-2">
-                <label class="" for="salutation">Salutation</label>&nbsp; &nbsp;
+                <label class="font-semibold" for="salutation">Salutation</label>&nbsp; &nbsp;
                 <div class="">
-                  <select class="w-full md:w-[130px] py-[7px] border-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" style="border: 1px solid gray;" name="salutation" id="salutation" value="{{ old('salutation') }}" placeholder="Ms.">
+                  <select class="w-full md:w-[130px] py-[7px] border-1 mt-3 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" style="border: 1px solid gray;" name="salutation" id="salutation" value="{{ old('salutation') }}" placeholder="Ms.">
                     <option value="Ms." {{ old('salutation') == 'Ms.' ? 'selected' : '' }}>Ms.</option>
                     <option value="Mrs." {{ old('salutation') == 'Mrs.' ? 'selected' : '' }}>Mrs.</option>
                     <option value="Mr." {{ old('salutation') == 'Mr.' ? 'selected' : '' }}>Mr.</option>
@@ -272,34 +280,34 @@
                 </div>
               </div>
               <div class="w-full lg:w-1/2 pt-2">
-                <label class="" for="fullname">Full Name&nbsp;<span class="text-red-700 font-bold">*</span></label>
+                <label class="font-semibold" for="fullname">Full Name&nbsp;<span class="text-red-700 font-bold">*</span></label>
                 <div class=" ">
-                  <input type="text" class="w-full py-[7px] border-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" style="border: 1px solid gray;" name="first_name" id="first_name" value="{{ old('first_name') }}" placeholder="First Name" required>  
+                  <input type="text" class="w-full py-[7px] border-1 mt-3 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" style="border: 1px solid gray;" name="first_name" id="first_name" value="{{ old('first_name') }}" placeholder="First Name" required>  
                 </div>
               </div>
               <div class="w-full lg:w-1/2 pt-2">
                 <label class="" for="last_name"></label>
                 <div class=" ">
-                  <input type="text" class="w-full py-[7px] border-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" style="border: 1px solid gray;" name="last_name" id="last_name" value="{{ old('last_name') }}" placeholder="Last Name" required>  
+                  <input type="text" class="w-full py-[7px] border-1 mt-3 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" style="border: 1px solid gray;" name="last_name" id="last_name" value="{{ old('last_name') }}" placeholder="Last Name" required>  
                 </div>
               </div>
             </div>
 
             <div class="mx-4 sm:mx-10 ">                                
-              <label for="companyName">Company Name</label>
-              <input type="text" name="company_name" id="company_name" class="w-full  py-[7px] border-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+              <label class="font-semibold" for="companyName">Company Name</label>
+              <input type="text" name="company_name" id="company_name" class="w-full mt-3 py-[7px] border-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                style="border: 1px solid gray;">
             </div>
   
             <div class="mx-4 sm:mx-10">
-              <label for="Address">Address&nbsp;<span class="text-red-700 font-bold">*</label>
+              <label class="font-semibold" for="Address">Address&nbsp;<span class="text-red-700 font-bold ">*</label>
               <input type="text" name="address" id="address" value="{{ old('address') }}" placeholder="Address" class="w-full
-              py-[7px] border-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" style="border: 1px solid gray;" required>                              
+              py-[7px] mt-3 border-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" style="border: 1px solid gray;" required>                              
             </div>
   
             <div class="mx-4 sm:mx-10">
-              <label for="address">Phone Number&nbsp;<span class="text-red-700 font-bold">*</label><br>
-              <input type="number"  name="phone_number" id="phone_number" value="{{ old('phone_number') }}" class="w-full sm:w-[200px] py-[7px] border-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" 
+              <label class="font-semibold" for="address">Phone Number&nbsp;<span class="text-red-700 font-bold">*</label><br>
+              <input type="number"  name="phone_number" id="phone_number" value="{{ old('phone_number') }}" class="w-full mt-3 sm:w-[200px] py-[7px] border-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" 
               style="border: 1px solid gray;" placeholder="+63" required>                              
               <x-input-error :messages="$errors->get('phone_number')" class="mt-2" />
             </div>
@@ -312,7 +320,7 @@
           <div class="mx-auto">
             <div class="bg-white rounded-lg shadow-md border-2 w-full">
               <div class="border-b-2 border-gray-300 px-4 py-3">
-                <h3 class="text- sm:text-2xl font-semibold">Payment Method</h3>
+                <h3 class="text-semibold font-semibold">Payment Method</h3>
               </div>
               <div class="mx-4 sm:mx-10 md:mx-5 py-8">
                 <div class="py-2">
@@ -366,7 +374,8 @@
           </button>
       </section>
     </form>
-  </main><!-- End #main -->
+  </main>
+
 
   <!-- ======= Footer ======= -->
   <footer id="footer" class="footer">

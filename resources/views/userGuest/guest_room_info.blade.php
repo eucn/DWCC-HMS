@@ -84,7 +84,7 @@
     {{-- Left --}}
     <div class="flex bg-gray-300 w-[800px] sm:w-[800px] md:w-[800px] lg:w-[800px] h-[450px] rounded-md">
         <div class="flex flex-wrap mx-4 my-4">
-            <img class="h-[305px] " src="{{ asset('./images/room1.jpg') }}" alt="">
+            <img class="h-[305px] " src="{{ asset('uploads/rooms/' . $rooms->photos) }}" alt="">
             <div class="flex space-x-5">
                 <div class="bg-white border-2  h-[90px] w-[190px] my-3 rounded-md"
                     style="border-color: #F3C623;">
@@ -188,11 +188,6 @@
                         <button
                             class=" bg-[#E6AF2E] hover:bg-yellow-600 text-white active:bg-yellow-800 font-bold uppercase text-sm px-[80px] py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                             id="next">Book Now</button>
-                    </div>
-                    <div>
-                        @if(session('error'))
-                        <div class="alert alert-danger">{{ session('error') }}</div>
-                        @endif
                     </div>
                 </div>
                 </form>

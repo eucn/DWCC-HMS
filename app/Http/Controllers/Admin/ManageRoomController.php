@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 use App\Models\Manage_Room;
 
@@ -28,7 +29,7 @@ class ManageRoomController extends Controller
             'amenities' => 'required',
             'status' => 'required',
             'rate' => 'required|numeric',
-            'photos.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,max:2048',
+            'photos.*' => 'required|image|mimes:jpeg,png,jpg,gif,max:2048',
         ]);
 
         $rooms = new Manage_Room;
@@ -70,17 +71,17 @@ class ManageRoomController extends Controller
      public function destroy($id)
      {
         $room = Manage_Room::find($id);
+
+        $destination = 'uploads/rooms/'.$room->photos;
+        if (File::exists($destination)) {
+            File::delete($destination);
+        }
         $room->delete();
 
         return redirect()->route('admin.room.index')->with('success', 'Room deleted successfully');
-
-        //  $room = manage_room::findOrFail($id);
-        //  $room->delete();
-         
-        //  return redirect()->route('admin.room.index')->with('success', 'Room has been deleted.')->with('rooms', $room);;
      }
 
-public function update(Request $request, $id)
+    public function update(Request $request, $id)
     {
         $validatedData = $request->validate([
             'room_number' => 'required|numeric',
@@ -90,7 +91,7 @@ public function update(Request $request, $id)
             'amenities' => 'required',
             'status' => 'required',
             'rate' => 'required|numeric',
-            'photos.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,max:2048',
+            'photos.*' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         $room = Manage_Room::find($id);
@@ -98,31 +99,32 @@ public function update(Request $request, $id)
         if (!$room) {
             abort(404, 'Room not found');
         }
-                $room->room_description = $request->input('room_description');
-                $room->room_type = $request->input('room_type');
-                $room->max_capacity = $request->input('max_capacity');
-                $room->amenities = $request->input('amenities');
-                $room->status = $request->input('status');
-                $room->rate = $request->input('rate');
-                $room->update($request->all());
 
-                if($request->hasfile('photos')){
-                    $file = $request->file('photos');
-                    $extension = $file->getClientOriginalExtension(); //getting image extension
-                    $filename = time() . '.' . $extension;
-                    $file->move('uploads/rooms/', $filename);
-                    $rooms["photos"] = $filename;
-                }else{
-                    return $request;
-                    $rooms["photos"] = "";
-                }
+        $room->room_description = $request->input('room_description');
+        $room->room_type = $request->input('room_type');
+        $room->max_capacity = $request->input('max_capacity');
+        $room->amenities = $request->input('amenities');
+        $room->status = $request->input('status');
+        $room->rate = $request->input('rate');
 
-                $room->save();
+        if($request->hasfile('photos')){
+            $destination = 'uploads/rooms/'.$room->photos;
+            if(File::exists($destination)){
+                File::delete($destination);
+            }
+            $file = $request->file('photos');
+            $extension = $file->getClientOriginalExtension(); //getting image extension
+            $filename = time() . '.' . $extension;
+            $file->move('uploads/rooms/', $filename);
+            $rooms["photos"] = $filename;
+            $room->photos = $filename;
+        }
 
         $room->save();
 
-        return redirect()->route('admin.room.index')->with('success', 'The room has been successfully added.')->with('rooms', $room);
+        return redirect()->route('admin.room.index')->with('success', 'The room has been successfully updated.')->with('rooms', $room);
     }
+
 
 
 

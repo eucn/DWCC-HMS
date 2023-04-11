@@ -127,16 +127,16 @@
                 <input type="hidden" name="number_of_nights" value="{{ session('number_of_nights') }}" />
                 <div class="max-w-sm rounded-md overflow-hidden shadow-lg m-2 bg-white">
                   @if ($displayImage)
-                  <img class="w-full" src="{{ asset('./images/room1.jpg') }}" alt="Room Image">
+                  <img class="w-full" src="{{ asset('uploads/rooms/' . $room->photos) }}" alt="Room Image">
                    @elseif ($isRoomReserved[$room->id])
                   <div class="relative">
-                      <img class="w-full opacity-50" src="{{ asset('./images/room1.jpg') }}" alt="Room Image">
+                      <img class="w-full opacity-50" src="{{ asset('uploads/rooms/' . $room->photos) }}" alt="Room Image">
                       <div class="absolute top-0 left-0 right-0 bottom-0 flex justify-center items-center">
                           <h1 class="text-[30px] font-bold text-gray-00 border-2 border-black p-2">Not Available</h1>
                       </div>
                   </div>
                   @else
-                  <img class="w-full" src="{{ asset('./images/room1.jpg') }}" alt="Room Image">
+                  <img class="w-full" src="{{ asset('uploads/rooms/' . $room->photos) }}" alt="Room Image">
                   @endif
                     <div class="px-6 py-4">
                       <div>

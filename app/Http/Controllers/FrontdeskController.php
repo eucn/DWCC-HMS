@@ -103,18 +103,23 @@ class FrontdeskController extends Controller
         return redirect()->route('admin.frontdeskList');
     }
     public function FrontdeskReservation(){
+        $rooms = Manage_Room::all();
         $room_type = Manage_Room::distinct()->pluck('room_type');
-        return view('frontdesk.frontdesk_reservation', compact('room_type'));
+        return view('frontdesk.frontdesk_reservation', [
+            'room_type' => $room_type,
+
+        ]);
+
     }
     public function GetRoomID(Request $request)
-    {
+    {   $rooms = Manage_Room::all();
         $roomType = $request->input('room_type');
-
         $room = Manage_Room::where('room_type', $roomType)->first();
     
         if ($room){
-            $roomId = $room->id;
-            return response()->json(['room_id' => $roomId]);
+        $roomId = $room->id;
+        $maxCapacity = $room->max_capacity;
+        return response()->json(['room_id' => $roomId, 'max_capacity' => $maxCapacity]);
         } else {
             return response()->json(['error' => 'Room type not found']);
         }
@@ -127,12 +132,13 @@ class FrontdeskController extends Controller
         } else {
             return abort(401, 'Unauthorized');
         }
+
+        // $frontdesk_id = auth()->user()->id;
     
         // $room_type = $request->input('room_type');
-        $room_id = $request->input('room_id');
+        $room_id = $request->input('room_no');
         $checkin_date = $request->input('check_in_date');
         $checkout_date = $request->input('check_out_date');
-    
         $checkin_date_formatted = date('Y-m-d', strtotime($checkin_date));
         $checkout_date_formatted = date('Y-m-d', strtotime($checkout_date));
 
@@ -142,16 +148,17 @@ class FrontdeskController extends Controller
                 ->orWhereBetween('checkout_date', [$checkin_date_formatted, $checkout_date_formatted])
                 ->orWhere(function($query) use ($checkin_date_formatted, $checkout_date_formatted) {
                     $query->where('checkin_date', '<', $checkin_date_formatted)
-                          ->where('checkout_date', '>', $checkout_date_formatted);
+                        ->where('checkout_date', '>', $checkout_date_formatted);
                 })
                 ->orWhere(function($query) use ($checkin_date_formatted, $checkout_date_formatted) {
-                    $query->where('checkin_date', '=', $checkin_date_formatted)
-                          ->where('checkout_date', '=', $checkout_date_formatted);
+                    $query->where('checkin_date', '>', $checkout_date_formatted)
+                        ->orWhere('checkout_date', '<', $checkin_date_formatted);
                 });
         })
         ->get();
     
-    if ($reservations->isEmpty()) {
+
+    if (!$reservations->isEmpty()){
         // room is already reserved, return an error message or redirect back with an error message
         return redirect()->back()->with('error', 'The room is already reserved for the selected dates.');
     }else{

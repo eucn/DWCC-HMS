@@ -27,10 +27,15 @@ class GuestInformationController extends Controller
                 ->orWhereBetween('checkout_date', [$checkin_date_formatted, $checkout_date_formatted])
                 ->orWhere(function($query) use ($checkin_date_formatted, $checkout_date_formatted) {
                     $query->where('checkin_date', '<', $checkin_date_formatted)
-                            ->where('checkout_date', '>', $checkout_date_formatted);
+                        ->where('checkout_date', '>', $checkout_date_formatted);
+                })
+                ->orWhere(function($query) use ($checkin_date_formatted, $checkout_date_formatted) {
+                    $query->where('checkin_date', '>', $checkout_date_formatted)
+                        ->orWhere('checkout_date', '<', $checkin_date_formatted);
                 });
         })
         ->get();
+    
 
     if (!$reservations->isEmpty()) {
         // room is already reserved, return an error message or redirect back with an error message
@@ -41,6 +46,7 @@ class GuestInformationController extends Controller
             $checkOut = Session::get('check_out_date');
             $numGuests = Session::get('guest_num');
             $numNights = Session::get('number_of_nights');
+            
             $checkindateSave = date('Y-m-d', strtotime($checkIn));
             $checkoutdateSave = date('Y-m-d', strtotime($checkOut));
 

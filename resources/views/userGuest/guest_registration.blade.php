@@ -110,7 +110,8 @@
                                 <div class="pt-5">
                                   <label class="" for="salutation">Salutation:</label>&nbsp; &nbsp;
                                   <div class="">
-                                  <select class="w-full md:w-[130px] py-[10px] shadow leading-tight rounded-md  focus:outline-none focus:shadow-outline" name="salutation" id="salutation" value="{{ old('salutation') }}" placeholder="Ms.">
+                                  <select class="w-full md:w-[130px] py-[10px] border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                                  style="border: 1px solid gray;" name="salutation" id="salutation" value="{{ old('salutation') }}" placeholder="Ms.">
                                     <option value="Ms." {{ old('salutation') == 'Ms.' ? 'selected' : '' }}>Ms.</option>
                                     <option value="Mrs." {{ old('salutation') == 'Mrs.' ? 'selected' : '' }}>Mrs.</option>
                                     <option value="Mr." {{ old('salutation') == 'Mr.' ? 'selected' : '' }}>Mr.</option>
@@ -120,14 +121,16 @@
                                 <div class="pt-5">
                                   <label class="" for="fullname">Full Name:&nbsp;<span class="text-red-700 font-bold ">*</span></label>
                                   <div class=" ">
-                                    <input type="text" class="w-full sm:w-full md:w-full lg:w-2/3 min-w-[410px]  py-[10px]  shadow leading-tight focus:outline-none focus:shadow-outline" name="first_name" id="first_name" value="{{ old('first_name') }}" placeholder="First Name" required>  
+                                    <input type="text" class="w-full sm:w-full md:w-full lg:w-2/3 md:min-w-[410px]  py-[10px]  border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                                    style="border: 1px solid gray;" name="first_name" id="first_name" value="{{ old('first_name') }}" placeholder="First Name" required>  
                                   </div>
                                 </div>
                         
                                 <div class="pt-5">
                                   <label class="opacity-0" type="text" for="lastname">LastName</label>
                                   <div class="">
-                                  <input type="text" class="w-full sm:w-full md:w-full lg:w-2/3 min-w-[410px] py-[10px]  shadow leading-tight focus:outline-none focus:shadow-outline" name="last_name" id="last_name" value="{{ old('last_name') }}" placeholder="Last Name" required>  
+                                  <input type="text" class="w-full sm:w-full md:w-full lg:w-2/3 md:min-w-[410px] py-[10px] border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                                  style="border: 1px solid gray;" name="last_name" id="last_name" value="{{ old('last_name') }}" placeholder="Last Name" required>  
                                 </div>
                                 {{-- sm:w-full md:w-full lg:w-[410px] --}}
                                 </div>
@@ -135,17 +138,21 @@
                 
                               <div class="mx-4 sm:mx-10 ">                                
                                 <label for="companyName">Company Name</label>
-                                <input type="text" name="company_name" id="company_name" class="w-full  py-[10px]  shadow leading-tight focus:outline-none focus:shadow-outline value="{{ old('company_name') }}" placeholder="Company Name" >                             
+                                <input type="text" name="company_name" id="company_name" class="w-full  py-[10px] border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                                style="border: 1px solid gray;" value="{{ old('company_name') }}" placeholder="Company Name" >                             
                               </div>
                     
                               <div class="mx-4 sm:mx-10">
                                 <label for="Address">Address&nbsp;<span class="text-red-700 font-bold">*</label>
-                                <input type="text" name="address" id="address" value="{{ old('address') }}" placeholder="Address" class="w-full py-[10px]  shadow leading-tight focus:outline-none focus:shadow-outline" required>                              
+                                <input type="text" name="address" id="address" value="{{ old('address') }}" placeholder="Address"
+                                 class="w-full py-[10px]   border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                                 style="border: 1px solid gray;" required>                              
                               </div>
                     
                               <div class="mx-4 sm:mx-10">
                                 <label for="address">Phone Number&nbsp;<span class="text-red-700 font-bold">*</label><br>
-                                <input type="number"  name="phone_number" id="phone_number" value="{{ old('phone_number') }}" class="w-full sm:w-[200px]  py-[10px]  shadow leading-tight focus:outline-none focus:shadow-outline" placeholder="+63" required>                              
+                                <input type="number"  name="phone_number" id="phone_number" value="{{ old('phone_number') }}" class="w-full sm:w-[200px]  py-[10px]  border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                                style="border: 1px solid gray;" placeholder="+63" required>                              
                                 <x-input-error :messages="$errors->get('phone_number')" class="mt-2" />
                               </div>
                           </div>

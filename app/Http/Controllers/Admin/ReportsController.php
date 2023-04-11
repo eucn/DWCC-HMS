@@ -5,14 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\GuestInformation;
-use App\Models\Reservations;
-use App\Models\Manage_Room;
-use Carbon\Carbon;
-use Illuminate\Support\Facades\DB;
-use PDF;
-use Dompdf\Options;
-use Dompdf\Dompdf;
-use Illuminate\Support\Facades\View;
 
 
 class ReportsController extends Controller
@@ -47,6 +39,9 @@ class ReportsController extends Controller
         $checkinDate = $request->input('checkin_date');
         $checkoutDate = $request->input('checkout_date');
 
+        if ($request->has('clear')) {
+            return redirect()->route('admin.reports.clear');
+        }
         // Retrieve the filtered orders
         $reports = GuestInformation::leftJoin('reservations', 'guest_information.reservation_id', '=', 'reservations.id')
         ->leftJoin('manage_rooms', 'reservations.room_id', '=', 'manage_rooms.id')
@@ -73,8 +68,6 @@ class ReportsController extends Controller
             'checkoutDate' => $checkoutDate,
         ]);
     }
-
-    
 
 public function printPDF(Request $request)
 {

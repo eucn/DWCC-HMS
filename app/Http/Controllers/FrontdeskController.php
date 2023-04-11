@@ -317,6 +317,7 @@ class FrontdeskController extends Controller
         $checkinDate = '';
         $checkoutDate = '';
 
+      
         $reports = GuestInformation::join('reservations', 'guest_information.reservation_id', '=', 'reservations.id')
         ->join('manage_rooms', 'reservations.room_id', '=', 'manage_rooms.id')
         ->select('guest_information.reservation_id','guest_information.first_name',
@@ -341,6 +342,9 @@ class FrontdeskController extends Controller
         $checkinDate = $request->input('checkin_date');
         $checkoutDate = $request->input('checkout_date');
 
+        if ($request->has('clear')) {
+            return redirect()->route('frontdesk.reports.clear');
+        }
         // Retrieve the filtered orders
         $reports = GuestInformation::leftJoin('reservations', 'guest_information.reservation_id', '=', 'reservations.id')
         ->leftJoin('manage_rooms', 'reservations.room_id', '=', 'manage_rooms.id')
@@ -374,7 +378,7 @@ class FrontdeskController extends Controller
         $status = $request->input('status', '');
         $checkinDate = $request->input('checkin_date');
         $checkoutDate = $request->input('checkout_date');
-
+    
         // Retrieve the filtered orders
         $reports = GuestInformation::leftJoin('reservations', 'guest_information.reservation_id', '=', 'reservations.id')
             ->leftJoin('manage_rooms', 'reservations.room_id', '=', 'manage_rooms.id')

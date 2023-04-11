@@ -9,7 +9,7 @@
  <!-- Logo -->
  <link rel="icon" type="image/png" sizes="16x16" href="../images/sitelogo.png">
 
-  <title>Admin Reservation</title>
+  <title>Frontdesk Reservation</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -212,14 +212,14 @@
             </div>
             <div class="flex flex-col md:flex-row">
               <div class="flex-1 mx-4">
-                <label class="block mt-3 font-semibold" for="room_no">Check-in Date:</label>
+                <label class="block mt-3 font-semibold">Check-in Date:</label>
                 <input
                   class="w-full mt-2 py-[7px] border-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                   style="border: 1px solid gray;" id="check_in_date" name="check_in_date" type="date"
                   value="{{ old('check_in_date') }}">
               </div>
               <div class="flex-1 mx-4">
-                <label class="block mt-3 font-semibold" for="room_no">Check-out Date:</label>
+                <label class="block mt-3 font-semibold" for="in">Check-out Date:</label>
                 <input
                   class="w-full mt-2 py-[7px] border-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                   style="border: 1px solid gray;" id="check_out_date" name="check_out_date" type="date"
@@ -228,7 +228,7 @@
             </div>
             <div class="">
               <div class="flex flex-col md:flex-row mx-4 md:mx-5">
-                <label class="font-semibold mt-3" for="room_no">Number of Guest</label>
+                <label class="font-semibold mt-3" for="num_guest">Number of Guest</label>
               </div>
               <div class="flex flex-col md:flex-row mx-4 md:mx-5">
                 <div class="w-full md:w-[450px] ">

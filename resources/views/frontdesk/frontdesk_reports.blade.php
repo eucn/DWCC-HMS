@@ -176,7 +176,7 @@
       </nav>
     </div><!-- End Page Title -->
 
-    <form id="filter-form" action="{{ route('frontdesk.reports.preview') }}" method="get" class="mb-[50px]">
+    <form id="filter-form" action="{{ route('frontdesk.reports.preview') }}" method="get" class="mb-[20px]">
       <div class="flex item-center">
           <div class="mr-5">
             <div>Status</div>
@@ -199,6 +199,13 @@
             <div class="opacity-1"></div>
               <button style ="position: relative; top: 20px;"type="submit" class="bg-[#259F6C] w-[120px] mt-1 py-2 text-white rounded-md">Preview</button>
           </div>
+          <div class="mr-10">
+            <div class="opacity-1"></div>
+            <form action="{{ route('frontdesk.reports.clear') }}" method="POST" style="display: inline">
+                @csrf
+                <button type="submit" style="position: relative; top: 20px;" class="btn btn-danger w-[120px] mt-1 py-2 text-white rounded-md" name="clear">Clear</button>
+            </form>
+        </div>
         </div>
     </form>
     <hr style="border-top: 2px solid #3C4048;position: relative; left: 8px;">

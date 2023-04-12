@@ -219,6 +219,7 @@
                   <th scope="col" class="text-center">Name</th>
                   <th scope="col" class="text-center"> &nbsp Payment Method</th>
                   <th scope="col" class="text-center"> &nbsp Booking Status</th>
+                  <th scope="col" class="text-center"> &nbsp Payment Status</th>
                   <th scope="col" class="text-center"> &nbsp &nbsp Check-in Date</th>
                   <th scope="col" class="text-center"> &nbsp Check-out Date</th>
                   <th scope="col" style="width: 100px; text-align:center;"> &nbsp &nbsp  Action</th>
@@ -236,6 +237,7 @@
                 <td scope="col">{{ $data->first_name }} &nbsp; {{ $data->last_name }}</td>
                 <td scope="col">{{ $data->payment_method }}</td>
                 <td scope="col">{{ $data->booking_status }}</td>
+                <td scope="col">{{ $data->payment_status }}</td>
                 <td scope="col"> {{ \Carbon\Carbon::parse($data->checkin_date)->format('F j, Y') }}</td>
                 <td scope="col"> {{ \Carbon\Carbon::parse($data->checkout_date)->format('F j, Y') }}</td>
                 <td scope="col">

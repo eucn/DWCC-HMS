@@ -187,7 +187,7 @@
       <section class="lg:container lg:mx-auto">
         <div class="bg-white rounded-lg shadow-md border-2 w-full my-10 pb-14 ">
           <div class="border-b-2 border-gray-300 px-4 py-3">
-            <h3 class="text- sm:text-2xl font-semibold">Room Information</h3>
+            <h3 class="text- sm:text-2xl font-bold">Room Information</h3>
           </div>
           <div class="pt-3">
             <div class="flex flex-col md:flex-row">
@@ -320,7 +320,7 @@
           <div class="mx-auto">
             <div class="bg-white rounded-lg shadow-md border-2 w-full">
               <div class="border-b-2 border-gray-300 px-4 py-3">
-                <h3 class="text-semibold font-semibold">Payment Method</h3>
+                <h3 class="text-lg sm:text-2xl font-bold">Payment Method</h3>
               </div>
               <div class="mx-4 sm:mx-10 md:mx-5 py-8">
                 <div class="py-2">

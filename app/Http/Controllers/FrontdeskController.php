@@ -64,6 +64,21 @@ class FrontdeskController extends Controller
         return redirect()->route('frontdesk.dashboard');
     }
 
+    // public function FrontdeskLogin(LoginRequest $request): RedirectResponse
+    // {
+    //     $credentials = $request->only('email', 'password');
+    
+    //     if (Auth::attempt($credentials, $request->remember)) {
+    //         $request->session()->regenerate();
+    
+    //         return redirect()->intended('frontdesk.dashboard');
+    //     }
+    
+    //     return back()->withErrors([
+    //         'email' => 'The provided credentials do not match our records.',
+    //     ]);
+    // }
+    
     //Destroy an authenticated session or Logout.
     public function FrontdeskLogout(Request $request): RedirectResponse
     {
@@ -132,36 +147,24 @@ class FrontdeskController extends Controller
         } else {
             return abort(401, 'Unauthorized');
         }
+        
         $phone_number = $request->validate([
             'phone_number' => 'required|regex:/^09[0-9]{9}$/',
         ], [
             'phone_number.required' => 'The phone number field is required.',
             'phone_number.regex' => 'The phone number must contain 11 digit.'
         ]);
-        // $frontdesk_id = auth()->user()->id;
-    
-        // $room_type = $request->input('room_type');
+
         $room_id = $request->input('room_no');
         $checkin_date = $request->input('check_in_date');
         $checkout_date = $request->input('check_out_date');
+        
         $checkin_date_formatted = date('Y-m-d', strtotime($checkin_date));
         $checkout_date_formatted = date('Y-m-d', strtotime($checkout_date));
-
         $reservations = Reservations::where('room_id', $room_id)
-        ->where(function($query) use ($checkin_date_formatted, $checkout_date_formatted) {
-            $query->whereBetween('checkin_date', [$checkin_date_formatted, $checkout_date_formatted])
-                ->orWhereBetween('checkout_date', [$checkin_date_formatted, $checkout_date_formatted])
-                ->orWhere(function($query) use ($checkin_date_formatted, $checkout_date_formatted) {
-                    $query->where('checkin_date', '<', $checkin_date_formatted)
-                        ->where('checkout_date', '>', $checkout_date_formatted);
-                })
-                ->orWhere(function($query) use ($checkin_date_formatted, $checkout_date_formatted) {
-                    $query->where('checkin_date', '>', $checkout_date_formatted)
-                        ->orWhere('checkout_date', '<', $checkin_date_formatted);
-                });
-        })
+        ->where('checkout_date', '>', $checkin_date_formatted) // Check if room is available after the selected check-in date
+        ->where('checkin_date', '<', $checkout_date_formatted) // Check if room is available before the selected check-out date
         ->get();
-    
 
     if (!$reservations->isEmpty()){
         // room is already reserved, return an error message or redirect back with an error message
@@ -208,6 +211,7 @@ class FrontdeskController extends Controller
             $reservation->additional_guests = $numAdditionalGuests;
             $reservation->guests_Fee = $total_numGuestFee;
             $reservation->save();
+            // dd($reservation);
 
          
             $reservation_id = Reservations::select('id')->latest('id')->value('id');
@@ -404,10 +408,9 @@ class FrontdeskController extends Controller
             // 'image_url' => public_path('images/DWCCLOGO.png'),
         ];
 
-        $pdf = PDF::loadView('frontdesk.frontdesk_reports-details', $data)
-        ->setPaper('letter', 'landscape');
-
+        $pdf = app('dompdf.wrapper')->loadView('frontdesk.frontdesk_reports-details', $data)->setPaper('letter', 'landscape');
         return $pdf->stream();
+
     }
 
     public function deactivate($id)
@@ -448,13 +451,10 @@ class FrontdeskController extends Controller
             // Check if the reservation ID in the guest information table matches the reservation ID in the reservation table
             if ($guestInformation->reservation_id === $guestInformation->reservation->id) {
                 $guestInformation->payment_status = 'Paid';    
-                 
                 $guestInformation->save();
-                // dd($guestInformation);
             
                 $reservation = $guestInformation->reservation;
                 $reservation->booking_status = 'Completed';
-                // dd($reservation);
                 $reservation->save();
         
                 return redirect()->back()->with('success', 'The payment status was verified successfully.');

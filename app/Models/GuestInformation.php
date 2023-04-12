@@ -4,25 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class GuestInformation extends Model
 {
-    use HasFactory;
-    // protected $fillable = [
-    //     'guest_id',
-    //     'frontdesk_id',
-    //     'reservation_id',
-    //     'salutation',
-    //     'first_name',
-    //     'last_name',
-    //     'company_name',
-    //     'address',
-    //     'phone_number',
-    //     'payment_method',
-    //     'payment_status',
-    //     'department',
-    //     'index'
-    // ];
+    use HasFactory, SoftDeletes;
+    protected $fillable = [
+        'payment_status'
+    ];
     public function reservation()
     {
         return $this->belongsTo(Reservations::class);

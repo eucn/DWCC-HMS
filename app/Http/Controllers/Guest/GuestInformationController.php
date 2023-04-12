@@ -13,7 +13,13 @@ class GuestInformationController extends Controller
     public function GuestInfo(Request $request){
 
         $guest_id = auth()->user()->id;
-
+        $phone_number = $request->validate([
+            'phone_number' => 'required|regex:/^09[0-9]{9}$/',
+        ], [
+            'phone_number.required' => 'The phone number field is required.',
+            'phone_number.regex' => 'The phone number contain 11 digit.'
+        ]);
+        
         $room_id = Session::get('room_id');
         $checkin_date = Session::get('check_in_date');
         $checkout_date = Session::get('check_out_date');
@@ -22,18 +28,8 @@ class GuestInformationController extends Controller
         $checkout_date_formatted = date('Y-m-d', strtotime($checkout_date));
 
         $reservations = Reservations::where('room_id', $room_id)
-        ->where(function($query) use ($checkin_date_formatted, $checkout_date_formatted) {
-            $query->whereBetween('checkin_date', [$checkin_date_formatted, $checkout_date_formatted])
-                ->orWhereBetween('checkout_date', [$checkin_date_formatted, $checkout_date_formatted])
-                ->orWhere(function($query) use ($checkin_date_formatted, $checkout_date_formatted) {
-                    $query->where('checkin_date', '<', $checkin_date_formatted)
-                        ->where('checkout_date', '>', $checkout_date_formatted);
-                })
-                ->orWhere(function($query) use ($checkin_date_formatted, $checkout_date_formatted) {
-                    $query->where('checkin_date', '>', $checkout_date_formatted)
-                        ->orWhere('checkout_date', '<', $checkin_date_formatted);
-                });
-        })
+        ->where('checkout_date', '>', $checkin_date_formatted) // Check if room is available after the selected check-in date
+        ->where('checkin_date', '<', $checkout_date_formatted) // Check if room is available before the selected check-out date
         ->get();
     
 
@@ -80,13 +76,6 @@ class GuestInformationController extends Controller
             $reservation->additional_guests = $numAdditionalGuests;
             $reservation->guests_Fee = $total_numGuestFee;
             $reservation->save();
-
-            $phone_number = $request->validate([
-                'phone_number' => 'required|regex:/^09[0-9]{9}$/',
-            ], [
-                'phone_number.required' => 'The phone number field is required.',
-                'phone_number.regex' => 'The phone number contain 11 digit.'
-            ]);
 
             $reservation_id = Reservations::select('id')->latest('id')->value('id');
             // Validate the request data

@@ -115,7 +115,8 @@ class FrontdeskController extends Controller
 
         event(new Registered($frontdesk));
         // return redirect('/frontdesk/login');
-        return redirect()->route('admin.frontdeskList');
+        return redirect()->route('admin.frontdeskList')->with('registered', 'Frontdesk account is successfully registered.');
+
     }
     public function FrontdeskReservation(){
         $rooms = Manage_Room::all();
@@ -418,7 +419,7 @@ class FrontdeskController extends Controller
         $frontdesk = Frontdesk::findOrFail($id);
         $frontdesk->Acc_Stat = 'Deactivate';
         $frontdesk->save();
-        return redirect()->back()->with('success', 'User deactivated successfully!');
+        return redirect()->back()->with('deactivate', 'User deactivated successfully!');
     }
     public function activate($id)
     {

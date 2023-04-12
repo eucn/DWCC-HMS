@@ -199,16 +199,6 @@
         
 
       </div>
-      {{-- @if (Session::has('success'))
-      <div class="alert alert-success">
-          {{ Session::get('success') }}
-          </div>
-      @endif
-      @if (Session::has('error'))
-      <div class="alert alert-error">
-          {{ Session::get('error') }}
-          </div>
-      @endif --}}
       <div class="mx-auto">
         @if (Session::has('error'))
         <div id="error-message" class="flex flex-row items-center justify-between bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative transition duration-500 ease-in-out" role="alert">

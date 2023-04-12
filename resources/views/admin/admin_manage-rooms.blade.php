@@ -218,7 +218,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title" style="color: #55afab">Add New Room</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <button type="button" class="close" style="color: #E21818;" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
                 <form action="{{ route('admin.room.store') }}" method="POST" enctype="multipart/form-data">
@@ -401,6 +401,7 @@
                                         <input class="form-control" type="text" name="amenities" id="amenities" value="{{ $roomData-> amenities }}" placeholder="Enter Amenities">
                                         <x-input-error :messages="$errors->get('amenities')" />
                                     </div>
+                              
 
                                     <div class="form-group font-semibold">
                                         <label>Status</label>

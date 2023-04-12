@@ -202,14 +202,13 @@
   <button type="button" style="position: relative; left: 900px" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
   <i class="fa-solid fa-plus"></i>&nbsp Add New
 </button>
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="exampleModal">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel" style=" color: #55afab;">Add Frontdesk Account</h5>
-        <button type="button" style="position:relative; left: 1px; color: #dc3545;" class="close"
-                        data-dismiss="modal">&times;</button>
-      </div>
+    <div class="modal-header">
+                <h4 class="modal-title" style="color: #55afab">Add Frontdesk Account</h4>
+                <button type="button" class="close" style="color: #E21818;" data-dismiss="modal">&times;</button>
+            </div>
       <div class="modal-body" style="height: 420px;">
       <div class="flex items-center justify-center min-h-screen bg-white-100">
                     <hr class="h-px mb-5 bg-[#55AFAB] border-0">

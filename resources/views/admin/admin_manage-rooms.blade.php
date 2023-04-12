@@ -217,7 +217,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Add New Room</h4>
+                <h4 class="modal-title" style="color: #55afab">Add New Room</h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
@@ -361,7 +361,7 @@
                           <div class="modal-dialog" role="document">
                             <div class="modal-content">
                               <div class="modal-header">
-                                <h5 class="modal-title" id="editModalLabel">Edit Room Details</h5>
+                                <h5 class="modal-title" id="editModalLabel" style="color: #55afab">Edit Room Details</h5>
                                 <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                                   <span aria-hidden="true">&times;</span>
                                 </button>
@@ -416,7 +416,7 @@
 
                                     <div class="form-group font-semibold">
                                         <label>Photos</label>
-                                        <p>(png/jpeg)</p>
+                                        <p>(png/jpg/jpeg)</p>
                                         <input type="file" name="photos" class="form-control" id="photos">
                                         <img src="{{ asset('uploads/rooms/' . $roomData->photos) }}" alt="Room" width="70px" height="70px">
                                         <x-input-error :messages="$errors->get('photos')" />

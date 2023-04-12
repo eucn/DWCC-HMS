@@ -13,7 +13,13 @@ class GuestInformationController extends Controller
     public function GuestInfo(Request $request){
 
         $guest_id = auth()->user()->id;
-
+        $phone_number = $request->validate([
+            'phone_number' => 'required|regex:/^09[0-9]{9}$/',
+        ], [
+            'phone_number.required' => 'The phone number field is required.',
+            'phone_number.regex' => 'The phone number contain 11 digit.'
+        ]);
+        
         $room_id = Session::get('room_id');
         $checkin_date = Session::get('check_in_date');
         $checkout_date = Session::get('check_out_date');
@@ -70,13 +76,6 @@ class GuestInformationController extends Controller
             $reservation->additional_guests = $numAdditionalGuests;
             $reservation->guests_Fee = $total_numGuestFee;
             $reservation->save();
-
-            $phone_number = $request->validate([
-                'phone_number' => 'required|regex:/^09[0-9]{9}$/',
-            ], [
-                'phone_number.required' => 'The phone number field is required.',
-                'phone_number.regex' => 'The phone number contain 11 digit.'
-            ]);
 
             $reservation_id = Reservations::select('id')->latest('id')->value('id');
             // Validate the request data

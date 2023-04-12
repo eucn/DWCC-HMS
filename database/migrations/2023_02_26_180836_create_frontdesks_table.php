@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('Acc_Stat')->default('Activate');
             $table->tinyInteger('status')->default(1);
             $table->timestamps();
         });

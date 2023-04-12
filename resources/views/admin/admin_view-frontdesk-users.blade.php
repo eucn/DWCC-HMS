@@ -15,7 +15,9 @@
 
   <!-- Google Fonts -->
   <link href="https://fonts.gstatic.com" rel="preconnect">
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+    rel="stylesheet">
 
   <!-- Vendor CSS Files -->
   <link href="{{ asset('template/assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
@@ -26,22 +28,19 @@
   <link href="{{ asset('template/assets/vendor/remixicon/remixicon.css') }}" rel="stylesheet">
   <link href="{{ asset('template/assets/vendor/simple-datatables/style.css') }}" rel="stylesheet">
   <script src="{{ asset('template/assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-<script src="{{ asset('template/assets/vendor/simple-datatables/simple-datatables.js') }}"></script>
+  <script src="{{ asset('template/assets/vendor/simple-datatables/simple-datatables.js') }}"></script>
 
-<!-- Template Main JS File -->
-<script src="{{ asset('template/assets/js/main.js') }}"></script>
+  <!-- Template Main JS File -->
+  <script src="{{ asset('template/assets/js/main.js') }}"></script>
 
   <!-- Template Main CSS File -->
   <link href="{{ asset('template/assets/css/style.css') }}" rel="stylesheet">
 
   <!-- Font Awesome -->
   <script src="https://kit.fontawesome.com/3a364cef47.js" crossorigin="anonymous"></script>
-    <script
-      defer
-      src="https://use.fontawesome.com/releases/v6.1.1/js/all.js"
-      integrity="sha384-xBXmu0dk1bEoiwd71wOonQLyH+VpgR1XcDH3rtxrLww5ajNTuMvBdL5SOiFZnNdp"
-      crossorigin="anonymous">
-    </script>
+  <script defer src="https://use.fontawesome.com/releases/v6.1.1/js/all.js"
+    integrity="sha384-xBXmu0dk1bEoiwd71wOonQLyH+VpgR1XcDH3rtxrLww5ajNTuMvBdL5SOiFZnNdp" crossorigin="anonymous">
+  </script>
 
   <!-- =======================================================
   * Template Name: NiceAdmin - v2.4.0
@@ -147,24 +146,24 @@
         </a>
       </li><!-- End Booking History Nav -->
 
-
       <li class="nav-item">
-  <a class="nav-link dropdown-toggle collapsed" href="#" id="accounts-dropdown" data-bs-toggle="dropdown" aria-expanded="false">
-    <i class="fa-solid fa-user icon-nav"></i><span>Accounts</span></i>
-  </a>
-  <ul id="tables-nav" class="dropdown-menu" aria-labelledby="accounts-dropdown">
-    <li>
-      <a class="dropdown-item" href="{{ route('admin.frontdeskList') }}">
-      <i class="fa-sharp fa-solid fa-user-tie"></i><span>&nbsp Frontdesk</span>
-      </a>
-    </li>
-    <li>
-      <a class="dropdown-item" href="{{ route('admin.guestList') }}">
-      <i class="fa-solid fa-users"></i><span>&nbsp Guest</span>
-      </a>
-    </li>
-  </ul>
-</li>
+        <a class="nav-link dropdown-toggle collapsed" href="#" id="accounts-dropdown" data-bs-toggle="dropdown"
+          aria-expanded="false">
+          <i class="fa-solid fa-user icon-nav"></i><span>Accounts</span></i>
+        </a>
+        <ul id="tables-nav" class="dropdown-menu" aria-labelledby="accounts-dropdown">
+          <li>
+            <a class="dropdown-item" href="{{ route('admin.frontdeskList') }}">
+              <i class="fa-sharp fa-solid fa-user-tie"></i><span>&nbsp Frontdesk</span>
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item" href="{{ route('admin.guestList') }}">
+              <i class="fa-solid fa-users"></i><span>&nbsp Guest</span>
+            </a>
+          </li>
+        </ul>
+      </li>
 
       <!-- End Tables Nav -->
 
@@ -190,220 +189,242 @@
         </ol>
       </nav>
     </div><!-- End Page Title -->
+    <div class="mx-auto">
+      @if (Session::has('deactivate'))
+      <div id="error-message" class="flex flex-row items-center justify-between bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative transition duration-500 ease-in-out" role="alert">
+        <div class="flex-grow">
+          {{ Session::get('deactivate') }}
+        </div>
+        <div class="ml-4">
+          <button type="button" style="opacity:70" class="close" onclick="document.getElementById('error-message').classList.add('opacity-0', 'h-0');">
+            <span class="text-xl-center text-red-500 font-extrabold">X</span>
+        </div>
+          </button>    
+        </div>
+      </div> 
+      @elseif (Session::has('registered'))
+      <div id="registered" class="flex flex-row items-center justify-between bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative transition duration-500 ease-in-out" role="alert">
+        <div class="flex-grow">
+          {{ Session::get('registered') }}
+        </div>
+        <div class="ml-4">
+          <button type="button" style="opacity:70" class="close" onclick="document.getElementById('registered').classList.add('opacity-0', 'h-0');">
+            <span class="text-xl-center text-green-500 font-extrabold">X</span>
+        </div>
+          </button>    
+        </div>
+      </div> 
+      @elseif (Session::has('success'))
+      <div id="success"  class="flex flex-row items-center justify-between bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative transition duration-500 ease-in-out" role="alert">
+        <div class="flex-grow">
+          {{ Session::get('success') }}
+        </div>
+        <div class="ml-4">
+          <button type="button" style="opacity:70" class="close" onclick="document.getElementById('success').classList.add('opacity-0', 'h-0');">
+            <span class="text-xl-center text-green-500 font-extrabold">X</span>
+        </div>
+          </button>    
+        </div>
+      </div> 
+    @endif
+    <div>          
 
     <section class="section dashboard">
       <div class="row">
-
         <!-- Left side columns -->
         <div class="col-lg-12">
           <div class="row">
-
-  <div class="ml-auto">
-  <button type="button" style="position: relative; left: 900px" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-  <i class="fa-solid fa-plus"></i>&nbsp Add New
-</button>
-<div class="modal fade" id="exampleModal">
-  <div class="modal-dialog">
-    <div class="modal-content">
-    <div class="modal-header">
-                <h4 class="modal-title" style="color: #55afab">Add Frontdesk Account</h4>
-                <button type="button" class="close" style="color: #E21818;" data-dismiss="modal">&times;</button>
-            </div>
-      <div class="modal-body" style="height: 420px;">
-      <div class="flex items-center justify-center min-h-screen bg-white-100">
-                    <hr class="h-px mb-5 bg-[#55AFAB] border-0">
-
-                    <form method="POST" action="{{ route('frontdesk.register.create') }}">
-                    @csrf
-                    <div class="py-1" style="position: relative; top: -170px; left: 1px;">
-                        
-                        <span class="mb-2 text-sm font-semibold">Name <span class="text-red-500 text-sm ">*</span></span>
-                        <input type="text" name="name" :value="old('name')" required autofocus id="name" class="w-full p-1 border border-gray-300 rounded-md placeholder:font:light placeholder:text-gray-500 placeholder:text-sm py-1"
-                        placeholder="Enter your name" >
-                        <x-input-error :messages="$errors->get('name')" class="mt-2" />
+            <div class="ml-auto">
+              <button type="button" style="position: relative; left: 900px" class="btn btn-primary"
+                data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <i class="fa-solid fa-plus"></i>&nbsp Add New
+              </button>
+              <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel" style=" color: #55afab;">Add Frontdesk Account</h5>
+                      <button type="button" style="position:relative; left: 1px; color: #dc3545;" class="close"
+                        data-dismiss="modal">&times;</button>
                     </div>
-
-                    <!-- <div class="py-1">
-                        <span class="mb-2 text-sm font-semibold">First Name</span>
-                        <input type="text" name="firstname" id="firstname" class="w-full p-1 border border-gray-300 rounded-md placeholder:font:light placeholder:text-gray-500 placeholder:text-sm py-1"
-                        placeholder="Enter your first name">
-                    </div>
-                    <div class="py-1">
-                        <span class="mb-2 text-sm font-semibold">Last Name</span>
-                        <input type="text" name="lastname" id="lastname" 
-                            class="w-full p-1 border border-gray-300 rounded-md placeholder:font:light placeholder:text-gray-500 placeholder:text-sm py-1"
-                        placeholder="Enter your last name">
-                    </div> -->
-                    <div class="py-1" style="position: relative; top: -165px; left: 1px;">
-                        <span class="mb-2 text-sm font-semibold">Email
-                            <span class="text-red-500 text-sm ">*</span> </span>
-                        <input type="email" name="email" :value="old('email')" required id="email"
-                            class="w-full p-1 border border-gray-300 rounded-md placeholder:font:light placeholder:text-gray-500 placeholder:text-sm py-1"
-                            placeholder="Enter your email">
+                    <div class="modal-body">
+                      <div class="flex items-center justify-center bg-white-100">
+                        <hr class="bg-[#55AFAB] border-0">
+                        <form method="POST" action="{{ route('frontdesk.register.create') }}">
+                          @csrf
+                          <div class="w-[450px] pb-4">
+                          <div class="py-2" >
+                            <span class="mb-2 text-sm font-semibold">Name <span
+                                class="text-red-500 text-sm ">*</span></span>
+                            <input type="text" name="name" :value="old('name')" required autofocus id="name"
+                              class="w-full p-1 border border-gray-300 rounded-md placeholder:font:light placeholder:text-gray-500 placeholder:text-sm py-1"
+                              placeholder="Enter your name">
+                            <x-input-error :messages="$errors->get('name')" class="mt-2" />
+                          </div>
+                          <div class="py-2" >
+                            <span class="mb-2 text-sm font-semibold">Email
+                              <span class="text-red-500 text-sm ">*</span> </span>
+                            <input type="email" name="email" :value="old('email')" required id="email"
+                              class="w-full p-1 border border-gray-300 rounded-md placeholder:font:light placeholder:text-gray-500 placeholder:text-sm py-1"
+                              placeholder="Enter your email">
                             <x-input-error :messages="$errors->get('email')" class="mt-2" />
-                    </div>
-                    <div class="py-1" style="position: relative; top: -160px; left: 1px;">
-                        <span class="mb-2 text-sm font-semibold" >Password <span class="text-red-500 text-sm ">*</span></span>
-                        <input type="password" name="password"
-                            required autocomplete="new-password" id="password" 
-                            class="w-full p-1 border border-gray-300 rounded-md placeholder:font:light placeholder:text-gray-500
-                            placeholder:text-sm py-1"
-                            placeholder="Enter your password" >
+                          </div>
+                          <div class="py-2">
+                            <span class="mb-2 text-sm font-semibold">Password <span
+                                class="text-red-500 text-sm ">*</span></span>
+                            <input type="password" name="password" required autocomplete="new-password" id="password"
+                              class="w-full p-1 border border-gray-300 rounded-md placeholder:font:light placeholder:text-gray-500
+                            placeholder:text-sm py-1" placeholder="Enter your password">
                             <x-input-error :messages="$errors->get('password')" class="mt-2" />
-                    </div>
-                    <div class="py-1" style="position: relative; top: -155px; left: 1px;">
-                        <span class="mb-2 text-sm font-semibold" >Confirm Password <span class="text-red-500 text-sm ">*</span></span>
-                        <input type="password" name="password_confirmation" required id="password"
-                            class="w-full p-1 border border-gray-300 rounded-md placeholder:font:light placeholder:text-gray-500 placeholder:text-sm py-1"
-                            placeholder="Confirm your password" style="width: 450px;">
+                          </div>
+                          <div class="py-2">
+                            <span class="mb-2 text-sm font-semibold">Confirm Password <span
+                                class="text-red-500 text-sm ">*</span></span>
+                            <input type="password" name="password_confirmation" required id="password"
+                              class="w-full p-1 border border-gray-300 rounded-md placeholder:font:light placeholder:text-gray-500 placeholder:text-sm py-1"
+                              placeholder="Confirm your password">
                             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
+                            </div>
+                        </div>
                     </div>
-                    <x-input-error :messages="$errors->get('terms')" class="mt-2" />
-
-<!-- <div class="w-1/2 flex flex-col m-auto"> -->
-    <!-- <button class="bg-[#277BC0]  text-white font-bold py-2 px-4 rounded"> -->
-        <!-- Register -->
-    <!-- </button> -->
-<!-- </div> -->
-
-      </div>
-      <div class="modal-footer" style="position: relative; top: -280px; left:5px;">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Register</button>
-      </div>
-    </div>
-  </div>
-</div>
-</div>
-</div>
-</div>
-
-
-<hr>
-
-
-
-            <table class="table table-condensed table-sm table-bordered">   
-                <thead class="bg-[#51bdb8] text-white">   
-                    <tr style="text-align:center">   
-                        <th scope="col">#</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Registered at</th>
-                        <th scope="col">Account Status</th>
-                        <th scope="col" style="width: 150px;">Action</th>
-                    </tr>   
-                </thead>   
-                <tbody>   
-                @foreach ($frontdesks as $frontdesk)
-                    <tr>     
-                        <td style="text-align:center">{{ $frontdesk->id }}</td>
-                        <td style="text-align:center">{{ $frontdesk->name }}</td>
-                        <td style="text-align:center">{{ $frontdesk->email }}</td>
-                        <td style="text-align:center">{{ $frontdesk->created_at }}</td>  
-                        {{-- <td>{{ $frontdesk->Acc_Stat }}</td>--}}
-                        <td style="text-align:center">
-                @if ($frontdesk->Acc_Stat == 'Deactivate')
-                    <p>{{ $frontdesk->Acc_Stat }}</p>
-                @elseif ($frontdesk->Acc_Stat == 'Activate')
-                    <p>{{ $frontdesk->Acc_Stat }}</p>
-                @endif
-              </td>
-                        <td>
-                        <!--View Button-->	
-                        <button type="button"  style="position: relative; left: 15px;" class="btn btn-primary btn-sm" id="modal2" data-bs-toggle="modal" data-bs-target="#modalDialogScrollable{{ $frontdesk->id }}">
-                         <i class="fa-solid fa-eye"></i>
-                        </button>
-
-                        <!-- Button trigger activate modal -->
-                        <button type="button" style="position: relative; left: 20px;" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#activate{{ $frontdesk->id }}">
-                            <i class="fa-solid fa-user"></i>
-                        </button>
-
-                        <!-- Button trigger deactivate modal -->
-                        <button type="button" style="position: relative; left: 25px;" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deactivate{{ $frontdesk->id }}">
-                            <i class="fa-solid fa-user-slash"></i>
-                        </button>
-                          </td>  
-
-                          <!-- Modal -->
-                              
-                              <div class="modal fade" id="modalDialogScrollable{{ $frontdesk->id }}" tabindex="-1">
-                                <div class="modal-dialog modal-dialog-scrollable">
-                                  <div class="modal-content">
-                                    <div class="modal-header">
-                                      <h5 class="modal-title" style=" color: #55afab;">View Information</h5>
-                                      <button type="button" style="position:relative; left: 1px; color: #dc3545;" class="close"
-                        data-dismiss="modal">&times;</button> 
-                                    </div>
-                                    <div class="modal-body">
-                                    <h6><strong>Name:</strong> {{ $frontdesk->name }}</h6><br>
-                                    <h6><strong>Email:</strong> {{ $frontdesk->email }}</h6><br>
-                                    <h6><strong>Registered at:</strong> {{ $frontdesk->created_at }}</h6><br>
-                                    </div>
-                                    <div class="modal-footer">
-                                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>  
-                                    </div>  
-                                  </div> 
-                               </div>
-                              </div>     
-                                   <!-- Deactivate Modal -->
-            
-                     
-<div class="modal fade" id="deactivate{{ $frontdesk->id }}" role="dialog">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <form method="POST" action="{{ route('frontdesk.deactivate', $frontdesk->id) }}">
-                @csrf
-                @method('PATCH')
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel" style=" color: #55afab;">Deactivate User</h5>
-                    <button type="button" style="position:relative; left: 1px; color: #dc3545;" class="close"
-                        data-dismiss="modal">&times;</button>
+                  </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" style="width:85px;" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary" style="width:85px;">Register</button>
+                      </form>
+                      </div>
+                  </div>
                 </div>
-                <div class="modal-body">
-                    <p>Are you sure you want to deactivate this user?</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-danger">Deactivate</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-                   
-
- <!-- activate modal -->
- <div class="modal fade" id="activate{{ $frontdesk->id }}" role="dialog">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <form method="POST" action="{{ route('frontdesk.activate', $frontdesk->id) }}">
-                @csrf
-                @method('PATCH')
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel" style=" color: #55afab;">Activate User</h5>
-                    <button type="button" style="position:relative; left: 1px; color: #dc3545;" class="close"
-                        data-dismiss="modal">&times;</button>
-                </div>
-                <div class="modal-body">
-                    <p>Are you sure you want to activate this user?</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-success">Activate</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-                    </tr>     
-                    @endforeach
-                </tbody>   
-            </table>
-
+              </div>
+            </div>
           </div>
-        </div><!-- End Left side columns -->
+          
+
+          <hr>
+
+          <table class="table table-condensed table-sm table-bordered">
+            <thead class="bg-[#51bdb8] text-white">
+              <tr style="text-align:center">
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Registered at</th>
+                <th scope="col">Account Status</th>
+                <th scope="col" style="width: 150px;">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              @foreach ($frontdesks as $frontdesk)
+              <tr>
+                <td style="text-align:center">{{ $frontdesk->id }}</td>
+                <td style="text-align:center">{{ $frontdesk->name }}</td>
+                <td style="text-align:center">{{ $frontdesk->email }}</td>
+                <td style="text-align:center">{{ $frontdesk->created_at }}</td>
+                {{-- <td>{{ $frontdesk->Acc_Stat }}</td>--}}
+                <td style="text-align:center">
+                  @if ($frontdesk->Acc_Stat == 'Deactivate')
+                  <p>{{ $frontdesk->Acc_Stat }}</p>
+                  @elseif ($frontdesk->Acc_Stat == 'Activate')
+                  <p>{{ $frontdesk->Acc_Stat }}</p>
+                  @endif
+                </td>
+                <td>
+                  <!--View Button-->
+                  <button type="button" style="position: relative; left: 15px;" class="btn btn-primary btn-sm"
+                    id="modal2" data-bs-toggle="modal" data-bs-target="#modalDialogScrollable{{ $frontdesk->id }}">
+                    <i class="fa-solid fa-eye"></i>
+                  </button>
+
+                  <!-- Button trigger activate modal -->
+                  <button type="button" style="position: relative; left: 20px;" class="btn btn-success btn-sm"
+                    data-bs-toggle="modal" data-bs-target="#activate{{ $frontdesk->id }}">
+                    <i class="fa-solid fa-user"></i>
+                  </button>
+
+                  <!-- Button trigger deactivate modal -->
+                  <button type="button" style="position: relative; left: 25px;" class="btn btn-danger btn-sm"
+                    data-bs-toggle="modal" data-bs-target="#deactivate{{ $frontdesk->id }}">
+                    <i class="fa-solid fa-user-slash"></i>
+                  </button>
+                </td>
+
+                <!-- Modal -->
+
+                <div class="modal fade" id="modalDialogScrollable{{ $frontdesk->id }}" tabindex="-1">
+                  <div class="modal-dialog modal-dialog-scrollable">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" style=" color: #55afab;">View Information</h5>
+                        <button type="button" style="position:relative; left: 1px; color: #dc3545;" class="close"
+                          data-dismiss="modal">&times;</button>
+                      </div>
+                      <div class="modal-body">
+                        <h6><strong>Name:</strong> {{ $frontdesk->name }}</h6><br>
+                        <h6><strong>Email:</strong> {{ $frontdesk->email }}</h6><br>
+                        <h6><strong>Registered at:</strong> {{ $frontdesk->created_at }}</h6><br>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Deactivate Modal -->
+
+                <div class="modal fade" id="deactivate{{ $frontdesk->id }}" role="dialog">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <form method="POST" action="{{ route('frontdesk.deactivate', $frontdesk->id) }}">
+                        @csrf
+                        @method('PATCH')
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel" style=" color: #55afab;">Deactivate User</h5>
+                          <button type="button" style="position:relative; left: 1px; color: #dc3545;" class="close"
+                            data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                          <p>Are you sure you want to deactivate this user?</p>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                          <button type="submit" class="btn btn-danger">Deactivate</button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- activate modal -->
+                <div class="modal fade" id="activate{{ $frontdesk->id }}" role="dialog">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <form method="POST" action="{{ route('frontdesk.activate', $frontdesk->id) }}">
+                        @csrf
+                        @method('PATCH')
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel" style=" color: #55afab;">Activate User</h5>
+                          <button type="button" style="position:relative; left: 1px; color: #dc3545;" class="close"
+                            data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                          <p>Are you sure you want to activate this user?</p>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                          <button type="submit" class="btn btn-success">Activate</button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </tr>
+              @endforeach
+            </tbody>
+          </table>
+
+        </div>
+      </div><!-- End Left side columns -->
 
       </div>
     </section>
@@ -418,7 +439,8 @@
 
   </footer><!-- End Footer -->
 
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+      class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files -->
   <script src="{{ asset('template/assets/vendor/apexcharts/apexcharts.min.js') }}"></script>
@@ -432,7 +454,6 @@
 
   <!-- Template Main JS File -->
   <script src="{{ asset('template/assets/js/main.js') }}"></script>
-
 
 </body>
 

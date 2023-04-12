@@ -154,9 +154,7 @@ class FrontdeskController extends Controller
             'phone_number.required' => 'The phone number field is required.',
             'phone_number.regex' => 'The phone number must contain 11 digit.'
         ]);
-        // $frontdesk_id = auth()->user()->id;
-    
-        // $room_type = $request->input('room_type');
+
         $room_id = $request->input('room_no');
         $checkin_date = $request->input('check_in_date');
         $checkout_date = $request->input('check_out_date');

@@ -256,7 +256,7 @@
                   <!-- Modal content-->
                   <div class="modal-content">
                     <div class="modal-header">
-                      <button type="button" style="position:relative; left: 350px; color: red;" class="close"
+                      <button type="button" style="position:relative; left: 338px; color: red; font-size: 25px;" 
                         data-dismiss="modal">&times;</button>
                       <h4 class="modal-title" style="position:relative; left: -230px; color:#51bdb8;">Booking Details
                       </h4>
@@ -279,7 +279,7 @@
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-default" data-dismiss="modal"
-                        style="background-color: #19A7CE; color:#ffffff;">Close</button>
+                        style="background-color: #6c757d; color:#ffffff;">Close</button>
                     </div>
                   </div>
                
@@ -289,9 +289,9 @@
               <div class="modal fade" id="delete_modal{{ $data->reservation_id }}" id="view_modal" role="dialog">
                 <div class="modal-dialog">
                   <!-- Modal content-->
-                  <div class="modal-content" style="height: 230px;">
+                  <div class="modal-content" style="height: 240px;">
                     <div class="modal-header">
-                      <button type="button" style="position:relative; left: 350px; color: red;" class="close"
+                      <button type="button" style="position:relative; left: 358px; color: red; font-size: 25px;" 
                         data-dismiss="modal">&times;</button>
                       <h4 class="modal-title" style="position:relative; left: -190px; color:#51bdb8;">Cancel Booking
                         Details

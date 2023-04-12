@@ -218,7 +218,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title" style="color: #55afab">Add New Room</h4>
-                <button type="button" class="close" style="color: #E21818;" data-dismiss="modal">&times;</button>
+                <button type="button"  style="color: #E21818; font-size: 25px;" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
                 <form action="{{ route('admin.room.store') }}" method="POST" enctype="multipart/form-data">
@@ -362,8 +362,7 @@
                             <div class="modal-content">
                               <div class="modal-header">
                                 <h5 class="modal-title" id="editModalLabel" style="color: #55afab">Edit Room Details</h5>
-                                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                                  <span aria-hidden="true">&times;</span>
+                                <button type="button"  style="color: #E21818; font-size: 25px;" data-bs-dismiss="modal">&times;</button>
                                 </button>
                               </div>
                               <form action="{{ route('admin.room.update',  $roomData->id) }}" method="POST" id="editForm" enctype="multipart/form-data">
@@ -440,7 +439,7 @@
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="deleteProductModalLabel" style="color: #51bdb8;">Delete Room</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        <button type="button" style="color: #E21818; font-size: 25px;" data-bs-dismiss="modal">&times;</button>
                                     </div>
                                     <div class="modal-body">
                                         Are you sure you want to delete this room?

@@ -273,7 +273,7 @@ class FrontdeskController extends Controller
 
         $reservations = GuestInformation::join('reservations', 'guest_information.reservation_id', '=', 'reservations.id')
         ->join('manage_rooms', 'reservations.room_id', '=', 'manage_rooms.id')
-        ->select('guest_information.reservation_id','guest_information.first_name','guest_information.last_name', 'guest_information.payment_method','reservations.booking_status', 'reservations.checkin_date','reservations.total_price', 'reservations.checkout_date',)
+        ->select('guest_information.reservation_id','guest_information.first_name','guest_information.last_name','guest_information.payment_status', 'guest_information.payment_method','reservations.booking_status', 'reservations.checkin_date','reservations.total_price', 'reservations.checkout_date',)
         ->orderBy('guest_information.first_name', 'asc')
         ->get();
 
@@ -297,8 +297,11 @@ class FrontdeskController extends Controller
         
         if ($reservations->count() > 0) {
             foreach ($reservations as $reservation) {
+
                 $reservation->delete(); // Soft delete the record
-            }
+                // $booking_status = new Reservations();
+                // $booking_status->booking_status = 'Cancelled';
+            } 
             return redirect()->back()->with('success', 'Item soft deleted successfully');
         } else {
             return redirect()->back()->with('error', 'Reservation not found');
@@ -439,17 +442,19 @@ class FrontdeskController extends Controller
             'receipt_no' => ['required'],
         ]);
         $invoice_no = $request->input('receipt_no');
-
         $guestInformation = GuestInformation::where('reservation_id', $invoice_no)->first();
         
         if ($guestInformation) {
             // Check if the reservation ID in the guest information table matches the reservation ID in the reservation table
             if ($guestInformation->reservation_id === $guestInformation->reservation->id) {
-                $guestInformation->payment_status = 'Paid';
+                $guestInformation->payment_status = 'Paid';    
+                 
                 $guestInformation->save();
+                // dd($guestInformation);
             
                 $reservation = $guestInformation->reservation;
                 $reservation->booking_status = 'Completed';
+                // dd($reservation);
                 $reservation->save();
         
                 return redirect()->back()->with('success', 'The payment status was verified successfully.');

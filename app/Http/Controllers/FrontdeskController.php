@@ -404,10 +404,9 @@ class FrontdeskController extends Controller
             // 'image_url' => public_path('images/DWCCLOGO.png'),
         ];
 
-        $pdf = PDF::loadView('frontdesk.frontdesk_reports-details', $data)
-        ->setPaper('letter', 'landscape');
-
+        $pdf = app('dompdf.wrapper')->loadView('frontdesk.frontdesk_reports-details', $data)->setPaper('letter', 'landscape');
         return $pdf->stream();
+
     }
 
     public function deactivate($id)
@@ -448,13 +447,10 @@ class FrontdeskController extends Controller
             // Check if the reservation ID in the guest information table matches the reservation ID in the reservation table
             if ($guestInformation->reservation_id === $guestInformation->reservation->id) {
                 $guestInformation->payment_status = 'Paid';    
-                 
                 $guestInformation->save();
-                // dd($guestInformation);
             
                 $reservation = $guestInformation->reservation;
                 $reservation->booking_status = 'Completed';
-                // dd($reservation);
                 $reservation->save();
         
                 return redirect()->back()->with('success', 'The payment status was verified successfully.');

@@ -226,7 +226,11 @@
                   </form>
               </div>
               </div>
-              <hr class="mt-10" style="border-top: 2px solid #3C4048;">
+              {{-- <hr class="mt-10" style="border-top: 2px solid #3C4048;"> --}}
+              <div class="pt-20px">
+                <hr class="mt-10" style="border-top: 2px solid #3C4048;">
+              </div>
+              
           </form>
 
             <form action="{{ route('admin.reports.print', ['status' => $status, 'checkin_date' => $checkinDate, 'checkout_date' => $checkoutDate])}}" method="post" target="_blank">

@@ -218,7 +218,7 @@
                             </div>
                             <div class="flex justify-between">
                               <label class="font-bold" for="room">Room Type </label>
-                              <div class="pl-10">{{ $rooms->room_type }}</div>
+                              <div class="pl-10" style="position: relative; left: 100px;">{{ $rooms->room_type }}</div>
                             </div>
                             <div class="flex justify-between">
                               <label class="font-bold" for="guests">Total No. of Guests: </label>

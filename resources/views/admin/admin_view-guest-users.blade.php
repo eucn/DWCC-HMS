@@ -262,8 +262,7 @@
                         <div class="modal-content">
                           <div class="modal-header">
                             <h5 class="modal-title" style="color: #55afab;">View Information</h5>
-                            <button type="button" style="position:relative; left: 1px; color: #dc3545;" class="close"
-                        data-dismiss="modal">&times;</button>
+                            <button type="button" class="close" style="color: #E21818; font-size: 25px;" data-bs-dismiss="modal">&times;</button>
                           </div>
                           <div class="modal-body">
                           <h6><strong>Name:</strong> {{ $user->name }}</h6><br>
@@ -287,8 +286,7 @@
                 @method('PATCH')
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel"  style="color: #55afab;">Deactivate User</h5>
-                    <button type="button" style="position:relative; left: 1px; color: #dc3545;" class="close"
-                        data-dismiss="modal">&times;</button>
+                    <button type="button" class="close" style="color: #E21818; font-size: 25px;" data-bs-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
                     <p>Are you sure you want to deactivate this user?</p>
@@ -311,8 +309,7 @@
                 @method('PATCH')
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel " style="color: #55afab;">Activate User</h5>
-                    <button type="button" style="position:relative; left: 1px; color: #dc3545;" class="close"
-                        data-dismiss="modal">&times;</button>
+                    <button type="button" class="close" style="color: #E21818; font-size: 25px;" data-bs-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
                     <p>Are you sure you want to activate this user?</p>

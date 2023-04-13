@@ -276,7 +276,7 @@
                     <!-- Modal content-->
                     <div class="modal-content">
                       <div class="modal-header">
-                        <button type="button" style="position:relative; left: 350px; color: red;" class="close" data-dismiss="modal">&times;</button>
+                      <button type="button" style="position:relative; left: 350px; color: red;  font-size: 25px;" data-dismiss="modal">&times;</button>
                         <h4 class="modal-title" style="position:relative; left: -200px; color:#51bdb8;">Payment Information</h4>
                       </div>
                       <div class="modal-body">

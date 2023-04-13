@@ -238,10 +238,11 @@
           <div class="row">
 
   <div class="ml-auto">
-              <button type="button" style="position: relative; left: 880px;top: -40px;" class="btn btn-primary"
+              <button type="button" style="position: relative; left: 880px;top: 20px;" class="btn btn-primary"
                 data-bs-toggle="modal" data-bs-target="#exampleModal">
   <i class="fa-solid fa-plus"></i>&nbsp Add New
 </button>
+<br>
               <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                 aria-hidden="true">
   <div class="modal-dialog">
@@ -302,11 +303,12 @@
 </div>
 </div>
 
+<br>
 
-<hr>
+<hr style="position: relative; top: 30px;">
 
-
-
+<br>
+<br>
             <table class="table table-condensed table-sm table-bordered">   
                 <thead class="bg-[#51bdb8] text-white">   
                     <tr style="text-align:center">   

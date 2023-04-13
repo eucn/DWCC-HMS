@@ -284,7 +284,7 @@ class FrontdeskController extends Controller
         $reservations = GuestInformation::join('reservations', 'guest_information.reservation_id', '=', 'reservations.id')
         ->join('manage_rooms', 'reservations.room_id', '=', 'manage_rooms.id')
         ->select('guest_information.reservation_id','guest_information.first_name','guest_information.last_name','guest_information.payment_status', 'guest_information.payment_method','reservations.booking_status', 'reservations.checkin_date','reservations.total_price', 'reservations.checkout_date',)
-        ->orderBy('guest_information.first_name', 'asc')
+        ->orderBy('reservations.created_at', 'desc')
         ->get();
 
         return view('frontdesk.frontdesk_bookingdetails', [
@@ -338,8 +338,9 @@ class FrontdeskController extends Controller
         'guest_information.last_name', 'reservations.booking_status','reservations.nights'
         ,'reservations.checkin_date','reservations.total_price', 'reservations.checkout_date','manage_rooms.room_type',
         'manage_rooms.room_number')
-        ->orderBy('guest_information.first_name', 'asc')
+        ->orderBy('reservations.created_at', 'desc')
         ->get();
+
 
         return view('frontdesk.frontdesk_reports', [
             'reports' => $reports,
@@ -410,6 +411,7 @@ class FrontdeskController extends Controller
                 return $query->where('reservations.checkout_date', '<=', $checkoutDate);
             })
             ->get();
+
             // $reports = GuestInformation::withTrashed()
             // ->leftJoin('reservations', 'guest_information.reservation_id', '=', 'reservations.id')
             // ->leftJoin('manage_rooms', 'reservations.room_id', '=', 'manage_rooms.id')
@@ -457,7 +459,7 @@ class FrontdeskController extends Controller
         $reservations = GuestInformation::join('reservations', 'guest_information.reservation_id', '=', 'reservations.id')
         ->join('manage_rooms', 'reservations.room_id', '=', 'manage_rooms.id')
         ->select('guest_information.reservation_id','guest_information.first_name','guest_information.last_name', 'guest_information.payment_method','guest_information.payment_status','reservations.booking_types', 'reservations.checkin_date','reservations.total_price', 'reservations.checkout_date',)
-        ->orderBy('guest_information.first_name', 'asc')
+        ->orderBy('reservations.created_at', 'desc')
         ->get();
         return view('frontdesk.frontdesk_payment', [
             'reservationData' => $reservations,

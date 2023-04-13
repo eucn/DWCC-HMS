@@ -26,8 +26,8 @@ class BookingHistoryController extends Controller
         ->join('manage_rooms', 'reservations.room_id', '=', 'manage_rooms.id')
         ->select('guest_information.first_name','guest_information.last_name','reservations.booking_status', 'reservations.checkin_date', 'reservations.checkout_date', 'reservations.total_price', 'reservations.created_at','manage_rooms.rate', 'manage_rooms.room_type')
         ->orderBy('reservations.created_at', 'asc')
+        ->withTrashed() // includes soft deleted records
         ->get();
-
          foreach ($bookings as $booking) {
             $booking->checkin_date = Carbon::parse($booking->checkin_date);
             $booking->checkout_date = Carbon::parse($booking->checkout_date);

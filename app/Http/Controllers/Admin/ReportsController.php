@@ -21,7 +21,7 @@ class ReportsController extends Controller
         'guest_information.last_name', 'reservations.booking_status','reservations.nights'
         ,'reservations.checkin_date','reservations.total_price', 'reservations.checkout_date','manage_rooms.room_type',
         'manage_rooms.room_number')
-        ->orderBy('guest_information.first_name', 'asc')
+        ->orderBy('reservations.created_at', 'desc')
         ->get();
         // ->paginate(10);
 
@@ -45,7 +45,7 @@ class ReportsController extends Controller
             return redirect()->route('admin.reports.clear');
         }
         // Retrieve the filtered orders
-        $reports = GuestInformation::leftJoin('reservations', 'guest_information.reservation_id', '=', 'reservations.id')
+      $reports = GuestInformation::leftJoin('reservations', 'guest_information.reservation_id', '=', 'reservations.id')
         ->leftJoin('manage_rooms', 'reservations.room_id', '=', 'manage_rooms.id')
         ->select('guest_information.first_name','guest_information.last_name','reservations.booking_status', 'reservations.checkin_date', 'reservations.checkout_date', 'reservations.total_price', 'reservations.nights', 'manage_rooms.room_number', 'manage_rooms.room_type')
         ->withTrashed() // Include soft deleted records

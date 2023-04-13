@@ -6,7 +6,7 @@
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   @vite('resources/css/app.css')
 
-  <title>Admin Dashboard</title>
+  <title>Admin Reports</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
    
@@ -201,7 +201,7 @@
                   <div>Status</div>
                   <select id="status" name="status" class="block w-[170px] mt-1 pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md">
                       <option value=""{{ empty($status) ? ' selected' : '' }}>All</option>
-                      <option value="complete"{{ $status === 'complete' ? ' selected' : '' }}>Complete</option>
+                      <option value="completed"{{ $status === 'completed' ? ' selected' : '' }}>Completed</option>
                       <option value="pending"{{ $status === 'pending' ? ' selected' : '' }}>Pending</option>
                       <option value="cancelled"{{ $status === 'cancelled' ? ' selected' : '' }}>Cancelled</option>
                   </select>

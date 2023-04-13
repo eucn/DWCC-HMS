@@ -195,56 +195,39 @@
         <div class="col-lg-12">
           <div class="row">
 
-            <form id="filter-form" action="{{ route('admin.reports.preview') }}" method="get" class="mb-[50px]">
+            <form id="filter-form" action="{{ route('admin.reports.preview') }}" method="get" cclass="mb-[30px]">
               <div class="flex item-center">
-                  <div class="mr-5">
-                    <div>Status</div>
-                    <select id="status" name="status" class="block w-[170px] mt-1 pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md">
-                        <option value=""{{ empty($status) ? ' selected' : '' }}>All</option>
-                        <option value="complete"{{ $status === 'complete' ? ' selected' : '' }}>Complete</option>
-                        <option value="pending"{{ $status === 'pending' ? ' selected' : '' }}>Pending</option>
-                        <option value="cancelled"{{ $status === 'cancelled' ? ' selected' : '' }}>Cancelled</option>
-                    </select>
-                  </div>
-                  <div class="mr-10">
-                    <div>Check-in Date</div>
-                      <input type="date" name="checkin_date" id="checkin_date" value="{{ $checkinDate }}" class="block w-[170px] mt-1 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md">
-                  </div>
-                  <div class="mr-10">
-                    <div>Check-in Date</div>
-                      <input type="date" name="checkout_date" id="checkout_date" value="{{ $checkoutDate }}" class="block w-[170px] mt-1 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md">
-                  </div>
-                  <div class="mr-10">
-                    <div class="opacity-1"></div>
-                      <button type="submit"  style ="position: relative; top: 20px;" class="bg-[#259F6C] w-[120px] mt-1 py-2 text-white rounded-md">Preview</button>
-                  </div>
+                <div class="mr-5">
+                  <div>Status</div>
+                  <select id="status" name="status" class="block w-[170px] mt-1 pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md">
+                      <option value=""{{ empty($status) ? ' selected' : '' }}>All</option>
+                      <option value="complete"{{ $status === 'complete' ? ' selected' : '' }}>Complete</option>
+                      <option value="pending"{{ $status === 'pending' ? ' selected' : '' }}>Pending</option>
+                      <option value="cancelled"{{ $status === 'cancelled' ? ' selected' : '' }}>Cancelled</option>
+                  </select>
                 </div>
-              </form>
-
-            {{-- <section class="mb-[50px]">
-                <div class="flex item-center">
-                    <div class="mr-5">
-                    <div>Status</div>
-                    <select id="select" name="select" class="block w-[170px] mt-1 pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md">
-                        <option value="option1">Completed</option>
-                        <option value="option2">Pending</option>
-                        <option value="option3">Cancelled</option>
-                    </select>
-                    </div>
-                    <div class="mr-10">
-                    <div>Check-in Date</div>
-                    <input type="date" class="block w-[170px] mt-1 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md">
-                    </div>
-                    <div class="mr-10">
-                    <div>Check-in Date</div>
-                    <input type="date" class="block w-[170px] mt-1 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md">
-                    </div>
-                    <div class="mr-10">
-                        <div class="opacity-1">Button</div>
-                        <button class="bg-[#005289] w-[120px] mt-1 py-2 text-white rounded-md">Preview</button>
-                    </div>
+                <div class="mr-10">
+                  <div>Check-in Date</div>
+                    <input type="date" name="checkin_date" id="checkin_date" value="{{ $checkinDate }}" class="block w-[170px] mt-1 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md">
                 </div>
-            </section> --}}
+                <div class="mr-10">
+                  <div>Check-out Date</div>
+                    <input type="date" name="checkout_date" id="checkout_date" value="{{ $checkoutDate }}" class="block w-[170px] mt-1 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md">
+                </div>
+                <div class="mr-10">
+                  <div class="opacity-1"></div>
+                    <button style ="position: relative; top: 20px;"type="submit" class="bg-[#259F6C] w-[120px] mt-1 py-2 text-white rounded-md">Preview</button>
+                </div>
+                <div class="mr-10">
+                  <div class="opacity-1"></div>
+                  <form action="{{ route('admin.reports.clear') }}" method="POST" style="display: inline">
+                      @csrf
+                      <button type="submit" style="position: relative; top: 20px;" class="btn btn-danger w-[120px] mt-1 py-2 text-white rounded-md" name="clear">Clear</button>
+                  </form>
+              </div>
+              </div>
+              <hr class="mt-10" style="border-top: 2px solid #3C4048;">
+          </form>
 
             <form action="{{ route('admin.reports.print', ['status' => $status, 'checkin_date' => $checkinDate, 'checkout_date' => $checkoutDate])}}" method="post" target="_blank">
               @csrf
@@ -254,7 +237,7 @@
                 </div>
               </div>
             </form>
-            <hr style="border-top: 2px solid #3C4048;position: relative; left: 8px;">
+           
 
             <table id="" class="table table-condensed table-sm table-bordered">   
                 <thead class="bg-[#51bdb8] text-white">   

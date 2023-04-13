@@ -331,8 +331,6 @@ class FrontdeskController extends Controller
         $status = '';
         $checkinDate = '';
         $checkoutDate = '';
-
-      
         $reports = GuestInformation::withTrashed() // Include soft deleted records
         ->join('reservations', 'guest_information.reservation_id', '=', 'reservations.id')
         ->join('manage_rooms', 'reservations.room_id', '=', 'manage_rooms.id')

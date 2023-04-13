@@ -14,11 +14,13 @@ class ReportsController extends Controller
         $checkinDate = '';
         $checkoutDate = '';
 
-        $reports = GuestInformation::join('reservations', 'guest_information.reservation_id', '=', 'reservations.id')
+        $reports = GuestInformation::withTrashed() // Include soft deleted records
+        ->join('reservations', 'guest_information.reservation_id', '=', 'reservations.id')
         ->join('manage_rooms', 'reservations.room_id', '=', 'manage_rooms.id')
         ->select('guest_information.reservation_id','guest_information.first_name',
         'guest_information.last_name', 'reservations.booking_status','reservations.nights'
-        ,'reservations.checkin_date','reservations.total_price', 'reservations.checkout_date', 'manage_rooms.room_type', 'manage_rooms.room_number')
+        ,'reservations.checkin_date','reservations.total_price', 'reservations.checkout_date','manage_rooms.room_type',
+        'manage_rooms.room_number')
         ->orderBy('guest_information.first_name', 'asc')
         ->get();
         // ->paginate(10);
@@ -46,7 +48,7 @@ class ReportsController extends Controller
         $reports = GuestInformation::leftJoin('reservations', 'guest_information.reservation_id', '=', 'reservations.id')
         ->leftJoin('manage_rooms', 'reservations.room_id', '=', 'manage_rooms.id')
         ->select('guest_information.first_name','guest_information.last_name','reservations.booking_status', 'reservations.checkin_date', 'reservations.checkout_date', 'reservations.total_price', 'reservations.nights', 'manage_rooms.room_number', 'manage_rooms.room_type')
-        
+        ->withTrashed() // Include soft deleted records
         ->when($status, function ($query, $status) {
             return $query->where('reservations.booking_status', $status);
         })
@@ -57,9 +59,9 @@ class ReportsController extends Controller
             return $query->where('reservations.checkout_date', '<=', $checkoutDate);
         })
         ->get();
+
         // ->paginate(10);
         
-
         // Pass the orders and input values to the view
         return view('admin.admin_reports', [
             'reports' => $reports,

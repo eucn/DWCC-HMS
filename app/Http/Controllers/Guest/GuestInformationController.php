@@ -107,7 +107,7 @@ class GuestInformationController extends Controller
             $guestInformation->company_name = $company_name;
             $guestInformation->address = $address;
             $guestInformation->phone_number = $phone_number;
-            $guestInformation->payment_status = 'Unpaidgu'; 
+            $guestInformation->payment_status = 'Unpaid'; 
             if($payment_method == "Cash"){
                 $guestInformation->payment_method = $payment_method;
             }else if($payment_method == "Department Charge"){

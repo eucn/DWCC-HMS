@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Reservations extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'booking_status',
+    ];
     public function guest()
     {
         return $this->belongsTo(User::class, 'guest_id');

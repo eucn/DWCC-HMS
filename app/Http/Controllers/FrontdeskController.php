@@ -53,44 +53,49 @@ class FrontdeskController extends Controller
         'todayReservationsCount'=>$todayReservationsCount,  
       ]);
     }
-
-    //Handle an incoming login request.
+    // public function FrontdeskLogin(LoginRequest $request): RedirectResponse
+    // {
+    //     $remember = $request->has('remember');
+    //     $request->authenticate_Frontdesk($remember);
+    
+    //     if ($remember) {
+    //         $cookie = cookie('frontdesk_credentials', [
+    //             'email' => $request->email,
+    //             'password' => $request->password
+    //         ], 60 * 24 * 7); // 1 week expiration time
+    //         return redirect()->route('frontdesk.dashboard')->withCookie($cookie);
+    //     }
+    
+    //     $request->session()->regenerate();
+    
+    //     return redirect()->route('frontdesk.dashboard');
+    // }
+    
+    // Handle an incoming login request.
     public function FrontdeskLogin(LoginRequest $request): RedirectResponse
     {
-        $request->authenticate_Frontdesk();
+        $remember = $request->has('remember');
+
+        $request->authenticate_Frontdesk($remember);
 
         $request->session()->regenerate();
 
         return redirect()->route('frontdesk.dashboard');
     }
 
-    // public function FrontdeskLogin(LoginRequest $request): RedirectResponse
-    // {
-    //     $credentials = $request->only('email', 'password');
-    
-    //     if (Auth::attempt($credentials, $request->remember)) {
-    //         $request->session()->regenerate();
-    
-    //         return redirect()->intended('frontdesk.dashboard');
-    //     }
-    
-    //     return back()->withErrors([
-    //         'email' => 'The provided credentials do not match our records.',
-    //     ]);
-    // }
-    
-    //Destroy an authenticated session or Logout.
-    public function FrontdeskLogout(Request $request): RedirectResponse
-    {
-        Auth::guard('frontdesk')->logout();
+    // Destroy an authenticated session or Logout.
+        public function FrontdeskLogout(Request $request): RedirectResponse
+        {
+            Auth::guard('frontdesk')->logout();
 
-        $request->session()->invalidate();
+            $request->session()->invalidate();
 
-        $request->session()->regenerateToken();
+            $request->session()->regenerateToken();
 
-        return redirect()->route('frontdesk_login_form');
-        // return redirect('/frontdesk/login');
-    }
+            return redirect()->route('frontdesk_login_form');
+        
+            // return redirect('/frontdesk/login');
+        }
 
     //Display the registration view.
     public function FrontdeskRegister(){
@@ -140,7 +145,7 @@ class FrontdeskController extends Controller
             return response()->json(['error' => 'Room type not found']);
         }
     }
-    
+     
      public function FrontdeskReservationSave(Request $request)
     {
         if (Auth::guard('frontdesk')->check()) {

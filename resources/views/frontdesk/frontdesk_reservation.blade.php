@@ -208,6 +208,7 @@
                   class="w-full mt-2 py-[7px]
                  border-1 text-center border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                   style="border: 1px solid gray;" name="room_no" id="room_no" value="{{ old('room_no') }}" readonly>
+                  <input type="text" name="max_capacity" id="max_capacity" class="hidden">
              </div>
             </div>
             <div class="flex flex-col md:flex-row">
@@ -417,6 +418,7 @@
           success: function(response) {
             if (response.room_id) {
               $('#room_no').val(response.room_id);
+              $('#max_capacity').val(response.max_capacity);
             } else {
               console.log('Room ID not found in response');
             }

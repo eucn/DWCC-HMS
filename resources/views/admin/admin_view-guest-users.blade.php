@@ -5,8 +5,8 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   @vite('resources/css/app.css')
-
-  <title>Admin Dashboard</title>
+  <link rel="icon" type="image/png" sizes="16x16" href="../images/sitelogo.png">
+  <title>Admin Guest List</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -15,7 +15,9 @@
 
   <!-- Google Fonts -->
   <link href="https://fonts.gstatic.com" rel="preconnect">
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+    rel="stylesheet">
 
   <!-- Vendor CSS Files -->
   <link href="{{ asset('template/assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
@@ -31,12 +33,9 @@
 
   <!-- Font Awesome -->
   <script src="https://kit.fontawesome.com/3a364cef47.js" crossorigin="anonymous"></script>
-    <script
-      defer
-      src="https://use.fontawesome.com/releases/v6.1.1/js/all.js"
-      integrity="sha384-xBXmu0dk1bEoiwd71wOonQLyH+VpgR1XcDH3rtxrLww5ajNTuMvBdL5SOiFZnNdp"
-      crossorigin="anonymous">
-    </script>
+  <script defer src="https://use.fontawesome.com/releases/v6.1.1/js/all.js"
+    integrity="sha384-xBXmu0dk1bEoiwd71wOonQLyH+VpgR1XcDH3rtxrLww5ajNTuMvBdL5SOiFZnNdp" crossorigin="anonymous">
+  </script>
 
   <!-- =======================================================
   * Template Name: NiceAdmin - v2.4.0
@@ -143,22 +142,23 @@
       </li><!-- End Booking History Nav -->
 
       <li class="nav-item">
-  <a class="nav-link dropdown-toggle collapsed" href="#" id="accounts-dropdown" data-bs-toggle="dropdown" aria-expanded="false">
-    <i class="fa-solid fa-user icon-nav"></i><span>Accounts</span>
-  </a>
-  <ul id="tables-nav" class="dropdown-menu" aria-labelledby="accounts-dropdown">
-    <li>
-      <a class="dropdown-item" href="{{ route('admin.frontdeskList') }}">
-      <i class="fa-sharp fa-solid fa-user-tie"></i><span>&nbsp Frontdesk</span>
-      </a>
-    </li>
-    <li>
-      <a class="dropdown-item" href="{{ route('admin.guestList') }}">
-      <i class="fa-solid fa-users"></i><span>&nbsp Guest</span>
-      </a>
-    </li>
-  </ul>
-</li><!-- End Tables Nav -->
+        <a class="nav-link dropdown-toggle collapsed" href="#" id="accounts-dropdown" data-bs-toggle="dropdown"
+          aria-expanded="false">
+          <i class="fa-solid fa-user icon-nav"></i><span>Accounts</span></i>
+        </a>
+        <ul id="tables-nav" class="dropdown-menu" aria-labelledby="accounts-dropdown">
+          <li>
+            <a class="dropdown-item" href="{{ route('admin.frontdeskList') }}">
+              <i class="fa-sharp fa-solid fa-user-tie"></i><span>&nbsp Frontdesk</span>
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item" href="{{ route('admin.guestList') }}">
+              <i class="fa-solid fa-users"></i><span>&nbsp Guest</span>
+            </a>
+          </li>
+        </ul>
+      </li><!-- End Tables Nav -->
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="{{ route('admin.reports') }}">
@@ -182,14 +182,62 @@
         </ol>
       </nav>
     </div><!-- End Page Title -->
+    <div class="mx-auto mb-5">
+      @if (Session::has('deactivate'))
+      <div id="error-message"
+        class="flex flex-row items-center justify-between bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative transition duration-500 ease-in-out"
+        role="alert">
+        <div class="flex-grow">
+          {{ Session::get('deactivate') }}
+        </div>
+        <div class="ml-4">
+          <button type="button" style="opacity:70" class="close"
+            onclick="document.getElementById('error-message').classList.add('opacity-0', 'h-0');">
+            <span class="text-xl-center text-red-500 font-extrabold">X</span>
+        </div>
+        </button>
+      </div>
+    </div>
+    @elseif (Session::has('registered'))
+    <div id="registered"
+      class="flex flex-row items-center justify-between bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative transition duration-500 ease-in-out"
+      role="alert">
+      <div class="flex-grow">
+        {{ Session::get('registered') }}
+      </div>
+      <div class="ml-4">
+        <button type="button" style="opacity:70" class="close"
+          onclick="document.getElementById('registered').classList.add('opacity-0', 'h-0');">
+          <span class="text-xl-center text-green-500 font-extrabold">X</span>
+      </div>
+      </button>
+    </div>
+    </div>
+    @elseif (Session::has('success'))
+    <div id="success"
+      class="flex flex-row items-center justify-between bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative transition duration-500 ease-in-out"
+      role="alert">
+      <div class="flex-grow">
+        {{ Session::get('success') }}
+      </div>
+      <div class="ml-4">
+        <button type="button" style="opacity:70" class="close"
+          onclick="document.getElementById('success').classList.add('opacity-0', 'h-0');">
+          <span class="text-xl-center text-green-500 font-extrabold">X</span>
+      </div>
+      </button>
+    </div>
+    </div>
+    @endif
+    <div>
 
-    <section class="section dashboard">
-      <div class="row">
+      <section class="section dashboard">
+        <div class="row">
 
-        <!-- Left side columns -->
-        <div class="col-lg-12">
-          <div class="row">
-<!-- 
+          <!-- Left side columns -->
+          <div class="col-lg-12">
+            <div class="row">
+              <!-- 
             <table class="table table-striped">
   <thead>
     <tr>
@@ -211,126 +259,131 @@
   </tbody>
 </table> -->
 
-  <table class="table table-condensed table-sm table-bordered">   
-      <thead class="bg-[#51bdb8] text-white">   
-          <tr style="text-align:center">   
-              <th scope="col">#</th>
-              <th scope="col">Name</th>
-              <th scope="col">Email</th>
-              <th scope="col">Registered at</th>
-              <th scope="col">Account Status</th>
-              <th scope="col" style="width: 150px;">Action</th>
-          </tr>   
-      </thead>   
-      <tbody>   
-      @foreach ($users as $user)
-          <tr>     
-              <td>{{ $user->id }}</td>
-              <td style="text-align:center">{{ $user->name }}</td>
-              <td style="text-align:center">{{ $user->email }}</td>
-              <td style="text-align:center">{{ $user->created_at }}</td>
-              {{-- <td style="text-align:center">{{ $user->Acc_Stat }}</td>--}}
-              <td style="text-align:center">
-                @if ($user->Acc_Stat == 'Deactivate')
-                    <p>{{ $user->Acc_Stat }}</p>
-                @elseif ($user->Acc_Stat == 'Activate')
-                    <p>{{ $user->Acc_Stat }}</p>
-                @endif
-              </td>
-              <td>
-              <!--View Button-->	
-                <button type="button"  style="position: relative; left: 10px;"  class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modalDialogScrollable{{ $user->id }}">
-                  <i class="fa-solid fa-eye"></i>
-                </button>
+              <table class="table table-condensed table-sm table-bordered">
+                <thead class="bg-[#51bdb8] text-white">
+                  <tr style="text-align:center">
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Registered at</th>
+                    <th scope="col">Account Status</th>
+                    <th scope="col" style="width: 150px;">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @foreach ($users as $user)
+                  <tr>
+                    <td>{{ $user->id }}</td>
+                    <td style="text-align:center">{{ $user->name }}</td>
+                    <td style="text-align:center">{{ $user->email }}</td>
+                    <td style="text-align:center">{{ $user->created_at }}</td>
+                    {{-- <td style="text-align:center">{{ $user->Acc_Stat }}</td>--}}
+                    <td style="text-align:center">
+                      @if ($user->Acc_Stat == 'Deactivate')
+                      <p>{{ $user->Acc_Stat }}</p>
+                      @elseif ($user->Acc_Stat == 'Activate')
+                      <p>{{ $user->Acc_Stat }}</p>
+                      @endif
+                    </td>
+                    <td>
+                      <!--View Button-->
+                      <button type="button" style="position: relative; left: 10px;" class="btn btn-primary btn-sm"
+                        data-bs-toggle="modal" data-bs-target="#modalDialogScrollable{{ $user->id }}">
+                        <i class="fa-solid fa-eye"></i>
+                      </button>
 
-                <!-- Button trigger activate modal -->
-                <button type="button"  style="position: relative; left: 15px;"  class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#activate{{ $user->id }}">
-                    <i class="fa-solid fa-user"></i>
-                </button>
+                      <!-- Button trigger activate modal -->
+                      <button type="button" style="position: relative; left: 15px;" class="btn btn-success btn-sm"
+                        data-bs-toggle="modal" data-bs-target="#activate{{ $user->id }}">
+                        <i class="fa-solid fa-user"></i>
+                      </button>
 
-                <!-- Button trigger deactivate modal -->
-                <button type="button"  style="position: relative; left: 20px;"  class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deactivate{{ $user->id }}">
-                    <i class="fa-solid fa-user-slash"></i>
-                </button>
+                      <!-- Button trigger deactivate modal -->
+                      <button type="button" style="position: relative; left: 20px;" class="btn btn-danger btn-sm"
+                        data-bs-toggle="modal" data-bs-target="#deactivate{{ $user->id }}">
+                        <i class="fa-solid fa-user-slash"></i>
+                      </button>
 
-                </td>  
-                </tr> 
-                <!-- View Modal -->
-                    
-                    <div class="modal fade" id="modalDialogScrollable{{ $user->id }}" tabindex="-1">
-                      <div class="modal-dialog modal-dialog-scrollable">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h5 class="modal-title" style="color: #55afab;">View Information</h5>
-                            <button type="button" class="close" style="color: #E21818; font-size: 25px;" data-bs-dismiss="modal">&times;</button>
-                          </div>
-                          <div class="modal-body">
+                    </td>
+                  </tr>
+                  <!-- View Modal -->
+
+                  <div class="modal fade" id="modalDialogScrollable{{ $user->id }}" tabindex="-1">
+                    <div class="modal-dialog modal-dialog-scrollable">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" style="color: #55afab;">View Information</h5>
+                          <button type="button" class="close" style="color: #E21818; font-size: 25px;"
+                            data-bs-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
                           <h6><strong>Name:</strong> {{ $user->name }}</h6><br>
                           <h6><strong>Email:</strong> {{ $user->email }}</h6><br>
                           <h6><strong>Registered at:</strong> {{ $user->created_at }}</h6><br>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Deactivate Modal -->
+
+                  <div class="modal fade" id="deactivate{{ $user->id }}" role="dialog">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <form method="POST" action="{{ route('admin.deactivate', $user->id) }}">
+                          @csrf
+                          @method('PATCH')
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel" style="color: #55afab;">Deactivate User</h5>
+                            <button type="button" class="close" style="color: #E21818; font-size: 25px;"
+                              data-bs-dismiss="modal">&times;</button>
+                          </div>
+                          <div class="modal-body">
+                            <p>Are you sure you want to deactivate this user?</p>
                           </div>
                           <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>  
-                          </div>  
-                        </div> 
-                      </div>    
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-danger">Deactivate</button>
+                          </div>
+                        </form>
+                      </div>
                     </div>
-                      <!-- Deactivate Modal -->
-            
-                     
-<div class="modal fade" id="deactivate{{ $user->id }}" role="dialog">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <form method="POST" action="{{ route('admin.deactivate', $user->id) }}">
-                @csrf
-                @method('PATCH')
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel"  style="color: #55afab;">Deactivate User</h5>
-                    <button type="button" class="close" style="color: #E21818; font-size: 25px;" data-bs-dismiss="modal">&times;</button>
-                </div>
-                <div class="modal-body">
-                    <p>Are you sure you want to deactivate this user?</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-danger">Deactivate</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
+                  </div>
 
-        <!-- activate modal -->
-<div class="modal fade" id="activate{{ $user->id }}" role="dialog">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <form method="POST" action="{{ route('admin.activate', $user->id) }}">
-                @csrf
-                @method('PATCH')
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel " style="color: #55afab;">Activate User</h5>
-                    <button type="button" class="close" style="color: #E21818; font-size: 25px;" data-bs-dismiss="modal">&times;</button>
-                </div>
-                <div class="modal-body">
-                    <p>Are you sure you want to activate this user?</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-primary">Activate</button>
-                </div>
-            </form>
+                  <!-- activate modal -->
+                  <div class="modal fade" id="activate{{ $user->id }}" role="dialog">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <form method="POST" action="{{ route('admin.activate', $user->id) }}">
+                          @csrf
+                          @method('PATCH')
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel " style="color: #55afab;">Activate User</h5>
+                            <button type="button" class="close" style="color: #E21818; font-size: 25px;"
+                              data-bs-dismiss="modal">&times;</button>
+                          </div>
+                          <div class="modal-body">
+                            <p>Are you sure you want to activate this user?</p>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-primary">Activate</button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+
+                  </tr>
+                  @endforeach
+                </tbody>
+              </table>
+            </div>
+          </div><!-- End Left side columns -->
         </div>
-    </div>
-</div>
-                        
-                    </tr>     
-                    @endforeach
-                </tbody>   
-            </table>
-          </div>
-        </div><!-- End Left side columns -->
-      </div>
-    </section>
+      </section>
   </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->
@@ -341,7 +394,8 @@
 
   </footer><!-- End Footer -->
 
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+      class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files -->
   <script src="{{ asset('template/assets/vendor/apexcharts/apexcharts.min.js') }}"></script>
@@ -353,28 +407,24 @@
   <script src="{{ asset('template/assets/vendor/tinymce/tinymce.min.js') }}"></script>
   <script src="{{ asset('template/assets/vendor/php-email-form/validate.js') }}"></script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.3/umd/popper.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/js/bootstrap.min.js"></script>
-
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.3/umd/popper.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/js/bootstrap.min.js"></script>
 
   <!-- Template Main JS File -->
   <script src="{{ asset('template/assets/js/main.js') }}"></script>
-  
 
   <script>
-  // Listen for the confirm button click
-  $('#confirmDeactivateBtn').click(function() {
-    // Submit the form
-    $('#deactivateForm').submit();
-  });
-  
-  // Reset the form when the modal is closed
-  $('#deactivateModal').on('hidden.bs.modal', function () {
-    $('#deactivateForm')[0].reset();
-  });
-</script>
+    // Listen for the confirm button click
+    $('#confirmDeactivateBtn').click(function() {
+      // Submit the form
+      $('#deactivateForm').submit();
+    });
+    // Reset the form when the modal is closed
+    $('#deactivateModal').on('hidden.bs.modal', function() {
+      $('#deactivateForm')[0].reset();
+    });
+  </script>
 
 </body>
-
 
 </html>

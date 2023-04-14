@@ -5,8 +5,8 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   @vite('resources/css/app.css')
-
-  <title>Admin Dashboard</title>
+  <link rel="icon" type="image/png" sizes="16x16" href="../images/sitelogo.png">
+  <title>Admin Frontdesk List</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -145,26 +145,23 @@
           <span>Booking History</span>
         </a>
       </li><!-- End Booking History Nav -->
-
-
       <li class="nav-item">
-        <a class="nav-link dropdown-toggle collapsed" href="#" id="accounts-dropdown" data-bs-toggle="dropdown"
-          aria-expanded="false">
-    <i class="fa-solid fa-user icon-nav"></i><span>Accounts</span></i>
-  </a>
-  <ul id="tables-nav" class="dropdown-menu" aria-labelledby="accounts-dropdown">
-    <li>
-      <a class="dropdown-item" href="{{ route('admin.frontdeskList') }}">
-      <i class="fa-sharp fa-solid fa-user-tie"></i><span>&nbsp Frontdesk</span>
-      </a>
-    </li>
-    <li>
-      <a class="dropdown-item" href="{{ route('admin.guestList') }}">
-      <i class="fa-solid fa-users"></i><span>&nbsp Guest</span>
-      </a>
-    </li>
-  </ul>
-</li>
+        <a class="nav-link dropdown-toggle collapsed" href="#" id="accounts-dropdown" data-bs-toggle="dropdown" aria-expanded="false">
+          <i class="fa-solid fa-user icon-nav"></i><span>Accounts</span></i>
+        </a>
+        <ul id="tables-nav" class="dropdown-menu" aria-labelledby="accounts-dropdown">
+          <li>
+            <a class="dropdown-item" href="{{ route('admin.frontdeskList') }}">
+            <i class="fa-sharp fa-solid fa-user-tie"></i><span>&nbsp Frontdesk</span>
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item" href="{{ route('admin.guestList') }}">
+            <i class="fa-solid fa-users"></i><span>&nbsp Guest</span>
+            </a>
+          </li>
+        </ul>
+      </li>
 
       <!-- End Tables Nav -->
 
@@ -436,30 +433,28 @@
 
   </main><!-- End #main -->
 
-  <!-- ======= Footer ======= -->
-  <footer id="footer" class="footer">
-    <div class="copyright">
-      &copy; Copyright <strong><span>Microhotel</span></strong>. All Rights Reserved
-    </div>
+ <!-- ======= Footer ======= -->
+ <footer id="footer" class="footer">
+  <div class="copyright">
+    &copy; Copyright <strong><span>Microhotel</span></strong>. All Rights Reserved
+  </div>
 
-  </footer><!-- End Footer -->
+</footer><!-- End Footer -->
 
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
-      class="bi bi-arrow-up-short"></i></a>
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
-  <!-- Vendor JS Files -->
-  <script src="{{ asset('template/assets/vendor/apexcharts/apexcharts.min.js') }}"></script>
-  <script src="{{ asset('template/assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-  <script src="{{ asset('template/assets/vendor/chart.js/chart.min.js') }}"></script>
-  <script src="{{ asset('template/assets/vendor/echarts/echarts.min.js') }}"></script>
-  <script src="{{ asset('template/assets/vendor/quill/quill.min.js') }}"></script>
-  <script src="{{ asset('template/assets/vendor/simple-datatables/simple-datatables.js') }}"></script>
-  <script src="{{ asset('template/assets/vendor/tinymce/tinymce.min.js') }}"></script>
-  <script src="{{ asset('template/assets/vendor/php-email-form/validate.js') }}"></script>
+<!-- Vendor JS Files -->
+<script src="{{ asset('template/assets/vendor/apexcharts/apexcharts.min.js') }}"></script>
+<script src="{{ asset('template/assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ asset('template/assets/vendor/chart.js/chart.min.js') }}"></script>
+<script src="{{ asset('template/assets/vendor/echarts/echarts.min.js') }}"></script>
+<script src="{{ asset('template/assets/vendor/quill/quill.min.js') }}"></script>
+<script src="{{ asset('template/assets/vendor/simple-datatables/simple-datatables.js') }}"></script>
+<script src="{{ asset('template/assets/vendor/tinymce/tinymce.min.js') }}"></script>
+<script src="{{ asset('template/assets/vendor/php-email-form/validate.js') }}"></script>
 
-  <!-- Template Main JS File -->
-  <script src="{{ asset('template/assets/js/main.js') }}"></script>
-
+<!-- Template Main JS File -->
+<script src="{{ asset('template/assets/js/main.js') }}"></script>
 
 </body>
 

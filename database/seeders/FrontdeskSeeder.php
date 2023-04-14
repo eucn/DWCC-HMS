@@ -25,7 +25,7 @@ class FrontdeskSeeder extends Seeder
                 'email' => $faker->unique()->email,
                 'password' => Hash::make($faker->password),
                 'status' => 1,
-                'Acc_Stat' =>  $faker->randomElement([ 'Activate', 'Deactivate']),
+                'Acc_Stat' =>  $faker->randomElement([ 'Activate']),
 
             ]);
         }

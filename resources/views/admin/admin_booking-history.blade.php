@@ -198,16 +198,20 @@
         <!-- Left side columns -->
         <div class="col-lg-12">
           <div class="row">
-
-          <form class="flex justify-end" action="{{ route('admin.filter-history') }}" method="GET">
-    <div class="flex items-center space-x-2 mb-3" style="position: relative; top: 10px; left: 3px;">
+        <form class="flex justify-end" action="{{ route('admin.filter-history') }}" method="GET">
+          @csrf
+       <div class="flex items-center space-x-2 mb-3" style="position: relative; top: 10px; left: 3px;">
         <label for="start-date" class="text-gray-600 font-medium">Filter</label>
-        <input type="date" id="start-date" name="date" value="{{ request('date', date('Y-m-d')) }}" class="form-control px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+        {{-- <input type="date" id="start-date" name="date" value="{{ request('date', date('Y-m-d')) }}" class="form-control px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"> --}}
+        {{-- <input type="date" id="start-date" name="date" value="{{ old('date') ?? '' }}" class="form-control px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"> --}}
+        <input type="date" id="start-date" name="date" value="{{ $date }}" class="form-control px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
         <button type="submit" class="btn btn-primary">Filter</button>
-       
+      </form>
+      <form action="{{ route('admin.clear-history') }}" method="POST">
+        @csrf
+        <button type="submit" name="clear" id="clear"  class="btn btn-danger">Clear</button>
+    </form>
     </div>
-  
-</form>
 <table id="datatable" class="table table-condensed table-sm table-bordered">
   <br>
     <thead class="bg-[#51bdb8] text-white">
@@ -274,15 +278,15 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
      {{-- DataTables CDN Links --}}
-    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    {{-- <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap4.min.js"></script>
-    {{-- <script src="https://cdn.datatables.net/1.11.6/js/jquery.dataTables.min.js"></script> --}}
+    <script src="https://cdn.datatables.net/1.11.6/js/jquery.dataTables.min.js"></script>
 
     <script type="text/javascript">
       $(document).ready(function (){
         var table = $('#datatable').DataTable();
       });
-    </script>
+    </script> --}}
 
 </body>
 </html>

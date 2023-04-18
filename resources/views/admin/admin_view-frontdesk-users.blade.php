@@ -235,7 +235,9 @@
           <div class="row">
 
   <div class="ml-auto">
-              <button type="button" style="position: relative; left: 880px;top: 20px;" class="btn btn-primary"
+              <button type="button" 
+              {{-- style="position: relative; left: 1025px;top: 20px;" --}}
+              class="btn btn-primary float-right"
                 data-bs-toggle="modal" data-bs-target="#exampleModal">
   <i class="fa-solid fa-plus"></i>&nbsp Add New
 </button>
